@@ -64,6 +64,7 @@ class User implements UserInterface
     private $telephone;
 
 
+
     /**
      * @ORM\Column(type="json")
      */
@@ -193,21 +194,6 @@ class User implements UserInterface
         $this->telephone = $telephone;
     }
 
-    /**
-     * @return string
-     */
-    public function getRole()
-    {
-        return $this->role;
-    }
-
-    /**
-     * @param string $role
-     */
-    public function setRole(string $role): void
-    {
-        $this->role = $role;
-    }
 
     /**
      * @return string
@@ -322,20 +308,10 @@ class User implements UserInterface
         $this->plainPassword = null;
     }
 
-    /**
-     * A visual identifier that represents this user.
-     *
-     * @see UserInterface
-     */
-    public function getUsername(): string
-    {
-        return (string) $this->username;
-    }
 
-    public function setUsername(string $username): self
+    public function getUsername()
     {
-        $this->username = $username;
+        return (string) $this->email;
 
-        return $this;
     }
 }

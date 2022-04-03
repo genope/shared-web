@@ -16,6 +16,7 @@
     <link rel="stylesheet" href="{{ asset('Front-office/fonts/flaticon.css') }}">
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&amp;display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('Front-office/css/style.css') }}">
+    <link rel="stylesheet" href="{{ asset('Front-office/css/bootstrap-datepicker.min.css') }}">
 
     <!-- main header css -->
     <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
@@ -24,19 +25,20 @@
     <link rel="stylesheet" href="{{ asset('Front-office/css/stylesheet.css') }}">
     <link rel="stylesheet" href="{{ asset('Front-office/css/mmenu.css') }}">
     <link rel="stylesheet" href="{{ asset('Front-office/css/Authstyle.css') }}" id="colors">
-    <link href="https://fonts.googleapis.com/css?family=Nunito:300,400,600,700,800&amp;display=swap&amp;subset=latin-ext,vietnamese" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,500,600,700,800" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Nunito:300,400,600,700,800&amp;display=swap&amp;subset=latin-ext,vietnamese"
+          rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,500,600,700,800" rel="stylesheet"
+          type="text/css">
     {% block stylesheets %}
     {% endblock %}
 </head>
-{% block body %}
     <body>
 
     {% block header %}
         <div id="main_wrapper">
             <header id="header_part">
                 <div id="header" style="background: white">
-                    <div class="container" >
+                    <div class="container">
                         <div class="utf_left_side">
                             <div id="logo"><a href="index_1.html"><img src="images/logo.png" alt=""></a></div>
                             <div class="mmenu-trigger">
@@ -167,16 +169,17 @@
     {% endblock %}
     {% block content %}
     {% endblock %}
-    {% block javascripts %}
+
+
+    <script src="{{ asset('Front-office/') }}js_login/jquery-3.5.0.min.js"></script>
+    <script src="{{ asset('Front-office/js_login/bootstrap-datepicker.min.js') }}"></script>
+    <script src="{{ asset('Front-office/') }}js_login/imagesloaded.pkgd.min.js"></script>
+    <script src="{{ asset('Front-office/') }}js_login/validator.min.js"></script>
+    <script src="{{ asset('Front-office/') }}js_login/main.js"></script>
+    {% block javascript %}
+
     {% endblock %}
 
 
-<script src="{{ asset('Front-office/') }}js_login/jquery-3.5.0.min.js"></script>
-
-<script src="{{ asset('Front-office/') }}js_login/imagesloaded.pkgd.min.js"></script>
-<script src="{{ asset('Front-office/') }}js_login/jquery.mb.YTPlayer.min.js"></script>
-<script src="{{ asset('Front-office/') }}js_login/validator.min.js"></script>
-<script src="{{ asset('Front-office/') }}js_login/main.js"></script>
     </body>
-{% endblock %}
 </html>
