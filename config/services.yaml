@@ -41,6 +41,11 @@ services:
         arguments:
             $key: '%app.recaptcha_key%'
             $secret: '%app.recaptcha_secret%'
+    app.locale_listener:
+        class: App\Listener\LocaleListener
+        arguments: ["%kernel.default_locale%"]
+        tags:
+            - { name: kernel.event_subscriber }
 knpu_oauth2_client:
     clients:
         google_main:

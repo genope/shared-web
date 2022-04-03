@@ -108,5 +108,13 @@ class SecurityController extends AbstractController
     {
         return $this->redirectToRoute('app_user_index', [], Response::HTTP_SEE_OTHER);
     }
+    /**
+     * @Route("/language/{locale}", name="language")
+     * @param $request Request
+     */
+    public function changeLangue(Request $request)
+    {
+        return $this->redirectToRoute('app_user_index', [], Response::HTTP_SEE_OTHER);
+    }
 
 }
