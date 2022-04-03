@@ -55,7 +55,18 @@ class User implements UserInterface
      * @ORM\Column(name="dateDeNaissance", type="date", nullable=false)
      */
     private $datedenaissance;
-
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="googleId", type="string", length=255, nullable=false)
+     */
+    private $googleId;
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="facebookId", type="string", length=255, nullable=false)
+     */
+    private $facebookId;
     /**
      * @var int
      *
@@ -314,4 +325,37 @@ class User implements UserInterface
         return (string) $this->email;
 
     }
+
+    /**
+     * @return string
+     */
+    public function getGoogleId()
+    {
+        return $this->googleId;
+    }
+
+    /**
+     * @param string $googleId
+     */
+    public function setGoogleId(string $googleId): void
+    {
+        $this->googleId = $googleId;
+    }
+
+    /**
+     * @return string
+     */
+    public function getFacebookId()
+    {
+        return $this->facebookId;
+    }
+
+    /**
+     * @param string $facebookId
+     */
+    public function setFacebookId(string $facebookId): void
+    {
+        $this->facebookId = $facebookId;
+    }
+
 }

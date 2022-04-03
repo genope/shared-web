@@ -23,7 +23,11 @@
     <input type="hidden" name="_csrf_token"
            value="{{ csrf_token('authenticate') }}"
     >
-
+    <hr>
+    <a href="{{ path('connect_google') }}" class="btn btn-default btn-block connect-with-google">
+        <i class="fa fa-google" aria-hidden="true"></i> -
+        Google</a>
+    <hr>
     {#
         Uncomment this section and add a remember_me option below your firewall to activate remember me functionality.
         See https://symfony.com/doc/current/security/remember_me.html
