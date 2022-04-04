@@ -7,8 +7,10 @@ use DateTime;
 use Doctrine\ORM\EntityManagerInterface;
 use KnpU\OAuth2ClientBundle\Client\ClientRegistry;
 use KnpU\OAuth2ClientBundle\Client\OAuth2Client;
+use KnpU\OAuth2ClientBundle\Client\OAuth2ClientInterface;
 use KnpU\OAuth2ClientBundle\Security\Authenticator\SocialAuthenticator;
 use League\OAuth2\Client\Provider\GoogleUser;
+use League\OAuth2\Client\Token\AccessToken;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -34,7 +36,7 @@ class GoogleAuthenticator extends SocialAuthenticator
      * @param Request $request
      * @return bool
      */
-    public function supports(Request $request)
+    public function supports(Request $request): bool
     {
         return $request->getPathInfo() == '/connect/google/check';
     }
@@ -52,7 +54,7 @@ class GoogleAuthenticator extends SocialAuthenticator
 
     /**
      * @param Request $request
-     * @return \League\OAuth2\Client\Token\AccessToken|mixed
+     * @return AccessToken
      */
     public function getCredentials(Request $request)
     {
@@ -89,10 +91,8 @@ class GoogleAuthenticator extends SocialAuthenticator
             $user->setImageProfile($googleUser->getAvatar());
             $user->setPassword(md5(uniqid()));
             $user->setDatedenaissance(new DateTime("now"));
-            $user->setTelephone(' ');
+            $user->setTelephone(00);
             $user->setEtat('Approved');
-            return onAuthenticationSuccess();
-
         }
 
         $this->em->persist($user);
@@ -102,7 +102,7 @@ class GoogleAuthenticator extends SocialAuthenticator
     }
 
     /**
-     * @return OAuth2Client
+     * @return OAuth2ClientInterface
      */
     private function getGoogleClient()
     {
@@ -114,10 +114,9 @@ class GoogleAuthenticator extends SocialAuthenticator
         // TODO: Implement onAuthenticationFailure() method.
     }
 
-    public function onAuthenticationSuccess(Request $request, TokenInterface $token, $providerKey)
+    public function onAuthenticationSuccess(Request $request, TokenInterface $token, $providerKey): RedirectResponse
     {
         return new RedirectResponse($this->router->generate('app_user_index'));
     }
-
 
 }

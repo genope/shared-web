@@ -44,7 +44,7 @@ class SecurityController extends AbstractController
     }
 
     /**
-     * @Route("/register", name="register", methods={"GET", "POST"})
+     * @Route("/register/guest", name="register", methods={"GET", "POST"})
      */
     public function register(Request $request, UserPasswordEncoderInterface $passwordEncoder, CaptchaService $captchaService, TranslatorInterface $translator): Response
     {
@@ -59,6 +59,7 @@ class SecurityController extends AbstractController
                 $form->addError(new FormError($translator->trans('captcha.wrong')));
                 throw new ValidatorException('captcha.wrong');
             }
+            $user->setRoles(array('ROLE_GUEST'));
             $password = $passwordEncoder->encodePassword($user, $user->getPassword());
             $user->setPassword($password);
             $entityManager->persist($user);
@@ -117,4 +118,12 @@ class SecurityController extends AbstractController
         return $this->redirectToRoute('app_user_index', [], Response::HTTP_SEE_OTHER);
     }
 
+
+    /**
+     * @Route("/test", name="test")
+     */
+    public function test(): Response
+    {
+        return $this->render('user/test.html.twig');
+    }
 }

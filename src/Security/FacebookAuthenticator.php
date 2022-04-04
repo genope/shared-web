@@ -1,25 +1,21 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: giorgiopagnoni
- * Date: 24/01/18
- * Time: 10:08
- */
 
 namespace App\Security;
 
 use App\Entity\User;
+use DateTime;
 use Doctrine\ORM\EntityManagerInterface;
 use KnpU\OAuth2ClientBundle\Client\ClientRegistry;
-use KnpU\OAuth2ClientBundle\Client\OAuth2Client;
+use KnpU\OAuth2ClientBundle\Client\OAuth2ClientInterface;
 use KnpU\OAuth2ClientBundle\Security\Authenticator\SocialAuthenticator;
-use League\OAuth2\Client\Provider\GoogleUser;
+use League\OAuth2\Client\Provider\FacebookUser;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\RouterInterface;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Exception\AuthenticationException;
+use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\User\UserProviderInterface;
 
 class FacebookAuthenticator extends SocialAuthenticator
@@ -39,9 +35,9 @@ class FacebookAuthenticator extends SocialAuthenticator
      * @param Request $request
      * @return bool
      */
-    public function supports(Request $request)
+    public function supports(Request $request): bool
     {
-        return $request->getPathInfo() == '/connect/google/check';
+        return $request->getPathInfo() == '/connect/facebook/check';
     }
 
     /**
@@ -51,7 +47,7 @@ class FacebookAuthenticator extends SocialAuthenticator
      */
     public function start(Request $request, AuthenticationException $authException = null)
     {
-        $url = $this->router->generate('security_login');
+        $url = $this->router->generate('app_login');
         return new RedirectResponse($url);
     }
 
@@ -61,37 +57,43 @@ class FacebookAuthenticator extends SocialAuthenticator
      */
     public function getCredentials(Request $request)
     {
-        return $this->fetchAccessToken($this->getGoogleClient());
+        return $this->fetchAccessToken($this->getFacebookClient());
     }
 
     /**
      * @param mixed $credentials
      * @param UserProviderInterface $userProvider
-     * @return null|object|\Symfony\Component\Security\Core\User\UserInterface
+     * @return null|object|UserInterface
      */
     public function getUser($credentials, UserProviderInterface $userProvider)
     {
-        /** @var GoogleUser $googleUser */
-        $googleUser = $this->getGoogleClient()
+        /** @var FacebookUser $facebookUser */
+        $facebookUser = $this->getFacebookClient()
             ->fetchUserFromToken($credentials);
-        $email = $googleUser->getEmail();
+        $email = $facebookUser->getEmail();
 
         $existingUser = $this->em->getRepository('App:User')
-            ->findOneBy(['googleId' => $googleUser->getId()]);
+            ->findOneBy(['facebookId' => $facebookUser->getId()]);
         if ($existingUser) {
             return $existingUser;
         }
 
         $user = $this->em->getRepository('App:User')
             ->findOneBy(['email' => $email]);
-
         if (!$user) {
             $user = new User();
             $user->setEmail($email);
+            $user->setNom($facebookUser->getFirstName());
+            $user->setPrenom($facebookUser->getName());
+            $user->setCin(0);
+            $user->setImageProfile($facebookUser->getPictureUrl());
             $user->setPassword(md5(uniqid()));
+            $user->setDatedenaissance(new DateTime("now"));
+            $user->setTelephone(00);
+            $user->setEtat('Approved');
         }
-
-        $user->setGoogleId($googleUser->getId());
+        $user->setGoogleId(" ");
+        $user->setFacebookId($facebookUser->getId());
         $this->em->persist($user);
         $this->em->flush();
 
@@ -99,11 +101,11 @@ class FacebookAuthenticator extends SocialAuthenticator
     }
 
     /**
-     * @return OAuth2Client
+     * @return OAuth2ClientInterface
      */
-    private function getGoogleClient()
+    private function getFacebookClient()
     {
-        return $this->clientRegistry->getClient('google_main');
+        return $this->clientRegistry->getClient('facebook_main');
     }
 
     public function onAuthenticationFailure(Request $request, AuthenticationException $exception)
@@ -111,9 +113,9 @@ class FacebookAuthenticator extends SocialAuthenticator
         // TODO: Implement onAuthenticationFailure() method.
     }
 
-    public function onAuthenticationSuccess(Request $request, TokenInterface $token, $providerKey)
+    public function onAuthenticationSuccess(Request $request, TokenInterface $token, $providerKey): RedirectResponse
     {
-        return new RedirectResponse($this->router->generate('homepage'));
+        return new RedirectResponse($this->router->generate('app_user_index'));
     }
 
 

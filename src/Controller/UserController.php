@@ -11,9 +11,6 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
-/**
- * @Route("/user")
- */
 class UserController extends AbstractController
 {
     /**
@@ -25,7 +22,7 @@ class UserController extends AbstractController
             ->getRepository(User::class)
             ->findAll();
 
-        return $this->render('::index.html.twig', [
+        return $this->render('index.html.twig', [
             'users' => $users,
         ]);
     }
@@ -41,6 +38,8 @@ class UserController extends AbstractController
             'user' => $user,
         ]);
     }
+
+
 
     /**
      * @Route("/{cin}/edit", name="app_user_edit", methods={"GET", "POST"})
