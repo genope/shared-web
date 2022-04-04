@@ -20,6 +20,16 @@ security:
             guard:
                 authenticators:
                     - App\Security\LoginFormAuthenticator
+                    - App\Security\FacebookAuthenticator
+                    - App\Security\GoogleAuthenticator
+
+                entry_point: App\Security\LoginFormAuthenticator
+
+            remember_me:
+                secret:   '%kernel.secret%'
+                remember_me_parameter: login[remember_me]
+                lifetime: 604800 # 1 week in seconds
+                path: /
             logout:
                 path: app_logout
                 # where to redirect after logout
@@ -35,4 +45,5 @@ security:
     # Note: Only the *first* access control that matches will be used
     access_control:
      - { path: ^/admin, roles: ROLE_ADMIN }
-     - { path: ^/profile, roles: ROLE_USER }
+     - { path: ^/profile, roles: ROLE_GUEST }
+     - { path: ^/host, roles: ROLE_HOST }
