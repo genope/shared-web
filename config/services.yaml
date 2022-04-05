@@ -49,13 +49,16 @@ services:
 knpu_oauth2_client:
     clients:
         google_main:
+            #must be "google"- it activates that type
             type: google
             redirect_route: connect_google_check
+            redirect_params: {}
             client_id: "%app.google_client_id%"
             client_secret: "%app.google_client_secret%"
         facebook_main:
             type: facebook
             redirect_route: connect_facebook_check
             client_id: "%app.facebook_id%"
+            redirect_params: {}
             client_secret: "%app.facebook_secret%"
             graph_api_version: v11.0
