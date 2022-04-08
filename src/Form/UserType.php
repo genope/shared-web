@@ -18,6 +18,7 @@ class UserType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
+            ->add('cin')
             ->add('nom', TextType::class, array(
                 'attr' => array(
                     'placeholder' => 'Name'

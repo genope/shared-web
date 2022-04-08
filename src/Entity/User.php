@@ -17,7 +17,6 @@ class User implements UserInterface
      *
      * @ORM\Column(name="CIN", type="integer", nullable=false)
      * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     private $cin;
 
