@@ -1,0 +1,163 @@
+{% extends 'base-front.html.twig' %}
+
+
+{% block content %}
+    <style>
+        .filterDiv {
+
+            display: none;
+        }
+</style>
+    <div class="clearfix"></div>
+    <div id="titlebar" class="gradient">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <h2>Profite Our Offre</h2>
+                    <!-- Breadcrumbs -->
+                    <nav id="breadcrumbs">
+                        <ul>
+                            <li><a href="index_1.html">Shared</a></li>
+                            <li>Liste des Offres</li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-md-8 listing_grid_item">
+                <div class="listing_filter_block">
+                    <div class="col-md-2 col-xs-2">
+                        <ul class="list-group list-group-flush"  style="margin-top: 10px">
+                            <li class="list-group-item">
+                                <div class="utf_layout_nav"> <a href="#" class="grid active"><i class="fa fa-th"></i></a> </div>
+                            </li>
+                            <li class="list-group-item" style="margin-top: 15px">
+                                <div class="utf_layout_nav"> <a href={{path('liste_offre')}} class="list"><i class="fa fa-align-justify"></i></a>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col-md-10 col-xs-10">
+                        <div class="sort-by  sort_by_margin " >
+                            <div class="row with-forms" >
+                                <div class="col-md-12">
+                                    <input type="text" placeholder="What are you looking for?" value=""/>
+                                </div>
+                            </div>
+
+
+                            <button class="button fullwidth_block margin-top-5 float-right">Update</button>
+                        </div>
+
+
+                    </div>
+                </div>
+
+                <!-- Offres -->
+                <div class="row" style="overflow-y: auto;height: 800px" >
+                    {% for offre in offres %}
+
+                    <div class="col-lg-6 col-md-12 filterDiv {{ offre.categ }}"> <a href="{{ path('app_offres_show', {'idOffre': offre.idOffre}) }}" class="utf_listing_item-container" data-marker-id="1">
+                            <div class="utf_listing_item">
+                                <img src="{{ asset('uploads/' ~ offre.image) }}" alt=""> <span class="tag"><i class="im im-icon-Hotel"></i> {{ offre.categ }}</span>
+                                <span class="utf_closed">Closed</span>
+                                <div class="utf_listing_item_content">
+                                    <div class="utf_listing_prige_block">
+                                        <span class="utf_meta_listing_price"><i class="fa fa-money"></i> {{ offre.prix }}DT</span>
+
+                                    </div>
+                                    <h3>{{ offre.nom }}</h3>
+                                    <span><i class="fa fa-map-marker"></i> {{ offre.ville }}</span>
+                                    <span><i class="fa fa-calendar"></i>Date Début :  {{ offre.datedebut | date}}</span>
+                                    <span><i class="fa fa-calendar"></i>Date din :   {{ offre.datedebut | date}}</span>
+                                </div>
+                            </div>
+                            <div class="utf_star_rating_section" data-rating="4.5">
+                                <div class="utf_counter_star_rating">(4.5)</div>
+                                <span class="utf_view_count"><i class="fa fa-eye"></i> 822+</span>
+                                <span class="like-icon"></span>
+                            </div>
+                        </a>
+                    </div>
+                    {% endfor %}
+
+
+
+
+                </div>
+
+            </div>
+
+            <!-- Sidebar -->
+            <div class="col-lg-4 col-md-4">
+                <div class="sidebar">
+
+                    <div class="utf_box_widget margin-top-35 margin-bottom-75">
+                        <h3><i class="sl sl-icon-folder-alt"></i> Categories</h3>
+                        <ul class="utf_listing_detail_sidebar">
+                            <li><i class="fa fa-angle-double-right"></i> <a href="#" class="active" onclick="filterSelection('all')">All</a></li>
+                            <li><i class="fa fa-angle-double-right"></i> <a href="#" onclick="filterSelection('Appartement')">Appartements</a></li>
+                            <li><i class="fa fa-angle-double-right"></i> <a href="#" onclick="filterSelection('Maison')">Maisons</a></li>
+                            <li><i class="fa fa-angle-double-right"></i> <a href="#" onclick="filterSelection('Chambre')">Chambres</a></li>
+                            <li><i class="fa fa-angle-double-right"></i> <a href="#" onclick="filterSelection('Voiture')">Voitures</a></li>
+                            <li><i class="fa fa-angle-double-right"></i> <a href="#" onclick="filterSelection('Moto')">Motos</a></li>
+                            <li><i class="fa fa-angle-double-right"></i> <a href="#" onclick="filterSelection('Velo')">Vélos</a></li>
+                        </ul>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+<br><br>
+
+    <script>
+        filterSelection("all")
+        function filterSelection(c) {
+            var x, i;
+            x = document.getElementsByClassName("filterDiv");
+            if (c == "all") c = "";
+            for (i = 0; i < x.length; i++) {
+                w3RemoveClass(x[i], "show");
+                if (x[i].className.indexOf(c) > -1) w3AddClass(x[i], "show");
+            }
+        }
+
+        function w3AddClass(element, name) {
+            var i, arr1, arr2;
+            arr1 = element.className.split(" ");
+            arr2 = name.split(" ");
+            for (i = 0; i < arr2.length; i++) {
+                if (arr1.indexOf(arr2[i]) == -1) {element.className += " " + arr2[i];}
+            }
+        }
+
+        function w3RemoveClass(element, name) {
+            var i, arr1, arr2;
+            arr1 = element.className.split(" ");
+            arr2 = name.split(" ");
+            for (i = 0; i < arr2.length; i++) {
+                while (arr1.indexOf(arr2[i]) > -1) {
+                    arr1.splice(arr1.indexOf(arr2[i]), 1);
+                }
+            }
+            element.className = arr1.join(" ");
+        }
+
+        // Add active class to the current button (highlight it)
+        var btnContainer = document.getElementById("myBtnContainer");
+        var btns = btnContainer.getElementsByClassName("btn");
+        for (var i = 0; i < btns.length; i++) {
+            btns[i].addEventListener("click", function(){
+                var current = document.getElementsByClassName("active");
+                current[0].className = current[0].className.replace(" active", "");
+                this.className += " active";
+            });
+        }
+    </script>
+
+{% endblock %}

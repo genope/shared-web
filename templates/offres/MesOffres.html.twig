@@ -1,0 +1,147 @@
+{% extends 'base-back.html.twig' %}
+
+{% block content %}
+<style>
+    .filterDiv {
+
+        display: none;
+    }
+
+
+
+</style>
+    <div id="titlebar" class="dashboard_gradient">
+        <div class="row">
+            <div class="col-md-12">
+                <h2>Mes Offres</h2>
+                <nav id="breadcrumbs">
+                    <ul>
+                        <li><a href="index_1.html">Dashbord</a></li>
+                        <li><a href="dashboard.html">Mes Offres</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </div>
+    <div class="row" >
+        <div class="col-lg-12 col-md-12">
+            <div class="utf_dashboard_list_box margin-top-0">
+                <div class="sort-by my_sort_by">
+                    <div class="utf_sort_by_select_item">
+
+
+                    </div>
+                </div>
+
+            <div id="myBtnContainer" style="height:85px">
+                <ul class="option-set margin-bottom-30">
+                        <li><a class="btn active" onclick="filterSelection('all')"> <i class="sl sl-icon-list"></i>   All</a></li>
+                        <li><a class="btn" onclick="filterSelection('Appartement')">  <i class="fa fa-building-o" >    </i>  Appartements</a></li>
+                        <li><a class="btn" onclick="filterSelection('Chambre')"><i class="fa fa-bed">   </i>  Chambres</a></li>
+                        <li><a class="btn" onclick="filterSelection('Maison')"><i class="fa fa-home">     </i>  Maisons</a></li>
+                        <li><a class="btn" onclick="filterSelection('Voiture')"><i class="fa fa-car">     </i>  Voitures</a></li>
+                        <li><a class="btn" onclick="filterSelection('Moto')"><i class="fa fa-motorcycle">   </i>  Moto</a></li>
+                        <li><a class="btn" onclick="filterSelection('Velo')"><i class="fa fa-bicycle">    </i>  Velo</a></li>
+
+                    </ul>
+
+
+            </div>
+                <h4><i class="sl sl-icon-list"></i> Mes Offres</h4>
+                <ul>
+                    {% for offre in offres %}
+                    <li class="filterDiv {{ offre.categ }}">
+                        <div class="utf_list_box_listing_item  ">
+
+                            <div class="utf_list_box_listing_item-img"><a href="#"><img src="{{ asset('uploads/' ~ offre.image) }}"s alt=""></a></div>
+
+                            <div class="utf_list_box_listing_item_content">
+                                <div class="inner">
+                                    <h3>{{ offre.nom }}</h3>
+                                    <span><i class="im im-icon-Hotel"></i> {{ offre.categ }}</span>
+                                    <span><i class="fa fa-map-marker"></i> {{ offre.ville }}</span>
+                                    <span><i class="fa fa-money"></i> {{ offre.prix }}</span>
+                                    <div class="utf_star_rating_section" data-rating="4.5">
+                                        <div class="utf_counter_star_rating">(4.5)</div>
+                                    </div>
+                                    <p>{{ offre.description }}</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="buttons-to-right" style="width: 250px">
+                            {% if offre.etat == true %}
+                            <a href="" class="button gray "  style="width: 126px;color: green" ><i class="fa fa-check " ></i> Approuved</a>
+                            {% endif %}
+                            {% if offre.etat == false %}
+                            <a href="" class="button gray " style="width: 126px;color: #ffbd3f"><i class="fa fa-spinner "></i> En attente</a>
+                            {% endif %}
+                            <a href="{{ path('app_offres_edit', {'idOffre': offre.idOffre}) }}" class="button gray" style="width: 115px"><i class="fa fa-pencil"></i> Edit</a>
+
+                            {{ include('offres/_delete_form.html.twig' )}}
+                        </div>
+                    </li>
+
+                    {% endfor %}
+
+
+                </ul>
+            </div>
+
+        </div>
+        <div class="col-md-12">
+            <div class="footer_copyright_part"></div>
+        </div>
+    </div>
+
+
+
+
+
+    <script>
+        filterSelection("all")
+        function filterSelection(c) {
+            var x, i;
+            x = document.getElementsByClassName("filterDiv");
+            if (c == "all") c = "";
+            for (i = 0; i < x.length; i++) {
+                w3RemoveClass(x[i], "show");
+                if (x[i].className.indexOf(c) > -1) w3AddClass(x[i], "show");
+            }
+        }
+
+        function w3AddClass(element, name) {
+            var i, arr1, arr2;
+            arr1 = element.className.split(" ");
+            arr2 = name.split(" ");
+            for (i = 0; i < arr2.length; i++) {
+                if (arr1.indexOf(arr2[i]) == -1) {element.className += " " + arr2[i];}
+            }
+        }
+
+        function w3RemoveClass(element, name) {
+            var i, arr1, arr2;
+            arr1 = element.className.split(" ");
+            arr2 = name.split(" ");
+            for (i = 0; i < arr2.length; i++) {
+                while (arr1.indexOf(arr2[i]) > -1) {
+                    arr1.splice(arr1.indexOf(arr2[i]), 1);
+                }
+            }
+            element.className = arr1.join(" ");
+        }
+
+        // Add active class to the current button (highlight it)
+        var btnContainer = document.getElementById("myBtnContainer");
+        var btns = btnContainer.getElementsByClassName("btn");
+        for (var i = 0; i < btns.length; i++) {
+            btns[i].addEventListener("click", function(){
+                var current = document.getElementsByClassName("active");
+                current[0].className = current[0].className.replace(" active", "");
+                this.className += " active";
+            });
+        }
+    </script>
+
+
+{% endblock %}

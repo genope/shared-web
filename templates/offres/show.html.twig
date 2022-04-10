@@ -1,0 +1,142 @@
+{% extends 'base-front.html.twig' %}
+
+{% block title %}Offres{% endblock %}
+
+{% block content %}
+    <div class="clearfix"></div>
+    <div id="titlebar" class="gradient">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <h2>Reserver ? </h2>
+                    <!-- Breadcrumbs -->
+                    <nav id="breadcrumbs">
+                        <ul>
+                            <li><a href="index_1.html">Shared</a></li>
+                            <li>Reserver</li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="clearfix"></div>
+        <div id="utf_listing_gallery_part" class="utf_listing_section" >
+            <div class="utf_listing_slider utf_gallery_container margin-bottom-0" >
+                <img src="{{ asset('Front-office/images/music_listing_04.jpg') }}" class="img-rounded" alt="Cinque Terre" width="600" height="200">
+                <img src="{{ asset('Front-office/images/music_listing_04.jpg') }}" class="img-rounded" alt="Cinque Terre" width="600" height="200">
+                <img src="{{ asset('Front-office/images/music_listing_04.jpg') }}" class="img-rounded" alt="Cinque Terre" width="600" height="200">
+                <img src="{{ asset('Front-office/images/music_listing_04.jpg') }}" class="img-rounded" alt="Cinque Terre" width="600" height="200">
+            </div>
+        </div>
+        <div class="row utf_sticky_main_wrapper">
+            <div class="col-lg-8 col-md-8">
+                <div id="titlebar" class="utf_listing_titlebar">
+                    <div class="utf_listing_titlebar_title">
+                        <h2>{{ offre.nom }}<span class="listing-tag">{{ offre.categ }}</span></h2>
+                        <span> <a href="#utf_listing_location" class="listing-address"> <i class="sl sl-icon-location"></i>{{ offre.ville }}</a> </span>
+                        <span class="call_now"><i class="fa fa-money"></i> {{ offre.prix }}</span>
+                        <div class="utf_star_rating_section" data-rating="4.5">
+                            <div class="utf_counter_star_rating">(4.5) / (14 Reviews)</div>
+                        </div>
+                        <ul class="listing_item_social">
+                            <li><a href="#"><i class="fa fa-bookmark"></i> Bookmark</a></li>
+                            <li><a href="#"><i class="fa fa-star"></i> Add Review</a></li>
+                            <li><a href="#"><i class="fa fa-flag"></i> Featured</a></li>
+                            <li><a href="#"><i class="fa fa-share"></i> Share</a></li>
+                            <li><a href="#" class="now_open">Open Now</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div id="utf_listing_overview" class="utf_listing_section">
+                    <h3 class="utf_listing_headline_part margin-top-30 margin-bottom-30">Offres Description</h3>
+                    <p>{{ offre.description }}</p>
+                   <div id="utf_listing_tags" class="utf_listing_section listing_tags_section margin-bottom-10 margin-top-0">
+                        <a href="#"><i class="sl sl-icon-phone" aria-hidden="true"></i> +(01) 1123-254-456</a>
+                        <a href="#"><i class="fa fa-envelope-o" aria-hidden="true"></i> info@example.com</a>
+                        <a href="#"><i class="sl sl-icon-globe" aria-hidden="true"></i> www.example.com</a>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!-- Sidebar -->
+            <div class="col-lg-4 col-md-4 margin-top-75 sidebar-search">
+                <div class="verified-badge with-tip margin-bottom-30" data-tip-content="Listing has been verified and belongs business owner or manager."> <i class="sl sl-icon-check"></i> Now Available</div>
+                <div class="utf_box_widget booking_widget_box">
+                    <h3><i class="fa fa-money"></i> Price
+                        <div class="price">
+                            <span>{{ offre.prix }} <small>DT</small></span>
+                        </div>
+                    </h3>
+                    <div class="row with-forms margin-top-0">
+                        <div class="col-lg-12 col-md-12 select_date_box">
+                            <input type="text" id="date-picker" placeholder=" De : {{ offre.datedebut |date }}" readonly="readonly">
+                            <i class="fa fa-calendar"></i>
+                        </div>
+                        <div class="col-lg-12 col-md-12 select_date_box">
+                            <input type="text" id="date-picker" placeholder=" Jusqu'a : {{ offre.datefin |date }}" readonly="readonly">
+                            <i class="fa fa-calendar"></i>
+                        </div>
+
+
+
+                    </div>
+                    <a href="listing_booking.html" class="utf_progress_button button fullwidth_block margin-top-5"><i class="fa fa-calendar"></i>Reserver</a>
+                    <button class="like-button add_to_wishlist"><i class="fa fa-star"></i> Add Review</button>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="utf_box_widget margin-top-35">
+                    <h3><i class="sl sl-icon-phone"></i> Contact Info</h3>
+                    <div class="utf_hosted_by_user_title"> <a href="#" class="utf_hosted_by_avatar_listing"><img src="{{ asset('Front-office/images/user_avatar_01.jpg') }}" alt=""></a>
+                        <h4><a href="#">Kathy Brown</a><span>Posted 3 Days Ago</span>
+                            <span><i class="sl sl-icon-location"></i> Lonsdale St, Melbourne</span>
+                        </h4>
+                    </div>
+                    <ul class="utf_social_icon rounded margin-top-10">
+                        <li><a class="facebook" href="#"><i class="icon-facebook"></i></a></li>
+                        <li><a class="twitter" href="#"><i class="icon-twitter"></i></a></li>
+                        <li><a class="gplus" href="#"><i class="icon-gplus"></i></a></li>
+                        <li><a class="linkedin" href="#"><i class="icon-linkedin"></i></a></li>
+                        <li><a class="instagram" href="#"><i class="icon-instagram"></i></a></li>
+                    </ul>
+                    <ul class="utf_listing_detail_sidebar">
+                        <li><i class="sl sl-icon-map"></i> 12345 Little Lonsdale St, Melbourne</li>
+                        <li><i class="sl sl-icon-phone"></i> +(012) 1123-254-456</li>
+                        <li><i class="sl sl-icon-globe"></i> <a href="#">www.example.com</a></li>
+                        <li><i class="fa fa-envelope-o"></i> <a href="mailto:info@example.com">info@example.com</a></li>
+                    </ul>
+                </div>
+
+
+
+
+
+            </div>
+        </div>
+    </div>
+<br><br>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{% endblock %}

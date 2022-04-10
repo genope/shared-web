@@ -1,0 +1,106 @@
+{% extends 'base-back.html.twig' %}
+
+
+{% block content %}
+<style>
+    .back:hover{
+        color: red;
+        text-transform: capitalize;
+    }
+    .btnn:hover{
+     transform: scale(1.03);
+    }
+</style>
+
+
+
+    <div id="titlebar" class="dashboard_gradient">
+        <div class="row">
+            <div class="col-md-12">
+                <h2>Add Offre</h2>
+                <nav id="breadcrumbs">
+                    <ul>
+                        <li><a href="index_1.html">Dashbord</a></li>
+                        <li><a href="dashboard.html">Edit Offres</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </div>
+
+
+<div class="back">
+    <i class="fa fa-arrow-left"></i> <a class="back" href="{{ path('mine') }}" style="font-size: large">back to list</a>
+</div>
+    <div class="add_utf_listing_section margin-top-45">
+        <div class="utf_add_listing_part_headline_part">
+            <h3><i class="sl sl-icon-tag"></i> Edit Offre</h3>
+        </div>
+        {{ form_start(form) }}
+        <div class="row with-forms">
+            <div class="col-md-6">
+                <h5>{{ form_label(form.nom,"Nom du l'offre") }}</h5>
+                {{ form_widget(form.nom) }}
+            </div>
+            <div class="col-md-6">
+                <h5>{{ form_label(form.categ,"categ du l'offre") }}</h5>
+                {{ form_widget(form.categ) }}
+            </div>
+        </div>
+        <div class="row with-forms">
+            <div class="col-md-6">
+                <h5>
+                    {{ form_label(form.datedebut,"datedebut du l'offre") }}</h5>
+
+                {{ form_widget(form.datedebut , {'attr': {'type': 'date'}})}}
+
+            </div>
+            <div class="col-md-6">
+                <h5>{{ form_label(form.datefin,"datefin du l'offre") }}</h5>
+
+
+                {{ form_widget(form.datefin) }}
+
+
+            </div>
+        </div>
+        <div class="row with-forms">
+            <div class="col-md-6">
+                <h5> {{ form_label(form.ville,"ville du l'offre") }}</h5>
+
+
+                {{ form_widget(form.ville) }}
+
+
+            </div>
+            <div class="col-md-6">
+                <h5> {{ form_label(form.prix,"prix du l'offre") }}</h5>
+
+                <div class="fm-input" >
+                    <i class="data-unit" style="margin-top: 45px;margin-right: 5px">DT</i>
+                    {{ form_widget(form.prix) }}
+
+                </div>
+
+            </div>
+        </div>
+        <div class="row with-forms">
+
+            <div class="col-md-12">
+                <h5> {{ form_label(form.description,"description du l'offre") }}</h5>
+                {{ form_widget(form.description , {'attr': {'placeholder': 'Add your decription here...'}}) }}
+            </div>
+            <div class="col-md-12">
+                <h5> {{ form_label(form.image,"Upload your image") }}</h5>
+                {{ form_widget(form.image , {'attr': {'placeholder': 'Add your decription here...'}}) }}
+            </div>
+        </div>
+    </div>
+    {{ form_end(form) }}
+
+    {{ include('offres/_delete_form.html.twig' )}}
+
+    <div class="col-md-12">
+        <div class="footer_copyright_part"></div>
+    </div>
+{% endblock %}
