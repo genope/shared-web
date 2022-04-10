@@ -95,6 +95,7 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator implements P
 
     public function onAuthenticationSuccess(Request $request, TokenInterface $token, $providerKey)
     {
+        // redirect user to their original path
         if ($targetPath = $this->getTargetPath($request->getSession(), $providerKey)) {
             return new RedirectResponse($targetPath);
         }
@@ -106,7 +107,6 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator implements P
         else
             $redirection = new RedirectResponse($this->router->generate('app_user_index'));
         return $redirection;
-        // For example : return new RedirectResponse($this->urlGenerator->generate('some_route'));
     }
 
     protected function getLoginUrl()

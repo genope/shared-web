@@ -4,6 +4,9 @@ namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Validator\Constraints as Assert;
+use App\Validator\Constraints\ComplexPassword;
+
 /**
  * User
  *
@@ -16,7 +19,9 @@ class User implements UserInterface
      * @var int
      *
      * @ORM\Column(name="CIN", type="integer", nullable=false)
+     * @Assert\Length(min="8",max="8")
      * @ORM\Id
+     *
      */
     private $cin;
 
@@ -36,14 +41,17 @@ class User implements UserInterface
 
     /**
      * @var string
-     *
+     * @Assert\NotBlank(groups={"Registration"})
+     * @Assert\Email()
      * @ORM\Column(name="Email", type="string", length=255, nullable=false)
      */
     private $email;
 
     /**
      * @var string
-     *
+     * @Assert\NotBlank(groups={"Registration", "PasswordReset"})
+     * @Assert\Length(min="6")
+     * @ComplexPassword()
      * @ORM\Column(name="Password", type="string", length=255, nullable=false)
      */
     private $password;
@@ -81,11 +89,9 @@ class User implements UserInterface
     private $roles = [];
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="etat", type="string", length=255, nullable=false)
+     * @ORM\Column(type="json")
      */
-    private $etat;
+    private $etat= [];
 
     /**
      * @var string|null
@@ -111,7 +117,7 @@ class User implements UserInterface
     /**
      * @return int
      */
-    public function getCin(): int
+    public function getCin(): ?int
     {
         return $this->cin;
     }
@@ -210,15 +216,20 @@ class User implements UserInterface
      */
     public function getEtat()
     {
-        return $this->etat;
+        $Etat = $this->etat;
+        // guarantee every user at least has ROLE_USER
+        $Etat[] = 'Approved';
+
+        return array_unique($Etat);
     }
 
     /**
      * @param string $etat
      */
-    public function setEtat(string $etat): void
+    public function setEtat(array $etat): self
     {
         $this->etat = $etat;
+        return $this;
     }
 
     /**

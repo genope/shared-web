@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\User;
+use App\Form\HostType;
 use App\Form\UserType;
 use App\Service\CaptchaService;
 use KnpU\OAuth2ClientBundle\Client\ClientRegistry;
@@ -56,19 +57,52 @@ class SecurityController extends AbstractController
         $entityManager = $this->getDoctrine()->getManager();
 
         if ($form->isSubmitted() && $form->isValid()) {
-            if (!$captchaService->validateCaptcha($request->get('g-recaptcha-response'))) {
-                $form->addError(new FormError($translator->trans('captcha.wrong')));
-                throw new ValidatorException('captcha.wrong');
-            }
-            $user->setRoles(array('ROLE_GUEST'));
+        /*   if (!$captchaService->validateCaptcha($request->get('g-recaptcha-response'))) {
+               $form->addError(new FormError($translator->trans('captcha.wrong')));
+               throw new ValidatorException('captcha.wrong');
+           }*/
+        $user->setRoles(array('ROLE_GUEST'));
+        $user->setEtat(array('Approved'));
+        $password = $passwordEncoder->encodePassword($user, $user->getPassword());
+        $user->setPassword($password);
+        $entityManager->persist($user);
+        $entityManager->flush();
+        $entityManager->clear();
+        return $this->redirectToRoute('app_user_index', [], Response::HTTP_SEE_OTHER);
+    }
+
+        return $this->render('user/register.html.twig', [
+            'user' => $user,
+            'form' => $form->createView(),
+        ]);
+    }
+    /**
+     * @Route("/register/host", name="registerHost", methods={"GET", "POST"})
+     */
+    public function registerHost(Request $request, UserPasswordEncoderInterface $passwordEncoder, CaptchaService $captchaService, TranslatorInterface $translator): Response
+    {
+
+        $user = new User();
+        $form = $this->createForm(HostType::class, $user);
+        $form->handleRequest($request);
+        $entityManager = $this->getDoctrine()->getManager();
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            /*   if (!$captchaService->validateCaptcha($request->get('g-recaptcha-response'))) {
+                   $form->addError(new FormError($translator->trans('captcha.wrong')));
+                   throw new ValidatorException('captcha.wrong');
+               }*/
+            $user->setRoles(array('ROLE_HOST'));
+            $user->setEtat(array('Approved'));
             $password = $passwordEncoder->encodePassword($user, $user->getPassword());
             $user->setPassword($password);
             $entityManager->persist($user);
             $entityManager->flush();
+            $entityManager->clear();
             return $this->redirectToRoute('app_user_index', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->render('user/register.html.twig', [
+        return $this->render('user/registerHost.html.twig', [
             'user' => $user,
             'form' => $form->createView(),
         ]);

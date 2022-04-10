@@ -26,6 +26,7 @@ security:
                 entry_point: App\Security\LoginFormAuthenticator
 
             remember_me:
+                name : SECURITY_DEMO
                 secret:   '%kernel.secret%'
                 remember_me_parameter: login[remember_me]
                 lifetime: 604800 # 1 week in seconds

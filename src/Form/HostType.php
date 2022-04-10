@@ -15,11 +15,12 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\File;
 
-class UserType extends AbstractType
+class HostType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
+
             ->add('cin', TextType::class, array(
                 'attr' => array(
                     'placeholder' => 'Cin'
@@ -57,6 +58,8 @@ class UserType extends AbstractType
                     'placeholder' => 'Phone number'
                 )
             ))
+            ->add('adressHost', TextType::class, ['attr' => ['id' => 'searchTextField', 'autocomplete' => 'on']])
+
             ->add('imageProfile', FileType::class, ['attr' => ['class' => 'custom-file-input'],
                 'label' => false,
                 'mapped' => false,
@@ -72,7 +75,7 @@ class UserType extends AbstractType
                     ])
                 ],
             ])
-            ->add('imageProfile', FileType::class, ['attr' => ['class' => 'custom-file-input'],
+            ->add('imageCin', FileType::class, ['attr' => ['class' => 'custom-file-input'],
                 'label' => false,
                 'mapped' => false,
                 'required' => false,
@@ -86,7 +89,8 @@ class UserType extends AbstractType
                         'mimeTypesMessage' => 'Please upload a valid ImageFile',
                     ])
                 ],
-            ]);
+            ])
+           ;
     }
 
     public function configureOptions(OptionsResolver $resolver): void
