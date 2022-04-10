@@ -58,9 +58,7 @@
                                             <h3>{{ produit.designation }}</h3>
                                             <h3>{{ produit.refProd }}</h3>
 
-                                            <span><i class="im im-icon-Hotel"></i> Hotels</span>
-                                            <span><i class="fa fa-map-marker"></i> The Ritz-Carlton, Hong Kong</span>
-                                            <span><i class="fa fa-phone"></i> (+15) 124-796-3633</span>
+                                            <span><i class=""></i> {{  produit.nomcategorie }}</span>
                                             <div class="utf_star_rating_section" data-rating="4.5">
                                                 <div class="utf_counter_star_rating">(4.5)</div>
                                             </div>
@@ -70,7 +68,7 @@
                                 </div>
                                 <div class="buttons-to-right">
                                     <a href="{{ path('app_produit_edit', {'idProd': produit.idProd}) }}" class="button gray"><i class="fa fa-pencil"></i> Edit</a>
-                                    <a href="{{ path('app_produit_delete', {'idProd': produit.idProd}) }}" class="button gray"><i class="fa fa-trash-o"></i> Delete</a>
+                                    {{ include('produit/_delete_form.html.twig') }}
                                 </div>
                             </li>
                         {% else %}
@@ -97,7 +95,7 @@
             </div>
         </div>
 
-    <a href="{{ path('app_produit_new') }}" class="button preview" >Ajouter un produit</a>
+    <a href="{{ path('app_produit_new') }}" class="buttons-to-right " >Ajouter un produit</a>
 
     <script src="{{ asset('front-office/scripts/jquery-3.4.1.min.js') }}"></script>
     <script src="{{ asset('front-office/scripts/jquery-migrate-3.3.2.min.js') }}"></script>

@@ -26,9 +26,6 @@ class CategorieproduitController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->persist($categorieproduitA);
-            var_dump($categorieproduitA);
-            var_dump(a);
-            echo($a);
             dump($categorieproduitA);
             $entityManager->flush();
             $entityManager->clear();

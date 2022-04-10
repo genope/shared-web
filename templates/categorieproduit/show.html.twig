@@ -1,16 +1,12 @@
-<!DOCTYPE html>
+{% extends 'base.html.twig' %}
 
-<title>Categorieproduit</title>
+{% block title %}Categorieproduit{% endblock %}
 
-{% block content %}
+{% block body %}
     <h1>Categorieproduit</h1>
 
     <table class="table">
         <tbody>
-            <tr>
-                <th>Idcategorie</th>
-                <td>{{ categorieproduit.idcategorie }}</td>
-            </tr>
             <tr>
                 <th>Nomcategorie</th>
                 <td>{{ categorieproduit.nomcategorie }}</td>

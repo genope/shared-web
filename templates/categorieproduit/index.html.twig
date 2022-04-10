@@ -28,10 +28,9 @@
                         {% for categorieproduit in categorieproduits %}
                         <a  class="utf_category_small_box_part"> <i ></i>
                             <h4>{{ categorieproduit.nomcategorie }}</h4>
-
                         </a>
-
-                                <div class="fm-close"><a class="delete" href="#"><i class="fa fa-remove"></i></a></div></td>
+                        {{ include('categorieproduit/_delete_form.html.twig') }}
+                                </td>
                         </td>
                         {% endfor %}
                     </div>

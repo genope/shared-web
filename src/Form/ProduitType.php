@@ -36,7 +36,7 @@ class ProduitType extends AbstractType
             ->add('prix')
             ->add('qteStock')
             ->add('region')
-            ->add('nomCategorie',EntityType::class,[
+            ->add('nomcategorie',EntityType::class,[
                 'class' => categorieproduit::class,
                 'choice_label' => 'nomCategorie',
                 'multiple' => false,

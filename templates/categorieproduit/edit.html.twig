@@ -1,8 +1,8 @@
-<!DOCTYPE html>
+{% extends 'base.html.twig' %}
 
-<title>Edit Categorieproduit</title>
+{% block title %}Edit Categorieproduit{% endblock %}
 
-{% block content %}
+{% block body %}
     <h1>Edit Categorieproduit</h1>
 
     {{ include('categorieproduit/_form.html.twig', {'button_label': 'Update'}) }}

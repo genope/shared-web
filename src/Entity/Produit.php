@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Produit
  *
- * @ORM\Table(name="produit", uniqueConstraints={@ORM\UniqueConstraint(name="ref_prod", columns={"ref_prod"})}, indexes={@ORM\Index(name="c2", columns={"region"}), @ORM\Index(name="nomCategorie", columns={"nomCategorie"})})
+ * @ORM\Table(name="produit", uniqueConstraints={@ORM\UniqueConstraint(name="ref_prod", columns={"ref_prod"})}, indexes={@ORM\Index(name="nomCategorie", columns={"nomCategorie"}), @ORM\Index(name="c2", columns={"region"})})
  * @ORM\Entity
  */
 class Produit
@@ -66,7 +66,7 @@ class Produit
     /**
      * @var \Region
      *
-     * @ORM\ManyToOne(targetEntity="Region",inversedBy="nom")
+     * @ORM\ManyToOne(targetEntity="Region")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="region", referencedColumnName="nom")
      * })
@@ -76,7 +76,7 @@ class Produit
     /**
      * @var \Categorieproduit
      *
-     * @ORM\ManyToOne(targetEntity="Categorieproduit" ,inversedBy="Produit")
+     * @ORM\ManyToOne(targetEntity="Categorieproduit")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="nomCategorie", referencedColumnName="nomCategorie")
      * })

@@ -12,8 +12,7 @@ class CategorieproduitType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('nomCategorie')
-
+            ->add('nomcategorie')
         ;
     }
 

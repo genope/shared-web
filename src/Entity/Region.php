@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Region
  *
- * @ORM\Table(name="region", uniqueConstraints={@ORM\UniqueConstraint(name="nom", columns={"nom"}), @ORM\UniqueConstraint(name="id", columns={"id"})})
+ * @ORM\Table(name="region", uniqueConstraints={@ORM\UniqueConstraint(name="id", columns={"id"}), @ORM\UniqueConstraint(name="nom", columns={"nom"})})
  * @ORM\Entity
  */
 class Region
@@ -23,7 +23,7 @@ class Region
 
     /**
      * @var int
-      * @ORM\OneToMany(targetEntity="Produit" ,mappedBy="Region")
+     *
      * @ORM\Column(name="id", type="integer", nullable=false)
      */
     private $id;
@@ -44,6 +44,7 @@ class Region
 
         return $this;
     }
+
     public function __toString()
     {
         return $this->nom;
