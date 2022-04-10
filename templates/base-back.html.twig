@@ -92,8 +92,8 @@
                                 <li><a class="current" href="#">User Panel</a>
                                     <ul>
                                         <li><a class="active" href="dashboard.html">Dashboard</a></li>
-                                        <li><a href="dashboard_add_listing.html">Add Listing</a></li>
-                                        <li><a href="dashboard_my_listing.html">My Listings</a></li>
+                                        <li><a href="{{ path('app_produit_new') }}">Ajouter Produit</a></li>
+                                        <li><a href="{{ path('app_produit_index') }}">List des produits</a></li>
                                         <li><a href="dashboard_bookings.html">Bookings</a></li>
                                         <li><a href="dashboard_messages.html">Messages</a></li>
                                         <li><a href="dashboard_wallet.html">Wallet</a></li>
@@ -201,8 +201,9 @@
             <div class="utf_dashboard_navigation js-scrollbar">
                 <div class="utf_dashboard_navigation_inner_block">
                     <ul>
-                        <li class="active"><a href="dashboard.html"><i class="sl sl-icon-layers"></i> Dashboard</a></li>
-                        <li><a href="dashboard_add_listing.html"><i class="sl sl-icon-plus"></i> Add Listing</a></li>
+                        <li><a href="{{ path('app_user_index') }}"><i class="sl sl-icon-layers"></i> Index</a></li>
+                        <li><a href="{{ path('app_shop') }}"><i class="sl sl-icon-layers"></i> Boutique</a></li>
+                        <li><a href="{{ path('app_produit_new') }}"><i class="sl sl-icon-plus"></i> Ajouter Produit</a></li>
                         <li>
                             <a href="#"><i class="sl sl-icon-layers"></i> My Listings</a>
                             <ul>
@@ -211,8 +212,8 @@
                                 <li><a href="dashboard_my_listing.html">Expired <span class="nav-tag red">8</span></a></li>
                             </ul>
                         </li>
-                        <li><a href="dashboard_bookings.html"><i class="sl sl-icon-docs"></i> Bookings</a></li>
-                        <li><a href="dashboard_messages.html"><i class="sl sl-icon-envelope-open"></i> Messages</a></li>
+                        <li><a href="{{ path('app_produit_new') }}"><i class="sl sl-icon-docs"></i> List des produits</a></li>
+                        <li><a href="{{ path('app_categorieproduit_index') }}"><i class="sl sl-icon-envelope-open"></i> Categories</a></li>
                         <li><a href="dashboard_wallet.html"><i class="sl sl-icon-wallet"></i> Wallet</a></li>
                         <li>
                             <a href="#"><i class="sl sl-icon-star"></i> Reviews</a>

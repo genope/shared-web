@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <html lang="zxx">
 
 <head>
@@ -94,28 +94,20 @@
                                         </li>
                                     </ul>
                                 </li>
-                                <li><a href="#">User Panel</a>
+                                <li><a href="#">Gestion Produit</a>
                                     <ul>
-                                        <li><a href="dashboard.html">Dashboard</a></li>
-                                        <li><a href="dashboard_add_listing.html">Add Listing</a></li>
-                                        <li><a href="dashboard_my_listing.html">My Listings</a></li>
-                                        <li><a href="dashboard_bookings.html">Bookings</a></li>
-                                        <li><a href="dashboard_messages.html">Messages</a></li>
-                                        <li><a href="dashboard_wallet.html">Wallet</a></li>
-                                        <li><a href="dashboard_visitor_review.html">Reviews</a></li>
-                                        <li><a href="dashboard_bookmark.html">Bookmark</a></li>
-                                        <li><a href="dashboard_my_profile.html">My Profile</a></li>
-                                        <li><a href="dashboard_change_password.html">Change Password</a></li>
-                                        <li><a href="dashboard_invoice.html">Invoice</a></li>
+                                        <li><a href="{{ path('app_produit_index') }}">List des produits</a></li>
                                     </ul>
                                 </li>
-                                <li><a href="#">Blog</a>
+                                <li><a href="#">Boutique</a>
                                     <ul>
-                                        <li><a href="blog_page.html">Blog Grid</a></li>
-                                        <li><a href="blog_page_left_sidebar.html">Blog Left Sidebar</a></li>
-                                        <li><a href="blog_page_right_sidebar.html">Blog Right Sidebar</a></li>
-                                        <li><a href="blog_detail_left_sidebar.html">Blog Detail Leftside</a></li>
-                                        <li><a href="blog_detail_right_sidebar.html">Blog Detail Rightside</a></li>
+                                        <li><a href="#">Boutique affichage</a>
+                                            <ul>
+                                                <li><a href="{{ path('app_shop') }}">Boutique Grid</a></li>
+                                                <li><a href="{{ path('app_shopList') }}">Boutique Liste</a></li>
+                                            </ul>
+                                        </li>
+                                        <li><a href="blog_page.html">Panier</a></li>
                                     </ul>
                                 </li>
                                 <li><a href="#">Pages</a>
@@ -232,6 +224,11 @@
 <script src="{{ asset('front-office/scripts/tooltips.min.js') }}"></script>
 <script src="{{ asset('front-office/scripts/color_switcher.js') }}"></script>
 <script src="{{ asset('front-office/scripts/jquery_custom.js') }}"></script>
+<script src="{{ asset('front-office/scripts/isotope.min.js') }}"></script>
+<script src="{{ asset('front-office/scripts/jquery-migrate-3.3.2.min.js') }}"></script>
+
+
+
 <script>
     var typed = new Typed('.typed-words', {
         strings: ["Attractions"," Restaurants"," Hotels"],

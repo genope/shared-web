@@ -1,0 +1,54 @@
+{% extends 'base-back.html.twig' %}
+{% block content %}
+    <div id="main_wrapper">
+        <div class="clearfix"></div>
+
+        <div id="titlebar" class="gradient margin-bottom-0">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h2 style="color: white">Liste des categories</h2>
+                        <br>
+                        <nav id="breadcrumbs">
+                            <ul>
+                                <li><a href="index_1.html">Home</a></li>
+                                <li>Liste Categories</li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <td>
+                    <div class="container_categories_box margin-top-5 margin-bottom-75">
+                        {% for categorieproduit in categorieproduits %}
+                        <a  class="utf_category_small_box_part"> <i ></i>
+                            <h4>{{ categorieproduit.nomcategorie }}</h4>
+
+                        </a>
+
+                                <div class="fm-close"><a class="delete" href="#"><i class="fa fa-remove"></i></a></div></td>
+                        </td>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div id="bottom_backto_top"><a href="#"></a></div>
+    </div>
+
+    <div class="add_utf_listing_section margin-top-45">
+				<div class="utf_add_listing_part_headline_part">
+					<h3><i class=" im im-icon-Pen-5"></i> Ajouter Categorie</h3>
+                </div>
+				        {{ include('categorieproduit/_form.html.twig') }}
+
+                 </div>
+
+        {% endblock %}

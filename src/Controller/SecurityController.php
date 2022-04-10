@@ -8,8 +8,6 @@ use App\Service\CaptchaService;
 use KnpU\OAuth2ClientBundle\Client\ClientRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\FormError;
-use Symfony\Component\HttpFoundation\JsonResponse;
-use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -46,7 +44,7 @@ class SecurityController extends AbstractController
     }
 
     /**
-         * @Route("/register/guest", name="register", methods={"GET", "POST"})
+     * @Route("/register/guest", name="register", methods={"GET", "POST"})
      */
     public function register(Request $request, UserPasswordEncoderInterface $passwordEncoder, CaptchaService $captchaService, TranslatorInterface $translator): Response
     {
@@ -78,19 +76,16 @@ class SecurityController extends AbstractController
     /**
      * @Route("/connect/google", name="connect_google")
      * @param ClientRegistry $clientRegistry
-     * @return RedirectResponse
+     * @return Response
      */
     public function googleConnectAction(ClientRegistry $clientRegistry)
     {
-        return $clientRegistry
-            ->getClient('google_main')
-            ->redirect();
+        return $clientRegistry->getClient('google_main')->redirect();
     }
 
     /**
      * @Route("/connect/google/check", name="connect_google_check")
      * @param $request Request
-     * @return JsonResponse|\Symfony\Component\HttpFoundation\RedirectResponse
      */
     public function connectGoogleCheckAction(Request $request)
     {
@@ -103,7 +98,6 @@ class SecurityController extends AbstractController
      */
     public function facebookConnectAction(ClientRegistry $clientRegistry)
     {
-
         return $clientRegistry->getClient('facebook_main')->redirect();
     }
 
@@ -122,5 +116,14 @@ class SecurityController extends AbstractController
     public function changeLangue(Request $request)
     {
         return $this->redirectToRoute('app_user_index', [], Response::HTTP_SEE_OTHER);
+    }
+
+
+    /**
+     * @Route("/test", name="test")
+     */
+    public function test(): Response
+    {
+        return $this->render('user/test.html.twig');
     }
 }

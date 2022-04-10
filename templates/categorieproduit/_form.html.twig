@@ -1,0 +1,10 @@
+{{ form_start(form) }}
+<div class="col-md-9">
+    <h5>{{ form_label(form.nomCategorie) }}</h5>
+    {{form_widget(form.nomCategorie) }}
+</div>
+<div class="col-md-3">
+    <button class="button" style="margin-top: 43px" >{{ button_label|default('Ajouter') }}</button>
+</div>
+
+{{ form_end(form) }}

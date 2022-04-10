@@ -1,0 +1,41 @@
+{{ form_start(form) }}
+<div class="row with-forms">
+    <div class="col-md-6">
+        <h5>{{ form_label(form.refProd,"RefProd") }}</h5>
+        {{form_widget(form.refProd)}}
+    </div>
+    <div class="col-md-6">
+        <h5>{{ form_label(form.designation,"designation") }}</h5>
+        {{form_widget(form.designation)}}
+    </div>
+    <div class="col-md-12">
+        <h5>{{ form_label(form.description,"description") }}</h5>
+        {{form_widget(form.description)}}
+    </div>
+    <div class="col-md-6">
+        <h5>{{ form_label(form.prix,"prix") }}</h5>
+        {{form_widget(form.prix)}}
+    </div>
+    <div class="col-md-6">
+        <h5>{{ form_label(form.qteStock,"Quantité") }}</h5>
+        {{form_widget(form.qteStock)}}
+    </div>
+    <div class="col-md-6">
+        <h5>{{ form_label(form.nomCategorie ,"nomCategorie ") }}</h5>
+        {{form_widget(form.nomCategorie )}}
+    </div>
+    <div class="col-md-6">
+        <h5>{{ form_label(form.region ,"region ") }}</h5>
+        {{form_widget(form.region )}}
+    </div>
+    <div class="col-md-6" style="align-self: center">
+        <h5>{{ form_label(form.image ,"image ") }}</h5>
+        {{form_widget(form.image )}}
+    </div>
+{# dropzon #}
+
+</div>
+
+    <button class="button preview" >{{ button_label|default('Save') }}</button>
+{{ form_end(form) }}
+
