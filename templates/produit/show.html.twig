@@ -47,7 +47,11 @@
             <!-- Sidebar -->
             <div class="col-lg-4 col-md-4 margin-top-75 sidebar-search">
                 <a href="listing_booking.html" class="utf_progress_button button fullwidth_block margin-top-5">Panier</a>
-                <div class="verified-badge with-tip margin-bottom-30" data-tip-content="Le produit est encore disponible."> <i class="sl sl-icon-check"></i> Disponible</div>
+                {% if produit.qtestock >0 %}
+                <div class="  verified-badge with-tip margin-bottom-30" data-tip-content="Le produit est encore disponible."> <i class="sl sl-icon-check"></i> Disponible</div>
+                {% else %}
+                    <div class="verified-badge1 with-tip margin-bottom-30" data-tip-content="Le produit est encore disponible."> <i class="sl sl-icon-close"></i> Indisponible</div>
+                {% endif %}
                 <div class="utf_box_widget booking_widget_box">
                     <h3><i class="fa fa-calendar"></i> Prix
                         <div class="price">
@@ -124,32 +128,27 @@
             </div>
         </div>
     </div>
-<a href="{{ path('app_produit_index') }}">back to list</a>
-
-    <a href="{{ path('app_produit_edit', {'idProd': produit.idProd}) }}">edit</a>
-
-    {{ include('produit/_delete_form.html.twig') }}
 
     <script>
-function  plus(){
-    const c= document.getElementById("txt");
-   const a= document.getElementById("txt").value;
-   let b=parseInt(a);
-   c.value=b+1;
+        function  plus(){
+            const c= document.getElementById("txt");
+            const a= document.getElementById("txt").value;
+            let b=parseInt(a);
+            c.value=b+1;
 
 
-}
-function  moins(){
+        }
+        function  moins(){
 
-    const c= document.getElementById("txt");
-    const a= document.getElementById("txt").value;
+            const c= document.getElementById("txt");
+            const a= document.getElementById("txt").value;
 
-    let b=parseInt(a);
-    if(a>0)
-    c.value=b-1;
+            let b=parseInt(a);
+            if(a>0)
+                c.value=b-1;
 
 
-}
+        }
         function close_panel_dropdown() {
             $('.panel-dropdown').removeClass("active");
             $('.fs-inner-container.content').removeClass("faded-out");

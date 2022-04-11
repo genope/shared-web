@@ -3,12 +3,20 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+
+
+
 
 /**
  * Produit
  *
  * @ORM\Table(name="produit", uniqueConstraints={@ORM\UniqueConstraint(name="ref_prod", columns={"ref_prod"})}, indexes={@ORM\Index(name="nomCategorie", columns={"nomCategorie"}), @ORM\Index(name="c2", columns={"region"})})
  * @ORM\Entity
+ * @UniqueEntity("refProd",
+ *     message="La reference est deja utilisé"
+ * )
  */
 class Produit
 {
@@ -25,6 +33,9 @@ class Produit
      * @var string
      *
      * @ORM\Column(name="ref_prod", type="string", length=25, nullable=false)
+     * @Assert\NotBlank(message="Ne doit pas etre vide")
+     * @Assert\Length(min=4, max=25,
+     *     minMessage ="Doit etre  moins que 25 caracteres", minMessage ="Doit etre plus que 4 caracteres")
      */
     private $refProd;
 
@@ -32,6 +43,9 @@ class Produit
      * @var string
      *
      * @ORM\Column(name="designation", type="string", length=255, nullable=false)
+     * @Assert\NotBlank(message="Ne doit pas etre vide")
+     * @Assert\Length(min=4, max=50,
+     *     minMessage ="Doit etre  moins que 25 caracteres", minMessage ="Doit etre plus que 4 caracteres")
      */
     private $designation;
 
@@ -46,6 +60,13 @@ class Produit
      * @var string
      *
      * @ORM\Column(name="image", type="string", length=255, nullable=false)
+     * @Assert\NotBlank(message="Ne doit pas etre vide")
+     * @Assert\Length(min=4, max=255)
+     *  @Assert\File(
+     *     maxSize = "2048k",
+     *     mimeTypes = {"application/png", "application/jpeg"},
+     *     mimeTypesMessage = "Veuillez Ajouter une image avec un format valide"
+     * )
      */
     private $image;
 
@@ -53,6 +74,12 @@ class Produit
      * @var float
      *
      * @ORM\Column(name="prix", type="float", precision=10, scale=0, nullable=false)
+     * @Assert\NotBlank(message="Ne doit pas etre vide")
+     * @Assert\Positive(message="doit etre Positif")
+     * @Assert\Regex(
+     *     pattern="/\d/",
+     *     message="Le nom de la categorie ne peut pas contenir de lettres"
+     * )
      */
     private $prix;
 
@@ -60,6 +87,8 @@ class Produit
      * @var int
      *
      * @ORM\Column(name="qte_stock", type="integer", nullable=false)
+     * @Assert\NotBlank(message="Ne doit pas etre vide")
+     * @Assert\Positive(message="doit etre Positif")
      */
     private $qteStock;
 

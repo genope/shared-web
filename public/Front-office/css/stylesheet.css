@@ -3157,7 +3157,57 @@ a.send-message-to-owner.button {
 	margin-top: 20px;
 	margin-bottom: -5px;
 }
-
+/*==========
+  Verified Style
+============*/
+.verified-badge1 {
+	background-color: #ff2222;
+	border-radius: 4px;
+	color: #fff;
+	text-align: center;
+	padding: 12px 20px;
+	font-size: 16px;
+	font-weight: 400;
+	cursor: help;
+	position: relative;
+	transition: 0.3s;
+	display: block;
+}
+.verified-badge1 i {
+	font-size: 22px;
+	padding: 0 4px 0 0;
+	position: relative;
+	top: 3px;
+}
+.verified-badge1 .tip-content {
+	transform: translate(-50%, -100%);
+	-ms-transform: translate(-50%, -100%);
+	padding: 20px;
+	border-radius:4px;
+	max-width: content-box;
+	top: -1px;
+	bottom: auto;
+}
+.verified-badge1:hover {
+	background:#ff2222
+}
+.verified-badge1:hover .tip-content {
+	opacity: 1;
+	visibility: visible;
+	transform: translate(-50%, -100%);
+	-ms-transform: translate(-50%, -100%);
+}
+.verified-badge1 .tip-content:after {
+	font-family: "FontAwesome";
+	content: "\f0d7";
+	position: absolute;
+	bottom: -22px;
+	top: auto;
+	left: 50%;
+	font-size: 22px;
+	color: #333;
+	transform: translate(-50%,-50%);
+}
 /*==========
   Verified Style
 ============*/

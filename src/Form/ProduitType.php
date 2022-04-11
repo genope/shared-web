@@ -18,24 +18,36 @@ class ProduitType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('refProd')
-            ->add('designation')
-            ->add('description',TextareaType::class)
+            ->add('refProd',null,[
+                'required'   => false,
+                'empty_data' => '',
+            ])
+            ->add('designation',null,[
+                'required'   => false,
+                'empty_data' => '',
+            ])
+            ->add('description',TextareaType::class,[
+                'required'   => false,
+                'empty_data' => '',
+            ])
             ->add('image',FileType::class,[
                 'data_class' => null,
-                'label'     => 'image',
+                'label'     => 'Image',
                 'required'  => false,
-                'constraints' => [
-                    new \Symfony\Component\Validator\Constraints\File([
-                        'maxSize' => '6000k',
 
-                        'mimeTypesMessage' => 'Veuillez uploader une image valide'
-                    ])
-                ]
             ])
-            ->add('prix')
-            ->add('qteStock')
-            ->add('region')
+            ->add('prix',null,[
+                'required'   => false,
+                'empty_data' => '',
+            ])
+            ->add('qteStock',null,[
+                'required'   => false,
+                'empty_data' => '',
+            ])
+            ->add('region',null,[
+                'required'   => false,
+                'empty_data' => '',
+            ])
             ->add('nomcategorie',EntityType::class,[
                 'class' => categorieproduit::class,
                 'choice_label' => 'nomCategorie',
