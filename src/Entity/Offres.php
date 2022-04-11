@@ -3,7 +3,7 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-
+use Symfony\Component\Validator\Constraints as Assert;
 /**
  * Offres
  *
@@ -23,35 +23,36 @@ class Offres
 
     /**
      * @var string
-     *
+     *@Assert\NotBlank(message="le nom  fin is required")
      * @ORM\Column(name="nom", type="string", length=255, nullable=false)
      */
     private $nom;
 
     /**
      * @var string
-     *
+     *@Assert\NotBlank(message="La description  is required")
      * @ORM\Column(name="description", type="string", length=255, nullable=false)
      */
     private $description;
 
     /**
      * @var \DateTime
-     *
+     *@Assert\NotBlank(message="Date debut is required")
      * @ORM\Column(name="dateDebut", type="date", nullable=false)
      */
     private $datedebut;
 
     /**
      * @var \DateTime
-     *
+     *@Assert\NotBlank(message="Date fin is required")
      * @ORM\Column(name="dateFin", type="date", nullable=false)
      */
     private $datefin;
 
     /**
      * @var float
-     *
+     *@Assert\NotBlank(message="Le prix  is required")
+     * @Assert\Positive(message="le prix doit etre positive ")
      * @ORM\Column(name="prix", type="float", precision=10, scale=0, nullable=false)
      */
     private $prix;
@@ -65,7 +66,7 @@ class Offres
 
     /**
      * @var string
-     *
+     *@Assert\NotBlank(message="ville  is required")
      * @ORM\Column(name="ville", type="string", length=255, nullable=false)
      */
     private $ville;
@@ -79,14 +80,14 @@ class Offres
 
     /**
      * @var string
-     *
+     *@Assert\NotBlank(message=" Categorie  is required")
      * @ORM\Column(name="categ", type="string", length=255, nullable=false)
      */
     private $categ;
 
     /**
      * @var string
-     *
+     *@Assert\NotBlank(message="L'image  is required")
      * @ORM\Column(name="image", type="string", length=255, nullable=false)
      */
     private $image;
@@ -96,7 +97,7 @@ class Offres
      *
      * @ORM\ManyToOne(targetEntity="User")
      * @ORM\JoinColumns({
-     * @ORM\JoinColumn(name="id_user", referencedColumnName="CIN")
+     *   @ORM\JoinColumn(name="id_user", referencedColumnName="CIN")
      * })
      */
     private $idUser;

@@ -92,12 +92,13 @@ class OffresController extends AbstractController
             }
             $offre->setImage($newFilename);
 
+
             $entityManager->persist($offre);
             $entityManager->flush();
 
 
 
-            return $this->redirectToRoute('app_offres_index', [], Response::HTTP_SEE_OTHER);
+            
         }
 
         return $this->render('offres/new.html.twig', [

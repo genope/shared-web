@@ -74,11 +74,11 @@
                     </h3>
                     <div class="row with-forms margin-top-0">
                         <div class="col-lg-12 col-md-12 select_date_box">
-                            <input type="text" id="date-picker" placeholder=" De : {{ offre.datedebut |date }}" readonly="readonly">
+                            <input type="text" id="date-picker" placeholder=" De : {{ offre.datedebut |date("F,d,Y") }}" readonly="readonly">
                             <i class="fa fa-calendar"></i>
                         </div>
                         <div class="col-lg-12 col-md-12 select_date_box">
-                            <input type="text" id="date-picker" placeholder=" Jusqu'a : {{ offre.datefin |date }}" readonly="readonly">
+                            <input type="text" id="date-picker" placeholder=" Jusqu'a : {{ offre.datefin |date("F,d,Y") }}" readonly="readonly">
                             <i class="fa fa-calendar"></i>
                         </div>
 
