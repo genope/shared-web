@@ -9,12 +9,12 @@
     <title>Shared {% block title %}Index {% endblock %}</title>
 
     <!-- Favicon -->
-    <link rel="shortcut icon" href="{{ asset('front-office/images/favicon.png') }}">
+    <link rel="shortcut icon" href="{{ asset('Front-office/images/favicon.png') }}">
     <!-- Style CSS -->
-    <link rel="stylesheet" href="{{ asset('front-office/css/stylesheet.css') }}">
-    <link rel="stylesheet" href="{{ asset('front-office/css/mmenu.css') }}">
-    <link rel="stylesheet" href="{{ asset('front-office/css/Authstyle.css') }}" id="colors">
-    <script src="{{ asset('front-office/scripts/typed.js') }}"></script>
+    <link rel="stylesheet" href="{{ asset('Front-office/css/stylesheet.css') }}">
+    <link rel="stylesheet" href="{{ asset('Front-office/css/mmenu.css') }}">
+    <link rel="stylesheet" href="{{ asset('Front-office/css/Authstyle.css') }}" id="colors">
+    <script src="{{ asset('Front-office/scripts/typed.js') }}"></script>
     {% block stylesheets %}
         {#{{ encore_entry_link_tags('app') }}#}
     {% endblock %}
@@ -29,7 +29,7 @@
             <div id="header" style="background: white">
                 <div class="container">
                     <div class="utf_left_side">
-                        <div id="logo"><a href="index_1.html"><img src="images/logo.png" alt=""></a></div>
+                        <div id="logo"><a href="{{ asset('index_1.html') }}"><img src="{{asset('Front-office/images/logo.png') }}" alt=""></a></div>
                         <div class="mmenu-trigger">
                             <button class="hamburger utfbutton_collapse" type="button">
 				<span class="utf_inner_button_box">
@@ -41,13 +41,13 @@
                             <ul id="responsive">
                                 <li><a class="current" href="#">Home</a>
                                     <ul>
-                                        <li><a href="index_1.html">Home Version 1</a></li>
-                                        <li><a href="index_2.html">Home Version 2</a></li>
-                                        <li><a class="active" href="index_3.html">Home Version 3</a></li>
-                                        <li><a href="index_4.html">Home Version 4</a></li>
-                                        <li><a href="index_5.html">Home Version 5</a></li>
-                                        <li><a href="index_6.html">Home Version 6</a></li>
-                                        <li><a href="index_7.html">Home Version 7</a></li>
+                                        <li><a href="{{ asset('index_1.html') }}">Home Version 1</a></li>
+                                        <li><a href="{{ asset('index_2.html') }}">Home Version 2</a></li>
+                                        <li><a class="active" href="{{ asset('index_3.html') }}">Home Version 3</a></li>
+                                        <li><a href="{{ asset('index_4.html') }}">Home Version 4</a></li>
+                                        <li><a href="{{ asset('index_5.html') }}">Home Version 5</a></li>
+                                        <li><a href="{{ asset('index_6.html') }}">Home Version 6</a></li>
+                                        <li><a href="{{ asset('index_7.html') }}">Home Version 7</a></li>
                                     </ul>
                                 </li>
                                 <li><a href="#">Listings</a>
@@ -62,17 +62,17 @@
                                         </li>
                                         <li><a href="#">Grid Layout</a>
                                             <ul>
-                                                <li><a href="listings_grid_with_sidebar.html">Listing Grid
+                                                <li><a href="{{ asset('listings_grid_with_sidebar.html') }}">Listing Grid
                                                         Sidebar</a></li>
-                                                <li><a href="listings_two_column_map_grid.html">Listing Two Column
+                                                <li><a href="{{ asset('listings_two_column_map_grid.html') }}">Listing Two Column
                                                         Grid</a></li>
-                                                <li><a href="listings_grid_full_width.html">Listing Grid Full
+                                                <li><a href="{{ asset('listings_grid_full_width.html') }}">Listing Grid Full
                                                         Width</a></li>
                                             </ul>
                                         </li>
                                         <li><a href="#">Half Listing Map</a>
                                             <ul>
-                                                <li><a href="listings_half_screen_map_list.html">Listing Half
+                                                <li><a href="{{ asset('listings_half_screen_map_list.html') }}">Listing Half
                                                         List</a></li>
                                                 <li><a href="listings_half_screen_map_grid.html">Listing Half
                                                         Grid</a></li>
@@ -221,17 +221,17 @@
 
 {% endblock %}
 <!-- Scripts -->
-<script src="{{ asset('front-office/scripts/jquery-3.4.1.min.js') }}"></script>
-<script src="{{ asset('front-office/scripts/chosen.min.js') }}"></script>
-<script src="{{ asset('front-office/scripts/slick.min.js') }}"></script>
-<script src="{{ asset('front-office/scripts/rangeslider.min.js') }}"></script>
-<script src="{{ asset('front-office/scripts/magnific-popup.min.js') }}"></script>
-<script src="{{ asset('front-office/scripts/jquery-ui.min.js') }}"></script>
-<script src="{{ asset('front-office/scripts/bootstrap-select.min.js') }}"></script>
-<script src="{{ asset('front-office/scripts/mmenu.js') }}"></script>
-<script src="{{ asset('front-office/scripts/tooltips.min.js') }}"></script>
-<script src="{{ asset('front-office/scripts/color_switcher.js') }}"></script>
-<script src="{{ asset('front-office/scripts/jquery_custom.js') }}"></script>
+<script src="{{ asset('Front-office/scripts/jquery-3.4.1.min.js') }}"></script>
+<script src="{{ asset('Front-office/scripts/chosen.min.js') }}"></script>
+<script src="{{ asset('Front-office/scripts/slick.min.js') }}"></script>
+<script src="{{ asset('Front-office/scripts/rangeslider.min.js') }}"></script>
+<script src="{{ asset('Front-office/scripts/magnific-popup.min.js') }}"></script>
+<script src="{{ asset('Front-office/scripts/jquery-ui.min.js') }}"></script>
+<script src="{{ asset('Front-office/scripts/bootstrap-select.min.js') }}"></script>
+<script src="{{ asset('Front-office/scripts/mmenu.js') }}"></script>
+<script src="{{ asset('Front-office/scripts/tooltips.min.js') }}"></script>
+<script src="{{ asset('Front-office/scripts/color_switcher.js') }}"></script>
+<script src="{{ asset('Front-office/scripts/jquery_custom.js') }}"></script>
 <script>
     var typed = new Typed('.typed-words', {
         strings: ["Attractions"," Restaurants"," Hotels"],

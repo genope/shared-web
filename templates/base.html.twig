@@ -1,4 +1,6 @@
 <!DOCTYPE html>
+
+
 <html>
 <head>
     <meta charset="UTF-8">
@@ -6,10 +8,48 @@
     {# Run `composer require symfony/webpack-encore-bundle`
            and uncomment the following Encore helpers to start using Symfony UX #}
     {% block stylesheets %}
+
+        <!-- Favicon -->
+        <link rel="shortcut icon" href="{{ asset('css/images/favicon.png') }}">
+        <!-- Style CSS -->
+        <link rel="stylesheet" href="{{asset('Front-office/css/stylesheet.css')}}">
+        <link rel="stylesheet" href="{{ asset('Front-office/css/mmenu.css') }}">
+        <link rel="stylesheet" href="{{ asset('Front-office/css/style.css') }}" id="colors">
+        <!-- Google Font -->
+        <link href="https://fonts.googleapis.com/css?family=Nunito:300,400,600,700,800&amp;display=swap&amp;subset=latin-ext,vietnamese" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,500,600,700,800" rel="stylesheet" type="text/css">
+
+
         {#{{ encore_entry_link_tags('app') }}#}
     {% endblock %}
 
     {% block javascripts %}
+
+        <!-- Scripts -->
+        <script src="{{asset('Front-office/scripts/jquery-3.4.1.min.js')}}"></script>
+        <script src="{{asset('Front-office/scripts/chosen.min.js')}}"></script>
+        <script src="{{asset('Front-office/scripts/slick.min.js')}}"></script>
+        <script src="{{asset('Front-office/scripts/rangeslider.min.js')}}"></script>
+        <script src="{{asset('Front-office/scripts/magnific-popup.min.js')}}"></script>
+        <script src="{{asset('Front-office/scripts/extensions/jquery-ui.min.js')}}"></script>
+        <script src="{{asset('Front-office/scripts/bootstrap-select.min.js')}}"></script>
+        <script src="{{asset('Front-office/scripts/mmenu.js')}}"></script>
+        <script src="{{asset('Front-office/scripts/tooltips.min.js')}}"></script>
+        <script src="{{asset('Front-office/scripts/color_switcher.js')}}"></script>
+        <script src="{{asset('Front-office/scripts/jquery_custom.js')}}"></script>
+        <script src="{{asset('Front-office/scripts/typed.js')}}"></script>
+        <script>
+            var typed = new Typed('.typed-words', {
+                strings: ["Attractions"," Restaurants"," Hotels"],
+                typeSpeed: 80,
+                backSpeed: 80,
+                backDelay: 4000,
+                startDelay: 1000,
+                loop: true,
+                showCursor: true
+            });
+        </script>
+
         {#{{ encore_entry_script_tags('app') }}#}
     {% endblock %}
 </head>
