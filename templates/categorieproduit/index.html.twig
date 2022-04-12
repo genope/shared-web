@@ -24,16 +24,16 @@
             <div class="row">
                 <div class="col-md-12">
                     <td>
-                    <div class="container_categories_box margin-top-5 margin-bottom-75">
-                        {% for categorieproduit in categorieproduits %}
-                        <a  class="utf_category_small_box_part"> <i ></i>
-                            <h4>{{ categorieproduit.nomcategorie }}</h4>
-                        </a>
-                        {{ include('categorieproduit/_delete_form.html.twig') }}
-                                </td>
-                        </td>
-                        {% endfor %}
-                    </div>
+                        <div class="container_categories_box margin-top-5 margin-bottom-75">
+                            {% for categorieproduit in categorieproduits %}
+                                <a class="utf_category_small_box_part"> <i></i>
+                                    <h4>{{ categorieproduit.nomcategorie }}</h4>
+                                </a>
+                                {{ include('categorieproduit/_delete_form.html.twig') }}
+
+                            {% endfor %}
+                        </div>
+                    </td>
                 </div>
             </div>
         </div>
@@ -43,11 +43,11 @@
     </div>
 
     <div class="add_utf_listing_section margin-top-45">
-				<div class="utf_add_listing_part_headline_part">
-					<h3><i class=" im im-icon-Pen-5"></i> Ajouter Categorie</h3>
-                </div>
-				        {{ include('categorieproduit/_form.html.twig') }}
+        <div class="utf_add_listing_part_headline_part">
+            <h3><i class=" im im-icon-Pen-5"></i> Ajouter Categorie</h3>
+        </div>
+        {{ include('categorieproduit/_form.html.twig') }}
 
-                 </div>
+    </div>
 
-        {% endblock %}
+{% endblock %}

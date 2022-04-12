@@ -15,8 +15,7 @@ class PanierdetailsType extends AbstractType
             ->add('idproduit')
             ->add('idcommande')
             ->add('quantite')
-            ->add('prix')
-        ;
+            ->add('prix');
     }
 
     public function configureOptions(OptionsResolver $resolver): void

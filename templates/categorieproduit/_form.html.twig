@@ -1,7 +1,15 @@
 {{ form_start(form) }}
 <div class="col-md-9">
     <h5>{{ form_label(form.nomcategorie) }}</h5>
-    {{form_widget(form.nomcategorie) }}
+
+    {% if form_errors(form.nomcategorie) > 0 %}
+        <div style="font-size: 12px; font-family: Arial; color: red">
+            {{form_widget(form.nomcategorie, {'attr': {'style': 'border-color:red'}})}}
+            <i class="sl sl-icon-close"></i> {{form_errors(form.nomcategorie) }}
+        </div>
+    {% else %}
+        {{form_widget(form.nomcategorie) }}
+    {% endif %}
 </div>
 <div class="col-md-3">
     <button class="button" style="margin-top: 43px" >{{ button_label|default('Ajouter') }}</button>

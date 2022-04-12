@@ -9002,6 +9002,46 @@ span.like-icon {
 	background:#134b7e;
 	border:0px solid rgba(255, 255, 255, 0.5);
 }
+.utf_category_small_box_part:nth-child(11){
+	background:#931674;
+	border:0px solid rgba(255, 255, 255, 0.5);
+}
+.utf_category_small_box_part:nth-child(12){
+	background:#d80a48;
+	border:0px solid rgba(255, 255, 255, 0.5);
+}
+.utf_category_small_box_part:nth-child(13){
+	background:#cc4300;
+	border:0px solid rgba(255, 255, 255, 0.5);
+}
+.utf_category_small_box_part:nth-child(14){
+	background:#d80a48;
+	border:0px solid rgba(255, 255, 255, 0.5);
+}
+.utf_category_small_box_part:nth-child(15){
+	background:#762acb;
+	border:0px solid rgba(255, 255, 255, 0.5);
+}
+.utf_category_small_box_part:nth-child(16){
+	background:#097784;
+	border:0px solid rgba(255, 255, 255, 0.5);
+}
+.utf_category_small_box_part:nth-child(17){
+	background:#2531d5;
+	border:0px solid rgba(255, 255, 255, 0.5);
+}
+.utf_category_small_box_part:nth-child(18){
+	background:#931674;
+	border:0px solid rgba(255, 255, 255, 0.5);
+}
+.utf_category_small_box_part:nth-child(19){
+	background:#d52f31;
+	border:0px solid rgba(255, 255, 255, 0.5);
+}
+.utf_category_small_box_part:nth-child(20){
+	background:#134b7e;
+	border:0px solid rgba(255, 255, 255, 0.5);
+}
 .utf_category_small_box_part:hover h4 {
 	font-size: 17px;
 }

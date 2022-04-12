@@ -38,10 +38,14 @@ class ShopController extends AbstractController
         $produits = $entityManager
             ->getRepository(Produit::class)
             ->findAll();
+        $categories = $entityManager
+            ->getRepository(Categorieproduit::class)
+            ->findAll();
 
         return $this->render('shop/indexFrontList.html.twig', [
             'controller_name' => 'ShopController',
             'produits' => $produits,
+            'categories' => $categories,
         ]);
     }
 

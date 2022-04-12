@@ -46,7 +46,6 @@ class UserType extends AbstractType
                 'attr' => ['class' => 'js-datepicker']
             ])
             ->add('telephone')
-            ->add('etat')
             ->add('adressHost', TextType::class, ['attr' => ['id' => 'searchTextField', 'autocomplete' => 'on']])
             ->add('imageCin')
             ->add('imageProfile');

@@ -64,7 +64,7 @@ class Produit
      * @Assert\Length(min=4, max=255)
      *  @Assert\File(
      *     maxSize = "2048k",
-     *     mimeTypes = {"application/png", "application/jpeg"},
+     *     mimeTypes = {"image/png", "image/jpeg"},
      *     mimeTypesMessage = "Veuillez Ajouter une image avec un format valide"
      * )
      */

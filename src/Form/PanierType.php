@@ -13,8 +13,7 @@ class PanierType extends AbstractType
     {
         $builder
             ->add('cin')
-            ->add('total')
-        ;
+            ->add('total');
     }
 
     public function configureOptions(OptionsResolver $resolver): void
