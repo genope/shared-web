@@ -8,6 +8,7 @@ use PHPUnit\TextUI\XmlConfiguration\File;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
+use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -36,7 +37,7 @@ class ProduitType extends AbstractType
                 'required'  => false,
 
             ])
-            ->add('prix',null,[
+            ->add('prix',NumberType::class,[
                 'required'   => false,
                 'empty_data' => '',
             ])

@@ -26,7 +26,7 @@
             <div id="header" class="not-sticky">
                 <div class="container">
                     <div class="utf_left_side">
-                        <div id="logo"> <a href="index_1.html"><img src="images/logo.png" alt=""></a> <a href="index_1.html" class="dashboard-logo"><img src="images/logo2.png" alt=""></a> </div>
+                        <div id="logo"> <a href="{{ path('app_user_index') }}"><img src="{{ asset('front-office/images/shared.png') }}" alt=""></a> <a href="index_1.html" class="dashboard-logo"><img src="{{ asset('front-office/images/shared.png') }}" alt=""></a> </div>
                         <div class="mmenu-trigger">
                             <button class="hamburger utfbutton_collapse" type="button">
 				<span class="utf_inner_button_box">
@@ -37,62 +37,13 @@
                         <nav id="navigation" class="style_one">
                             <ul id="responsive">
                                 <li><a href="#">Home</a>
-                                    <ul>
-                                        <li><a href="index_1.html">Home Version 1</a></li>
-                                        <li><a href="index_2.html">Home Version 2</a></li>
-                                        <li><a href="index_3.html">Home Version 3</a></li>
-                                        <li><a href="index_4.html">Home Version 4</a></li>
-                                        <li><a href="index_5.html">Home Version 5</a></li>
-                                        <li><a href="index_6.html">Home Version 6</a></li>
-                                        <li><a href="index_7.html">Home Version 7</a></li>
-                                    </ul>
+
                                 </li>
                                 <li><a href="#">Listings</a>
-                                    <ul>
-                                        <li><a href="#">List Layout</a>
-                                            <ul>
-                                                <li><a href="listings_list_with_sidebar.html">Listing List Sidebar</a></li>
-                                                <li><a href="listings_list_full_width.html">Listing List Full Width</a></li>
-                                            </ul>
-                                        </li>
-                                        <li><a href="#">Grid Layout</a>
-                                            <ul>
-                                                <li><a href="listings_grid_with_sidebar.html">Listing Grid Sidebar</a></li>
-                                                <li><a href="listings_two_column_map_grid.html">Listing Two Column Grid</a></li>
-                                                <li><a href="listings_grid_full_width.html">Listing Grid Full Width</a></li>
-                                            </ul>
-                                        </li>
-                                        <li><a href="#">Half Listing Map</a>
-                                            <ul>
-                                                <li><a href="listings_half_screen_map_list.html">Listing Half List</a></li>
-                                                <li><a href="listings_half_screen_map_grid.html">Listing Half Grid</a></li>
-                                            </ul>
-                                        </li>
-                                        <li><a href="#">Listing Details</a>
-                                            <ul>
-                                                <li><a href="listings_single_page_1.html">Single Listing Version 1</a></li>
-                                                <li><a href="listings_single_page_2.html">Single Listing Version 2</a></li>
-                                                <li><a href="listings_single_page_3.html">Single Listing Version 3</a></li>
-                                                <li><a href="listings_single_page_4.html">Single Listing Version 4</a></li>
-                                                <li><a href="listings_single_page_5.html">Single Listing Version 5</a></li>
-                                            </ul>
-                                        </li>
-                                    </ul>
+
                                 </li>
                                 <li><a class="current" href="#">User Panel</a>
-                                    <ul>
-                                        <li><a class="active" href="dashboard.html">Dashboard</a></li>
-                                        <li><a href="{{ path('app_produit_new') }}">Ajouter Produit</a></li>
-                                        <li><a href="{{ path('app_produit_index') }}">List des produits</a></li>
-                                        <li><a href="dashboard_bookings.html">Bookings</a></li>
-                                        <li><a href="dashboard_messages.html">Messages</a></li>
-                                        <li><a href="dashboard_wallet.html">Wallet</a></li>
-                                        <li><a href="dashboard_visitor_review.html">Reviews</a></li>
-                                        <li><a href="dashboard_bookmark.html">Bookmark</a></li>
-                                        <li><a href="dashboard_my_profile.html">My Profile</a></li>
-                                        <li><a href="dashboard_change_password.html">Change Password</a></li>
-                                        <li><a href="dashboard_invoice.html">Invoice</a></li>
-                                    </ul>
+
                                 </li>
                                 <li><a href="#">Pages</a>
                                     <ul>
@@ -174,17 +125,15 @@
                 <div class="utf_dashboard_navigation_inner_block">
                     <ul>
                         <li><a href="{{ path('app_user_index') }}"><i class="sl sl-icon-layers"></i> Index</a></li>
-                        <li><a href="{{ path('app_shop') }}"><i class="sl sl-icon-layers"></i> Boutique</a></li>
                         <li><a href="{{ path('app_produit_new') }}"><i class="sl sl-icon-plus"></i> Ajouter Produit</a></li>
                         <li>
-                            <a href="#"><i class="sl sl-icon-layers"></i> My Listings</a>
+                            <a href="#"><i class="sl sl-icon-layers"></i> Boutique</a>
                             <ul>
-                                <li><a href="dashboard_my_listing.html">Active <span class="nav-tag green">10</span></a></li>
-                                <li><a href="dashboard_my_listing.html">Pending <span class="nav-tag yellow">4</span></a></li>
-                                <li><a href="dashboard_my_listing.html">Expired <span class="nav-tag red">8</span></a></li>
+                                <li><a href="{{ path('app_shop') }}">Grid <span class="nav-tag green">10</span></a></li>
+                                <li><a href="{{ path('app_shopList') }}">List Pr<span class="nav-tag yellow">4</span></a></li>
                             </ul>
                         </li>
-                        <li><a href="{{ path('app_produit_new') }}"><i class="sl sl-icon-docs"></i> List des produits</a></li>
+                        <li><a href="{{ path('app_produit_index') }}"><i class="sl sl-icon-docs"></i> List des produits</a></li>
                         <li><a href="{{ path('app_categorieproduit_index') }}"><i class="sl sl-icon-envelope-open"></i> Categories</a></li>
                         <li><a href="index_1.html"><i class="sl sl-icon-power"></i> Logout</a></li>
                     </ul>

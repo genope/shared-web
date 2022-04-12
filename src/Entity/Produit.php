@@ -99,6 +99,7 @@ class Produit
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="region", referencedColumnName="nom")
      * })
+     * @Assert\NotBlank(message="Ne doit pas etre vide")
      */
     private $region;
 
