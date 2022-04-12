@@ -59,7 +59,7 @@ class SecurityController extends AbstractController
                 $form->addError(new FormError($translator->trans('captcha.wrong')));
                 throw new ValidatorException('captcha.wrong');
             }
-            $user->setRoles(array('ROLE_GUEST'));
+            $user->setRole(array('ROLE_GUEST'));
             $password = $passwordEncoder->encodePassword($user, $user->getPassword());
             $user->setPassword($password);
             $entityManager->persist($user);

@@ -1,0 +1,97 @@
+{% extends 'base-back.html.twig' %}
+{% block title %}Reclamation {% endblock %}
+{% block css %}
+    <link rel="stylesheet" href="{{asset(css/stylesheet.css)}}">
+    <link rel="stylesheet" href="{{ asset(css/mmenu.css) }}">
+    <link rel="stylesheet" href="{{ asset(css/perfect-scrollbar.css) }}">
+    <link rel="stylesheet" href="{{ asset(css/style.css) }}" id="colors">
+{% endblock %}
+{% block body %}
+
+    <div class="row">
+        <div class="col-lg-12 col-md-12">
+            <div class="utf_dashboard_list_box margin-top-0">
+                <h4><i class="sl sl-icon-pencil"></i> Réclamations</h4>
+                <ul>
+                    {% for rec in recls %}
+                        <li>
+                            <div class="utf_list_box_listing_item">
+                                <div class="utf_list_box_listing_item-img">
+                                    {% if rec.getImage != null %}
+                                        <a href="{{ path('app_reclamation_detail',{'id': rec.id }) }}"><img src="{{asset("Front-office/images/#{rec.getImage}")}}" alt=""></a>
+                                    {% else %}
+                                        <a href="{{ path('app_reclamation_detail',{'id': rec.id }) }}"><img src="{{asset('Front-office/')}}images/noimage.png" alt=""></a>
+                                    {% endif %}
+                                </div>
+                                <div class="utf_list_box_listing_item_content">
+                                    <div class="inner">
+                                        <h3>{{ rec.getObjet }}</h3>
+                                        <p>{{rec.getDescription}}</p>
+                                        {% if rec.getVocal != null %}
+                                            <audio controls autoplay muted>
+                                                <source src="{{asset("Front-office/voc/#{rec.getVocal}")}}" type="audio/wav">
+                                                <source src="{{asset("Front-office/voc/#{rec.getVocal}")}}" type="audio/mp3">
+                                                Your browser does not support the audio element.
+                                            </audio>
+                                            <br>
+                                        {% endif %}
+                                        <span><i class="fa fa-mail-reply"></i> {{ rec.getEmail }}</span>
+                                        <br>
+                                        <div class="spanc"> Envoyée le : {{ rec.getDatecreation|date('Y-m-d') }}</div>
+                                        {% if rec.getStatut == 'Traitée' %}
+                                            <span style="color:seagreen">{{rec.getStatut}} le : {{rec.getDatetraitement|date('Y-m-d')}}</span>
+                                        {% elseif rec.getStatut == 'EnCours'%}
+                                            <span style="color:yellowgreen">{{rec.getStatut}}</span>
+                                        {% else %}
+                                            <span style="color:red">{{rec.getStatut}}</span>
+                                        {% endif %}
+
+
+
+                                    </div>
+                                </div>
+                            </div>
+                            {% if rec.getStatut == "Traitée" %}
+                            <div class="buttons-to-right"> <a href="{{ path('app_reclamation_delete',{'id': rec.id }) }}" class="button gray"><i class="sl sl-icon-close"></i> Supprimer</a> </div>
+                            {% elseif rec.getStatut == "EnCours" %}
+                            <div class="buttons-to-right"> <a href="{{ path('app_reclamation_detail',{'id': rec.id }) }}" class="button gray"><i class="sl sl-icon-action-undo"></i> Traiter</a> </div>
+                                {% endif %}
+
+
+                        </li>
+                    {% endfor %}
+
+                </ul>
+            </div>
+            <div class="clearfix"></div>
+            <div class="utf_pagination_container_part margin-top-30 margin-bottom-30">
+                <nav class="pagination">
+                    <ul>
+                        <li><a href="#"><i class="sl sl-icon-arrow-left"></i></a></li>
+                        <li><a href="#" class="current-page">1</a></li>
+                        <li><a href="#">2</a></li>
+                        <li><a href="#">3</a></li>
+                        <li><a href="#"><i class="sl sl-icon-arrow-right"></i></a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+
+    </div>
+
+
+
+{% endblock %}
+{% block js %}
+    <script src="{{ asset(scripts/jquery-3.4.1.min.js) }}"></script>
+    <script src="{{ asset(scripts/chosen.min.js) }}"></script>
+    <script src="{{ asset(scripts/perfect-scrollbar.min.js) }}"></script>
+    <script src="{{ asset(scripts/slick.min.js) }}"></script>
+    <script src="{{ asset(scripts/rangeslider.min.js) }}"></script>
+    <script src="{{ asset(scripts/magnific-popup.min.js) }}"></script>
+    <script src="{{ asset(scripts/jquery-ui.min.js) }}"></script>
+    <script src="{{ asset(scripts/mmenu.js) }}"></script>
+    <script src="{{ asset(scripts/tooltips.min.js) }}"></script>
+    <script src="{{ asset(scripts/color_switcher.js) }}"></script>
+    <script src="{{ asset(scripts/jquery_custom.js) }}"></script>
+{% endblock %}

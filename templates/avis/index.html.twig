@@ -1,0 +1,80 @@
+{% extends 'base-front.html.twig' %}
+{% block title %}Avis{% endblock %}
+{% block body %}
+    <style>li{
+            color:red;
+        }</style>
+    <div id="titlebar" class="gradient margin-bottom-0">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <h2>Avis</h2>
+                    <nav id="breadcrumbs">
+                        <ul>
+                            <li><a href="#">Home</a></li>
+                            <li>Avis</li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <section class="utf_testimonial_part fullwidth_block padding-top-75 padding-bottom-75">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8 col-md-offset-2">
+                    <h3 class="headline_part centered">  <span class="margin-top-15"><div class="utf_box_widget opening-hours review-avg-wrapper margin-top-35 margin-bottom-70">
+    <h3><i class="sl sl-icon-star"></i>  Note moyenne</h3>
+    <div class="box-inner">
+    <div class="rating-avg-wrapper text-theme clearfix">
+        <div class="rating-avg">4.8</div>
+        <div class="rating-after">
+            <div class="rating-mode">/5 (45)</div>
+
+        </div>
+    </div>
+    </div></div></span> </h3>
+                </div>
+            </div>
+        </div>
+        <div class="fullwidth_carousel_container_block margin-top-20">
+            <div class="utf_testimonial_carousel testimonials">
+                {% for avis in avis %}
+                <div class="utf_carousel_review_part">
+                    <div class="utf_testimonial_box">
+                        <div class="testimonial"> {{ avis.commentaire }} <br>
+                            <span class="utf_star_rating_section" data-rating="{{ avis.note }}"></span></div>
+                    </div>
+                    <div class="utf_testimonial_author"> <img src="{{ asset("Front-office/images/#{avis.idguest.imageProfile}") }}" alt="">
+                        <h4>{{ avis.idguest.nom }} {{ avis.idguest.prenom }}</h4>
+                        <span>{{ avis.dateCreation|date('Y-m-d') }}</span>
+                    </div>
+                </div>
+    {% endfor %}
+
+
+            </div>
+            <div id="utf_add_review" class="utf_add_review-box">
+                <h3 class="utf_listing_headline_part margin-bottom-35">Donner votre avis</h3>
+                {{ form_start(form,{'attr':{'novalidate':'novalidate'}}) }}
+
+
+                        <div class="row">
+                            <div class="col-md-4">
+
+                                    {{ form_row(form.note) }}
+                                </div>
+
+                            <div class="col-md-4">
+                            {{ form_row(form.commentaire) }}
+                        </div>
+
+
+                        </div>
+
+
+                {{ form_end (form) }}
+            </div>
+        </div>
+{% endblock %}
