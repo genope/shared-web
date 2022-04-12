@@ -25,10 +25,11 @@
         <div class="clearfix"></div>
         <div id="utf_listing_gallery_part" class="utf_listing_section" >
             <div class="utf_listing_slider utf_gallery_container margin-bottom-0" >
-                <img src="{{ asset('Front-office/images/music_listing_04.jpg') }}" class="img-rounded" alt="Cinque Terre" width="600" height="200">
-                <img src="{{ asset('Front-office/images/music_listing_04.jpg') }}" class="img-rounded" alt="Cinque Terre" width="600" height="200">
-                <img src="{{ asset('Front-office/images/music_listing_04.jpg') }}" class="img-rounded" alt="Cinque Terre" width="600" height="200">
-                <img src="{{ asset('Front-office/images/music_listing_04.jpg') }}" class="img-rounded" alt="Cinque Terre" width="600" height="200">
+                <img src="{{ asset('uploads/' ~ offre.image) }}" class="img-rounded" alt="Cinque Terre" width="600" height="200" style="max-height: 400px">
+                <img src="{{ asset('uploads/' ~ offre.image) }}" class="img-rounded" alt="Cinque Terre" width="600" height="200" style="max-height: 400px">
+                <img src="{{ asset('uploads/' ~ offre.image) }}" class="img-rounded" alt="Cinque Terre" width="600" height="200" style="max-height: 400px">
+                <img src="{{ asset('uploads/' ~ offre.image) }}" class="img-rounded" alt="Cinque Terre" width="600" height="200" style="max-height: 400px">
+
             </div>
         </div>
         <div class="row utf_sticky_main_wrapper">
@@ -82,8 +83,6 @@
                             <i class="fa fa-calendar"></i>
                         </div>
 
-
-
                     </div>
                     <a href="listing_booking.html" class="utf_progress_button button fullwidth_block margin-top-5"><i class="fa fa-calendar"></i>Reserver</a>
                     <button class="like-button add_to_wishlist"><i class="fa fa-star"></i> Add Review</button>
@@ -92,7 +91,7 @@
                 <div class="utf_box_widget margin-top-35">
                     <h3><i class="sl sl-icon-phone"></i> Contact Info</h3>
                     <div class="utf_hosted_by_user_title"> <a href="#" class="utf_hosted_by_avatar_listing"><img src="{{ asset('Front-office/images/user_avatar_01.jpg') }}" alt=""></a>
-                        <h4><a href="#">Kathy Brown</a><span>Posted 3 Days Ago</span>
+                        <h4><a href="#">{{ user.email}}</a><span>Posted 3 Days Ago</span>
                             <span><i class="sl sl-icon-location"></i> Lonsdale St, Melbourne</span>
                         </h4>
                     </div>

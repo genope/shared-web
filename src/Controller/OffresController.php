@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Classroom;
 use App\Entity\Offres;
+use App\Entity\User;
 use App\Form\OffresType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -98,7 +99,8 @@ class OffresController extends AbstractController
 
 
 
-            
+            $offre = new Offres();
+            $form = $this->createForm(OffresType::class, $offre);
         }
 
         return $this->render('offres/new.html.twig', [
@@ -113,8 +115,18 @@ class OffresController extends AbstractController
 
     public function show(Offres $offre): Response
     {
+        $users = $this->getDoctrine()
+            ->getRepository(User::class)
+            ->findBy(['cin' => $offre->getIdUser()]);
+
+
+        dump($users);
+
+        dump($offre->getIdUser()->getEmail());
+
         return $this->render('offres/show.html.twig', [
             'offre' => $offre,
+            'user'=>$offre->getIdUser(),
         ]);
     }
     /**
@@ -163,7 +175,7 @@ class OffresController extends AbstractController
             $entityManager->flush();
         }
 
-        return $this->redirectToRoute('mine', [], Response::HTTP_SEE_OTHER);
+        return $this->redirectToRoute('  mine', [], Response::HTTP_SEE_OTHER);
     }
 
 }

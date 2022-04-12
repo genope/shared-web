@@ -53,6 +53,7 @@ class Offres
      * @var float
      *@Assert\NotBlank(message="Le prix  is required")
      * @Assert\Positive(message="le prix doit etre positive ")
+     * @Assert\Regex(pattern = "/^[0-9]+$/i",message="le prix doit se composer seulement des numéros")
      * @ORM\Column(name="prix", type="float", precision=10, scale=0, nullable=false)
      */
     private $prix;

@@ -112,6 +112,7 @@ class User
      */
     private $facebookid;
 
+
     public function getCin(): ?int
     {
         return $this->cin;

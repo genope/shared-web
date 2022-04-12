@@ -27,7 +27,7 @@
         {% for offre in offres %}
             <tr>
                 <td>{{ offre.idOffre }}</td>
-                <td>{{ offre.idHost }}</td>
+                <td>{{ offre.idUser }}</td>
                 <td>{{ offre.nom }}</td>
                 <td>{{ offre.description }}</td>
                 <td>{{ offre.datedebut ? offre.datedebut|date('Y-m-d') : '' }}</td>

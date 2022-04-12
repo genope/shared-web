@@ -3,28 +3,6 @@
 {% block content %}
 
     <style>
-
-        input:invalid {
-            border-bottom-color: red;
-        }
-        input:valid{
-            border-bottom-color: green;
-        }
-        textarea:invalid{
-            border-bottom-color: red;
-        }
-        textarea:valid{
-            border-bottom-color: green;
-        }
-
-        form:invalid{
-
-            background-color: red;
-        }
-
-
-
-
         .btnn:hover{
             transform: scale(1.02);
         }
@@ -62,60 +40,97 @@
                 <h5>
 
                 {{ form_label(form.nom,"Nom du l'offre") }}</h5>
-                {{ form_widget(form.nom) }}
+                {% if form_errors(form.nom) > 0 %}
 
-                <div style="font-size: 12px; font-family: Arial; color: red;margin-top: -5px;padding-bottom: 10px;margin-left: 10px">{{ form_errors(form.nom) }}</div>
+                    {{ form_widget(form.nom, {'attr': {'style': ' border-bottom-color: red'}}) }}
+                    <div style="font-size: 12px; font-family: Arial; color: red;margin-top: -5px;padding-bottom: 10px;margin-left: 10px">{{ form_errors(form.nom) }}</div>
+
+                {% else %}
+                        {{ form_widget(form.nom,{'attr':{'oninput':'myFunctionNom()'}}) }}
+                    {% endif %}
+
 
 
             </div>
             <div class="col-md-6">
-                <h5>{{ form_label(form.categ,"categ du l'offre") }}</h5>
-                {{ form_widget(form.categ) }}
+                <h5>
+                    {{ form_label(form.categ,"Catégorie") }}</h5>
+                {% if form_errors(form.categ) > 0 %}
+
+                    {{ form_widget(form.categ, {'attr': {'style': ' border-bottom-color: red'}}) }}
+                    <div style="font-size: 12px; font-family: Arial; color: red;margin-top: -5px;padding-bottom: 10px;margin-left: 10px">{{ form_errors(form.categ) }}</div>
+
+                {% else %}
+                    {{ form_widget(form.categ,{'attr':{'oninput':'myFunctionCateg()'}}) }}
+                {% endif %}
 
             </div>
         </div>
         <div class="row with-forms">
             <div class="col-md-6">
                 <h5>
-                    {{ form_label(form.datedebut,"datedebut du l'offre") }}</h5>
+                    {{ form_label(form.datedebut,"Date Début") }}</h5>
 
-                {{ form_widget(form.datedebut , {'attr': {'type': 'date'}})}}
+                {% if form_errors(form.datedebut) > 0 %}
+
+                    {{ form_widget(form.datedebut, {'attr': {'style': ' border-bottom-color: red'}}) }}
+                    <div style="font-size: 12px; font-family: Arial; color: red;margin-top: -5px;padding-bottom: 10px;margin-left: 10px">{{ form_errors(form.datedebut) }}</div>
+
+                {% else %}
+                    {{ form_widget(form.datedebut) }}
+                {% endif %}
 
             </div>
             <div class="col-md-6">
-                <h5>{{ form_label(form.datefin,"datefin du l'offre") }}</h5>
+                <h5>{{ form_label(form.datefin,"Date Fin") }}</h5>
 
 
-                {{ form_widget(form.datefin) }}
+                {% if form_errors(form.datefin) > 0 %}
+
+                    {{ form_widget(form.datefin, {'attr': {'style': ' border-bottom-color: red'}}) }}
+                    <div style="font-size: 12px; font-family: Arial; color: red;margin-top: -5px;padding-bottom: 10px;margin-left: 10px">{{ form_errors(form.datefin) }}</div>
+
+                {% else %}
+                    {{ form_widget(form.datefin) }}
+                {% endif %}
 
 
             </div>
         </div>
         <div class="row with-forms">
             <div class="col-md-6">
-                <h5> {{ form_label(form.ville,"ville du l'offre") }}</h5>
+                <h5> {{ form_label(form.ville,"Ville") }}</h5>
 
 
-                {{ form_widget(form.ville) }}
+                {% if form_errors(form.ville) > 0 %}
+
+                    {{ form_widget(form.ville, {'attr': {'style': ' border-bottom-color: red'}}) }}
+                    <div style="font-size: 12px; font-family: Arial; color: red;margin-top: -5px;padding-bottom: 10px;margin-left: 10px">{{ form_errors(form.ville) }}</div>
+
+                {% else %}
+                    {{ form_widget(form.ville) }}
+                {% endif %}
 
 
-                <div class="my-custom-class-for-errors" >
-                    {{ form_errors(form.ville) }}
-                </div>
+
 
 
             </div>
             <div class="col-md-6">
-                <h5> {{ form_label(form.prix,"prix du l'offre") }}</h5>
+                <h5> {{ form_label(form.prix,"Prix") }}</h5>
 
 
                 <div class="fm-input" >
                     <i class="data-unit" style="margin-top: 45px;margin-right: 5px">DT</i>
-                    {{ form_widget(form.prix) }}
-                    <div class="my-custom-class-for-errors">
+                    {% if form_errors(form.prix) > 0 %}
 
-                        {{ form_errors(form.prix) }}
-                    </div>
+                        {{ form_widget(form.prix, {'attr': {'style': ' border-bottom-color: red'}}) }}
+                        <div style="font-size: 12px; font-family: Arial; color: red;margin-top: -5px;padding-bottom: 10px;margin-left: 10px">{{ form_errors(form.prix) }}</div>
+
+                    {% else %}
+                        {{ form_widget(form.prix) }}
+                    {% endif %}
+
 
                 </div>
 
@@ -124,12 +139,29 @@
         </div>
         <div class="row with-forms">
             <div class="col-md-12">
-                <h5> {{ form_label(form.description,"description du l'offre") }}</h5>
-                {{ form_widget(form.description , {'attr': {'placeholder': 'Add your decription here...'}}) }}
+                <h5> {{ form_label(form.description,"Déscription") }}</h5>
+
+                {% if form_errors(form.description) > 0 %}
+
+                    {{ form_widget(form.description, {'attr': {'style': ' border-bottom-color: red'}}) }}
+                    <div style="font-size: 12px; font-family: Arial; color: red;margin-top: -5px;padding-bottom: 10px;margin-left: 10px">{{ form_errors(form.description) }}</div>
+
+                {% else %}
+                    {{ form_widget(form.description , {'attr': {'placeholder': 'Add your decription here...'}}) }}
+                {% endif %}
+
             </div>
             <div class="col-md-12">
                 <h5> {{ form_label(form.image,"Upload your image") }}</h5>
-                {{ form_widget(form.image , {'attr': {'placeholder': 'Add your decription here...'}}) }}
+
+                {% if form_errors(form.image) > 0 %}
+
+                    {{ form_widget(form.image, {'attr': {'style': ' border-bottom-color: red'}}) }}
+                    <div style="font-size: 12px; font-family: Arial; color: red;margin-top: -5px;padding-bottom: 10px;margin-left: 10px">{{ form_errors(form.image) }}</div>
+
+                {% else %}
+                    {{ form_widget(form.image , {'attr': {'placeholder': 'Add your decription here...'}}) }}
+                {% endif %}
             </div>
 
         </div>
@@ -142,7 +174,16 @@
     <div class="col-md-12">
         <div class="footer_copyright_part"></div>
     </div>
+<script>
+    function myFunctionNom() {
+        const b=document.getElementById("offres_nom");
+        const a=document.getElementById("offres_nom").value;
+       b.addEventListener('invalid',(e)=>{
 
+       })
+
+    }
+</script>
 
 
 {% endblock %}
