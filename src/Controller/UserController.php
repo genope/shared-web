@@ -22,7 +22,7 @@ class UserController extends AbstractController
             ->getRepository(User::class)
             ->findAll();
 
-        return $this->render('index.html.twig', [
+        return $this->render('FrontPublication.html.twig', [
             'users' => $users,
         ]);
     }

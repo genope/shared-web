@@ -1,0 +1,84 @@
+{% extends 'base-front.html.twig' %}
+
+{% block title %}Publication index{% endblock %}
+
+{% block body %}
+    <body>
+
+    <div id="titlebar" class="gradient">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <h2>Les experiences partagées</h2>
+                    <nav id="breadcrumbs">
+                        <ul>
+
+                            <li><a href="{{ path('app_publicationfront_new') }}"> Ajouter votre expérience</a></li>
+                            <li>Toutes les publications</li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+
+
+        <div class="blog-page">
+            <div class="row mt-5">
+                {% for publication in publications %}
+                    <div class="col-md-6 col-sm-6 col-xs-12">
+                        <div class="utf_blog_post">
+                            <a href="blog_detail_right_sidebar.html" class="utf_post_img"> <img  src="{{  asset ("image/#{publication.image}") }}" alt=""> </a>
+                            <div class="utf_post_content" >
+                                <h3><a href="blog_detail_right_sidebar.html"> {{ publication.nom }}</a></h3>
+                                <ul class="utf_post_text_meta">
+                                    <li> <i class="fa fa-calendar"   ></i>  {{ publication.datecreation ? publication.datecreation|date('Y-m-d') : '' }}</li>
+                                    <li> <i class="fa fa-user" ></i> Par  {{ publication.idGuest }}</li>
+
+                                </ul>
+                                <p>{{ publication.description }}</p>
+                                <a href="{{ path('app_publication_front_show', {'id': publication.id}) }}" class="read-more">Voir Plus <i class="fa fa-angle-right"></i></a>
+                            </div>
+
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+    <section class="utf_cta_area_item utf_cta_area2_block">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="utf_subscribe_block clearfix">
+                        <div class="col-md-8 col-sm-7">
+                            <div class="section-heading">
+                                <h2 class="utf_sec_title_item utf_sec_title_item2">Subscribe to Newsletter!</h2>
+                                <p class="utf_sec_meta">
+                                    Subscribe to get latest updates and information.
+                                </p>
+                            </div>
+                        </div>
+                        <div class="col-md-4 col-sm-5">
+                            <div class="contact-form-action">
+                                <form method="post">
+                                    <span class="la la-envelope-o"></span>
+                                    <input class="form-control" type="email" placeholder="Enter your email" required="">
+                                    <button class="utf_theme_btn" type="submit">Subscribe</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</body>
+{% endblock %}

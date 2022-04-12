@@ -1,0 +1,100 @@
+{% extends 'base-back.html.twig' %}
+
+{% block title %}Publication{% endblock %}
+
+{% block body %}
+    <div class="container">
+
+        <div id="titlebar" class="dashboard_gradient">
+            <div class="row">
+                <div class="col-md-12">
+                    <h2>Expérience partagée</h2>
+                    <nav id="breadcrumbs">
+                        <ul>
+                            <li><a href="{{ path('app_publication_index') }}">Retour</a></li>
+
+                            <li>Détails de l'expérience</li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
+
+
+
+
+
+
+
+
+        <div class="container">
+
+
+            <div class="utf_blog_post utf_single_post">
+                <a  class="utf_post_img"> <img  src="{{  asset ("image/#{publication.image}") }}" alt=""> </a>
+                <div class="utf_post_content">
+                    <h3>{{ publication.nom }}</h3>
+                    <ul class="utf_post_text_meta">
+                        <span class="date"><i class="fa fa-clock-o"></i> {{ publication.datecreation ? publication.datecreation|date('Y-m-d') : '' }}</span>
+                        <li>Par <a href="#"></a> {{ publication.idGuest }}</li>
+                        <li>À<a href="#"></a> {{ publication.region }}</li>
+                        <li><a href="#">{{ number }} comments</a></li>
+                    </ul>
+
+                    <div class="utf_post_quote"> <span class="icon"></span>
+                        <blockquote> {{ publication.adresse }}</blockquote>
+                    </div>
+                    <p>{{ publication.description }}</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        <a href="{{ path('app_publication_delete', {'id': publication.id}) }}" onclick="return confirm('Are you sure you want to delete this item?');" class="button border">Supprimer</a>
+
+                </div>
+            </div>
+
+                <section class="comments">
+                    <h4 class="headline_part margin-top-20 margin-bottom-35"> <i class="fa fa-comments" ></i>Comments <span class="comments-amount">({{ number }})</span></h4>
+
+                    <ul>
+                        {% for c in commentaires %}
+                            <li>
+                                <div class="avatar"><img src="Front-office/images/client-avatar3.jpg" alt=""></div>
+                                <div class="utf_comment_content">
+                                    <div class="utf_arrow_comment"></div>
+                                    {#    <div class="utf_star_rating_section" data-rating="4.5"><span class="star"></span><span class="star"></span><span class="star"></span><span class="star"></span><span class="star half"></span></div> #}
+                                    {% if c.note==1  %}
+                                        <i class ='fa fa-star text-warning'></i> <i class ='fa fa-star '  ></i><i class ='fa fa-star '  ></i><i class ='fa fa-star '  ></i><i class ='fa fa-star '  ></i>
+                                    {% elseif c.note==2 %}
+                                        <i class ='fa fa-star text-warning'  ></i> <i class ='fa fa-star text-warning'  ></i><i class ='fa fa-star '  ></i><i class ='fa fa-star '  ></i><i class ='fa fa-star '  ></i>
+                                    {% elseif c.note==3 %}
+                                        <i class ='fa fa-star text-warning'  ></i> <i class ='fa fa-star text-warning'  ></i><i class ='fa fa-star text-warning'  ></i><i class ='fa fa-star '  ></i><i class ='fa fa-star '  ></i>
+                                    {% elseif c.note==4 %}
+                                        <i class ='fa fa-star text-warning'  ></i> <i class ='fa fa-star text-warning'  ></i><i class ='fa fa-star text-warning'  ></i><i class ='fa fa-star text-warning'  ></i><i class ='fa fa-star '  ></i>
+                                    {% else %}
+                                        <i class ='fa fa-star text-warning'  ></i> <i class ='fa fa-star text-warning'  ></i><i class ='fa fa-star text-warning'  ></i><i class ='fa fa-star text-warning'  ></i><i class ='fa fa-star text-warning'  ></i>
+                                    {% endif %}
+
+                                    <div class="utf_by_comment">{{ c.nom }}<span class="date"><i class="fa fa-clock-o"></i> {{ publication.datecreation ? publication.datecreation|date('Y-m-d') : '' }}/span>  <a href="{{ path('app_commentaire_back_delete', {'id':c.id ,'idpub':idpub}) }}" onclick="return confirm('Are you sure you want to delete this item?');" class="reply">Supprimer <i class="fa fa-times"></i></a>   </div>
+                                    <p>{{ c.comment }}</p>
+
+                                </div>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </section>
+                </div>
+{% endblock %}

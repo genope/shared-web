@@ -3,14 +3,14 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Security\Core\User\UserInterface;
+
 /**
  * User
  *
  * @ORM\Table(name="user", uniqueConstraints={@ORM\UniqueConstraint(name="user_email", columns={"Email"})})
  * @ORM\Entity
  */
-class User implements UserInterface
+class User
 {
     /**
      * @var int
@@ -55,31 +55,13 @@ class User implements UserInterface
      * @ORM\Column(name="dateDeNaissance", type="date", nullable=false)
      */
     private $datedenaissance;
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="googleId", type="string", length=255, nullable=false)
-     */
-    private $googleId;
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="facebookId", type="string", length=255, nullable=false)
-     */
-    private $facebookId;
+
     /**
      * @var int
      *
      * @ORM\Column(name="Telephone", type="integer", nullable=false)
      */
     private $telephone;
-
-
-
-    /**
-     * @ORM\Column(type="json")
-     */
-    private $roles = [];
 
     /**
      * @var string
@@ -110,189 +92,70 @@ class User implements UserInterface
     private $imageProfile;
 
     /**
-     * @return int
+     * @var string
+     *
+     * @ORM\Column(name="roles", type="text", length=0, nullable=false)
      */
-    public function getCin(): int
+    private $roles;
+
+    /**
+     * @var string|null
+     *
+     * @ORM\Column(name="googleId", type="string", length=255, nullable=true)
+     */
+    private $googleid;
+
+    /**
+     * @var string|null
+     *
+     * @ORM\Column(name="facebookId", type="string", length=255, nullable=true)
+     */
+    private $facebookid;
+
+    public function getCin(): ?int
     {
         return $this->cin;
     }
 
-    /**
-     * @param int $cin
-     */
-    public function setCin(int $cin): void
-    {
-        $this->cin = $cin;
-    }
-
-    /**
-     * @return string
-     */
-    public function getNom()
+    public function getNom(): ?string
     {
         return $this->nom;
     }
 
-    /**
-     * @param string $nom
-     */
-    public function setNom($nom)
+    public function setNom(string $nom): self
     {
         $this->nom = $nom;
-    }
-
-    /**
-     * @return string
-     */
-    public function getPrenom()
-    {
-        return $this->prenom;
-    }
-
-    /**
-     * @param string $prenom
-     */
-    public function setPrenom(string $prenom): void
-    {
-        $this->prenom = $prenom;
-    }
-
-    /**
-     * @return string
-     */
-    public function getEmail()
-    {
-        return $this->email;
-    }
-
-    /**
-     * @param string $email
-     */
-    public function setEmail(string $email): void
-    {
-        $this->email = $email;
-    }
-
-    /**
-     * @return \DateTime
-     */
-    public function getDatedenaissance()
-    {
-        return $this->datedenaissance;
-    }
-
-    /**
-     * @param \DateTime $datedenaissance
-     */
-    public function setDatedenaissance(\DateTime $datedenaissance): void
-    {
-        $this->datedenaissance = $datedenaissance;
-    }
-
-    /**
-     * @return int
-     */
-    public function getTelephone()
-    {
-        return $this->telephone;
-    }
-
-    /**
-     * @param int $telephone
-     */
-    public function setTelephone(int $telephone): void
-    {
-        $this->telephone = $telephone;
-    }
-
-
-    /**
-     * @return string
-     */
-    public function getEtat()
-    {
-        return $this->etat;
-    }
-
-    /**
-     * @param string $etat
-     */
-    public function setEtat(string $etat): void
-    {
-        $this->etat = $etat;
-    }
-
-    /**
-     * @return string|null
-     */
-    public function getAdressHost()
-    {
-        return $this->adressHost;
-    }
-
-    /**
-     * @param string|null $adressHost
-     */
-    public function setAdressHost(?string $adressHost): void
-    {
-        $this->adressHost = $adressHost;
-    }
-
-    /**
-     * @return string|null
-     */
-    public function getImageCin()
-    {
-        return $this->imageCin;
-    }
-
-    /**
-     * @param string|null $imageCin
-     */
-    public function setImageCin(?string $imageCin): void
-    {
-        $this->imageCin = $imageCin;
-    }
-
-    /**
-     * @return string
-     */
-    public function getImageProfile()
-    {
-        return $this->imageProfile;
-    }
-
-    /**
-     * @param string $imageProfile
-     */
-    public function setImageProfile(string $imageProfile): void
-    {
-        $this->imageProfile = $imageProfile;
-    }
-
-
-    public function getRoles(): array
-    {
-        $roles = $this->roles;
-        // guarantee every user at least has ROLE_USER
-        $roles[] = 'ROLE_USER';
-
-        return array_unique($roles);
-    }
-
-    public function setRoles(array $roles): self
-    {
-        $this->roles = $roles;
 
         return $this;
     }
 
-    /**
-     * @see UserInterface
-     */
-    public function getPassword(): string
+    public function getPrenom(): ?string
     {
-        return (string) $this->password;
+        return $this->prenom;
+    }
+
+    public function setPrenom(string $prenom): self
+    {
+        $this->prenom = $prenom;
+
+        return $this;
+    }
+
+    public function getEmail(): ?string
+    {
+        return $this->email;
+    }
+
+    public function setEmail(string $email): self
+    {
+        $this->email = $email;
+
+        return $this;
+    }
+
+    public function getPassword(): ?string
+    {
+        return $this->password;
     }
 
     public function setPassword(string $password): self
@@ -302,60 +165,116 @@ class User implements UserInterface
         return $this;
     }
 
-    /**
-     * @see UserInterface
-     */
-    public function getSalt()
+    public function getDatedenaissance(): ?\DateTimeInterface
     {
-        // not needed when using the "bcrypt" algorithm in security.yaml
+        return $this->datedenaissance;
     }
 
-    /**
-     * @see UserInterface
-     */
-    public function eraseCredentials()
+    public function setDatedenaissance(\DateTimeInterface $datedenaissance): self
     {
-        // If you store any temporary, sensitive data on the user, clear it here
-        $this->plainPassword = null;
+        $this->datedenaissance = $datedenaissance;
+
+        return $this;
     }
 
-
-    public function getUsername()
+    public function getTelephone(): ?int
     {
-        return (string) $this->email;
-
+        return $this->telephone;
     }
 
-    /**
-     * @return string
-     */
-    public function getGoogleId()
+    public function setTelephone(int $telephone): self
     {
-        return $this->googleId;
+        $this->telephone = $telephone;
+
+        return $this;
     }
 
-    /**
-     * @param string $googleId
-     */
-    public function setGoogleId(string $googleId): void
+    public function getEtat(): ?string
     {
-        $this->googleId = $googleId;
+        return $this->etat;
     }
 
-    /**
-     * @return string
-     */
-    public function getFacebookId()
+    public function setEtat(string $etat): self
     {
-        return $this->facebookId;
+        $this->etat = $etat;
+
+        return $this;
     }
 
-    /**
-     * @param string $facebookId
-     */
-    public function setFacebookId(string $facebookId): void
+    public function getAdressHost(): ?string
     {
-        $this->facebookId = $facebookId;
+        return $this->adressHost;
+    }
+
+    public function setAdressHost(?string $adressHost): self
+    {
+        $this->adressHost = $adressHost;
+
+        return $this;
+    }
+
+    public function getImageCin(): ?string
+    {
+        return $this->imageCin;
+    }
+
+    public function setImageCin(?string $imageCin): self
+    {
+        $this->imageCin = $imageCin;
+
+        return $this;
+    }
+
+    public function getImageProfile(): ?string
+    {
+        return $this->imageProfile;
+    }
+
+    public function setImageProfile(string $imageProfile): self
+    {
+        $this->imageProfile = $imageProfile;
+
+        return $this;
+    }
+
+    public function getRoles(): ?string
+    {
+        return $this->roles;
+    }
+
+    public function setRoles(string $roles): self
+    {
+        $this->roles = $roles;
+
+        return $this;
+    }
+
+    public function getGoogleid(): ?string
+    {
+        return $this->googleid;
+    }
+
+    public function setGoogleid(?string $googleid): self
+    {
+        $this->googleid = $googleid;
+
+        return $this;
+    }
+
+    public function getFacebookid(): ?string
+    {
+        return $this->facebookid;
+    }
+
+    public function setFacebookid(?string $facebookid): self
+    {
+        $this->facebookid = $facebookid;
+
+        return $this;
+    }
+    public function __ToString() {
+        return $this -> roles;
+
     }
 
 }
