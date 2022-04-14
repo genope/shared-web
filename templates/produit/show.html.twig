@@ -46,27 +46,26 @@
 
             <!-- Sidebar -->
             <div class="col-lg-4 col-md-4 margin-top-75 sidebar-search">
-                <a href="listing_booking.html" class="utf_progress_button button fullwidth_block margin-top-5">Panier</a>
                 {% if produit.qtestock >0 %}
                 <div class="  verified-badge with-tip margin-bottom-30" data-tip-content="Le produit est encore disponible."> <i class="sl sl-icon-check"></i> Disponible</div>
                 {% else %}
                     <div class="verified-badge1 with-tip margin-bottom-30" data-tip-content="Le produit est encore disponible."> <i class="sl sl-icon-close"></i> Indisponible</div>
                 {% endif %}
                 <div class="utf_box_widget booking_widget_box">
-                    <h3><i class="fa fa-calendar"></i> Prix
+                    <h3><i class="fa fa-money "></i> Prix
                         <div class="price">
                             <span>{{ produit.prix }}<small>dt</small></span>
                         </div>
                     </h3>
+                    </br>
                     <div class="row with-forms margin-top-0">
 
-                        <div class="qtyButtons">
-                            <div class="qtyTitle">Quantité </div>
-                            <div class="qtyDec" id="btnmoin" onclick="moins()"></div><input type="number" name="qtyInput" id="txt" value="1"><div class="qtyInc" id="btnplus" onclick="plus()"></div>
+                        <div class="qtyButtons" >
+
+                            <a href="{{ path('ajout_panier', {'idProd': produit.idProd}) }}" class="addCart-button "  ><i class="fa fa-shopping-basket"></i> Ajouter au panier</a>
+
                         </div>
                     </div>
-
-                    <button class="like-button add_to_wishlist"><span class="like-icon"></span> Ajouter au panier</button>
 
                     <div class="clearfix"></div>
                 </div>
