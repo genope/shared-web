@@ -18,7 +18,8 @@ class ChatType extends AbstractType
                     'class' =>'form-control chat_form',
                     'placeholder' =>'Write a message.',
                     'style' =>'width:900px'
-                ]
+                ],
+                 'required'   => false
             ])
         ;
     }

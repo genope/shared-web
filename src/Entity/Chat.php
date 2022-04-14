@@ -23,7 +23,7 @@ class Chat
 
     /**
      * @var string
-     *@Assert\NotBlank(message="Le meesage is required")
+      *@Assert\NotBlank(message="Le meesage is required")
      * @ORM\Column(name="message", type="string", length=355, nullable=false)
      */
     private $message;

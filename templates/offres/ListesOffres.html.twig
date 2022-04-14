@@ -1,6 +1,12 @@
 {% extends 'base-front.html.twig' %}
 
 {% block content %}
+<style>
+ .filterDiv {
+
+            display: none;
+        }
+</style>
     <div class="clearfix"></div>
     <div id="titlebar" class="gradient">
         <div class="container">
@@ -25,65 +31,43 @@
 
             <div class="col-lg-8 col-md-8">
                 <div class="listing_filter_block">
-                    <div class="col-md-2 col-xs-2">
-                        <div class="utf_layout_nav"> <a href={{path('app_offres_index')}} class="grid"><i class="fa fa-th"></i></a> <a href="#" class="list active"><i class="fa fa-align-justify"></i></a> </div>
-                    </div>
+
+
+                     <div class="col-md-2 col-xs-2">
+                                            <ul class="list-group list-group-flush"  style="margin-top: 10px">
+                                                <li class="list-group-item">
+                                                    <div class="utf_layout_nav"> <a href={{path('app_offres_index')}} class="grid active"><i class="fa fa-th"></i></a> </div>
+                                                </li>
+                                                <li class="list-group-item" style="margin-top: 15px">
+                                                    <div class="utf_layout_nav"> <a href="#" class="list"><i class="fa fa-align-justify"></i></a>
+                                                    </div>
+                                                </li>
+                                            </ul>
+                                        </div>
                     <div class="col-md-10 col-xs-10">
-                        <div class="sort-by utf_panel_dropdown sort_by_margin float-right"> <a href="#">Destination</a>
-                            <div class="utf_panel_dropdown-content">
-                                <input class="distance-radius" type="range" min="1" max="999" step="1" value="1" data-title="Select Range">
-                                <div class="panel-buttons">
-                                    <button class="panel-apply">Apply</button>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="sort-by">
-                            <div class="utf_sort_by_select_item sort_by_margin">
-                                <select data-placeholder="Sort by Listing" class="utf_chosen_select_single">
-                                    <option>Sort by Listing</option>
-                                    <option>Latest Listings</option>
-                                    <option>Popular Listings</option>
-                                    <option>Price (Low to High)</option>
-                                    <option>Price (High to Low)</option>
-                                    <option>Highest Reviewe</option>
-                                    <option>Lowest Reviewe</option>
-                                    <option>Newest Listing</option>
-                                    <option>Oldest Listing</option>
-                                    <option>Random Listings</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="sort-by">
-                            <div class="utf_sort_by_select_item sort_by_margin">
-                                <select data-placeholder="Categories:" class="utf_chosen_select_single">
-                                    <option>Categories</option>
-                                    <option>Restaurant</option>
-                                    <option>Health</option>
-                                    <option>Hotels</option>
-                                    <option>Real Estate</option>
-                                    <option>Fitness</option>
-                                    <option>Shopping</option>
-                                    <option>Travel</option>
-                                    <option>Shops</option>
-                                    <option>Nightlife</option>
-                                    <option>Events</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="sort-by">
-                            <div class="utf_sort_by_select_item utf_search_map_section">
-                                <ul>
-                                    <li><a class="utf_common_button" href="#"><i class="fa fa-dot-circle-o"></i>Near Me</a></li>
-                                </ul>
-                            </div>
-                        </div>
+
+
+                         <div class="col-md-10 col-xs-10">
+                                                <div class="sort-by  sort_by_margin " >
+                                                    <div class="row with-forms" >
+                                                        <div class="col-md-12">
+                                                            <input type="text" placeholder="What are you looking for?" value=""/>
+                                                        </div>
+                                                    </div>
+
+
+                                                    <button class="button fullwidth_block margin-top-5 float-right">Update</button>
+                                                </div>
+
+
+                                            </div>
                     </div>
                 </div>
                     <div class="row">
 
                         {% for offre in offres %}
-                        <div class="col-lg-12 col-md-12">
-                            <div class="utf_listing_item-container list-layout"> <a href="{{ path('app_offres_show', {'idOffre': offre.idOffre}) }}" class="utf_listing_item">
+                        <div class="col-lg-12 col-md-12 ">
+                            <div class="utf_listing_item-container list-layout  "> <a href="{{ path('app_offres_show', {'idOffre': offre.idOffre}) }}" class="utf_listing_item">
                                     <div class="utf_listing_item-image">
                                         <img src="{{ asset('uploads/' ~ offre.image) }}" alt="">
                                         <span class="like-icon"></span>
@@ -132,58 +116,68 @@
             <!-- Sidebar -->
             <div class="col-lg-4 col-md-4">
                 <div class="sidebar">
-                    <div class="utf_box_widget margin-bottom-35">
-                        <h3><i class="sl sl-icon-direction"></i> Filters</h3>
-                        <div class="row with-forms">
-                            <div class="col-md-12">
-                                <input type="text" placeholder="What are you looking for?" value=""/>
-                            </div>
-                        </div>
-                        <div class="row with-forms">
-                            <div class="col-md-12">
-                                <div class="input-with-icon location">
-                                    <input type="text" placeholder="Search Location..." value=""/>
-                                    <a href="#"><i class="sl sl-icon-location"></i></a> </div>
-                            </div>
-                        </div>
-                        <a href="#" class="more-search-options-trigger margin-bottom-10" data-open-title="More Filters Options" data-close-title="More Filters Options"></a>
-                        <div class="more-search-options relative">
-                            <div class="checkboxes one-in-row margin-bottom-15">
-                                <input id="check-a" type="checkbox" name="check">
-                                <label for="check-a">Real Estate</label>
-                                <input id="check-b" type="checkbox" name="check">
-                                <label for="check-b">Friendly Workspace</label>
-                                <input id="check-c" type="checkbox" name="check">
-                                <label for="check-c">Instant Book</label>
-                                <input id="check-d" type="checkbox" name="check">
-                                <label for="check-d">Wireless Internet</label>
-                                <input id="check-e" type="checkbox" name="check" >
-                                <label for="check-e">Free Parking</label>
-                                <input id="check-f" type="checkbox" name="check" >
-                                <label for="check-f">Elevator in Building</label>
-                                <input id="check-g" type="checkbox" name="check">
-                                <label for="check-g">Restaurant</label>
-                                <input id="check-h" type="checkbox" name="check">
-                                <label for="check-h">Dance Floor</label>
-                            </div>
-                        </div>
-                        <button class="button fullwidth_block margin-top-5">Update</button>
-                    </div>
+
                     <div class="utf_box_widget margin-top-35 margin-bottom-75">
                         <h3><i class="sl sl-icon-folder-alt"></i> Categories</h3>
                         <ul class="utf_listing_detail_sidebar">
-                            <li><i class="fa fa-angle-double-right"></i> <a href="#">Travel</a></li>
-                            <li><i class="fa fa-angle-double-right"></i> <a href="#">Nightlife</a></li>
-                            <li><i class="fa fa-angle-double-right"></i> <a href="#">Fitness</a></li>
-                            <li><i class="fa fa-angle-double-right"></i> <a href="#">Real Estate</a></li>
-                            <li><i class="fa fa-angle-double-right"></i> <a href="#">Restaurant</a></li>
-                            <li><i class="fa fa-angle-double-right"></i> <a href="#">Dance Floor</a></li>
-                        </ul>
+                                                   <li><i class="fa fa-angle-double-right"></i> <a href="#" class="active" onclick="filterSelection('all')">All</a></li>
+                                                   <li><i class="fa fa-angle-double-right"></i> <a href="#" onclick="filterSelection('Appartement')">Appartements</a></li>
+                                                   <li><i class="fa fa-angle-double-right"></i> <a href="#" onclick="filterSelection('Maison')">Maisons</a></li>
+                                                   <li><i class="fa fa-angle-double-right"></i> <a href="#" onclick="filterSelection('Chambre')">Chambres</a></li>
+                                                   <li><i class="fa fa-angle-double-right"></i> <a href="#" onclick="filterSelection('Voiture')">Voitures</a></li>
+                                                   <li><i class="fa fa-angle-double-right"></i> <a href="#" onclick="filterSelection('Moto')">Motos</a></li>
+                                                   <li><i class="fa fa-angle-double-right"></i> <a href="#" onclick="filterSelection('Velo')">Vélos</a></li>
+                                               </ul>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 
+<script>
+ <script>
+        filterSelection("all")
+        function filterSelection(c) {
+            var x, i;
+            x = document.getElementsByClassName("filterDiv");
+            if (c == "all") c = "";
+            for (i = 0; i < x.length; i++) {
+                w3RemoveClass(x[i], "show");
+                if (x[i].className.indexOf(c) > -1) w3AddClass(x[i], "show");
+            }
+        }
 
+        function w3AddClass(element, name) {
+            var i, arr1, arr2;
+            arr1 = element.className.split(" ");
+            arr2 = name.split(" ");
+            for (i = 0; i < arr2.length; i++) {
+                if (arr1.indexOf(arr2[i]) == -1) {element.className += " " + arr2[i];}
+            }
+        }
+
+        function w3RemoveClass(element, name) {
+            var i, arr1, arr2;
+            arr1 = element.className.split(" ");
+            arr2 = name.split(" ");
+            for (i = 0; i < arr2.length; i++) {
+                while (arr1.indexOf(arr2[i]) > -1) {
+                    arr1.splice(arr1.indexOf(arr2[i]), 1);
+                }
+            }
+            element.className = arr1.join(" ");
+        }
+
+        // Add active class to the current button (highlight it)
+        var btnContainer = document.getElementById("myBtnContainer");
+        var btns = btnContainer.getElementsByClassName("btn");
+        for (var i = 0; i < btns.length; i++) {
+            btns[i].addEventListener("click", function(){
+                var current = document.getElementsByClassName("active");
+                current[0].className = current[0].className.replace(" active", "");
+                this.className += " active";
+            });
+        }
+    </script>
+</script>
 {% endblock %}

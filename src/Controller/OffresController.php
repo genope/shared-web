@@ -120,9 +120,7 @@ class OffresController extends AbstractController
             ->findBy(['cin' => $offre->getIdUser()]);
 
 
-        dump($users);
 
-        dump($offre->getIdUser()->getEmail());
 
         return $this->render('offres/show.html.twig', [
             'offre' => $offre,
@@ -175,7 +173,7 @@ class OffresController extends AbstractController
             $entityManager->flush();
         }
 
-        return $this->redirectToRoute('  mine', [], Response::HTTP_SEE_OTHER);
+        return $this->redirectToRoute('mine', [], Response::HTTP_SEE_OTHER);
     }
 
 }

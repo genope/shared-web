@@ -136,6 +136,9 @@
     "league/oauth2-google": {
         "version": "4.0.0"
     },
+    "mercuryseries/flashy-bundle": {
+        "version": "v5.1.0"
+    },
     "monolog/monolog": {
         "version": "1.27.0"
     },
@@ -487,6 +490,9 @@
             "./tests/bootstrap.php"
         ]
     },
+    "symfony/polyfill-intl-grapheme": {
+        "version": "v1.25.0"
+    },
     "symfony/polyfill-intl-icu": {
         "version": "v1.25.0"
     },
@@ -569,6 +575,9 @@
     },
     "symfony/stopwatch": {
         "version": "v4.4.38"
+    },
+    "symfony/string": {
+        "version": "v6.0.3"
     },
     "symfony/templating": {
         "version": "v4.4.37"
