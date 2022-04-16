@@ -6,11 +6,15 @@ use App\Entity\Classroom;
 use App\Entity\Offres;
 use App\Entity\User;
 use App\Form\OffresType;
+use App\Repository\OffresRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Knp\Component\Pager\PaginatorInterface;
+
+use MercurySeries\FlashyBundle\FlashyNotifier;
 
 /**
  * @Route("/offres")
@@ -43,18 +47,80 @@ class OffresController extends AbstractController
             'offres' => $offres,
         ]);
     }
+        /**
+     * @Route("/dashboard", name="dashboard", methods={"GET"})
+     */
+    public function MesStatistique(OffresRepository $repo): Response
+    {
+        $nbr = $repo->NbrOffre(12312122);
+
+     
+        $Maison = $repo->findBy([
+            'idUser' => 12312122,
+            'categ' => "Maison",
+        ]);
+        $Appartement = $repo->findBy([
+            'idUser' => 12312122,
+            'categ' => "Appartement",
+        ]);
+        $Chambre = $repo->findBy([
+            'idUser' => 12312122,
+            'categ' => "Chambre",
+        ]);
+        $Voiture = $repo->findBy([
+            'idUser' => 12312122,
+            'categ' => "Voiture",
+        ]);
+        $Vélo = $repo->findBy([
+            'idUser' => 12312122,
+            'categ' => "Vélo",
+        ]);
+        $Moto = $repo->findBy([
+            'idUser' => 12312122,
+            'categ' => "Moto",
+        ]);
+
+                return $this->render('offres/Dashboard.html.twig', [
+                'Maison' => count($Maison),
+                'Appartement' => count($Appartement),
+                'Chambre' => count($Chambre),
+                'Voiture' => count($Voiture),
+                'Vélo' => count($Vélo),
+                'Moto' => count($Moto)
+                ]);
+    }
+
+        /**
+     * @Route("/Approuver", name="Approuver", methods={"GET", "POST"})
+     */
+    public function Approuver(EntityManagerInterface $entityManager): Response
+    {
+        $offres = $entityManager
+            ->getRepository(Offres::class)
+            ->findAll([
+                'etat' => "0",
+            ]);
+       
+
+                return $this->render('offres/ApprouverOffres.html.twig', [
+                    'offres' => $offres
+                ]);
+    }
 
     /**
      * @Route("/list", name="liste_offre", methods={"GET"})
      */
-    public function listeindex(EntityManagerInterface $entityManager): Response
+    public function listeindex(Request $request,EntityManagerInterface $entityManager,PaginatorInterface $paginator): Response
     {
         $offres = $entityManager
             ->getRepository(Offres::class)
             ->findAll();
 
+
+       $liste_Offres = $paginator->paginate($offres,$request->query->getInt('page',1),5);
         return $this->render('offres/ListesOffres.html.twig', [
             'offres' => $offres,
+            'filtre'=>$liste_Offres
         ]);
     }
 
@@ -62,14 +128,18 @@ class OffresController extends AbstractController
     /**
      * @Route("/new", name="app_offres_new", methods={"GET", "POST"})
      */
-    public function new(Request $request, EntityManagerInterface $entityManager): Response
+    public function new(Request $request, EntityManagerInterface $entityManager,FlashyNotifier $flashy): Response
     {
         $offre = new Offres();
         $form = $this->createForm(OffresType::class, $offre);
         $form->handleRequest($request);
 
 
+        $flashy->success('Event created!', 'http://your-awesome-link.com');
+
         if ($form->isSubmitted() && $form->isValid()) {
+
+            
             $file = $form->get('image')->getData();
             $newFilename = md5(uniqid()).'.'.$file->guessExtension();
             try {
@@ -93,14 +163,16 @@ class OffresController extends AbstractController
             }
             $offre->setImage($newFilename);
 
+            
 
             $entityManager->persist($offre);
             $entityManager->flush();
 
 
+           
 
-            $offre = new Offres();
-            $form = $this->createForm(OffresType::class, $offre);
+
+         
         }
 
         return $this->render('offres/new.html.twig', [

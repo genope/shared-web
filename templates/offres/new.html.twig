@@ -2,11 +2,12 @@
 
 {% block content %}
 
-    <style>
-        .btnn:hover{
-            transform: scale(1.02);
-        }
-    </style>
+       <head>
+  <link rel="stylesheet" href="{{ asset('bundles/mercuryseriesflashy/css/flashy.css') }}">
+
+
+    </head>
+
 
 
     <div id="titlebar" class="dashboard_gradient">
@@ -171,19 +172,21 @@
     {{ form_end(form) }}
 
 
+
     <div class="col-md-12">
         <div class="footer_copyright_part"></div>
     </div>
+
+
+
+
 <script>
-    function myFunctionNom() {
-        const b=document.getElementById("offres_nom");
-        const a=document.getElementById("offres_nom").value;
-       b.addEventListener('invalid',(e)=>{
-
-       })
-
-    }
+    <script src="//code.jquery.com/jquery.js"></script>
+    <!-- Load Flashy default JavaScript -->
+    <script src="{{ asset('bundles/mercuryseriesflashy/js/flashy.js') }}"></script>
 </script>
+
+{{ include('@MercurySeriesFlashy/flashy.html.twig') }}
 
 
 {% endblock %}

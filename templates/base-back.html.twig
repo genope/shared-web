@@ -122,7 +122,7 @@
                 <div class="utf_dashboard_navigation_inner_block">
                     <ul>
 
-                        <li  ><a href="dashboard.html"><i class="sl sl-icon-layers"></i> Dashboard</a></li>
+                        <li  ><a href="{{ path('Approuver') }}"><i class="sl sl-icon-layers"></i> Dashboard</a></li>
                         <li ><a href="{{ path('app_offres_new') }}"><i class="sl sl-icon-plus"></i> Add Offres</a></li>
 
                         <li ><a href="{{ path('mine') }}"><i class="sl sl-icon-docs"></i> My Offers</a></li>
@@ -176,5 +176,7 @@
     {% block stylesheets %}
     {% endblock %}
 </script>
+
+{{ include('@MercurySeriesFlashy/flashy.html.twig') }}
 </body>
 </html>
