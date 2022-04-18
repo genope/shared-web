@@ -115,6 +115,12 @@
             "ref": "18ce21f16066cccfa0803c9e846a2e4f4bec92ab"
         }
     },
+    "knplabs/knp-components": {
+        "version": "v3.4.0"
+    },
+    "knplabs/knp-paginator-bundle": {
+        "version": "v5.8.0"
+    },
     "knpuniversity/oauth2-client-bundle": {
         "version": "2.10",
         "recipe": {
@@ -293,6 +299,9 @@
         "files": [
             "./config/packages/sensio_framework_extra.yaml"
         ]
+    },
+    "swiftmailer/swiftmailer": {
+        "version": "v6.3.0"
     },
     "symfony/asset": {
         "version": "v4.4.37"
@@ -569,6 +578,20 @@
     },
     "symfony/stopwatch": {
         "version": "v4.4.38"
+    },
+    "symfony/swiftmailer-bundle": {
+        "version": "3.5",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "master",
+            "version": "2.5",
+            "ref": "f0b2fccdca2dfd97dc2fd5ad216d5e27c4f895ac"
+        },
+        "files": [
+            "./config/packages/dev/swiftmailer.yaml",
+            "./config/packages/swiftmailer.yaml",
+            "./config/packages/test/swiftmailer.yaml"
+        ]
     },
     "symfony/templating": {
         "version": "v4.4.37"

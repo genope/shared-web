@@ -19,6 +19,43 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 class PanierdetailsController extends AbstractController
 {
+    /**
+     * @Route("/commande", name="commande")
+     */
+    public function commande(Request $request, \Swift_Mailer $mailer, SessionInterface $session, ProduitRepository $produitRepository): Response
+    {
+        $panier = $session->get('panier', []);
+
+
+        $panierwithdata = [];
+
+        foreach ($panier as $id => $quantity) {
+
+            $panierwithdata[] = [
+                'produit' => $produitRepository->find($id),
+                'quantity' => $quantity,
+            ];
+        }
+        $total = 0;
+        foreach ($panierwithdata as $item) {
+            $totalItem = $item['produit']->getPrix() * $item['quantity'];
+            $total += $totalItem;
+        }
+
+        $message = (new \Swift_Message('Confirmation'))
+            ->setFrom('yeektheb@gmail.com')
+            ->setTo('aziz.lajili@esprit.tn')
+            ->setBody($this->renderView('panierdetails/Commande.html.twig',[
+                'items' => $panierwithdata,
+                'total' => $total,
+            ]),'text/html');
+
+        $mailer ->send($message);
+        $this->addFlash('message', 'Le message a ete envoyé');
+
+        return $this->redirectToRoute('app_panierdetails_index');
+
+    }
 
     /**
      * @Route ("/add/{idProd}", name="ajout_panier")
@@ -37,7 +74,6 @@ class PanierdetailsController extends AbstractController
         $session->set('panier', $panier);
 
         return $this-> redirectToRoute("app_panierdetails_index");
-        /*dd($panier);*/
 
     }
     /**
@@ -57,7 +93,6 @@ class PanierdetailsController extends AbstractController
         $session->set('panier', $panier);
         return $this-> redirectToRoute("app_panierdetails_index");
 
-        /*dd($panier);*/
 
     }
 
@@ -194,4 +229,6 @@ class PanierdetailsController extends AbstractController
 
         return $this->redirectToRoute('app_panierdetails_index', [], Response::HTTP_SEE_OTHER);
     }
+
+
 }

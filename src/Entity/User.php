@@ -5,7 +5,7 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
-use App\Validator\Validator\Constraints\ComplexPassword;
+use App\Validator\Constraints\ComplexPassword;
 
 /**
  * User
@@ -27,21 +27,21 @@ class User implements UserInterface
 
     /**
      * @var string
-     *
+     * @Assert\NotBlank
      * @ORM\Column(name="Nom", type="string", length=255, nullable=false)
      */
     private $nom;
 
     /**
      * @var string
-     *
+     *@Assert\NotBlank
      * @ORM\Column(name="Prenom", type="string", length=255, nullable=false)
      */
     private $prenom;
 
     /**
      * @var string
-     * @Assert\NotBlank(groups={"Registration"})
+     * @Assert\NotBlank
      * @Assert\Email()
      * @ORM\Column(name="Email", type="string", length=255, nullable=false)
      */
@@ -49,7 +49,7 @@ class User implements UserInterface
 
     /**
      * @var string
-     * @Assert\NotBlank(groups={"Registration", "PasswordReset"})
+     * @Assert\NotBlank
      * @Assert\Length(min="6")
      * @ComplexPassword()
      * @ORM\Column(name="Password", type="string", length=255, nullable=false)
@@ -58,31 +58,29 @@ class User implements UserInterface
 
     /**
      * @var \DateTime
-     *
+     * @Assert\NotBlank
      * @ORM\Column(name="dateDeNaissance", type="date", nullable=false)
      */
     private $datedenaissance;
     /**
      * @var string
      *
-     * @ORM\Column(name="googleId", type="string", length=255, nullable=false)
+     * @ORM\Column(name="googleId", type="string", length=255, nullable=true)
      */
     private $googleId;
     /**
      * @var string
      *
-     * @ORM\Column(name="facebookId", type="string", length=255, nullable=false)
+     * @ORM\Column(name="facebookId", type="string", length=255, nullable=true)
      */
     private $facebookId;
     /**
      * @var int
-     *
+     * @Assert\NotBlank(groups={"Registration"})
+     * @Assert\Length(min="8",max="8")d
      * @ORM\Column(name="Telephone", type="integer", nullable=false)
      */
     private $telephone;
-
-
-
     /**
      * @ORM\Column(type="json")
      */
@@ -108,9 +106,14 @@ class User implements UserInterface
     private $imageCin;
 
     /**
+     * @ORM\Column(type="boolean")
+     */
+    private $is_verified =false ;
+
+    /**
      * @var string
      *
-     * @ORM\Column(name="image_profile", type="string", length=255, nullable=false)
+     * @ORM\Column(name="image_profile", type="string", length=255, nullable=true)
      */
     private $imageProfile;
 
@@ -136,6 +139,19 @@ class User implements UserInterface
     public function getNom()
     {
         return $this->nom;
+    }
+
+
+    public function getIsVerified() : bool
+    {
+        return $this->is_verified;
+    }
+
+
+    public function setIsVerified(bool $is_verified):self
+    {
+        $this->is_verified = $is_verified;
+        return $this;
     }
 
 

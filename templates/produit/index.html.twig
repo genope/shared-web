@@ -52,7 +52,7 @@
 
                             <li>
                                 <div class="utf_list_box_listing_item">
-                                    <div class="utf_list_box_listing_item-img  "><a href="{{ path('app_produit_show', {'idProd': produit.idProd}) }}"><img src="{{ asset('uploads/' ~ produit.image) }}" alt=""></a></div>
+                                    <div style="max-height: 250px; max-width: 250px" class="utf_list_box_listing_item-img  "><a href="{{ path('app_produit_show', {'idProd': produit.idProd}) }}"><img  src="{{ asset('uploads/' ~ produit.image) }}" alt=""></a></div>
                                     <div class="utf_list_box_listing_item_content isotope-item {{  produit.nomcategorie }}">
                                         <div class="inner">
                                             <h3>{{ produit.designation }}</h3>
@@ -75,20 +75,14 @@
                                 <td colspan="10">no records found</td>
                             </tr>
                         {% endfor %}
+                        <div class="utf_pagination_container_part margin-top-30 margin-bottom-30">
+                            <nav class="pagination">
+                                {{ knp_pagination_render(produits) }}
+                            </nav>
                     </ul>
                 </div>
                 <div class="clearfix"></div>
-                <div class="utf_pagination_container_part margin-top-30 margin-bottom-30">
-                    <nav class="pagination">
-                        <ul>
-                            <li><a href="#"><i class="sl sl-icon-arrow-left"></i></a></li>
-                            <li><a href="#" class="current-page">1</a></li>
-                            <li><a href="#">2</a></li>
-                            <li><a href="#">3</a></li>
-                            <li><a href="#"><i class="sl sl-icon-arrow-right"></i></a></li>
-                        </ul>
-                    </nav>
-                </div>
+
             </div>
             <div class="col-md-12">
             </div>

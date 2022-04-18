@@ -6,6 +6,7 @@ use App\Entity\Categorieproduit;
 use App\Entity\Produit;
 use App\Form\ProduitType;
 use Doctrine\ORM\EntityManagerInterface;
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
@@ -23,14 +24,21 @@ class ProduitController extends AbstractController
     /**
      * @Route("/", name="app_produit_index", methods={"GET"})
      */
-    public function index(EntityManagerInterface $entityManager): Response
+    public function index(Request $request, EntityManagerInterface $entityManager, PaginatorInterface $paginator): Response
     {
-        $produits = $entityManager
+        $donnees = $entityManager
             ->getRepository(Produit::class)
             ->findAll();
         $categories = $entityManager
             ->getRepository(Categorieproduit::class)
             ->findAll();
+
+        $produits = $paginator->paginate(
+            $donnees,
+            $request -> query->getInt('page',1),
+            4
+        );
+
 
         return $this->render('produit/index.html.twig', [
             'categories' => $categories,
