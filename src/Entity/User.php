@@ -4,6 +4,9 @@ namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Validator\Constraints as Assert;
+use App\Validator\Constraints\ComplexPassword;
+
 /**
  * User
  *
@@ -16,77 +19,77 @@ class User implements UserInterface
      * @var int
      *
      * @ORM\Column(name="CIN", type="integer", nullable=false)
+     * @Assert\Length(min="8",max="8")
      * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
+     *
      */
     private $cin;
 
     /**
      * @var string
-     *
+     * @Assert\NotBlank
      * @ORM\Column(name="Nom", type="string", length=255, nullable=false)
      */
     private $nom;
 
     /**
      * @var string
-     *
+     *@Assert\NotBlank
      * @ORM\Column(name="Prenom", type="string", length=255, nullable=false)
      */
     private $prenom;
 
     /**
      * @var string
-     *
+     * @Assert\NotBlank
+     * @Assert\Email()
      * @ORM\Column(name="Email", type="string", length=255, nullable=false)
      */
     private $email;
 
     /**
      * @var string
-     *
+     * @Assert\NotBlank
+     * @Assert\Length(min="6")
+     * @ComplexPassword()
      * @ORM\Column(name="Password", type="string", length=255, nullable=false)
      */
     private $password;
 
     /**
      * @var \DateTime
-     *
+     * @Assert\NotBlank
      * @ORM\Column(name="dateDeNaissance", type="date", nullable=false)
      */
     private $datedenaissance;
     /**
      * @var string
      *
-     * @ORM\Column(name="googleId", type="string", length=255, nullable=false)
+     * @ORM\Column(name="googleId", type="string", length=255, nullable=true)
      */
     private $googleId;
     /**
      * @var string
      *
-     * @ORM\Column(name="facebookId", type="string", length=255, nullable=false)
+     * @ORM\Column(name="facebookId", type="string", length=255, nullable=true)
      */
     private $facebookId;
     /**
      * @var int
-     *
+     * @Assert\NotBlank(groups={"Registration"})
+     * @Assert\Length(min="8",max="8")d
      * @ORM\Column(name="Telephone", type="integer", nullable=false)
      */
     private $telephone;
-
-
-
     /**
      * @ORM\Column(type="json")
      */
     private $roles = [];
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="etat", type="string", length=255, nullable=false)
+     * @ORM\Column(type="json")
      */
-    private $etat;
+    private $etat= [];
 
     /**
      * @var string|null
@@ -105,14 +108,24 @@ class User implements UserInterface
     /**
      * @var string
      *
-     * @ORM\Column(name="image_profile", type="string", length=255, nullable=false)
+     * @ORM\Column(name="image_profile", type="string", length=255, nullable=true)
      */
     private $imageProfile;
 
     /**
+     * @ORM\Column(type="string", length=50, nullable=true)
+     */
+    private $activation_token;
+
+    /**
+     * @ORM\Column(type="string", length=50, nullable=true)
+     */
+    private $reset_token;
+
+    /**
      * @return int
      */
-    public function getCin(): int
+    public function getCin(): ?int
     {
         return $this->cin;
     }
@@ -211,15 +224,20 @@ class User implements UserInterface
      */
     public function getEtat()
     {
-        return $this->etat;
+        $Etat = $this->etat;
+        // guarantee every user at least has ROLE_USER
+        $Etat[] = 'Approved';
+
+        return array_unique($Etat);
     }
 
     /**
      * @param string $etat
      */
-    public function setEtat(string $etat): void
+    public function setEtat(array $etat): self
     {
         $this->etat = $etat;
+        return $this;
     }
 
     /**
@@ -286,7 +304,10 @@ class User implements UserInterface
 
         return $this;
     }
-
+    public function __toString()
+    {
+        return $this->roles;
+    }
     /**
      * @see UserInterface
      */
@@ -356,6 +377,30 @@ class User implements UserInterface
     public function setFacebookId(string $facebookId): void
     {
         $this->facebookId = $facebookId;
+    }
+
+    public function getActivationToken(): ?string
+    {
+        return $this->activation_token;
+    }
+
+    public function setActivationToken(?string $activation_token): self
+    {
+        $this->activation_token = $activation_token;
+
+        return $this;
+    }
+
+    public function getResetToken(): ?string
+    {
+        return $this->reset_token;
+    }
+
+    public function setResetToken(?string $reset_token): self
+    {
+        $this->reset_token = $reset_token;
+
+        return $this;
     }
 
 }

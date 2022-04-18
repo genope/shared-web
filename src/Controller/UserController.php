@@ -3,16 +3,37 @@
 namespace App\Controller;
 
 use App\Entity\User;
+use App\Form\UpdateHostType;
+use App\Form\UpdateType;
 use App\Form\UserType;
+use App\Security\LoginFormAuthenticator;
+use App\Service\CaptchaValidator;
+use App\Service\Mailer;
+use App\Service\TokenGenerator;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 class UserController extends AbstractController
 {
+    /**
+     * @Route("/allusers", name="app_user_users", methods={"GET"})
+     */
+    public function listUsers(EntityManagerInterface $entityManager): Response
+    {
+        $this->denyAccessUnlessGranted('ROLE_ADMIN');
+        $users = $entityManager
+            ->getRepository(User::class)
+            ->findAll();
+
+        return $this->render('/user/index.html.twig', [
+            'users' => $users,
+        ]);
+    }
     /**
      * @Route("/", name="app_user_index", methods={"GET"})
      */
@@ -30,12 +51,41 @@ class UserController extends AbstractController
 
 
     /**
-     * @Route("/{cin}", name="app_user_show", methods={"GET"})
+     * @Route("/{cin}", name="app_user_show", methods={"GET", "POST"})
      */
-    public function show(User $user): Response
+    public function show(Request $request, User $user, EntityManagerInterface $entityManager): Response
     {
-        return $this->render('user/show.html.twig', [
+        $form = $this->createForm(UpdateType::class, $user);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager->flush();
+
+            return $this->redirectToRoute('app_user_index', [], Response::HTTP_SEE_OTHER);
+        }
+
+        return $this->render('user/profile.html.twig', [
             'user' => $user,
+            'form' => $form->createView(),
+        ]);
+    }
+    /**
+     * @Route("/host/{cin}", name="app_user_show_host", methods={"GET", "POST"})
+     */
+    public function showHost(Request $request, User $user, EntityManagerInterface $entityManager): Response
+    {
+        $form = $this->createForm(UpdateHostType::class, $user);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager->flush();
+
+            return $this->redirectToRoute('app_user_index', [], Response::HTTP_SEE_OTHER);
+        }
+
+        return $this->render('user/profileHost.html.twig', [
+            'user' => $user,
+            'form' => $form->createView(),
         ]);
     }
 
@@ -73,4 +123,6 @@ class UserController extends AbstractController
 
         return $this->redirectToRoute('app_user_index', [], Response::HTTP_SEE_OTHER);
     }
+
+
 }

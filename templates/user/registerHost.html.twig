@@ -1,4 +1,5 @@
 {% extends 'base_loginRegister.html.twig' %}
+
 {% block stylesheets %}
     <style>
         .form-control {
@@ -38,6 +39,7 @@
                     </div>
                 </div>
                 <div class="col-lg-6 col-12">
+
                     <div class="fxt-content">
                         <div class="form-group">
                             <div class="login_form is_closed">
@@ -77,6 +79,8 @@
                             {{ form_widget(form.password.second,{'attr':{'class':'form-control',"id":"second",'placeholder': "verify your password"}}) }}
                             {{ form_widget(form.datedenaissance,{'attr':{'class':'form-control','placeholder': "Birthday"}}) }}
                             {{ form_widget(form.telephone,{'attr':{'class':'form-control','placeholder': "Phone number"}}) }}
+                            {{ form_widget(form.adressHost,{'attr':{'class':'form-control','placeholder': "Your address"}}) }}
+                            {{ form_widget(form.imageCin,{'attr':{'class':'form-control','placeholder': "Image Cin"}}) }}
                             <div class="g-recaptcha" data-sitekey="6Lc5CVgaAAAAAJL8V2UR9DCU3k8yUT0PNgSkmJbm"></div>
 
                             <div class="form-group">
@@ -95,6 +99,7 @@
                                 </div>
                             </div>
                         </div>
+
                         <div class="fxt-footer">
                             <div class="fxt-transformY-50 fxt-transition-delay-9">
                                 <p>Already have an account?<a href="{{ path('app_login') }}"
@@ -145,5 +150,4 @@
 <script src="https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit"
         async def er>
 </script>
-
 {% endblock %}

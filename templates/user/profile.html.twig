@@ -1,0 +1,123 @@
+{% extends 'base-front.html.twig' %}
+{% block content %}
+    <!-- Dashboard -->
+    <div id="main_wrapper">
+        <div id="titlebar" class="gradient">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h2>Add Listing</h2>
+                        <nav id="breadcrumbs">
+                            <ul>
+                                <li><a href="index_1.html">Home</a></li>
+                                <li>Add Listing</li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+            <div class="row">
+                <div class="container margin-bottom-75">
+                <div class="col-lg-12 col-md-12">
+                    <div class="utf_dashboard_list_box margin-top-0">
+                        <h4 class="gray"><i class="sl sl-icon-user"></i> Profile Details</h4>
+                        <div class="utf_dashboard_list_box-static">
+                            <div class="edit-profile-photo"> <img src="{{ asset('Front-office/') }}images/user-avatar.jpg" alt="">
+                                <div class="change-photo-btn">
+                                    <div class="photoUpload"> <span><i class="fa fa-upload"></i> Upload Photo</span>
+                                        <input type="file" class="upload" />
+                                    </div>
+                                </div>
+                            </div>
+                            {{ form_start(form, {'attr': {'id': 'registerForm'}}) }}
+                            <div class="my-profile">
+                                <div class="row with-forms">
+                                    <div class="col-md-4">
+                                        <label>Cin</label>
+                                        {{ user.cin }}
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label>Name</label>
+                                        {{ form_widget(form.nom,{'attr':{'class':'form-control'}}) }}
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label>Lastname</label>
+                                        {{ form_widget(form.prenom,{'attr':{'class':'form-control'}}) }}
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label>Email</label>
+                                        {{ user.email }}
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label>Old password</label>
+                                        {{ form_widget(form.password.first,{'attr':{'class':'form-control',"id":"first",'placeholder': "Password"}}) }}
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label>New Password</label>
+                                        {{ form_widget(form.password.second,{'attr':{'class':'form-control',"id":"second",'placeholder': "Password"}}) }}
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label>Birthday</label>
+                                        {{ form_widget(form.datedenaissance,{'attr':{'class':'form-control'}}) }}
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label>Phone number</label>
+                                        {{ form_widget(form.telephone,{'attr':{'class':'form-control'}}) }}
+                                    </div>
+
+                                    <div class="col-md-12">
+                                        <label>Notes</label>
+                                        <textarea name="notes" cols="30" rows="10">At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti.</textarea>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label>Facebook</label>
+                                        <input type="text" class="input-text" placeholder="https://www.facebook.com" value="">
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label>Twitter</label>
+                                        <input type="text" class="input-text" placeholder="https://www.twitter.com" value="">
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label>Linkedin</label>
+                                        <input type="text" class="input-text" placeholder="https://www.linkedin.com" value="">
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label>Google+</label>
+                                        <input type="text" class="input-text" placeholder="https://plus.google.com" value="">
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label>Instagram</label>
+                                        <input type="text" class="input-text" placeholder="http://instagram.com" value="">
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label>Skype</label>
+                                        <input type="text" class="input-text" placeholder="https://www.skype.com" value="">
+                                    </div>
+                                </div>
+                            </div>
+                            <button class="button preview btn_center_item margin-top-15">Save Changes</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </div>
+    </div>
+
+    {% block javascript %}
+    <script>
+
+        (function ($) {
+        try {
+        var jscr1 = $('.js-scrollbar');
+        if (jscr1[0]) {
+        const ps1 = new PerfectScrollbar('.js-scrollbar');
+
+    }
+    } catch (error) {
+        console.log(error);
+    }
+    })(jQuery);
+    </script>
+    {% endblock %}
+{% endblock %}
