@@ -21,6 +21,30 @@ use MercurySeries\FlashyBundle\FlashyNotifier;
  */
 class OffresController extends AbstractController
 {
+
+    /**
+     * @Route("/send/{id}", name="send", methods={"GET", "POST"})
+     */
+
+    public function Approu(Request $request,Offres $offre,  OffresRepository $repo,\Swift_Mailer $mailer): Response
+    {
+
+
+        $message = (new \Swift_Message('Confirmation'))
+        ->setFrom('yeektheb@gmail.com')
+        ->setTo($offre->getIdUser()->getEmail())
+        ->setBody($this->renderView('offres/test.html.twig',
+        ['offre' => $offre,
+         'user'=>$offre->getIdUser()
+            ])
+            ,'text/html');
+        $mailer ->send($message);
+
+        $nbr = $repo->Approuver($offre->getIdOffre());
+
+        return $this->redirectToRoute('Approuver');
+      
+    }
     /**
      * @Route("/", name="app_offres_index", methods={"GET"})
      */
@@ -52,7 +76,6 @@ class OffresController extends AbstractController
      */
     public function MesStatistique(OffresRepository $repo): Response
     {
-        $nbr = $repo->NbrOffre(12312122);
 
      
         $Maison = $repo->findBy([
@@ -95,6 +118,7 @@ class OffresController extends AbstractController
      */
     public function Approuver(EntityManagerInterface $entityManager): Response
     {
+   
         $offres = $entityManager
             ->getRepository(Offres::class)
             ->findAll([
@@ -192,8 +216,6 @@ class OffresController extends AbstractController
             ->findBy(['cin' => $offre->getIdUser()]);
 
 
-
-
         return $this->render('offres/show.html.twig', [
             'offre' => $offre,
             'user'=>$offre->getIdUser(),
@@ -248,4 +270,5 @@ class OffresController extends AbstractController
         return $this->redirectToRoute('mine', [], Response::HTTP_SEE_OTHER);
     }
 
+ 
 }

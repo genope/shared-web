@@ -50,10 +50,11 @@
                 <h4><i class="sl sl-icon-list"></i> Mes Offres</h4>
                 <ul>
                     {% for offre in offres %}
+                       
                     <li class="filterDiv {{ offre.categ }}">
                         <div class="utf_list_box_listing_item  ">
 
-                            <div class="utf_list_box_listing_item-img"><a href="#"><img src="{{ asset('uploads/' ~ offre.image) }}"s alt=""></a></div>
+                            <div class="utf_list_box_listing_item-img"><a href="#"><img src="{{ asset('uploads/' ~ offre.image) }}" alt=""></a></div>
 
                             <div class="utf_list_box_listing_item_content">
                                 <div class="inner">

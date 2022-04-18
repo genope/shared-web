@@ -31,14 +31,11 @@ class OffresRepository extends ServiceEntityRepository
     }
 
 
-    public function Approuver($editId){
-            $queryBuilder = $this->em->createQueryBuilder();
-            $query = $queryBuilder->update('App\Entity\Offres', 'u')
-                ->set('u.etat', '1')
-                ->where('u.id = :editId')
-                ->setParameter('editId', $editId)
-                ->getQuery();
-            $result = $query->execute();
+    public function Approuver($id){
+        $em = $this->getEntityManager();
+        $query = $em->createQuery("Update App\Entity\Offres C SET C.etat='1' where C.idOffre = :id");
+        $query->setParameter('id', $id);
+        return $query->getSingleScalarResult();
     }
 /*
     public function NbrApparement($id){
