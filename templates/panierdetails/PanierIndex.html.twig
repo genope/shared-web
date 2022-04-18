@@ -1,6 +1,21 @@
 {% extends 'base-back.html.twig' %}
 
 {% block content %}
+    <script>
+
+        $('.order').click(function(e) {
+
+            let button = $(this);
+
+            if(!button.hasClass('animate')) {
+                button.addClass('animate');
+                setTimeout(() => {
+                    button.removeClass('animate');
+                }, 10000);
+            }
+
+        });
+    </script>
     <style>:root {
             --primary: #275efe;
             --primary-light: #7699ff;
@@ -526,7 +541,10 @@
 
     {% endif %}
 
+
     <script>
+
+
         const valeur = parseInt(document.getElementById("td" + index).innerText);
         const a = valeur;
 
@@ -563,18 +581,7 @@
             if (a > 0)
                 c.value = b - 1;
         }
-        $('.order').click(function(e) {
 
-            let button = $(this);
-
-            if(!button.hasClass('animate')) {
-                button.addClass('animate');
-                setTimeout(() => {
-                    button.removeClass('animate');
-                }, 10000);
-            }
-
-        });
 
     </script>
 
