@@ -135,7 +135,6 @@ class OffresController extends AbstractController
         $form->handleRequest($request);
 
 
-        $flashy->success('Event created!', 'http://your-awesome-link.com');
 
         if ($form->isSubmitted() && $form->isValid()) {
 
@@ -170,6 +169,7 @@ class OffresController extends AbstractController
 
 
            
+          $flashy->success('Event created!', 'http://your-awesome-link.com');
 
 
          

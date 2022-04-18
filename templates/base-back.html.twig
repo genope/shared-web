@@ -14,6 +14,8 @@
     <link rel="stylesheet" href="{{ asset('front-office/css/perfect-scrollbar.css') }}">
     <link rel="stylesheet" href="{{ asset('front-office/css/Authstyle.css') }}" id="colors">
     <!-- Google Font -->
+
+
     <link href="https://fonts.googleapis.com/css?family=Nunito:300,400,600,700,800&amp;display=swap&amp;subset=latin-ext,vietnamese" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,500,600,700,800" rel="stylesheet" type="text/css">
 </head>
@@ -147,6 +149,15 @@
 
 <!-- Scripts -->
 
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"
+integrity="sha512-s
++xg36jbIujB2S2VKfpGmlC3T5V2TF31Y48DX7u2r9XZGzgPsa6wTp0QA7J9iffvdeBN0q9tKzRxVxw1JviZPg="
+crossorigin="anonymous"></script>
+
+
+
 <script src="{{ asset('front-office/scripts/jquery-3.4.1.min.js') }}"></script>
 <script src="{{ asset('front-office/scripts/chosen.min.js') }}"></script>
 <script src="{{ asset('front-office/scripts/perfect-scrollbar.min.js') }}"></script>
@@ -160,6 +171,7 @@
 <script src="{{ asset('front-office/scripts/color_switcher.js') }}"></script>
 <script src="{{ asset('front-office/scripts/jquery_custom.js') }}"></script>
 <script src="{{ asset('front-office/scripts/typed.js') }}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.1/chart.min.js" integrity="sha512-QSkVNOCYLtj73J4hbmVoOV6KVZuMluZlioC+trLpewV8qMjsWqlIQvkn1KGX2StWvPMdWGBqim1xlC8krl1EKQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script>
     (function($) {
         try {
@@ -173,9 +185,10 @@
         }
     })(jQuery);
 
+</script>
+
     {% block stylesheets %}
     {% endblock %}
-</script>
 
 {{ include('@MercurySeriesFlashy/flashy.html.twig') }}
 </body>
