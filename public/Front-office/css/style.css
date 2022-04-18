@@ -15,7 +15,7 @@ body, h1, h2, h3, h4, h5, h6, input[type="text"], input[type="password"], input[
 h1, h2, h3, h4, h5, h6 {
 	color: #323232;
 }
-/*.video-container {
+.video-container {
 	position: absolute;
 	top: 0;
 	left: 0;
@@ -30,7 +30,7 @@ h1, h2, h3, h4, h5, h6 {
 	width: 100%;
 	height: 100vh;
 	opacity: 0.5;
-}*/
+}
 login_form,
 .login_form *{
 	display: flex;

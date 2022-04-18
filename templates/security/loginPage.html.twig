@@ -33,7 +33,7 @@
             <div class="row align-items-center justify-content-center">
                 <div class="col-lg-3">
                     <div class="fxt-header">
-                        <a href="loginPage.html.twig" class="fxt-logo"><img
+                        <a href="{{ path('app_user_index') }}" class="fxt-logo"><img
                                     src="{{ asset('Front-office/') }}img/logo.png" alt="Logo"></a>
                     </div>
                 </div>
@@ -85,7 +85,7 @@
                                                 <input id="checkbox1" name="_remember_me" type="checkbox">
                                                 <label for="checkbox1">Keep me logged in</label>
                                             </div>
-                                            <a href="../user/forgot-password-24.html" class="switcher-text">Forgot
+                                            <a href="{{ path('app_forgotten_password')  }}" class="switcher-text">Forgot
                                                 Password</a>
                                         </div>
                                     </div>
@@ -99,7 +99,7 @@
                         </div>
                         <div class="fxt-footer">
                             <div class="fxt-transformY-50 fxt-transition-delay-9">
-                                <p>Don't have an account?<a href="../user/register.html.twig"
+                                <p>Don't have an account?<a href="{{ path('register') }}"
                                                             class="switcher-text2 inline-text">Register</a></p>
                             </div>
                         </div>

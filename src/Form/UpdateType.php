@@ -15,21 +15,18 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\File;
 
-class HostType extends AbstractType
+class UpdateType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-
-            ->add('cin')
             ->add('nom')
             ->add('prenom')
-            ->add('email')
             ->add('password', RepeatedType::class, [
                 'type' => PasswordType::class,
                 'first_options' => ['label' => 'user.password.first'],
                 'second_options' => ['label' => 'user.password.second'],
-                'required'=> false,
+                'required'=>false,
             ])
             ->add('datedenaissance', DateType::class, [
                 'widget' => 'single_text',
@@ -39,7 +36,6 @@ class HostType extends AbstractType
                 'attr' => ['class' => 'js-datepicker']
             ])
             ->add('telephone')
-            ->add('adressHost', TextType::class, ['attr' => ['id' => 'searchTextField', 'autocomplete' => 'on',]])
             ->add('imageProfile', FileType::class, ['attr' => ['class' => 'custom-file-input'],
                 'label' => false,
                 'mapped' => false,
@@ -69,8 +65,7 @@ class HostType extends AbstractType
                         'mimeTypesMessage' => 'Please upload a valid ImageFile',
                     ])
                 ],
-            ])
-           ;
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void

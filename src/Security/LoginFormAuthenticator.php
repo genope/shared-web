@@ -100,10 +100,12 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator implements P
             return new RedirectResponse($targetPath);
         }
         $roles = $token->getUser()->getRoles();
-        $hasAccess = in_array('ROLE_ADMIN', $roles);
-        //TODO :: CHeck redirection
-        if ($hasAccess)
-            $redirection = new RedirectResponse($this->router->generate('admin_index'));
+        $hasAccessA = in_array('ROLE_ADMIN', $roles);
+        $hasAccessH = in_array('ROLE_HOST', $roles);
+        if ($hasAccessA)
+            $redirection = new RedirectResponse($this->router->generate('app_user_index'));
+        elseif ($hasAccessH)
+            $redirection = new RedirectResponse($this->router->generate('app_user_index'));
         else
             $redirection = new RedirectResponse($this->router->generate('app_user_index'));
         return $redirection;

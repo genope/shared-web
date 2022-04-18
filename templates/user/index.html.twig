@@ -1,55 +1,218 @@
 {% extends 'base-back.html.twig' %}
+{% block content %}
 
-{% block title %}User index{% endblock %}
+    <div id="titlebar" class="dashboard_gradient">
+        <div class="row">
+            <div class="col-md-12">
+                <h2>Bookings</h2>
+                <nav id="breadcrumbs">
+                    <ul>
+                        <li><a href="index_1.html">Home</a></li>
+                        <li><a href="dashboard.html">Dashboard</a></li>
+                        <li>Bookings</li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </div>
 
-{% block body %}
-    <h1>User index</h1>
+    <div class="row">
+        <div class="col-lg-6 col-md-6">
+            <div class="utf_dashboard_list_box margin-top-0">
+                <div class="sort-by my_sort_by">
+                    <div class="utf_sort_by_select_item">
+                        <select data-placeholder="All Listing" class="utf_chosen_select_single">
+                            <option>All Listing</option>
+                            <option>Burger House</option>
+                            <option>Sandfields Silver</option>
+                            <option>Beer Bar & Restaurant</option>
+                            <option>Vintage Italian</option>
+                            <option>Modern Apartment</option>
+                        </select>
+                    </div>
+                </div>
+                <h4>Bookings Request</h4>
+                <ul>
+                    {% for user in users %}
+                        {% if user.etat[0] == 'Pending' %}
+                            <li class="utf_approved_booking_listing">
+                                <div class="utf_list_box_listing_item bookings">
+                                    <div class="utf_list_box_listing_item-img"><img src="images/client-avatar1.jpg"
+                                                                                    alt="">
+                                    </div>
+                                    <div class="utf_list_box_listing_item_content">
+                                        <div class="inner">
+                                            <h3>{{ user.nom }}{{ user.prenom }}
+                                                {% if   user.etat[0]   == 'Approved' %}
+                                                <span class="utf_booking_listing_status">Approved</span></h3>
+                                            {% else %}
+                                                <span style="
+                                                 background-color: #61b2db;
+                                                border-radius: 4px;
+    line-height: 20px;
+    font-weight: 500;
+    font-size: 12px;
+    color: #fff;
+    font-style: normal;
+    padding: 2px 7px;
+    margin-left: 3px;
+    position: relative;
+    top: 0px;
+	display: inline-block;
+	vertical-align: top;">Pending</span></h3>
+                                            {% endif %}
+                                            <div class="utf_inner_booking_listing_list">
+                                                <h5>Booking Item:-</h5>
+                                                <ul class="utf_booking_listing_list">
+                                                    <li>{{ user.cin }}</li>
+                                                </ul>
+                                            </div>
+                                            <div class="utf_inner_booking_listing_list">
+                                                <h5>Start Date:-</h5>
+                                                <ul class="utf_booking_listing_list">
+                                                    <li class="highlighted">{{ user.email }}</li>
+                                                </ul>
+                                            </div>
+                                            <div class="utf_inner_booking_listing_list">
+                                                <h5>End Date:-</h5>
+                                                <ul class="utf_booking_listing_list">
+                                                    <li class="highlighted">{{ user.datedenaissance ? user.datedenaissance|date('Y-m-d') : '' }}</li>
+                                                </ul>
+                                            </div>
+                                            <div class="utf_inner_booking_listing_list">
+                                                <h5>Booking Details:-</h5>
+                                                <ul class="utf_booking_listing_list">
+                                                    <li class="highlighted">{{ user.telephone }}</li>
+                                                </ul>
+                                            </div>
+                                            <div class="utf_inner_booking_listing_list">
+                                                <h5>Email Address:-</h5>
+                                                <ul class="utf_booking_listing_list">
+                                                    <li class="highlighted">{{ user.roles[0] }}</li>
+                                                </ul>
+                                            </div>
+                                            <div class="utf_inner_booking_listing_list">
+                                                <h5>Email Address:-</h5>
+                                                <ul class="utf_booking_listing_list">
+                                                    <li class="highlighted">{{ user.etat[0] }}</li>
+                                                </ul>
+                                            </div>
+                                            <div class="utf_inner_booking_listing_list">
+                                                <h5>Phone Number:-</h5>
+                                                <ul class="utf_booking_listing_list">
+                                                    <li class="highlighted">{{ user.adressHost }}</li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="buttons-to-right"> <a href="#" class="button gray reject"><i class="sl sl-icon-close"></i> Cancel</a> </div>
+                                <div class="buttons-to-right"> <a href="#" class="button gray approve"><i class="sl sl-icon-close"></i> Approve</a> </div>
+                            </li>
+                        {% endif %}
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+        <div class="col-lg-6 col-md-6">
+            <div class="utf_dashboard_list_box margin-top-0">
+                <div class="sort-by my_sort_by">
+                    <div class="utf_sort_by_select_item">
+                        <select data-placeholder="All Listing" class="utf_chosen_select_single">
+                            <option>All Listing</option>
+                            <option>Burger House</option>
+                            <option>Sandfields Silver</option>
+                            <option>Beer Bar & Restaurant</option>
+                            <option>Vintage Italian</option>
+                            <option>Modern Apartment</option>
+                        </select>
+                    </div>
+                </div>
+                <h4>Bookings Request</h4>
+                <ul>
+                    {% for user in users %}
+                        {% if user.etat[0] == 'Approved' %}
+                            <li class="utf_approved_booking_listing">
+                                <div class="utf_list_box_listing_item bookings">
+                                    <div class="utf_list_box_listing_item-img"><img src="images/client-avatar1.jpg"
+                                                                                    alt="">
+                                    </div>
+                                    <div class="utf_list_box_listing_item_content">
+                                        <div class="inner">
+                                            <h3>{{ user.nom }} {{ user.prenom }}
+                                                {% if   user.etat[0]   == 'Approved' %}
+                                                <span class="utf_booking_listing_status">Approved</span></h3>
+                                            {% else %}
+                                                <span class="listing-tag">Pending</span></h3>
+                                            {% endif %}
+                                            {{ user.etat[0] }}
+                                            <div class="utf_inner_booking_listing_list">
+                                                <h5>Booking Item:-</h5>
+                                                <ul class="utf_booking_listing_list">
+                                                    <li>{{ user.cin }}</li>
+                                                </ul>
+                                            </div>
+                                            <div class="utf_inner_booking_listing_list">
+                                                <h5>Start Date:-</h5>
+                                                <ul class="utf_booking_listing_list">
+                                                    <li class="highlighted">{{ user.email }}</li>
+                                                </ul>
+                                            </div>
+                                            <div class="utf_inner_booking_listing_list">
+                                                <h5>End Date:-</h5>
+                                                <ul class="utf_booking_listing_list">
+                                                    <li class="highlighted">{{ user.datedenaissance ? user.datedenaissance|date('Y-m-d') : '' }}</li>
+                                                </ul>
+                                            </div>
+                                            <div class="utf_inner_booking_listing_list">
+                                                <h5>Booking Details:-</h5>
+                                                <ul class="utf_booking_listing_list">
+                                                    <li class="highlighted">{{ user.telephone }}</li>
+                                                </ul>
+                                            </div>
+                                            <div class="utf_inner_booking_listing_list">
+                                                <h5>Email Address:-</h5>
+                                                <ul class="utf_booking_listing_list">
+                                                    <li class="highlighted">{{ user.roles[0] }}</li>
+                                                </ul>
+                                            </div>
+                                            <div class="utf_inner_booking_listing_list">
+                                                <h5>Email Address:-</h5>
+                                                <ul class="utf_booking_listing_list">
+                                                    <li class="highlighted">{{ user.etat[0] }}</li>
+                                                </ul>
+                                            </div>
+                                            <div class="utf_inner_booking_listing_list">
+                                                <h5>Phone Number:-</h5>
+                                                <ul class="utf_booking_listing_list">
+                                                    <li class="highlighted">{{ user.adressHost }}</li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                               {{ include('user/_delete_form.html.twig') }}
+                                <div class="buttons-to-right"> <a href="#" class="button gray approve"><i class="sl sl-icon-close"></i> Approve</a> </div>
+                            </li>
+                        {% endif %}
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div>
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Cin</th>
-                <th>Nom</th>
-                <th>Prenom</th>
-                <th>Email</th>
-                <th>Password</th>
-                <th>Datedenaissance</th>
-                <th>Telephone</th>
-                <th>Role</th>
-                <th>Etat</th>
-                <th>AdressHost</th>
-                <th>ImageCin</th>
-                <th>ImageProfile</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for user in users %}
-            <tr>
-                <td>{{ user.cin }}</td>
-                <td>{{ user.nom }}</td>
-                <td>{{ user.prenom }}</td>
-                <td>{{ user.email }}</td>
-                <td>{{ user.password }}</td>
-                <td>{{ user.datedenaissance ? user.datedenaissance|date('Y-m-d') : '' }}</td>
-                <td>{{ user.telephone }}</td>
-                <td>{{ user.role }}</td>
-                <td>{{ user.etat }}</td>
-                <td>{{ user.adressHost }}</td>
-                <td>{{ user.imageCin }}</td>
-                <td>{{ user.imageProfile }}</td>
-                <td>
-                    <a href="{{ path('app_user_show', {'cin': user.cin}) }}">show</a>
-                    <a href="{{ path('app_user_edit', {'cin': user.cin}) }}">edit</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="13">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+    <script>
+        (function ($) {
+            try {
+                var jscr1 = $('.js-scrollbar');
+                if (jscr1[0]) {
+                    const ps1 = new PerfectScrollbar('.js-scrollbar');
 
-    <a href="{{ path('app_user_new') }}"><Creat></Creat>e new</a>
+                }
+            } catch (error) {
+                console.log(error);
+            }
+        })(jQuery);
+    </script>
+
 {% endblock %}

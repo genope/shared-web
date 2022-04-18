@@ -1,5 +1,4 @@
 {% extends 'base_loginRegister.html.twig' %}
-
 {% block stylesheets %}
     <style>
         .form-control {
@@ -34,12 +33,34 @@
             <div class="row align-items-center justify-content-center">
                 <div class="col-lg-3 col-12">
                     <div class="fxt-header">
-                        <a href="loginPage.html.twig" class="fxt-logo"><img
+                        <a href="{{ path('app_user_index') }}" class="fxt-logo"><img
                                     src="{{ asset('Front-office/') }}img/logo.png" alt="Logo"></a>
                     </div>
                 </div>
                 <div class="col-lg-6 col-12">
                     <div class="fxt-content">
+                        <div class="form-group">
+                            <div class="login_form is_closed">
+                                <div class="login">
+                                    <h2>Login with</h2>
+                                    <div class="social_login">
+                                        <a href="{{ path('connect_google') }}" class="google">
+                                            <i class="fa fa-google"></i>
+                                            <span>Login with Google</span>
+                                        </a>
+                                        <a href="{{ path('connect_facebook') }}" class="fb">
+                                            <i class="fa fa-facebook"></i>
+                                            <span>Login with Facebook</span>
+                                        </a>
+                                        <a href="#" class="tw">
+                                            <i class="fa fa-twitter"></i>
+                                            <span>Login with Twitter</span>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <br>
                         <h2>Register for new account</h2>
                         <h4 style="color: darkred">{{ form_errors(form) }}</h4>
 
@@ -48,15 +69,14 @@
                             {{ form_start(form, {'attr': {'id': 'registerForm'}}) }}
                             {# TODO :: Add Translation #}
                             {#{{ 'user.name'|trans }}#}
-                            {{ form_widget(form.cin,{'attr':{'class':'form-control'}}) }}
-                            {{ form_widget(form.nom,{'attr':{'class':'form-control'}}) }}
-                            {{ form_widget(form.prenom,{'attr':{'class':'form-control'}}) }}
-                            {{ form_widget(form.email,{'attr':{'class':'form-control'}}) }}
+                            {{ form_widget(form.cin,{'attr':{'class':'form-control','placeholder': "Cin"}}) }}
+                            {{ form_widget(form.nom,{'attr':{'class':'form-control','placeholder': "Name"}}) }}
+                            {{ form_widget(form.prenom,{'attr':{'class':'form-control','placeholder': "Lastname"}}) }}
+                            {{ form_widget(form.email,{'attr':{'class':'form-control','placeholder': "Email"}}) }}
                             {{ form_widget(form.password.first,{'attr':{'class':'form-control',"id":"first",'placeholder': "Password"}}) }}
                             {{ form_widget(form.password.second,{'attr':{'class':'form-control',"id":"second",'placeholder': "verify your password"}}) }}
-                            {{ form_widget(form.datedenaissance) }}
-                            {{ form_widget(form.telephone,{'attr':{'class':'form-control'}}) }}
-                            {{ form_widget(form.imageProfile,{'attr':{'class':'form-control'}}) }}
+                            {{ form_widget(form.datedenaissance,{'attr':{'class':'form-control','placeholder': "Birthday"}}) }}
+                            {{ form_widget(form.telephone,{'attr':{'class':'form-control','placeholder': "Phone number"}}) }}
                             <div class="g-recaptcha" data-sitekey="6Lc5CVgaAAAAAJL8V2UR9DCU3k8yUT0PNgSkmJbm"></div>
 
                             <div class="form-group">
@@ -75,20 +95,9 @@
                                 </div>
                             </div>
                         </div>
-                        <hr>
-                        <a href="{{ path('connect_google_check') }}"
-                           class="btn btn-default btn-block connect-with-google">
-                            <i class="fa fa-google" aria-hidden="true"></i> -
-                            Google</a>
-                        <hr>
-                        <hr>
-                        <a href="{{ path('connect_facebook') }}" class="btn btn-default btn-block connect-with-google">
-                            <i class="fa fa-google" aria-hidden="true"></i> -
-                            Google</a>
-                        <hr>
                         <div class="fxt-footer">
                             <div class="fxt-transformY-50 fxt-transition-delay-9">
-                                <p>Already have an account?<a href="../security/loginPage.html.twig"
+                                <p>Already have an account?<a href="{{ path('app_login') }}"
                                                               class="switcher-text2 inline-text">Log
                                         in</a></p>
                             </div>
@@ -136,4 +145,5 @@
 <script src="https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit"
         async def er>
 </script>
+
 {% endblock %}
