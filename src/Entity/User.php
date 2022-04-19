@@ -106,6 +106,11 @@ class User implements UserInterface
     private $imageCin;
 
     /**
+     * @ORM\Column(type="boolean")
+     */
+    private $is_verified =false ;
+
+    /**
      * @var string
      *
      * @ORM\Column(name="image_profile", type="string", length=255, nullable=true)
@@ -145,6 +150,20 @@ class User implements UserInterface
     {
         return $this->nom;
     }
+
+
+    public function getIsVerified() : bool
+    {
+        return $this->is_verified;
+    }
+
+
+    public function setIsVerified(bool $is_verified):self
+    {
+        $this->is_verified = $is_verified;
+        return $this;
+    }
+
 
     /**
      * @param string $nom
@@ -378,6 +397,7 @@ class User implements UserInterface
     {
         $this->facebookId = $facebookId;
     }
+
 
     public function getActivationToken(): ?string
     {

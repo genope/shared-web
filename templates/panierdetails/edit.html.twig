@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+
+<title>Edit Panierdetails</title>
+
+{% block body %}
+    <h1>Edit Panierdetails</h1>
+
+    {{ include('panierdetails/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('app_panierdetails_index') }}">back to list</a>
+
+    {{ include('panierdetails/_delete_form.html.twig') }}
+{% endblock %}

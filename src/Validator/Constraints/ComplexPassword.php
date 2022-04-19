@@ -16,4 +16,5 @@ use Symfony\Component\Validator\Constraint;
 class ComplexPassword extends Constraint
 {
     public $message = 'user.password.must_be_complex';
+
 }
