@@ -25,11 +25,13 @@
 <body>
 {% block header %}
     <div id="main_wrapper">
-        <header id="header_part">
+        <header id="header_part" >
             <div id="header" style="background: white">
                 <div class="container">
                     <div class="utf_left_side">
+
                         <div id="logo"><a href="{{ path('app_user_index') }}"><img src="{{ asset('front-office/images/shared.png') }}" alt=""></a></div>
+
                         <div class="mmenu-trigger">
                             <button class="hamburger utfbutton_collapse" type="button">
 				<span class="utf_inner_button_box">
@@ -37,11 +39,31 @@
 				</span>
                             </button>
                         </div>
+
                         <nav id="navigation" class="style_one">
                             <ul id="responsive">
+                            
                                 <li><a class="current" href="{{ path('app_user_index') }}">Accueil</a>
                                 </li>
+ <li>
+                                                        <a href="{{path('app_user_index')}}">Home</a>
 
+                                                        </li>
+                                                        <li>
+                                                          <a href="{{path('app_offres_index')}}"> Offres</a>
+                                                                <ul>
+                                                                  <li><a href={{path('liste_offre')}}>Liste Offres</a></li>
+                                                                  <li><a href="{{path('app_offres_index')}}">Grid Offres</a></li>
+                                                                </ul>
+                                                        </li>
+
+                                                        <li>
+                                                          <a href="{{path('app_chat_new')}}">Forum</a>
+
+                                                       </li>
+                                                        <li>
+                                                            <a href="{{path('mine')}}">Dashboard</a>
+                                                       </li>
                                 <li><a href="#">Gestion Produit</a>
                                     <ul>
                                         <li><a href="{{ path('app_produit_index') }}">List des produits</a></li>
@@ -60,6 +82,7 @@
                                 </li>
                             </ul>
                         </nav>
+
                         <div class="clearfix"></div>
                     </div>
                     <div class="utf_right_side">
@@ -210,7 +233,18 @@
 </script>
 
 {% block javascripts %}
-
+    <script src="scripts/jquery-3.4.1.min.js"></script>
+    <script src="scripts/jquery-migrate-3.3.2.min.js"></script>
+    <script src="scripts/chosen.min.js"></script>
+    <script src="scripts/slick.min.js"></script>
+    <script src="scripts/rangeslider.min.js"></script>
+    <script src="scripts/magnific-popup.min.js"></script>
+    <script src="scripts/jquery-ui.min.js"></script>
+    <script src="scripts/mmenu.js"></script>
+    <script src="scripts/tooltips.min.js"></script>
+    <script src="scripts/color_switcher.js"></script>
+    <script src="scripts/isotope.min.js"></script>
+    <script src="scripts/jquery_custom.js"></script>
 {% endblock %}
 
 

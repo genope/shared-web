@@ -1,0 +1,148 @@
+{% extends 'base-front.html.twig' %}
+
+
+{% block content %}
+
+    <style>
+        .filterDiv {
+
+            display: none;
+        }
+
+
+
+        .container {
+            margin-top: 20px;
+            overflow: hidden;
+        }
+
+        /* Style the buttons */
+        .btn {
+            border: none;
+            outline: none;
+            padding: 12px 16px;
+            background-color: #f1f1f1;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            background-color: #ddd;
+        }
+
+        .btn.active {
+            background-color: #666;
+            color: white;
+        }
+    </style>
+
+    <div class="container">
+    <h2>Filter DIV Elements</h2>
+
+
+        <div class="row">
+            <div class="col-md-12">
+                <div id="myBtnContainer">
+                    <ul class="option-set margin-bottom-30">
+                        <li><a class="btn active" onclick="filterSelection('all')">All</a></li>
+                        <li><a class="btn" onclick="filterSelection('Appartement')">Appartements</a></li>
+                        <li><a class="btn" onclick="filterSelection('Chambre')">Chambres</a></li>
+                        <li><a class="btn" onclick="filterSelection('Maison')">Maisons</a></li>
+                        <li><a class="btn" onclick="filterSelection('Voiture')">Voitures</a></li>
+                        <li><a class="btn" onclick="filterSelection('Moto')">Moto</a></li>
+                        <li><a class="btn" onclick="filterSelection('Velo')">Velo</a></li>
+
+                    </ul>
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+
+            <div class="projects isotope-wrapper a cars">
+                {% for offre in offres %}
+                <div class="col-md-4 col-lg-4 col-md-12 isotope-item events restaurants  filterDiv {{ offre.categ }}"> <a href="listings_single_page_1.html" class="utf_listing_item-container" data-marker-id="1">
+                        <div class="utf_listing_item"> <img src="images/utf_listing_item-01.jpg" alt=""> <span class="tag"><i class="im im-icon-Hotel"></i> {{ offre.categ }}</span> <span class="featured_tag">Featured</span>
+                            <span class="utf_closed">Closed</span>
+                            <div class="utf_listing_item_content">
+                                <div class="utf_listing_prige_block">
+                                    <span class="utf_meta_listing_price"><i class="fa fa-tag"></i> $45 - $70</span>
+                                    <span class="utp_approve_item"><i class="utf_approve_listing"></i></span>
+                                </div>
+                                <h3>{{ offre.nom }}</h3>
+                                <span><i class="fa fa-map-marker"></i> The Ritz-Carlton, Hong Kong</span>
+                                <span><i class="fa fa-phone"></i> (+15) 124-796-3633</span>
+                            </div>
+                        </div>
+                        <div class="utf_star_rating_section" data-rating="4.5">
+                            <div class="utf_counter_star_rating">(4.5)</div>
+                            <span class="utf_view_count"><i class="fa fa-eye"></i> 822+</span>
+                            <span class="like-icon"></span>
+                        </div>
+                    </a>
+                </div>
+                 {% endfor %}
+
+
+
+
+
+
+
+
+
+            </div>
+        </div>
+
+
+
+
+    </div>
+
+    <script>
+        filterSelection("all")
+        function filterSelection(c) {
+            var x, i;
+            x = document.getElementsByClassName("filterDiv");
+            if (c == "all") c = "";
+            for (i = 0; i < x.length; i++) {
+                w3RemoveClass(x[i], "show");
+                if (x[i].className.indexOf(c) > -1) w3AddClass(x[i], "show");
+            }
+        }
+
+        function w3AddClass(element, name) {
+            var i, arr1, arr2;
+            arr1 = element.className.split(" ");
+            arr2 = name.split(" ");
+            for (i = 0; i < arr2.length; i++) {
+                if (arr1.indexOf(arr2[i]) == -1) {element.className += " " + arr2[i];}
+            }
+        }
+
+        function w3RemoveClass(element, name) {
+            var i, arr1, arr2;
+            arr1 = element.className.split(" ");
+            arr2 = name.split(" ");
+            for (i = 0; i < arr2.length; i++) {
+                while (arr1.indexOf(arr2[i]) > -1) {
+                    arr1.splice(arr1.indexOf(arr2[i]), 1);
+                }
+            }
+            element.className = arr1.join(" ");
+        }
+
+        // Add active class to the current button (highlight it)
+        var btnContainer = document.getElementById("myBtnContainer");
+        var btns = btnContainer.getElementsByClassName("btn");
+        for (var i = 0; i < btns.length; i++) {
+            btns[i].addEventListener("click", function(){
+                var current = document.getElementsByClassName("active");
+                current[0].className = current[0].className.replace(" active", "");
+                this.className += " active";
+            });
+        }
+    </script>
+
+
+{% endblock %}
