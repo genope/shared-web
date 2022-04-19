@@ -3157,7 +3157,57 @@ a.send-message-to-owner.button {
 	margin-top: 20px;
 	margin-bottom: -5px;
 }
-
+/*==========
+  Verified Style
+============*/
+.verified-badge1 {
+	background-color: #ff2222;
+	border-radius: 4px;
+	color: #fff;
+	text-align: center;
+	padding: 12px 20px;
+	font-size: 16px;
+	font-weight: 400;
+	cursor: help;
+	position: relative;
+	transition: 0.3s;
+	display: block;
+}
+.verified-badge1 i {
+	font-size: 22px;
+	padding: 0 4px 0 0;
+	position: relative;
+	top: 3px;
+}
+.verified-badge1 .tip-content {
+	transform: translate(-50%, -100%);
+	-ms-transform: translate(-50%, -100%);
+	padding: 20px;
+	border-radius:4px;
+	max-width: content-box;
+	top: -1px;
+	bottom: auto;
+}
+.verified-badge1:hover {
+	background:#ff2222
+}
+.verified-badge1:hover .tip-content {
+	opacity: 1;
+	visibility: visible;
+	transform: translate(-50%, -100%);
+	-ms-transform: translate(-50%, -100%);
+}
+.verified-badge1 .tip-content:after {
+	font-family: "FontAwesome";
+	content: "\f0d7";
+	position: absolute;
+	bottom: -22px;
+	top: auto;
+	left: 50%;
+	font-size: 22px;
+	color: #333;
+	transform: translate(-50%,-50%);
+}
 /*==========
   Verified Style
 ============*/
@@ -3309,6 +3359,84 @@ a.send-message-to-owner.button {
 	border:2px solid transparent;
 }
 .like-button .like-icon {
+	position: relative;
+	height: 20px;
+	display: inline-block;
+	line-height: 30px;
+	right: auto;
+	bottom: 3px;
+	background: transparent;
+	color: #ff2222;
+	font-weight: 500;
+	float: left;
+	width: 20px;
+	margin-right: 8px;
+	font-size: 18px;
+}
+/*==========
+  Listing Add to cart Style
+============*/
+.listing-share {
+	text-align: center;
+	position: relative;
+}
+.listing-share .share-buttons li {
+	margin: 0 3px 8px 0;
+}
+.listing-share.with-border {
+	border-top: 1px solid #eee;
+	padding-top: 35px;
+}
+.listing-share span {
+	display: block;
+	font-size: 16px;
+	color: #707070;
+}
+.utf_box_widget .addCart-button{
+	margin: auto;
+	text-align: center;
+	width: 200px;
+}
+.addCart-button {
+	outline: none;
+	border: none;
+	color: #444;
+	font-weight: 500;
+	font-size: 16px;
+	background-color: #fff;
+	border: 1px solid #e0e0e0;
+	border-radius: 50px;
+	padding: 10px 25px;
+	line-height: 24px;
+	margin-bottom: 9px;
+	transition: 0.3s;
+	cursor: pointer;
+}
+.addCart-button:hover {
+	background-color: #fafafa;
+	border: 1px solid #ddd;
+}
+.listing-share .like-icon::before, .listing-share .like-icon::after {
+	top: 0;
+}
+.listing-share .utf_social_icon li {
+	text-align: center;
+	float: none;
+	padding: 0;
+	margin: 0;
+}
+.addCart-button .like-icon:hover, .addCart-button .like-icon.liked {
+	background-color: transparent;
+	color: #ff2222;
+}
+.listing-share span.like-icon{
+	top:-5px;
+	left:0;
+}
+.listing-share .addCart-button .like-icon{
+	border:2px solid transparent;
+}
+.addCart-button .like-icon {
 	position: relative;
 	height: 20px;
 	display: inline-block;
@@ -8949,6 +9077,46 @@ span.like-icon {
 	border:0px solid rgba(255, 255, 255, 0.5);
 }
 .utf_category_small_box_part:nth-child(10){
+	background:#134b7e;
+	border:0px solid rgba(255, 255, 255, 0.5);
+}
+.utf_category_small_box_part:nth-child(11){
+	background:#931674;
+	border:0px solid rgba(255, 255, 255, 0.5);
+}
+.utf_category_small_box_part:nth-child(12){
+	background:#d80a48;
+	border:0px solid rgba(255, 255, 255, 0.5);
+}
+.utf_category_small_box_part:nth-child(13){
+	background:#cc4300;
+	border:0px solid rgba(255, 255, 255, 0.5);
+}
+.utf_category_small_box_part:nth-child(14){
+	background:#d80a48;
+	border:0px solid rgba(255, 255, 255, 0.5);
+}
+.utf_category_small_box_part:nth-child(15){
+	background:#762acb;
+	border:0px solid rgba(255, 255, 255, 0.5);
+}
+.utf_category_small_box_part:nth-child(16){
+	background:#097784;
+	border:0px solid rgba(255, 255, 255, 0.5);
+}
+.utf_category_small_box_part:nth-child(17){
+	background:#2531d5;
+	border:0px solid rgba(255, 255, 255, 0.5);
+}
+.utf_category_small_box_part:nth-child(18){
+	background:#931674;
+	border:0px solid rgba(255, 255, 255, 0.5);
+}
+.utf_category_small_box_part:nth-child(19){
+	background:#d52f31;
+	border:0px solid rgba(255, 255, 255, 0.5);
+}
+.utf_category_small_box_part:nth-child(20){
 	background:#134b7e;
 	border:0px solid rgba(255, 255, 255, 0.5);
 }

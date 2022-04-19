@@ -98,7 +98,7 @@ class GoogleAuthenticator extends SocialAuthenticator
         $this->em->persist($user);
         $this->em->flush();
 
-        return onAuthenticationSuccess ;
+        return $user ;
     }
 
     /**
