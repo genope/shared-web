@@ -34,6 +34,7 @@ class UserType extends AbstractType
                 'format' => 'yyyy-MM',
                 'attr' => ['class' => 'js-datepicker']
             ])
+
             ->add('telephone');
     }
 

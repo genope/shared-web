@@ -16,8 +16,6 @@ use PhpParser\Node\Stmt\Echo_;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\FormError;
-use Symfony\Component\HttpFoundation\JsonResponse;
-use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Mime\Address;
@@ -72,6 +70,7 @@ class SecurityController extends AbstractController
         $entityManager = $this->getDoctrine()->getManager();
 
         if ($form->isSubmitted() && $form->isValid()) {
+
               if (!$captchaService->validateCaptcha($request->get('g-recaptcha-response'))) {
                    $form->addError(new FormError($translator->trans('captcha.wrong')));
                    throw new ValidatorException('captcha.wrong');
@@ -196,20 +195,17 @@ class SecurityController extends AbstractController
     /**
      * @Route("/connect/google", name="connect_google")
      * @param ClientRegistry $clientRegistry
-     * @return RedirectResponse
+     * @return Response
      */
     public
     function googleConnectAction(ClientRegistry $clientRegistry)
     {
-        return $clientRegistry
-            ->getClient('google_main')
-            ->redirect();
+        return $clientRegistry->getClient('google_main')->redirect();
     }
 
     /**
      * @Route("/connect/google/check", name="connect_google_check")
      * @param $request Request
-     * @return JsonResponse|\Symfony\Component\HttpFoundation\RedirectResponse
      */
     public
     function connectGoogleCheckAction(Request $request)
@@ -225,7 +221,6 @@ class SecurityController extends AbstractController
     public
     function facebookConnectAction(ClientRegistry $clientRegistry)
     {
-
         return $clientRegistry->getClient('facebook_main')->redirect();
     }
 
@@ -316,5 +311,14 @@ class SecurityController extends AbstractController
             return $this->render('security/reset-password.html.twig', ['token' => $token]);
         }
 
+    }
+
+
+    /**
+     * @Route("/test", name="test")
+     */
+    public function test(): Response
+    {
+        return $this->render('user/test.html.twig');
     }
 }

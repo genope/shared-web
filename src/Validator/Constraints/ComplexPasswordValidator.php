@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Ryaan
- * Date: 12/04/17
- * Time: 10:12
- */
 
 namespace App\Validator\Constraints;
 
@@ -29,4 +23,5 @@ class ComplexPasswordValidator extends ConstraintValidator
             }
         }
     }
+
 }
