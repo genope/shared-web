@@ -49,7 +49,7 @@
                             </div>
                             <nav id="navigation" class="style_one">
                                 <ul id="responsive">
-                                    <li><a href="#">Home</a>
+                                    <li><a href="#">Acceuil</a>
                                         <ul>
                                             <li><a href="{{ path('app_front') }}">Home Version 1</a></li>
                                             <li><a href="index_2.html">Home Version 2</a></li>
@@ -60,7 +60,7 @@
                                             <li><a href="index_7.html">Home Version 7</a></li>
                                         </ul>
                                     </li>
-                                    <li><a href="#">Listings</a>
+                                    <li><a href="#">Réservations</a>
                                         <ul>
                                             <li><a href="#">List Layout</a>
                                                 <ul>
@@ -92,29 +92,23 @@
                                             </li>
                                         </ul>
                                     </li>
-                                    <li><a class="current" href="#">User Panel</a>
+                                    <li><a class="current" href="#">Réclamation</a>
                                         <ul>
                                             <li><a href="{{ path('app_host') }}">Dashboard</a></li>
-                                            <li><a class="active" href="{{ path('addevent') }}">Add Event</a></li>
+                                            <li><a class="active" href="{{ path('addevent') }}">Ajouter Evenement</a></li>
                                             <li><a href="{{ path('listevent') }}">My events</a></li>
                                             <li><a href="dashboard_bookings.html">Reservations</a></li>
-                                            <li><a href="dashboard_messages.html">Messages</a></li>
-                                            <li><a href="dashboard_wallet.html">Wallet</a></li>
+                                            <li><a href="dashboard_messages.html">découvettes</a></li>
+                                            <li><a href="dashboard_wallet.html">réclamation</a></li>
                                             <li><a href="dashboard_visitor_review.html">Reviews</a></li>
-                                            <li><a href="dashboard_bookmark.html">Bookmark</a></li>
-                                            <li><a href="dashboard_my_profile.html">My Profile</a></li>
+                                            <li><a href="dashboard_bookmark.html">offres</a></li>
+                                            <li><a href="dashboard_my_profile.html">Shop</a></li>
                                             <li><a href="dashboard_change_password.html">Change Password</a></li>
                                             <li><a href="dashboard_invoice.html">Invoice</a></li>
                                         </ul>
                                     </li>
                                     <li><a href="#">Blog</a>
-                                        <ul>
-                                            <li><a href="blog_page.html">Blog Grid</a></li>
-                                            <li><a href="blog_page_left_sidebar.html">Blog Left Sidebar</a></li>
-                                            <li><a href="blog_page_right_sidebar.html">Blog Right Sidebar</a></li>
-                                            <li><a href="blog_detail_left_sidebar.html">Blog Detail Leftside</a></li>
-                                            <li><a href="blog_detail_right_sidebar.html">Blog Detail Rightside</a></li>
-                                        </ul>
+
                                     </li>
                                     <li><a href="#">Pages</a>
                                         <ul>
@@ -125,7 +119,7 @@
                                                     <li><a href="page_categorie_two.html">Categorie Two</a></li>
                                                 </ul>
                                             </li>
-                                            <li><a href="add_listing.html">Add Event</a></li>
+                                            <li><a href="add_listing.html">Ajouter Evenement</a></li>
                                             <li><a href="listing_booking.html">Booking Listing</a></li>
                                             <li><a href="page_pricing.html">Pricing Plan</a></li>
                                             <li><a href="wishlist_listings.html">Wishlist Page</a></li>
@@ -205,23 +199,23 @@
                     <div class="utf_dashboard_navigation_inner_block">
                         <ul>
                             <li class="active"><a href="dashboard.html"><i class="sl sl-icon-layers"></i> Dashboard</a></li>
-                            <li><a href="{{ path('addevent') }}"><i class="sl sl-icon-plus"></i> Add Event</a></li>
+                            <li><a href="{{ path('addevent') }}"><i class="sl sl-icon-plus"></i> Ajouter Evenement</a></li>
                             <li>
-                                <a href="{{ path('listevent') }}"><i class="sl sl-icon-layers"></i> My events</a>
+                                <a href="{{ path('listevent') }}"><i class="sl sl-icon-layers"></i> Mes evenements</a>
 
                             </li>
-                            <li><a ><i class="sl sl-icon-docs"></i> Reservation</a></li>
-                            <li><a href="dashboard_messages.html"><i class="sl sl-icon-envelope-open"></i> Messages</a></li>
-                            <li><a href="dashboard_wallet.html"><i class="sl sl-icon-wallet"></i> Wallet</a></li>
+                            <li><a ><i class="sl sl-icon-docs"></i> Reservations</a></li>
+                            <li><a href="dashboard_messages.html"><i class="sl sl-icon-envelope-open"></i> Découvertes</a></li>
+                            <li><a href="dashboard_wallet.html"><i class="sl sl-icon-wallet"></i> Réclamations</a></li>
                             <li>
-                                <a href="#"><i class="sl sl-icon-star"></i> Reviews</a>
+                                <a href="#"><i class="sl sl-icon-star"></i> Avis</a>
                                 <ul>
                                     <li><a href="dashboard_visitor_review.html">Visitor Reviews <span class="nav-tag green">4</span></a></li>
                                     <li><a href="dashboard_submitted_review.html">Submitted Reviews <span class="nav-tag yellow">5</span></a></li>
                                 </ul>
                             </li>
-                            <li><a href="dashboard_bookmark.html"><i class="sl sl-icon-heart"></i> Bookmark</a></li>
-                            <li><a href="dashboard_my_profile.html"><i class="sl sl-icon-user"></i> My Profile</a></li>
+                            <li><a href="dashboard_bookmark.html"><i class="sl sl-icon-heart"></i> Offre</a></li>
+                            <li><a href="dashboard_my_profile.html"><i class="sl sl-icon-user"></i> Profile</a></li>
                             <li><a href="dashboard_change_password.html"><i class="sl sl-icon-key"></i> Change Password</a></li>
                             <li><a href="index_1.html"><i class="sl sl-icon-power"></i> Logout</a></li>
                         </ul>
@@ -232,7 +226,7 @@
                     {% block content %}
                         <div class="add_utf_listing_section margin-top-45">
                             <div class="utf_add_listing_part_headline_part">
-                                <h3><i class="sl sl-icon-tag"></i>Add event</h3>
+                                <h3><i class="sl sl-icon-tag"></i>Ajouter évenement</h3>
                             </div>
                             <div class="row with-forms">
                                 <div class="col-md-6">

@@ -98,10 +98,10 @@
                                             <li><a href="{{ path('addevent') }}">Add Event</a></li>
                                             <li><a class="active" href="{{ path('listevent') }}">My events</a></li>
                                             <li><a href="dashboard_bookings.html">Reservations</a></li>
-                                            <li><a href="dashboard_messages.html">Messages</a></li>
-                                            <li><a href="dashboard_wallet.html">Wallet</a></li>
+                                            <li><a href="dashboard_messages.html">découvettes</a></li>
+                                            <li><a href="dashboard_wallet.html">réclamation</a></li>
                                             <li><a href="dashboard_visitor_review.html">Reviews</a></li>
-                                            <li><a href="dashboard_bookmark.html">Bookmark</a></li>
+                                            <li><a href="dashboard_bookmark.html">offres</a></li>
                                             <li><a href="dashboard_my_profile.html">My Profile</a></li>
                                             <li><a href="dashboard_change_password.html">Change Password</a></li>
                                             <li><a href="dashboard_invoice.html">Invoice</a></li>
@@ -205,23 +205,23 @@
                     <div class="utf_dashboard_navigation_inner_block">
                         <ul>
                             <li class="active"><a href="dashboard.html"><i class="sl sl-icon-layers"></i> Dashboard</a></li>
-                            <li><a href="{{ path('addevent') }}"><i class="sl sl-icon-plus"></i> Add Event</a></li>
+                            <li><a href="{{ path('addevent') }}"><i class="sl sl-icon-plus"></i> Ajouter Event</a></li>
                             <li>
-                                <a href="{{ path('listevent') }}"><i class="sl sl-icon-layers"></i> My events</a>
+                                <a href="{{ path('listevent') }}"><i class="sl sl-icon-layers"></i> Mes evenements</a>
 
                             </li>
-                            <li><a ><i class="sl sl-icon-docs"></i> Reservation</a></li>
-                            <li><a href="dashboard_messages.html"><i class="sl sl-icon-envelope-open"></i> Messages</a></li>
-                            <li><a href="dashboard_wallet.html"><i class="sl sl-icon-wallet"></i> Wallet</a></li>
+                            <li><a ><i class="sl sl-icon-docs"></i> Reservations</a></li>
+                            <li><a href="dashboard_messages.html"><i class="sl sl-icon-envelope-open"></i> Découvertes</a></li>
+                            <li><a href="dashboard_wallet.html"><i class="sl sl-icon-wallet"></i> Réclamations</a></li>
                             <li>
-                                <a href="#"><i class="sl sl-icon-star"></i> Reviews</a>
+                                <a href="#"><i class="sl sl-icon-star"></i> Avis</a>
                                 <ul>
                                     <li><a href="dashboard_visitor_review.html">Visitor Reviews <span class="nav-tag green">4</span></a></li>
                                     <li><a href="dashboard_submitted_review.html">Submitted Reviews <span class="nav-tag yellow">5</span></a></li>
                                 </ul>
                             </li>
-                            <li><a href="dashboard_bookmark.html"><i class="sl sl-icon-heart"></i> Bookmark</a></li>
-                            <li><a href="dashboard_my_profile.html"><i class="sl sl-icon-user"></i> My Profile</a></li>
+                            <li><a href="dashboard_bookmark.html"><i class="sl sl-icon-heart"></i> Offre</a></li>
+                            <li><a href="dashboard_my_profile.html"><i class="sl sl-icon-user"></i>  Profile</a></li>
                             <li><a href="dashboard_change_password.html"><i class="sl sl-icon-key"></i> Change Password</a></li>
                             <li><a href="index_1.html"><i class="sl sl-icon-power"></i> Logout</a></li>
                         </ul>
@@ -233,15 +233,12 @@
                         <div class="utf_dashboard_list_box margin-top-0">
                             <div class="sort-by my_sort_by">
                                 <div class="utf_sort_by_select_item">
-                                    <select data-placeholder="Default Listing" class="utf_chosen_select_single">
-                                        <option>Default Listing</option>
-                                        <option>Active Listing</option>
-                                        <option>Pending Listing</option>
-                                        <option>Expired Listing</option>
+                                    <select data-placeholder="Réservations proches" class="utf_chosen_select_single">
+
                                     </select>
                                 </div>
                             </div>
-                            <h4><i class="sl sl-icon-list"></i> reservations</h4>
+                            <h4><i class="sl sl-icon-list"></i> Mes réservations</h4>
                             <ul>
                                 <li>
                                     {% for c in res %}
@@ -272,7 +269,11 @@
                                     {% endfor  %}
 
                                 </li>
-
+                                <nav class="pagination">
+                                    <ul>
+                                        <li><a class="current-page" {{ knp_pagination_render(res) }}></a></li>
+                                    </ul>
+                                </nav>
                             </ul>
                         </div>
                     {% endblock %}

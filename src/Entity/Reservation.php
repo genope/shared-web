@@ -57,7 +57,6 @@ class Reservation
      * @var \Event
      *
      * @Assert\NotBlank(message="veuillez saisir l'id de levent  ")
-
      * @ORM\ManyToOne(targetEntity="Event")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="idevent", referencedColumnName="idevent")

@@ -47,13 +47,13 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
-                    <h2> reservation list</h2>
-                    <li><a href="index_1.html"> reservation list</a></li>
+                    <h2>  liste de réservations</h2>
+                    <li><a href="index_1.html">liste de réservations </a></li>
 
                     <nav id="breadcrumbs">
                         <ul>
                             <li><a href="index_1.html">Home</a></li>
-                            <li>Event reservation</li>
+                            <li>liste de réservations</li>
                         </ul>
                     </nav>
 
@@ -123,12 +123,7 @@
                     <div class="utf_pagination_container_part margin-bottom-70">
                         <nav class="pagination">
                             <ul>
-                                <li><a href="#"><i class="sl sl-icon-arrow-left"></i></a></li>
-                                <li><a href="#" class="current-page">1</a></li>
-                                <li><a href="#">2</a></li>
-                                <li><a href="#">3</a></li>
-                                <li><a href="#">4</a></li>
-                                <li><a href="#"><i class="sl sl-icon-arrow-right"></i></a></li>
+                                <li><a class="current-page" {{ knp_pagination_render(res) }}></a></li>
                             </ul>
                         </nav>
                     </div>

@@ -94,13 +94,9 @@
                         <div class="utf_pagination_container_part margin-bottom-70">
                             <nav class="pagination">
                                 <ul>
-                                    <li><a href="#"><i class="sl sl-icon-arrow-left"></i></a></li>
-                                    <li><a href="#" class="current-page">1</a></li>
-                                    <li><a href="#">2</a></li>
-                                    <li><a href="#">3</a></li>
-                                    <li><a href="#">4</a></li>
-                                    <li><a href="#"><i class="sl sl-icon-arrow-right"></i></a></li>
+                                    <li><a class="current-page" {{ knp_pagination_render(events) }}></a></li>
                                 </ul>
+
                             </nav>
                         </div>
                     </div>
