@@ -24,7 +24,7 @@ class ShopController extends AbstractController
             ->findAll();
         if ($this->getUser() ){
             $userCon = $this->getUser()->getCin();
-            $userName = $this->getUser()->getName();
+            $userName = $this->getUser()->getNom();
         }else
             $userCon = 0;
         $userName = "";
