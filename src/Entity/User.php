@@ -189,7 +189,7 @@ class User
         return $this;
     }
 
-    public function getRole(): ?string
+    public function getRole(): ?array
     {
         return $this->role;
     }

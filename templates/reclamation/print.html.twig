@@ -25,7 +25,7 @@
             </div>
             <div class="col-md-6">
                 <p><strong>Envoyé par :</strong><br>
-                    {{ reclamation.iduser.nom }} {{ reclamation.iduser.prenom }}<br>{{ reclamation.email }}<br> {{ reclamation.iduser.telephone }}
+                    {{ reclamation.iduser.nom }} {{ reclamation.iduser.prenom }}<br>{{ reclamation.iduser.email }}<br> {{ reclamation.iduser.telephone }}
                 </p>
             </div>
             <div class="col-md-6 fl_right">
@@ -46,11 +46,13 @@
             </div>
         </div>
 
-        <div class="row">
-            <div class="col-md-12">
-                <img class="utf_img_content_box" src="{{ asset("Front-office/images/#{reclamation.image}") }}" alt="">
-            </div>
+        <br> <br> <br> <br> <br> <br>
 
-        </div>
+
+
+        <img class="" src="{{ asset("Front-office/images/#{reclamation.image}") }}" alt="">
+
+
+
     </div>
 {% endblock %}

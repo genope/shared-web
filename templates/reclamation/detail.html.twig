@@ -46,29 +46,7 @@
                     </section>
                     <div class="clearfix"></div>
 
-                        <div id="utf_add_review" class="utf_add_review-box">
-                        <h3 class="utf_listing_headline_part margin-bottom-35">Répondre par mail</h3>
-                        <form id="utf_add_comment" class="utf_add_comment">
-                            <fieldset>
-                                <div class="row">
-                                    <div class="col-md-4">
-                                        <label>Email:</label>
-                                        <input type="text" placeholder="Email" value="{{ reclamation.email }}"/>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <label>Objet:</label>
-                                        <input type="text" placeholder="Objet" value=""/>
-                                    </div>
-                                </div>
-                                <div>
-                                    <label>Description:</label>
-                                    <textarea cols="40" placeholder="Description" rows="3"></textarea>
-                                </div>
-                            </fieldset>
-                            <button class="button">Envoyer</button>
-                            <div class="clearfix"></div>
-                        </form>
-                    </div>
+
                 </div>
 
                 <div class="col-lg-4 col-md-4">
@@ -92,7 +70,7 @@
                                     <li><a class="gplus" href="#"><i class="icon-gplus"></i></a></li>
                                 </ul>
                                 <ul class="utf_listing_detail_sidebar">
-                                    <li><i class="sl sl-icon-map"></i> 12345 Little Lonsdale St, Melbourne</li>
+                                    <li><i class="sl sl-icon-map"></i> {{ reclamation.type }}</li>
                                     <li><i class="sl sl-icon-phone"></i> +(216) {{ reclamation.iduser.telephone }}</li>
                                     <li><i class="fa fa-envelope-o"></i> <a href="mailto:info@example.com">{{reclamation.email}}</a></li>
                                 </ul>
@@ -109,36 +87,23 @@
                         <div class="utf_box_widget margin-top-35">
                             <h3><i class="sl sl-icon-book-open"></i> Reclamations associées</h3>
                             <ul class="utf_widget_tabs">
+                                {% for r in RidU %}
                                 <li>
                                     <div class="utf_widget_content">
-                                        <div class="utf_widget_thum"> <a href="blog_detail_right_sidebar.html"><img src="images/blog-widget-03.jpg" alt=""></a> </div>
+                                        {% if r.getImage != null %}
+                                            <div class="utf_widget_thum"> <a href="blog_detail_right_sidebar.html"><img src="{{ asset("Front-office/images/#{r.image}") }}" alt=""></a> </div>
+                                        {% else %}
+                                            <div class="utf_widget_thum"> <a href="blog_detail_right_sidebar.html"><img src="{{asset('Front-office/images/noimage.png')}}" alt=""></a> </div>
+                                        {% endif %}
+
                                         <div class="utf_widget_text">
-                                            <h5><a href="blog_detail_right_sidebar.html">Lorem ipsum dolor sit amet consectetur...</a></h5>
-                                            <span><i class="fa fa-clock-o"></i> Feb 02, 2021 at 12:52 pm</span>
+                                            <h5><a href="blog_detail_right_sidebar.html">{{ r.objet }}</a></h5>
+                                            <span><i class="fa fa-clock-o"></i> {{ r.dateCreation|date("Y-m-d") }}</span>
                                         </div>
                                         <div class="clearfix"></div>
                                     </div>
                                 </li>
-                                <li>
-                                    <div class="utf_widget_content">
-                                        <div class="utf_widget_thum"> <a href="blog_detail_right_sidebar.html"><img src="images/blog-widget-02.jpg" alt=""></a> </div>
-                                        <div class="utf_widget_text">
-                                            <h5><a href="blog_detail_right_sidebar.html">Lorem ipsum dolor sit amet consectetur...</a></h5>
-                                            <span><i class="fa fa-clock-o"></i> Feb 02, 2021 at 12:52 pm</span>
-                                        </div>
-                                        <div class="clearfix"></div>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="utf_widget_content">
-                                        <div class="utf_widget_thum"> <a href="blog_detail_right_sidebar.html"><img src="images/blog-widget-01.jpg" alt=""></a> </div>
-                                        <div class="utf_widget_text">
-                                            <h5><a href="blog_detail_right_sidebar.html">Lorem ipsum dolor sit amet consectetur...</a></h5>
-                                            <span><i class="fa fa-clock-o"></i> Feb 02, 2021 at 12:52 pm</span>
-                                        </div>
-                                        <div class="clearfix"></div>
-                                    </div>
-                                </li>
+                                {% endfor %}
                             </ul>
                         </div>
                         <div class="utf_box_widget margin-top-35">

@@ -121,6 +121,12 @@
             "ref": "18ce21f16066cccfa0803c9e846a2e4f4bec92ab"
         }
     },
+    "knplabs/knp-components": {
+        "version": "v3.4.0"
+    },
+    "knplabs/knp-paginator-bundle": {
+        "version": "v5.8.0"
+    },
     "knpuniversity/oauth2-client-bundle": {
         "version": "2.10",
         "recipe": {
@@ -141,6 +147,9 @@
     },
     "league/oauth2-google": {
         "version": "4.0.0"
+    },
+    "mofodojodino/profanity-filter": {
+        "version": "1.3.0"
     },
     "monolog/monolog": {
         "version": "1.27.0"
@@ -300,6 +309,9 @@
             "./config/packages/sensio_framework_extra.yaml"
         ]
     },
+    "swiftmailer/swiftmailer": {
+        "version": "v6.3.0"
+    },
     "symfony/asset": {
         "version": "v4.4.37"
     },
@@ -414,6 +426,15 @@
             "./src/Controller/.gitignore",
             "./src/Kernel.php"
         ]
+    },
+    "symfony/google-mailer": {
+        "version": "4.4",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "master",
+            "version": "4.4",
+            "ref": "f8fd4ddb9b477510f8f4bce2b9c054ab428c0120"
+        }
     },
     "symfony/http-client": {
         "version": "v4.4.39"
@@ -576,6 +597,20 @@
     "symfony/stopwatch": {
         "version": "v4.4.38"
     },
+    "symfony/swiftmailer-bundle": {
+        "version": "3.5",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "master",
+            "version": "2.5",
+            "ref": "f0b2fccdca2dfd97dc2fd5ad216d5e27c4f895ac"
+        },
+        "files": [
+            "./config/packages/dev/swiftmailer.yaml",
+            "./config/packages/swiftmailer.yaml",
+            "./config/packages/test/swiftmailer.yaml"
+        ]
+    },
     "symfony/templating": {
         "version": "v4.4.37"
     },
@@ -668,6 +703,9 @@
     },
     "twig/twig": {
         "version": "v3.3.8"
+    },
+    "vangrg/profanity-bundle": {
+        "version": "v1.1.3"
     },
     "webmozart/assert": {
         "version": "1.10.0"

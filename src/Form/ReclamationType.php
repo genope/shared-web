@@ -19,7 +19,7 @@ class ReclamationType extends AbstractType
             ->add('description')
             ->add('email', EmailType::class, array(
                 'attr' => array(
-                    'placeholder' => 'xyz123@xyz.com'
+                    'placeholder' => 'xyz_123@xyz.com'
                 )
             ))
             ->add('image',FileType::Class,[
@@ -28,7 +28,6 @@ class ReclamationType extends AbstractType
             ])
             ->add('nom')
             ->add('prenom')
-
             ->add('iduser')
         ;
     }

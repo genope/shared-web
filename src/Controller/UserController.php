@@ -12,9 +12,12 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 class UserController extends AbstractController
+    /**
+     * @Route("/user", name="app_user_home", methods={"GET"})
+     */
 {
     /**
-     * @Route("/", name="app_user_index", methods={"GET"})
+     * @Route("/index", name="app_user_index", methods={"GET"})
      */
     public function index(EntityManagerInterface $entityManager): Response
     {
@@ -22,7 +25,7 @@ class UserController extends AbstractController
             ->getRepository(User::class)
             ->findAll();
 
-        return $this->render('index.html.twig', [
+        return $this->render('user/index.html.twig', [
             'users' => $users,
         ]);
     }

@@ -45,22 +45,21 @@ class ReclamationRepository extends ServiceEntityRepository
         }
     }
 
-    // /**
-    //  * @return Reclamation[] Returns an array of Reclamation objects
-    //  */
-    /*
-    public function findByExampleField($value)
+     /**
+      * @return Reclamation[] Returns an array of Reclamation objects
+      */
+
+    public function findReclamationsByStatut($value): array
     {
         return $this->createQueryBuilder('r')
-            ->andWhere('r.exampleField = :val')
+            ->andWhere('r.statut = :val')
             ->setParameter('val', $value)
             ->orderBy('r.id', 'ASC')
-            ->setMaxResults(10)
             ->getQuery()
             ->getResult()
         ;
     }
-    */
+
 
     /*
     public function findOneBySomeField($value): ?Reclamation
@@ -73,4 +72,13 @@ class ReclamationRepository extends ServiceEntityRepository
         ;
     }
     */
-}
+    public function findEntitiesByString($str){
+        return $this->getEntityManager()
+            ->createQuery(
+                'SELECT e
+                FROM AppBundle:Entity e
+                WHERE e.foo LIKE :str'
+            )
+            ->setParameter('str', '%'.$str.'%')
+            ->getResult();
+}}

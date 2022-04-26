@@ -20,6 +20,7 @@
         </div>
     </div>
 
+
     <section class="utf_testimonial_part fullwidth_block padding-top-75 padding-bottom-75">
         <div class="container">
             <div class="row">
@@ -28,9 +29,9 @@
     <h3><i class="sl sl-icon-star"></i>  Note moyenne</h3>
     <div class="box-inner">
     <div class="rating-avg-wrapper text-theme clearfix">
-        <div class="rating-avg">4.8</div>
+        <div class="rating-avg">{{ moyenne }}</div>
         <div class="rating-after">
-            <div class="rating-mode">/5 (45)</div>
+            <div class="rating-mode">/5 ({{ nbr }})</div>
 
         </div>
     </div>
@@ -63,7 +64,7 @@
                         <div class="row">
                             <div class="col-md-4">
 
-                                    {{ form_row(form.note) }}
+{{ form_row(form.note)  }}
                                 </div>
 
                             <div class="col-md-4">
@@ -75,6 +76,40 @@
 
 
                 {{ form_end (form) }}
+<br>
+                {% if app.request.query.get("bad") == "bad"  %}
+
+
+
+                                    <div class="small_dialog_header">
+                                        <h3>Attention</h3>
+                                    </div>
+                                    <div class="utf_message_reply_block margin-top-0">
+                                        <h5>Votre avis a été annulé.Le respect est primordial sur notre plateforme.</h5>
+
+                                    </div>
+
+                                  {% endif %}
+        {% if app.request.query.get("good") == "good" %}
+
+                                    <div class="small_dialog_header">
+                                        <h3>Ajouté</h3>
+                                    </div>
+                                    <div class="utf_message_reply_block margin-top-0">
+                                        <h5>Votre commentaire a été ajouté</h5>
+
+                                    </div>
+
+        {% endif %}
             </div>
         </div>
+{% endblock %}
+        {% block javascripts %}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script src="https://cdnjs.cloudf lare.com/ajax/iibs/popper.js/1.12.9/umd/popper.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+
+
 {% endblock %}
