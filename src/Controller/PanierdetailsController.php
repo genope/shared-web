@@ -133,7 +133,7 @@ class PanierdetailsController extends AbstractController
             $userCon = 0;
             $userName = "";
             $ci = null;
-            $userRole = null;
+            $userRole = ["USER_USER",null];
         }
         $panierwithdata = [];
 
