@@ -31,117 +31,29 @@
                 <div class="container">
                     <div class="utf_left_side">
 
-                        <div id="logo"><a href="#"><img src="{{ asset('front-office/images/shared.png') }}" alt=""></a>
-                            <a href="index_1.html" class="dashboard-logo"><img
+                        <div id="logo" ><a href="#" ><img src="{{ asset('front-office/images/shared.png') }}" alt="" style="margin-left:80px"></a>
+                            <a href="{{ path('app_user_index') }}" class="dashboard-logo" style="margin-left:80px"><img
                                         src="{{ asset('front-office/images/shared.png') }}" alt=""></a></div>
 
                         <div class="mmenu-trigger">
                             <button class="hamburger utfbutton_collapse" type="button">
-				<span class="utf_inner_button_box">
-					<span class="utf_inner_section"></span>
-				</span>
+		
+					
                             </button>
                         </div>
                         <nav id="navigation" class="style_one">
-                            <ul id="responsive">
-
-                                <li><a href="#">Home</a>
-
-                                </li>
-                                <li><a href="#">Listings</a>
-
-                                </li>
-                                <li><a class="current" href="#">User Panel</a>
-
-                                </li>
-                                <li><a href="#">Pages</a>
-                                    <ul>
-                                        <li><a href="page_about.html">About Us</a></li>
-                                        <li><a href="#">Categorie Type</a>
-                                            <ul>
-                                                <li><a href="page_categorie_one.html">Categorie One</a></li>
-                                                <li><a href="page_categorie_two.html">Categorie Two</a></li>
-                                            </ul>
-                                        </li>
-                                        <ul>
-                                            <li><a href="page_icons_one.html">Icon-Mind Icon</a></li>
-                                            <li><a href="page_icons_two.html">Simple Line Icon</a></li>
-                                            <li><a href="page_icons_three.html">Font Awesome Icon</a></li>
-                                        </ul>
-                                        </li>
-                                        <li><a href="page_not_found.html">Page Error 404</a></li>
-                                        <li><a href="page_coming_soon.html">Coming Soon</a></li>
-                                        <li><a href="contact.html">Contact</a></li>
-                                    </ul>
-
-                                </li>
-                                <li>
-                                    <a href="{{ path('app_offres_index') }}">List Offres</a>
-
-                                </li>
-
-                                <li>
-                                    <a href="{{ path('app_chat_new') }}">Forum</a>
-
-                                </li>
-
-
-                            </ul>
+                         
                         </nav>
                         <div class="clearfix"></div>
                     </div>
                     <div class="utf_right_side">
                         <div class="header_widget">
-                            <div class="dashboard_header_button_item has-noti js-item-menu">
-                                <i class="sl sl-icon-bell"></i>
-                                <div class="dashboard_notifi_dropdown js-dropdown">
-                                    <div class="dashboard_notifi_title">
-                                        <p>You Have 2 Notifications</p>
-                                    </div>
-                                    <div class="dashboard_notifi_item">
-                                        <div class="bg-c1 red">
-                                            <i class="fa fa-check"></i>
-                                        </div>
-                                        <div class="content">
-                                            <p>Your Listing <b>Burger House (MG Road)</b> Has Been Approved!</p>
-                                            <span class="date">2 hours ago</span>
-                                        </div>
-                                    </div>
-                                    <div class="dashboard_notifi_item">
-                                        <div class="bg-c1 green">
-                                            <i class="fa fa-envelope"></i>
-                                        </div>
-                                        <div class="content">
-                                            <p>You Have 7 Unread Messages</p>
-                                            <span class="date">5 hours ago</span>
-                                        </div>
-                                    </div>
-                                    <div class="dashboard_notify_bottom text-center pad-tb-20">
-                                        <a href="#">View All Notification</a>
-                                    </div>
-                                </div>
-                            </div>
+                          
                             <a class="dashboard_header_button_item" href="{{ path('app_panierdetails_index') }}">
                                 <i class="sl sl-icon-basket"></i>
 
                             </a>
-                            <div class="utf_user_menu">
-                                <div class="utf_user_name"><span><img src="images/dashboard-avatar.jpg" alt=""></span>Hi,
-                                    John!
-                                </div>
-                                <ul>
-                                    <li><a href="dashboard.html"><i class="sl sl-icon-layers"></i> Dashboard</a></li>
-                                    <li><a href="dashboard_my_profile.html"><i class="sl sl-icon-user"></i> My
-                                            Profile</a></li>
-                                    <li><a href="dashboard_my_listing.html"><i class="sl sl-icon-list"></i> My
-                                            Listing</a></li>
-                                    <li><a href="dashboard_messages.html"><i class="sl sl-icon-envelope-open"></i>
-                                            Messages</a></li>
-                                    <li><a href="dashboard_bookings.html"><i class="sl sl-icon-docs"></i> Booking</a>
-                                    </li>
-                                    <li><a href="index_1.html"><i class="sl sl-icon-power"></i> Logout</a></li>
-                                </ul>
-                            </div>
+                          
                         </div>
                     </div>
                 </div>
@@ -155,13 +67,14 @@
             <div class="utf_dashboard_navigation js-scrollbar">
                 <div class="utf_dashboard_navigation_inner_block">
                     <ul>
+                         <li><a href="{{ path('app_user_index') }}"><i class="sl sl-icon-home"></i> Accueil</a></li>
 
                         {% if user[0] == "ROLE_ADMIN" %}
-                            <li><a href="{{ path('Approuver') }}"><i class="sl sl-icon-layers"></i> Approuver
+                            <li><a href="{{ path('Approuver') }}"><i class="sl sl-icon-like"></i> Approuver
                                     Produits</a></li>
                         {% endif %}
                         {% if user[0] == "ROLE_HOST" %}
-                            <li><a href="{{ path('app_offres_new') }}"><i class="sl sl-icon-plus"></i> Add Offres</a>
+                            <li><a href="{{ path('app_offres_new') }}"><i class="sl sl-icon-magnifier-add"></i> Add Offres</a>
                             </li>
                         {% endif %}
                         {% if user[0] == "ROLE_HOST" %}
@@ -177,9 +90,10 @@
                             </li>
 
                         <li><a href="{{ path('app_user_show',{'cin': Usercin.cin}) }}"><i class="sl sl-icon-layers"></i> Profile</a></li>
-                        {% endif %}
-                        <li><a href="{{ path('app_user_index') }}"><i class="sl sl-icon-layers"></i> Index</a></li>
 
+
+                        {% endif %}
+                   
                         {% if user[0] == "ROLE_ADMIN" %}
                             <li><a href="{{ path('app_produit_new') }}"><i class="sl sl-icon-plus"></i> Ajouter Produit</a>
                             </li>
@@ -190,7 +104,7 @@
                             <li><a href="{{ path('app_categorieproduit_index') }}"><i
                                             class="sl sl-icon-envelope-open"></i> Categories</a></li>
                         {% endif %}
-                        <li><a href="index_1.html"><i class="sl sl-icon-power"></i> Logout</a></li>
+                        <li  style="margin-top:250px;border-bottom-color:red"><a href="index_1.html"><i class="sl sl-icon-power"></i> Logout</a></li>
 
                     </ul>
                 </div>
