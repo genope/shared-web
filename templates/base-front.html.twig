@@ -70,14 +70,17 @@
                         <div class="header_widget">
 
 
+
                             {% if userCon is defined %}
                                 {% if userCon != 0 %}
                                     <a class="dashboard_header_button_item" href="{{ path('app_panierdetails_index') }}">
                                         <i class="sl sl-icon-basket" ></i>
 
                                     </a>
-
-
+                              <div class="utf_user_menu">
+                                {% include 'user/locale.html.twig' %}
+                             </div>
+  
                                     <div class="utf_user_menu">
                                         <div class="utf_user_name"><span><img src="images/dashboard-avatar.jpg" alt=""></span>Bonjour, {{ userName }}</div>
                                         <ul>
@@ -93,8 +96,6 @@
                                     <a href="{{ path('app_panierdetails_index') }}">Login</a>
                                 {% endif %}
                             {% endif %}
-
-
                         </div>
                     </div>
                 </div>
