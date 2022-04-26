@@ -230,7 +230,7 @@ class OffresController extends AbstractController
 
         $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
 
-        $cin = $this->getUser();
+        $cin = $this->getUser()->getRoles();
 
         $offre = new Offres();
 
@@ -263,7 +263,7 @@ class OffresController extends AbstractController
             }
 
 
-            $offre->setIdUser($cin);
+            $offre->setIdUser($ci);
             $offre->setEtat(false);
              if($offre->getCateg() == 'Appartement' || $offre->getCateg() == 'Maison' || $offre->getCateg() == 'Chambre'){
                  $offre->setType("Logement");
@@ -294,7 +294,9 @@ class OffresController extends AbstractController
             'offre' => $offre,
             'form' => $form->createView(),
             'Usercin' =>$ci,
-            'userRole' =>$userRole
+            'userRole' =>$userRole,
+            'user'=>$userRole,
+
         ]);
     }
 

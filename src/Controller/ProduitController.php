@@ -73,7 +73,7 @@ class ProduitController extends AbstractController
     {
         $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
 
-        $cin = $this->getUser()->getRoles();
+
         $produit = new Produit();
         $form = $this->createForm(ProduitType::class, $produit);
         $form->handleRequest($request);
@@ -83,7 +83,7 @@ class ProduitController extends AbstractController
             ->findAll();
 
         if ($this->getUser() ){
-
+            $cin = $this->getUser()->getRoles();
             $ci = $this->getUser();
         }else{
 
@@ -124,8 +124,27 @@ class ProduitController extends AbstractController
      */
     public function show(Produit $produit): Response
     {
+
+
+        if ($this->getUser() ){
+            $userRole = $this->getUser()->getRoles();
+            $userCon = $this->getUser()->getCin();
+            $ci = $this->getUser();
+            $cin = $this->getUser()->getRoles();
+            $userName = $this->getUser()->getNom();
+        }else{
+            $userCon = 0;
+            $ci = null;
+            $userRole = ["ROLE_USER",null];
+            $userName = "";
+        }
         return $this->render('produit/show.html.twig', [
             'produit' => $produit,
+            'user'=>$userRole,
+            'Usercin' =>$ci,
+            'userRole' =>$userRole,
+            'userCon' => $userCon,
+            'userName' => $userName,
         ]);
     }
 
@@ -136,7 +155,14 @@ class ProduitController extends AbstractController
     {
         $form = $this->createForm(ProduitType::class, $produit);
         $form->handleRequest($request);
+        if ($this->getUser() ){
+            $userRole = $this->getUser()->getRoles();
+            $ci = $this->getUser();
+        }else{
 
+            $ci = null;
+            $userRole = null;
+        }
         if ($form->isSubmitted() && $form->isValid()) {
             $file = $form->get('image')->getData();
             /*$originalFileName= pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);*/
@@ -158,6 +184,9 @@ class ProduitController extends AbstractController
         return $this->render('produit/edit.html.twig', [
             'produit' => $produit,
             'form' => $form->createView(),
+            'user'=>$ci,
+            'Usercin' =>$ci,
+            'userRole' =>$userRole
         ]);
     }
 

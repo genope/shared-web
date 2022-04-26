@@ -124,7 +124,17 @@ class PanierdetailsController extends AbstractController
 
         $panier = $session->get('panier', []);
 
-
+        if ($this->getUser() ){
+            $userCon = $this->getUser()->getCin();
+            $userName = $this->getUser()->getNom();
+            $userRole = $this->getUser()->getRoles();
+            $ci = $this->getUser();
+        }else{
+            $userCon = 0;
+            $userName = "";
+            $ci = null;
+            $userRole = ["USER_USER",null];
+        }
         $panierwithdata = [];
 
         foreach ($panier as $id => $quantity) {
@@ -142,6 +152,10 @@ class PanierdetailsController extends AbstractController
         return $this->render('panierdetails/PanierIndex.html.twig', [
             'items' => $panierwithdata,
             'total' => $total,
+            'userCon' => $userCon,
+            'userName' => $userName,
+            'Usercin' =>$ci,
+            'userRole' =>$userRole
         ]);
     }
 
