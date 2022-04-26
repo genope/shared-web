@@ -13,6 +13,8 @@ parameters:
   app.google_client_secret: '%env(OAUTH_GOOGLE_SECRET)%'
   app.facebook_id: '%env(OAUTH_FACEBOOK_ID)%'
   app.facebook_secret: '%env(OAUTH_FACEBOOK_SECRET)%'
+  uploads_directory: '%kernel.project_dir%/public.uploads'
+  app_locales: [fr_FR, en_EN]
 
 services:
   # default configuration for services in *this* file
@@ -40,13 +42,15 @@ services:
   App\Service\Mailer:
       arguments:
         $noreply: '%app.email_noreply%'
-
   # add more service definitions when explicit configuration is needed
   # please note that last definitions always *replace* previous ones
   App\Service\CaptchaService:
     arguments:
       $key: '%app.recaptcha_key%'
       $secret: '%app.recaptcha_secret%'
+  App\Service\FileUploader:
+    arguments:
+      $targetDirectory: '%upload_directory%'
   app.locale_listener:
     class: App\Listener\LocaleListener
     arguments: [ "%kernel.default_locale%" ]
@@ -68,3 +72,6 @@ knpu_oauth2_client:
       redirect_params: { }
       client_secret: "%app.facebook_secret%"
       graph_api_version: v11.0
+twig:
+  globals:
+    locales: "%app_locales%"

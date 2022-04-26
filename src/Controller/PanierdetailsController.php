@@ -25,11 +25,13 @@ class PanierdetailsController extends AbstractController
     public function commande(Request $request, \Swift_Mailer $mailer, SessionInterface $session, ProduitRepository $produitRepository): Response
     {
         $panier = $session->get('panier', []);
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+        $email = $this->getUser()->getEmail();
 
 
         $panierwithdata = [];
 
-        foreach ($panier as $id => $quantity) {
+        foreach ($panier as $id  => $quantity) {
 
             $panierwithdata[] = [
                 'produit' => $produitRepository->find($id),
@@ -44,7 +46,7 @@ class PanierdetailsController extends AbstractController
 
         $message = (new \Swift_Message('Confirmation'))
             ->setFrom('yeektheb@gmail.com')
-            ->setTo('aziz.lajili@esprit.tn')
+            ->setTo($email)
             ->setBody($this->renderView('panierdetails/Commande.html.twig',[
                 'items' => $panierwithdata,
                 'total' => $total,
