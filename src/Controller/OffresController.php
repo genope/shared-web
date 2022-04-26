@@ -230,7 +230,7 @@ class OffresController extends AbstractController
 
         $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
 
-        $cin = $this->getUser();
+        $cin = $this->getUser()->getRoles();
 
         $offre = new Offres();
 
@@ -294,7 +294,9 @@ class OffresController extends AbstractController
             'offre' => $offre,
             'form' => $form->createView(),
             'Usercin' =>$ci,
-            'userRole' =>$userRole
+            'userRole' =>$userRole,
+            'user'=>$cin,
+
         ]);
     }
 
