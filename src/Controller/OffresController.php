@@ -31,19 +31,21 @@ class OffresController extends AbstractController
 
 
         $message = (new \Swift_Message('Confirmation'))
-            ->setFrom('yeektheb@gmail.com')
-            ->setTo($offre->getIdUser()->getEmail())
-            ->setBody($this->renderView('offres/test.html.twig',
-                ['offre' => $offre,
-                    'user'=>$offre->getIdUser()
-                ])
-                ,'text/html');
+
+        ->setFrom('yeektheb@gmail.com')
+        ->setTo($offre->getIdUser()->getEmail())
+        ->setBody($this->renderView('offres/test.html.twig',
+        ['offre' => $offre,
+         'user'=>$offre->getIdUser()
+            ])
+            ,'text/html');
         $mailer ->send($message);
 
         $nbr = $repo->Approuver($offre->getIdOffre());
 
         return $this->redirectToRoute('Approuver');
 
+      
     }
     /**
      * @Route("/", name="app_offres_index", methods={"GET"})
@@ -63,72 +65,88 @@ class OffresController extends AbstractController
      */
     public function MesOffre(EntityManagerInterface $entityManager): Response
     {
+
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+
+        $cin = $this->getUser()->getRoles();
+
         $offres = $entityManager
             ->getRepository(Offres::class)
-            ->findAll();
+            ->findBy([
+                'idUser' => $cin,
+            ]);
 
         return $this->render('offres/MesOffres.html.twig', [
             'offres' => $offres,
+'user'=>$cin,
         ]);
     }
-    /**
+        /**
      * @Route("/dashboard", name="dashboard", methods={"GET"})
      */
     public function MesStatistique(OffresRepository $repo): Response
     {
 
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
 
+        $cin = $this->getUser();
+     
         $Maison = $repo->findBy([
-            'idUser' => 12312122,
+            'idUser' => $cin,
             'categ' => "Maison",
         ]);
         $Appartement = $repo->findBy([
-            'idUser' => 12312122,
+            'idUser' => $cin,
             'categ' => "Appartement",
         ]);
         $Chambre = $repo->findBy([
-            'idUser' => 12312122,
+            'idUser' => $cin,
             'categ' => "Chambre",
         ]);
         $Voiture = $repo->findBy([
-            'idUser' => 12312122,
+            'idUser' => $cin,
             'categ' => "Voiture",
         ]);
         $Vélo = $repo->findBy([
-            'idUser' => 12312122,
+            'idUser' => $cin,
             'categ' => "Vélo",
         ]);
         $Moto = $repo->findBy([
-            'idUser' => 12312122,
+            'idUser' => $cin,
             'categ' => "Moto",
         ]);
 
-        return $this->render('offres/Dashboard.html.twig', [
-            'Maison' => count($Maison),
-            'Appartement' => count($Appartement),
-            'Chambre' => count($Chambre),
-            'Voiture' => count($Voiture),
-            'Vélo' => count($Vélo),
-            'Moto' => count($Moto)
-        ]);
+                return $this->render('offres/Dashboard.html.twig', [
+                'Maison' => count($Maison),
+                'Appartement' => count($Appartement),
+                'Chambre' => count($Chambre),
+                'Voiture' => count($Voiture),
+                'Vélo' => count($Vélo),
+                'Moto' => count($Moto)
+                ]);
     }
 
-    /**
+     /**
      * @Route("/Approuver", name="Approuver", methods={"GET", "POST"})
      */
     public function Approuver(EntityManagerInterface $entityManager): Response
     {
 
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+
+        $cin = $this->getUser()->getRoles();
         $offres = $entityManager
             ->getRepository(Offres::class)
             ->findAll([
                 'etat' => "0",
             ]);
 
+       
 
-        return $this->render('offres/ApprouverOffres.html.twig', [
-            'offres' => $offres
-        ]);
+                return $this->render('offres/ApprouverOffres.html.twig', [
+                    'offres' => $offres,
+                    'user' =>$cin,
+                ]);
     }
 
     /**
@@ -141,7 +159,7 @@ class OffresController extends AbstractController
             ->findAll();
 
 
-        $liste_Offres = $paginator->paginate($offres,$request->query->getInt('page',1),5);
+       $liste_Offres = $paginator->paginate($offres,$request->query->getInt('page',1),5);
         return $this->render('offres/ListesOffres.html.twig', [
             'offres' => $offres,
             'filtre'=>$liste_Offres
@@ -154,7 +172,14 @@ class OffresController extends AbstractController
      */
     public function new(Request $request, EntityManagerInterface $entityManager,FlashyNotifier $flashy): Response
     {
+
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+
+        $cin = $this->getUser();
+
         $offre = new Offres();
+
+
         $form = $this->createForm(OffresType::class, $offre);
         $form->handleRequest($request);
 
@@ -174,10 +199,11 @@ class OffresController extends AbstractController
             }
 
 
+            $offre->setIdUser($cin);
             $offre->setEtat(false);
-            if($offre->getCateg() == 'Appartement' || $offre->getCateg() == 'Maison' || $offre->getCateg() == 'Chambre'){
-                $offre->setType("Logement");
-            }
+             if($offre->getCateg() == 'Appartement' || $offre->getCateg() == 'Maison' || $offre->getCateg() == 'Chambre'){
+                 $offre->setType("Logement");
+             }
             elseif($offre->getCateg() == 'Voiture' || $offre->getCateg() == 'Moto' || $offre->getCateg() == 'Velo'){
                 $offre->setType("MoyenDeTransport");
             }
@@ -186,17 +212,18 @@ class OffresController extends AbstractController
             }
             $offre->setImage($newFilename);
 
-
+            
 
             $entityManager->persist($offre);
             $entityManager->flush();
 
 
 
-            $flashy->success('Event created!', 'http://your-awesome-link.com');
+           
+          $flashy->success('Event created!', 'http://your-awesome-link.com');
 
 
-
+         
         }
 
         return $this->render('offres/new.html.twig', [
@@ -271,4 +298,5 @@ class OffresController extends AbstractController
     }
 
 
+ 
 }

@@ -15,6 +15,8 @@
         "knpuniversity/oauth2-client-bundle": "^2.10",
         "league/oauth2-facebook": "^2.2",
         "league/oauth2-google": "^4.0",
+        "mercuryseries/flashy": "^1.0",
+        "mercuryseries/flashy-bundle": "^5.1",
         "phpdocumentor/reflection-docblock": "^5.3",
         "sensio/framework-extra-bundle": "^5.1",
         "symfony/asset": "4.4.*",

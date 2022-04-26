@@ -1,0 +1,192 @@
+{% extends 'base-back.html.twig' %}
+
+{% block content %}
+
+       <head>
+  <link rel="stylesheet" href="{{ asset('bundles/mercuryseriesflashy/css/flashy.css') }}">
+
+
+    </head>
+
+
+
+    <div id="titlebar" class="dashboard_gradient">
+        <div class="row">
+            <div class="col-md-12">
+                <h2>Add Offre</h2>
+                <nav id="breadcrumbs">
+                    <ul>
+                        <li><a href="index_1.html">Dashbord</a></li>
+                        <li><a href="dashboard.html">Add Offres</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </div>
+
+
+
+
+    <div class="add_utf_listing_section margin-top-45">
+        <div class="utf_add_listing_part_headline_part">
+            <h3><i class="sl sl-icon-tag"></i> Ajouter Offre</h3>
+        </div>
+        {{ form_start(form) }}
+
+        <div class="my-custom-class-for-errors">
+            {{ form_errors(form) }}
+        </div>
+        <div class="row with-forms">
+            <div class="col-md-6">
+                <h5>
+
+                {{ form_label(form.nom,"Nom du l'offre") }}</h5>
+                {% if form_errors(form.nom) > 0 %}
+
+                    {{ form_widget(form.nom, {'attr': {'style': ' border-bottom-color: red'}}) }}
+                    <div style="font-size: 12px; font-family: Arial; color: red;margin-top: -5px;padding-bottom: 10px;margin-left: 10px">{{ form_errors(form.nom) }}</div>
+
+                {% else %}
+                        {{ form_widget(form.nom,{'attr':{'oninput':'myFunctionNom()'}}) }}
+                    {% endif %}
+
+
+
+            </div>
+            <div class="col-md-6">
+                <h5>
+                    {{ form_label(form.categ,"Catégorie") }}</h5>
+                {% if form_errors(form.categ) > 0 %}
+
+                    {{ form_widget(form.categ, {'attr': {'style': ' border-bottom-color: red'}}) }}
+                    <div style="font-size: 12px; font-family: Arial; color: red;margin-top: -5px;padding-bottom: 10px;margin-left: 10px">{{ form_errors(form.categ) }}</div>
+
+                {% else %}
+                    {{ form_widget(form.categ,{'attr':{'oninput':'myFunctionCateg()'}}) }}
+                {% endif %}
+
+            </div>
+        </div>
+        <div class="row with-forms">
+            <div class="col-md-6">
+                <h5>
+                    {{ form_label(form.datedebut,"Date Début") }}</h5>
+
+                {% if form_errors(form.datedebut) > 0 %}
+
+                    {{ form_widget(form.datedebut, {'attr': {'style': ' border-bottom-color: red'}}) }}
+                    <div style="font-size: 12px; font-family: Arial; color: red;margin-top: -5px;padding-bottom: 10px;margin-left: 10px">{{ form_errors(form.datedebut) }}</div>
+
+                {% else %}
+                    {{ form_widget(form.datedebut) }}
+                {% endif %}
+
+            </div>
+            <div class="col-md-6">
+                <h5>{{ form_label(form.datefin,"Date Fin") }}</h5>
+
+
+                {% if form_errors(form.datefin) > 0 %}
+
+                    {{ form_widget(form.datefin, {'attr': {'style': ' border-bottom-color: red'}}) }}
+                    <div style="font-size: 12px; font-family: Arial; color: red;margin-top: -5px;padding-bottom: 10px;margin-left: 10px">{{ form_errors(form.datefin) }}</div>
+
+                {% else %}
+                    {{ form_widget(form.datefin) }}
+                {% endif %}
+
+
+            </div>
+        </div>
+        <div class="row with-forms">
+            <div class="col-md-6">
+                <h5> {{ form_label(form.ville,"Ville") }}</h5>
+
+
+                {% if form_errors(form.ville) > 0 %}
+
+                    {{ form_widget(form.ville, {'attr': {'style': ' border-bottom-color: red'}}) }}
+                    <div style="font-size: 12px; font-family: Arial; color: red;margin-top: -5px;padding-bottom: 10px;margin-left: 10px">{{ form_errors(form.ville) }}</div>
+
+                {% else %}
+                    {{ form_widget(form.ville) }}
+                {% endif %}
+
+
+
+
+
+            </div>
+            <div class="col-md-6">
+                <h5> {{ form_label(form.prix,"Prix") }}</h5>
+
+
+                <div class="fm-input" >
+                    <i class="data-unit" style="margin-top: 45px;margin-right: 5px">DT</i>
+                    {% if form_errors(form.prix) > 0 %}
+
+                        {{ form_widget(form.prix, {'attr': {'style': ' border-bottom-color: red'}}) }}
+                        <div style="font-size: 12px; font-family: Arial; color: red;margin-top: -5px;padding-bottom: 10px;margin-left: 10px">{{ form_errors(form.prix) }}</div>
+
+                    {% else %}
+                        {{ form_widget(form.prix) }}
+                    {% endif %}
+
+
+                </div>
+
+
+            </div>
+        </div>
+        <div class="row with-forms">
+            <div class="col-md-12">
+                <h5> {{ form_label(form.description,"Déscription") }}</h5>
+
+                {% if form_errors(form.description) > 0 %}
+
+                    {{ form_widget(form.description, {'attr': {'style': ' border-bottom-color: red'}}) }}
+                    <div style="font-size: 12px; font-family: Arial; color: red;margin-top: -5px;padding-bottom: 10px;margin-left: 10px">{{ form_errors(form.description) }}</div>
+
+                {% else %}
+                    {{ form_widget(form.description , {'attr': {'placeholder': 'Add your decription here...'}}) }}
+                {% endif %}
+
+            </div>
+            <div class="col-md-12">
+                <h5> {{ form_label(form.image,"Upload your image") }}</h5>
+
+                {% if form_errors(form.image) > 0 %}
+
+                    {{ form_widget(form.image, {'attr': {'style': ' border-bottom-color: red'}}) }}
+                    <div style="font-size: 12px; font-family: Arial; color: red;margin-top: -5px;padding-bottom: 10px;margin-left: 10px">{{ form_errors(form.image) }}</div>
+
+                {% else %}
+                    {{ form_widget(form.image , {'attr': {'placeholder': 'Add your decription here...'}}) }}
+                {% endif %}
+            </div>
+
+        </div>
+    </div>
+<br>
+    {{ form_widget(form.enregitrer ) }}
+    {{ form_end(form) }}
+
+
+
+    <div class="col-md-12">
+        <div class="footer_copyright_part"></div>
+    </div>
+
+
+
+
+<script>
+    <script src="//code.jquery.com/jquery.js"></script>
+    <!-- Load Flashy default JavaScript -->
+    <script src="{{ asset('bundles/mercuryseriesflashy/js/flashy.js') }}"></script>
+</script>
+
+{{ include('@MercurySeriesFlashy/flashy.html.twig') }}
+
+
+{% endblock %}

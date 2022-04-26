@@ -26,6 +26,9 @@ class ProduitController extends AbstractController
      */
     public function index(Request $request, EntityManagerInterface $entityManager, PaginatorInterface $paginator): Response
     {
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+
+        $cin = $this->getUser()->getRoles();
         $donnees = $entityManager
             ->getRepository(Produit::class)
             ->findAll();
@@ -43,7 +46,10 @@ class ProduitController extends AbstractController
         return $this->render('produit/index.html.twig', [
             'categories' => $categories,
             'produits' => $produits,
+            'user'=>$cin,
         ]);
+        //json
+
     }
 
     /**
@@ -52,6 +58,9 @@ class ProduitController extends AbstractController
      */
     public function new(Request $request, EntityManagerInterface $entityManager): Response
     {
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+
+        $cin = $this->getUser()->getRoles();
         $produit = new Produit();
         $form = $this->createForm(ProduitType::class, $produit);
         $form->handleRequest($request);
@@ -83,6 +92,7 @@ class ProduitController extends AbstractController
             'categories' => $categorieproduit,
             'produit' => $produit,
             'form' => $form->createView(),
+            'user'=>$cin,
         ]);
     }
 

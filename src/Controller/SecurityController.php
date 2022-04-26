@@ -15,6 +15,8 @@ use KnpU\OAuth2ClientBundle\Client\ClientRegistry;
 use PhpParser\Node\Stmt\Echo_;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormError;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -71,11 +73,11 @@ class SecurityController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
 
-              if (!$captchaService->validateCaptcha($request->get('g-recaptcha-response'))) {
-                   $form->addError(new FormError($translator->trans('captcha.wrong')));
-                   throw new ValidatorException('captcha.wrong');
-               }
 
+            if (!$captchaService->validateCaptcha($request->get('g-recaptcha-response'))) {
+                $form->addError(new FormError($translator->trans('captcha.wrong')));
+                throw new ValidatorException('captcha.wrong');
+            }
             $user->setActivationToken(md5(uniqid()));
             $user->setRoles(array('ROLE_GUEST'));
             $user->setEtat(array('Approved'));
@@ -86,7 +88,6 @@ class SecurityController extends AbstractController
             $entityManager->clear();
 
             $message = (new \Swift_Message('Nouveau compte'))
-
                 ->setFrom('kiraamv1337@gmail.com')
                 ->setTo($user->getEmail())
                 ->setBody(
@@ -145,7 +146,6 @@ class SecurityController extends AbstractController
             $entityManager->flush();
 
             $message = (new \Swift_Message('Nouveau compte'))
-
                 ->setFrom('TNSharedInc@gmail.com')
                 ->setTo($user->getEmail())
                 ->setBody(
@@ -188,7 +188,6 @@ class SecurityController extends AbstractController
         $entityManager->flush();
         $entityManager->clear();
         $this->addFlash('message', 'your account is fully activated');
-
         return $this->redirectToRoute('app_user_index', [], Response::HTTP_SEE_OTHER);
     }
 
@@ -233,6 +232,7 @@ class SecurityController extends AbstractController
     {
         return $this->redirectToRoute('app_user_index', [], Response::HTTP_SEE_OTHER);
     }
+
     /**
      * @Route("/forget_password", name="app_forgotten_password")
      */
@@ -254,7 +254,7 @@ class SecurityController extends AbstractController
             }
             $token = $tokenGenerator->generateToken();
 
-            try{
+            try {
                 $user->setResetToken($token);
                 $entityManager = $this->getDoctrine()->getManager();
                 $entityManager->persist($user);
@@ -272,8 +272,7 @@ class SecurityController extends AbstractController
                 ->setBody(
                     "Bonjour,<br><br>Une demande de réinitialisation de mot de passe a été effectuée pour le site Nouvelle-Techno.fr. Veuillez cliquer sur le lien suivant : " . $url,
                     'text/html'
-                )
-            ;
+                );
 
 
             $mailer->send($message);
@@ -285,6 +284,7 @@ class SecurityController extends AbstractController
         return $this->render('Security/forgot-password.html.twig',
             ['emailForm' => $form->createView()]);
     }
+
     /**
      * @Route("/reset_pass/{token}", name="app_reset_password")
      */
@@ -307,7 +307,7 @@ class SecurityController extends AbstractController
 
             $this->addFlash('message', 'Mot de passe mis à jour');
             return $this->redirectToRoute('app_login');
-        }else {
+        } else {
             return $this->render('security/reset-password.html.twig', ['token' => $token]);
         }
 
@@ -315,10 +315,19 @@ class SecurityController extends AbstractController
 
 
     /**
-     * @Route("/test", name="test")
+     * @Route("/change_locale/{locale}", name="change_locale")
      */
-    public function test(): Response
+    public function changeLocale($locale, Request $request)
     {
-        return $this->render('user/test.html.twig');
+        $request->getSession()->set('_locale', $locale);
+
+        $em = $this->getDoctrine()->getManager();
+        $user = $this->getUser();
+        $user->setLocale($locale);
+        $em->persist($user);
+        $em->flush();
+
+        return $this->redirect($request->headers->get('referer'));
+
     }
 }

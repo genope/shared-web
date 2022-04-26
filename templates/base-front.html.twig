@@ -16,11 +16,13 @@
     <link rel="stylesheet" href="{{ asset('front-office/css/Authstyle.css') }}" id="colors">
     <script src="{{ asset('front-office/scripts/typed.js') }}"></script>
     {% block stylesheets %}
-        {#{{ encore_entry_link_tags('app') }}#}
+        {# {{ encore_entry_link_tags('app') }} #}
     {% endblock %}
     <!-- Google Font -->
-    <link href="https://fonts.googleapis.com/css?family=Nunito:300,400,600,700,800&amp;display=swap&amp;subset=latin-ext,vietnamese" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,500,600,700,800" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Nunito:300,400,600,700,800&amp;display=swap&amp;subset=latin-ext,vietnamese"
+          rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,500,600,700,800" rel="stylesheet"
+          type="text/css">
 </head>
 <body>
 {% block header %}
@@ -29,7 +31,10 @@
             <div id="header" style="background: white">
                 <div class="container">
                     <div class="utf_left_side">
-                        <div id="logo"><a href="{{ path('app_user_index') }}"><img src="{{ asset('front-office/images/shared.png') }}" alt=""></a></div>
+
+                        <div id="logo"><a href="{{ path('app_user_index') }}"><img
+                                        src="{{ asset('front-office/images/shared.png') }}" alt=""></a></div>
+
                         <div class="mmenu-trigger">
                             <button class="hamburger utfbutton_collapse" type="button">
 				        <span class="utf_inner_button_box">
@@ -37,6 +42,7 @@
 				        </span>
                             </button>
                         </div>
+
                         <nav id="navigation" class="style_one">
                             <ul id="responsive">
                                 <li><a class="current" href="{{ path('app_user_index') }}">Accueil</a></li>
@@ -57,6 +63,7 @@
                                 </li>
                             </ul>
                         </nav>
+
                         <div class="clearfix"></div>
                     </div>
                     <div class="utf_right_side">
@@ -87,6 +94,7 @@
                                 {% endif %}
                             {% endif %}
 
+
                         </div>
                     </div>
                 </div>
@@ -104,7 +112,9 @@
             <div class="row">
                 <div class="col-md-4 col-sm-12 col-xs-12">
                     <h4>About Us</h4>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore</p>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut
+                        labore Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
+                        incididunt ut labore</p>
                 </div>
                 <div class="col-md-2 col-sm-3 col-xs-6">
                     <h4>Useful Links</h4>
@@ -164,7 +174,7 @@
 <script src="{{ asset('front-office/scripts/slick.min.js') }}"></script>
 <script src="{{ asset('front-office/scripts/rangeslider.min.js') }}"></script>
 <script src="{{ asset('front-office/scripts/magnific-popup.min.js') }}"></script>
-<script src="{{ asset('front-office/scripts/perfect-scrollbar.min.js')}}"></script>
+<script src="{{ asset('front-office/scripts/perfect-scrollbar.min.js') }}"></script>
 <script src="{{ asset('front-office/scripts/jquery-ui.min.js') }}"></script>
 <script src="{{ asset('front-office/scripts/bootstrap-select.min.js') }}"></script>
 <script src="{{ asset('front-office/scripts/mmenu.js') }}"></script>
@@ -175,10 +185,9 @@
 <script src="{{ asset('front-office/scripts/jquery-migrate-3.3.2.min.js') }}"></script>
 
 
-
 <script>
     var typed = new Typed('.typed-words', {
-        strings: ["Attractions"," Restaurants"," Hotels"],
+        strings: ["Attractions", " Restaurants", " Hotels"],
         typeSpeed: 80,
         backSpeed: 80,
         backDelay: 4000,
@@ -202,6 +211,7 @@
 
 
 </script>
+
 
 
 </body>
