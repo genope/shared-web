@@ -63,12 +63,19 @@ class OffresController extends AbstractController
      */
     public function MesOffre(EntityManagerInterface $entityManager): Response
     {
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+
+        $cin = $this->getUser()->getRoles();
+
         $offres = $entityManager
             ->getRepository(Offres::class)
-            ->findAll();
+            ->findBy([
+                'idUser' => $cin,
+            ]);
 
         return $this->render('offres/MesOffres.html.twig', [
             'offres' => $offres,
+'user'=>$cin,
         ]);
     }
         /**
@@ -76,30 +83,32 @@ class OffresController extends AbstractController
      */
     public function MesStatistique(OffresRepository $repo): Response
     {
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
 
+        $cin = $this->getUser();
      
         $Maison = $repo->findBy([
-            'idUser' => 12312122,
+            'idUser' => $cin,
             'categ' => "Maison",
         ]);
         $Appartement = $repo->findBy([
-            'idUser' => 12312122,
+            'idUser' => $cin,
             'categ' => "Appartement",
         ]);
         $Chambre = $repo->findBy([
-            'idUser' => 12312122,
+            'idUser' => $cin,
             'categ' => "Chambre",
         ]);
         $Voiture = $repo->findBy([
-            'idUser' => 12312122,
+            'idUser' => $cin,
             'categ' => "Voiture",
         ]);
         $Vélo = $repo->findBy([
-            'idUser' => 12312122,
+            'idUser' => $cin,
             'categ' => "Vélo",
         ]);
         $Moto = $repo->findBy([
-            'idUser' => 12312122,
+            'idUser' => $cin,
             'categ' => "Moto",
         ]);
 
@@ -118,7 +127,9 @@ class OffresController extends AbstractController
      */
     public function Approuver(EntityManagerInterface $entityManager): Response
     {
-   
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+
+        $cin = $this->getUser()->getRoles();
         $offres = $entityManager
             ->getRepository(Offres::class)
             ->findAll([
@@ -127,7 +138,8 @@ class OffresController extends AbstractController
        
 
                 return $this->render('offres/ApprouverOffres.html.twig', [
-                    'offres' => $offres
+                    'offres' => $offres,
+                    'user' =>$cin,
                 ]);
     }
 
@@ -154,7 +166,13 @@ class OffresController extends AbstractController
      */
     public function new(Request $request, EntityManagerInterface $entityManager,FlashyNotifier $flashy): Response
     {
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+
+        $cin = $this->getUser();
+
         $offre = new Offres();
+
+
         $form = $this->createForm(OffresType::class, $offre);
         $form->handleRequest($request);
 
@@ -162,7 +180,7 @@ class OffresController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
 
-            
+
             $file = $form->get('image')->getData();
             $newFilename = md5(uniqid()).'.'.$file->guessExtension();
             try {
@@ -173,7 +191,7 @@ class OffresController extends AbstractController
             } catch (FileException $e) {
             }
 
-
+            $offre->setIdUser($cin);
             $offre->setEtat(false);
              if($offre->getCateg() == 'Appartement' || $offre->getCateg() == 'Maison' || $offre->getCateg() == 'Chambre'){
                  $offre->setType("Logement");

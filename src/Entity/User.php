@@ -312,8 +312,9 @@ class User implements UserInterface
     }
     public function __toString()
     {
-        return $this->roles;
+        return $this->cin;
     }
+
     /**
      * @see UserInterface
      */

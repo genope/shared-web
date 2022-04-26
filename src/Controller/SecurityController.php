@@ -73,11 +73,11 @@ class SecurityController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
 
+
             if (!$captchaService->validateCaptcha($request->get('g-recaptcha-response'))) {
                 $form->addError(new FormError($translator->trans('captcha.wrong')));
                 throw new ValidatorException('captcha.wrong');
             }
-
             $user->setActivationToken(md5(uniqid()));
             $user->setRoles(array('ROLE_GUEST'));
             $user->setEtat(array('Approved'));
