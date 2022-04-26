@@ -33,9 +33,19 @@ class UserController extends AbstractController
             ->getRepository(User::class)
             ->findAll();
 
+        if ($this->getUser() ){
+
+            $userRole = $this->getUser()->getRoles();
+            $ci = $this->getUser();
+        }else{
+
+            $ci = null;
+            $userRole = null;
+        }
         return $this->render('/user/index.html.twig', [
             'users' => $users,
             'user' =>$cin,
+            'Usercin' =>$ci,
         ]);
     }
     /**
@@ -48,16 +58,23 @@ class UserController extends AbstractController
             $userCon = $this->getUser()->getCin();
             $userName = $this->getUser()->getNom();
             $ci = $this->getUser();
+            $userRole = $this->getUser()->getRoles();
+
         }else {
             $userCon = 0;
             $userName = "";
             $ci = null;
+            $userRole = null;
+
 
         }
         return $this->render('index.html.twig', [
+
             'userCon' => $userCon,
             'userName' => $userName,
             'Usercin' =>$ci,
+            'userRole' =>$userRole,
+            'user' =>$userRole
         ]);
     }
 
@@ -79,11 +96,25 @@ class UserController extends AbstractController
             $entityManager->flush();
             return $this->redirectToRoute('app_user_index', [], Response::HTTP_SEE_OTHER);
         }
+        if ($this->getUser() ){
+            $userCon = $this->getUser()->getCin();
+            $userName = $this->getUser()->getNom();
+            $userRole = $this->getUser()->getRoles();
+            $ci = $this->getUser();
+        }else{
+            $userCon = 0;
+            $userName = "";
+            $ci = null;
+            $userRole = null;
+        }
 
         return $this->render('user/profile.html.twig', [
             'user' => $user,
             'form' => $form->createView(),
             'users' =>$cin,
+            'userName' => $userName,
+            'Usercin' =>$ci,
+            'userRole' =>$userRole
         ]);
     }
     /**

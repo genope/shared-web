@@ -25,16 +25,14 @@ class ShopController extends AbstractController
         if ($this->getUser() ){
             $userCon = $this->getUser()->getCin();
             $userName = $this->getUser()->getNom();
-
+            $userRole = $this->getUser()->getRoles();
             $ci = $this->getUser();
         }else{
             $userCon = 0;
-        $userName = "";
-        }
-
+            $userName = "";
             $ci = null;
-
-
+            $userRole = null;
+        }
         return $this->render('shop/indexFrontGrid.html.twig', [
             'controller_name' => 'ShopController',
             'produits' => $produits,
@@ -42,6 +40,7 @@ class ShopController extends AbstractController
             'userCon' => $userCon,
             'userName' => $userName,
             'Usercin' =>$ci,
+            'userRole' =>$userRole
         ]);
     }
 
@@ -60,10 +59,13 @@ class ShopController extends AbstractController
             $userCon = $this->getUser()->getCin();
             $userName = $this->getUser()->getNom();
             $ci = $this->getUser();
-        } else {
+            $userRole = $this->getUser()->getRoles();
+        }else {
+
             $userCon = 0;
             $userName = "";
             $ci = null;
+            $userRole = null;
 
 
             return $this->render('shop/indexFrontList.html.twig', [
@@ -74,7 +76,19 @@ class ShopController extends AbstractController
                 'userName' => $userName,
                 'Usercin' => $ci,
 
-            ]);
-        }
+        return $this->render('shop/indexFrontList.html.twig', [
+            'controller_name' => 'ShopController',
+            'produits' => $produits,
+            'categories' => $categories,
+            'userCon' => $userCon,
+            'userName' => $userName,
+            'Usercin' =>$ci,
+            'userRole' =>$userRole
+
+        ]);
     }
+    }
+
+
 }
+

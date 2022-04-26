@@ -41,12 +41,25 @@ class ProduitController extends AbstractController
             $request -> query->getInt('page',1),
             4
         );
+        if ($this->getUser() ){
+            $userCon = $this->getUser()->getCin();
+            $userName = $this->getUser()->getNom();
+            $userRole = $this->getUser()->getRoles();
+            $ci = $this->getUser();
+        }else{
+            $userCon = 0;
+            $userName = "";
+            $ci = null;
+            $userRole = null;
+        }
 
 
         return $this->render('produit/index.html.twig', [
             'categories' => $categories,
             'produits' => $produits,
             'user'=>$cin,
+            'Usercin' =>$ci,
+
         ]);
         //json
 
@@ -69,6 +82,14 @@ class ProduitController extends AbstractController
             ->getRepository(categorieproduit::class)
             ->findAll();
 
+        if ($this->getUser() ){
+
+            $ci = $this->getUser();
+        }else{
+
+            $ci = null;
+
+        }
         if ($form->isSubmitted() && $form->isValid()) {
 
             $file = $form->get('image')->getData();
@@ -93,6 +114,8 @@ class ProduitController extends AbstractController
             'produit' => $produit,
             'form' => $form->createView(),
             'user'=>$cin,
+            'Usercin' =>$ci,
+
         ]);
     }
 
