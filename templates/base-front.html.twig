@@ -85,16 +85,18 @@
                                     <div class="utf_user_menu">
                                         <div class="utf_user_name"><span><img src="images/dashboard-avatar.jpg" alt=""></span>Bonjour, {{ userName }}</div>
                                         <ul>
-                                            <li><a href="dashboard.html"><i class="sl sl-icon-layers"></i> Dashboard</a></li>
-                                            <li><a href="dashboard_my_profile.html"><i class="sl sl-icon-user"></i> My Profile</a></li>
-                                            <li><a href="dashboard_my_listing.html"><i class="sl sl-icon-list"></i> My Listing</a></li>
-                                            <li><a href="dashboard_messages.html"><i class="sl sl-icon-envelope-open"></i> Messages</a></li>
-                                            <li><a href="dashboard_bookings.html"><i class="sl sl-icon-docs"></i> Booking</a></li>
+                                            {% if userRole[0] != "ROLE_GUEST" %}
+                                                <li><a href="{{ path('app_dashboard') }}"><i class="sl sl-icon-layers"></i> Dashboard</a></li>
+                                            {% endif %}
+                                            {% if userRole[0] == "ROLE_ADMIN" %}
+                                                <li><a href="{{ path('app_produit_index') }}"><i class="sl sl-icon-layers"></i> Gestion Produit</a></li>
+                                            {% endif %}
+                                            <li><a href="{{ path('app_user_show',{'cin': Usercin.cin}) }}"><i class="sl sl-icon-user"></i> My Profile</a></li>
                                             <li><a href="index_1.html"><i class="sl sl-icon-power"></i> Logout</a></li>
                                         </ul>
                                     </div>
                                 {% else %}
-                                    <a href="{{ path('app_panierdetails_index') }}">Login</a>
+                                    <a href="{{ path('app_login') }}">Login</a>
                                 {% endif %}
                             {% endif %}
                         </div>

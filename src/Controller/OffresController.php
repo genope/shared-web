@@ -59,16 +59,20 @@ class OffresController extends AbstractController
             $userCon = $this->getUser()->getCin();
             $userName = $this->getUser()->getNom();
             $ci = $this->getUser();
+            $userRole = $this->getUser()->getRoles();
 
         }else {
             $userCon = 0;
             $userName = "";
+            $ci = null;
+            $userRole = null;
         }
         return $this->render('offres/GridOffres.html.twig', [
             'offres' => $offres,
                 'userCon' => $userCon,
                 'userName' => $userName,
             'Usercin' =>$ci,
+            'userRole' =>$userRole
         ]);
     }
     /**
@@ -95,7 +99,7 @@ class OffresController extends AbstractController
         ]);
     }
         /**
-     * @Route("/dashboard", name="dashboard", methods={"GET"})
+     * @Route("/dashboard", name="app_dashboard", methods={"GET"})
      */
     public function MesStatistique(OffresRepository $repo): Response
     {
@@ -103,7 +107,9 @@ class OffresController extends AbstractController
         $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
 
         $cin = $this->getUser();
-     
+        $user = $this->getUser()->getRoles();
+
+
         $Maison = $repo->findBy([
             'idUser' => $cin,
             'categ' => "Maison",
@@ -135,7 +141,9 @@ class OffresController extends AbstractController
                 'Chambre' => count($Chambre),
                 'Voiture' => count($Voiture),
                 'Vélo' => count($Vélo),
-                'Moto' => count($Moto)
+                'Moto' => count($Moto),
+                    'user' => $user,
+                    'Usercin' =>$cin,
                 ]);
     }
 
@@ -187,10 +195,14 @@ class OffresController extends AbstractController
             $userCon = $this->getUser()->getCin();
             $userName = $this->getUser()->getNom();
             $ci = $this->getUser();
+            $userRole = $this->getUser()->getRoles();
+
         }else {
             $userCon = 0;
             $userName = "";
             $ci = null;
+            $userRole = null;
+
         }
 
 
@@ -201,6 +213,7 @@ class OffresController extends AbstractController
             'userCon' => $userCon,
             'userName' => $userName,
             'Usercin' =>$ci,
+            'userRole' =>$userRole
 
         ]);
     }
