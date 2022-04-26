@@ -55,9 +55,20 @@ class OffresController extends AbstractController
         $offres = $entityManager
             ->getRepository(Offres::class)
             ->findAll();
+        if ($this->getUser() ){
+            $userCon = $this->getUser()->getCin();
+            $userName = $this->getUser()->getNom();
+            $ci = $this->getUser();
 
+        }else {
+            $userCon = 0;
+            $userName = "";
+        }
         return $this->render('offres/GridOffres.html.twig', [
             'offres' => $offres,
+                'userCon' => $userCon,
+                'userName' => $userName,
+            'Usercin' =>$ci,
         ]);
     }
     /**
@@ -163,12 +174,24 @@ class OffresController extends AbstractController
         $offres = $entityManager
             ->getRepository(Offres::class)
             ->findAll();
+        if ($this->getUser() ){
+            $userCon = $this->getUser()->getCin();
+            $userName = $this->getUser()->getNom();
+            $ci = $this->getUser();
+        }else {
+            $userCon = 0;
+            $userName = "";
+        }
 
 
        $liste_Offres = $paginator->paginate($offres,$request->query->getInt('page',1),5);
         return $this->render('offres/ListesOffres.html.twig', [
             'offres' => $offres,
-            'filtre'=>$liste_Offres
+            'filtre'=>$liste_Offres,
+            'userCon' => $userCon,
+            'userName' => $userName,
+            'Usercin' =>$ci,
+
         ]);
     }
 

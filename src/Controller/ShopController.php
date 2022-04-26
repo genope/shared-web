@@ -25,9 +25,12 @@ class ShopController extends AbstractController
         if ($this->getUser() ){
             $userCon = $this->getUser()->getCin();
             $userName = $this->getUser()->getNom();
-        }else
+
+            $ci = $this->getUser();
+        }else{
             $userCon = 0;
         $userName = "";
+        }
 
         return $this->render('shop/indexFrontGrid.html.twig', [
             'controller_name' => 'ShopController',
@@ -35,6 +38,7 @@ class ShopController extends AbstractController
             'categories' => $categories,
             'userCon' => $userCon,
             'userName' => $userName,
+            'Usercin' =>$ci,
         ]);
     }
 
@@ -51,11 +55,12 @@ class ShopController extends AbstractController
             ->findAll();
         if ($this->getUser() ){
             $userCon = $this->getUser()->getCin();
-            $userName = $this->getUser()->getName();
-        }else
+            $userName = $this->getUser()->getNom();
+            $ci = $this->getUser();
+        }else {
             $userCon = 0;
-        $userName = "";
-
+            $userName = "";
+        }
 
         return $this->render('shop/indexFrontList.html.twig', [
             'controller_name' => 'ShopController',
@@ -63,6 +68,8 @@ class ShopController extends AbstractController
             'categories' => $categories,
             'userCon' => $userCon,
             'userName' => $userName,
+            'Usercin' =>$ci,
+
         ]);
     }
 

@@ -45,7 +45,8 @@
 
                         <nav id="navigation" class="style_one">
                             <ul id="responsive">
-                                <li><a class="current" href="{{ path('app_user_index') }}">{% trans %}Accueil{% endtrans %} </a></li>
+
+                                <li><a class="current" href="{{ path('app_user_index') }}">{% trans %}Accueil{% endtrans %}</a></li>
                                 <li><a href="{{path('app_offres_index')}}"> Offres</a>
                                     <ul>
                                         <li><a href={{path('liste_offre')}}>Liste Offres</a></li>
@@ -188,7 +189,9 @@
 
 <script>
     var typed = new Typed('.typed-words', {
-        strings: ["Attractions", " Restaurants", " Hotels"],
+
+        strings: ["Evenements"," Logements"," Moyen De transports"],
+
         typeSpeed: 80,
         backSpeed: 80,
         backDelay: 4000,
