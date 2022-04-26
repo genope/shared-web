@@ -48,6 +48,8 @@ class ProduitController extends AbstractController
             'produits' => $produits,
             'user'=>$cin,
         ]);
+        //json
+
     }
 
     /**
