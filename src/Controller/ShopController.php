@@ -60,7 +60,7 @@ class ShopController extends AbstractController
 
             $userName = "";
             $ci = null;
-        }
+
 
         return $this->render('shop/indexFrontList.html.twig', [
             'controller_name' => 'ShopController',
