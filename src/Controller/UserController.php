@@ -39,7 +39,21 @@ class UserController extends AbstractController
      */
     public function index(): Response
     {
-        return $this->render('index.html.twig');
+
+        if ($this->getUser() ){
+            $userCon = $this->getUser()->getCin();
+            $userName = $this->getUser()->getNom();
+            $ci = $this->getUser();
+        }else {
+            $userCon = 0;
+            $userName = "";
+            $ci = null;
+        }
+        return $this->render('index.html.twig', [
+            'userCon' => $userCon,
+            'userName' => $userName,
+            'Usercin' =>$ci,
+        ]);
     }
 
 

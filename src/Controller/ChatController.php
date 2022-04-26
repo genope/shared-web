@@ -50,6 +50,15 @@ intval($sender);
         $form = $this->createForm(ChatType::class, $chat);
         $form->handleRequest($request);
 
+        if ($this->getUser() ){
+            $userCon = $this->getUser()->getCin();
+            $userName = $this->getUser()->getNom();
+            $ci = $this->getUser();
+        }else {
+            $userCon = 0;
+            $userName = "";
+            $ci = null;
+        }
 
 
 

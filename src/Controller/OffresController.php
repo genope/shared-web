@@ -158,6 +158,16 @@ class OffresController extends AbstractController
             ->getRepository(Offres::class)
             ->findAll();
 
+        if ($this->getUser() ){
+            $userCon = $this->getUser()->getCin();
+            $userName = $this->getUser()->getNom();
+            $ci = $this->getUser();
+        }else {
+            $userCon = 0;
+            $userName = "";
+            $ci = null;
+        }
+
 
        $liste_Offres = $paginator->paginate($offres,$request->query->getInt('page',1),5);
         return $this->render('offres/ListesOffres.html.twig', [
