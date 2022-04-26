@@ -77,7 +77,7 @@
                             </li>
                         {% endif %}
                         {% if user[0] == "ROLE_HOST" %}
-                            <li><a href="{{ path('dashboard') }}"><i class="sl sl-icon-chart"></i> Mes statistiques</a>
+                            <li><a href="{{ path('app_dashboard') }}"><i class="sl sl-icon-chart"></i> Mes statistiques</a>
                             </li>
                         {% endif %}
                         {% if user[0] == "ROLE_HOST" %}
@@ -102,7 +102,7 @@
                             <li><a href="{{ path('app_categorieproduit_index') }}"><i
                                             class="sl sl-icon-envelope-open"></i> Categories</a></li>
                         {% endif %}
-                        <li style="border-bottom-color: red"><a href="index_1.html" ><i class="sl sl-icon-power"></i> Logout</a></li>
+                        <li style="border-bottom-color: red"><a href="{{ path('app_logout') }}" ><i class="sl sl-icon-power"></i> Logout</a></li>
 
                     </ul>
                 </div>
