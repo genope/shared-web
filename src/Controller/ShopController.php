@@ -22,11 +22,19 @@ class ShopController extends AbstractController
         $categories = $entityManager
             ->getRepository(Categorieproduit::class)
             ->findAll();
+        if ($this->getUser() ){
+            $userCon = $this->getUser()->getCin();
+            $userName = $this->getUser()->getName();
+        }else
+            $userCon = 0;
+        $userName = "";
 
         return $this->render('shop/indexFrontGrid.html.twig', [
             'controller_name' => 'ShopController',
             'produits' => $produits,
             'categories' => $categories,
+            'userCon' => $userCon,
+            'userName' => $userName,
         ]);
     }
 
@@ -41,11 +49,20 @@ class ShopController extends AbstractController
         $categories = $entityManager
             ->getRepository(Categorieproduit::class)
             ->findAll();
+        if ($this->getUser() ){
+            $userCon = $this->getUser()->getCin();
+            $userName = $this->getUser()->getName();
+        }else
+            $userCon = 0;
+        $userName = "";
+
 
         return $this->render('shop/indexFrontList.html.twig', [
             'controller_name' => 'ShopController',
             'produits' => $produits,
             'categories' => $categories,
+            'userCon' => $userCon,
+            'userName' => $userName,
         ]);
     }
 
