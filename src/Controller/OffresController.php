@@ -31,6 +31,7 @@ class OffresController extends AbstractController
 
 
         $message = (new \Swift_Message('Confirmation'))
+
         ->setFrom('yeektheb@gmail.com')
         ->setTo($offre->getIdUser()->getEmail())
         ->setBody($this->renderView('offres/test.html.twig',
@@ -43,6 +44,7 @@ class OffresController extends AbstractController
         $nbr = $repo->Approuver($offre->getIdOffre());
 
         return $this->redirectToRoute('Approuver');
+
       
     }
     /**
@@ -63,6 +65,7 @@ class OffresController extends AbstractController
      */
     public function MesOffre(EntityManagerInterface $entityManager): Response
     {
+
         $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
 
         $cin = $this->getUser()->getRoles();
@@ -85,6 +88,7 @@ class OffresController extends AbstractController
      */
     public function MesStatistique(OffresRepository $repo): Response
     {
+
         $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
 
         $cin = $this->getUser();
@@ -124,11 +128,12 @@ class OffresController extends AbstractController
                 ]);
     }
 
-        /**
+     /**
      * @Route("/Approuver", name="Approuver", methods={"GET", "POST"})
      */
     public function Approuver(EntityManagerInterface $entityManager): Response
     {
+
         $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
 
         $cin = $this->getUser()->getRoles();
@@ -139,6 +144,7 @@ class OffresController extends AbstractController
             ->findAll([
                 'etat' => "0",
             ]);
+
        
 
                 return $this->render('offres/ApprouverOffres.html.twig', [
@@ -172,6 +178,7 @@ class OffresController extends AbstractController
      */
     public function new(Request $request, EntityManagerInterface $entityManager,FlashyNotifier $flashy): Response
     {
+
         $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
 
         $cin = $this->getUser();
@@ -197,6 +204,7 @@ class OffresController extends AbstractController
             } catch (FileException $e) {
             }
 
+
             $offre->setIdUser($cin);
             $offre->setEtat(false);
              if($offre->getCateg() == 'Appartement' || $offre->getCateg() == 'Maison' || $offre->getCateg() == 'Chambre'){
@@ -214,6 +222,7 @@ class OffresController extends AbstractController
 
             $entityManager->persist($offre);
             $entityManager->flush();
+
 
 
            
@@ -293,6 +302,7 @@ class OffresController extends AbstractController
 
         return $this->redirectToRoute('mine', [], Response::HTTP_SEE_OTHER);
     }
+
 
  
 }
