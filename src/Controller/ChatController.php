@@ -49,6 +49,7 @@ intval($sender);
         $chat->setIdSender($cin);
         $form = $this->createForm(ChatType::class, $chat);
         $form->handleRequest($request);
+
         if ($this->getUser() ){
             $userCon = $this->getUser()->getCin();
             $userName = $this->getUser()->getNom();
@@ -56,6 +57,8 @@ intval($sender);
         }else {
             $userCon = 0;
             $userName = "";
+            $ci = null;
+
         }
 
 

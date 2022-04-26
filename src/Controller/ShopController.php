@@ -32,6 +32,9 @@ class ShopController extends AbstractController
         $userName = "";
         }
 
+            $ci = null;
+
+
         return $this->render('shop/indexFrontGrid.html.twig', [
             'controller_name' => 'ShopController',
             'produits' => $produits,
@@ -60,7 +63,9 @@ class ShopController extends AbstractController
         }else {
             $userCon = 0;
             $userName = "";
-        }
+            $ci = null;
+
+
 
         return $this->render('shop/indexFrontList.html.twig', [
             'controller_name' => 'ShopController',
