@@ -25,6 +25,7 @@ class ShopController extends AbstractController
         if ($this->getUser() ){
             $userCon = $this->getUser()->getCin();
             $userName = $this->getUser()->getNom();
+
             $ci = $this->getUser();
         }else{
             $userCon = 0;
