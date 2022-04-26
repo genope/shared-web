@@ -55,9 +55,20 @@ class OffresController extends AbstractController
         $offres = $entityManager
             ->getRepository(Offres::class)
             ->findAll();
+        if ($this->getUser() ){
+            $userCon = $this->getUser()->getCin();
+            $userName = $this->getUser()->getNom();
+            $ci = $this->getUser();
 
+        }else {
+            $userCon = 0;
+            $userName = "";
+        }
         return $this->render('offres/GridOffres.html.twig', [
             'offres' => $offres,
+                'userCon' => $userCon,
+                'userName' => $userName,
+            'Usercin' =>$ci,
         ]);
     }
     /**
@@ -69,6 +80,7 @@ class OffresController extends AbstractController
         $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
 
         $cin = $this->getUser()->getRoles();
+        $Usercin = $this->getUser();
 
         $offres = $entityManager
             ->getRepository(Offres::class)
@@ -78,7 +90,8 @@ class OffresController extends AbstractController
 
         return $this->render('offres/MesOffres.html.twig', [
             'offres' => $offres,
-'user'=>$cin,
+            'user'=>$cin,
+            'Usercin'=>$Usercin,
         ]);
     }
         /**
@@ -135,6 +148,8 @@ class OffresController extends AbstractController
         $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
 
         $cin = $this->getUser()->getRoles();
+        $ci = $this->getUser();
+
         $offres = $entityManager
             ->getRepository(Offres::class)
             ->findAll([
@@ -146,6 +161,8 @@ class OffresController extends AbstractController
                 return $this->render('offres/ApprouverOffres.html.twig', [
                     'offres' => $offres,
                     'user' =>$cin,
+                    'Usercin' =>$ci,
+
                 ]);
     }
 
@@ -157,6 +174,14 @@ class OffresController extends AbstractController
         $offres = $entityManager
             ->getRepository(Offres::class)
             ->findAll();
+        if ($this->getUser() ){
+            $userCon = $this->getUser()->getCin();
+            $userName = $this->getUser()->getNom();
+            $ci = $this->getUser();
+        }else {
+            $userCon = 0;
+            $userName = "";
+        }
 
         if ($this->getUser() ){
             $userCon = $this->getUser()->getCin();
@@ -172,7 +197,11 @@ class OffresController extends AbstractController
        $liste_Offres = $paginator->paginate($offres,$request->query->getInt('page',1),5);
         return $this->render('offres/ListesOffres.html.twig', [
             'offres' => $offres,
-            'filtre'=>$liste_Offres
+            'filtre'=>$liste_Offres,
+            'userCon' => $userCon,
+            'userName' => $userName,
+            'Usercin' =>$ci,
+
         ]);
     }
 

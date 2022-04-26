@@ -58,6 +58,7 @@ intval($sender);
             $userCon = 0;
             $userName = "";
             $ci = null;
+
         }
 
 
@@ -78,6 +79,9 @@ intval($sender);
             'form' => $form->createView(),
             'user' => $cin,
             'sender'=>$sender,
+            'userCon' => $userCon,
+            'userName' => $userName,
+            'Usercin' =>$ci,
         ]);
     }
 
