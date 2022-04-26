@@ -1,6 +1,6 @@
 site:
   name: My Website
-home: Accueil
+Accueil: Accueil
 
 button:
   save: Save

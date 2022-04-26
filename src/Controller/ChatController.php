@@ -49,7 +49,14 @@ intval($sender);
         $chat->setIdSender($cin);
         $form = $this->createForm(ChatType::class, $chat);
         $form->handleRequest($request);
-
+        if ($this->getUser() ){
+            $userCon = $this->getUser()->getCin();
+            $userName = $this->getUser()->getNom();
+            $ci = $this->getUser();
+        }else {
+            $userCon = 0;
+            $userName = "";
+        }
 
 
 
@@ -69,6 +76,9 @@ intval($sender);
             'form' => $form->createView(),
             'user' => $cin,
             'sender'=>$sender,
+            'userCon' => $userCon,
+            'userName' => $userName,
+            'Usercin' =>$ci,
         ]);
     }
 
