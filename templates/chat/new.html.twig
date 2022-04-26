@@ -164,7 +164,7 @@
                             <img src="{{ asset('Front-office/forum/img/avatar-2.jpg') }}" class="rounded-circle" alt="image" width="80" height="130">
                         </figure>
                         <div class="mt-1">
-                            <h5 class="mb-1">Iheb Kraiem</h5>
+                            <h5 class="mb-1">{{user.nom}}</h5>
                             <small class="text-muted mb-2">
 
                             </small>
@@ -201,13 +201,14 @@
                 <div class="chat-body">
                     {% for chat in chats %}
                         <div class="messages">
-                            <div class="chats">
+                        {% if user != chat.idSender %}
+                             <div class="chats">
                                 <div class="chat-avatar">
                                     <img src="{{ asset('Front-office/forum/img/avatar-2.jpg') }}" class="rounded-circle dreams_chat" alt="image">
                                 </div>
                                 <div class="chat-content">
                                     <div class="message-content">
-                                        {{ chat.message }}
+                                       hh {{ chat.message }}
                                     </div>
                                     <div class="chat-time">
                                         <div>
@@ -224,7 +225,8 @@
                                     </ul>
                                 </div>
                             </div>
-
+{% endif %}
+{% if user == chat.idSender %}
                             <div class="chats chats-right" >
                                 <div>
                                     {{ include('chat/_delete_form.html.twig') }}
@@ -243,6 +245,7 @@
                                 </div>
 
                             </div>
+                 {% endif %}
                         </div>
                     {% endfor %}
                 </div>

@@ -20,6 +20,9 @@ class CategorieproduitController extends AbstractController
      */
     public function index(Request $request, EntityManagerInterface $entityManager): Response
     {
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+
+        $cin = $this->getUser()->getRoles();
         $categorieproduitA = new Categorieproduit();
         $form = $this->createForm(CategorieproduitType::class, $categorieproduitA);
         $form->handleRequest($request);
@@ -41,6 +44,7 @@ class CategorieproduitController extends AbstractController
         return $this->render('categorieproduit/index.html.twig', [
             'categorieproduits' => $categorieproduits,
             'form' => $form->createView(),
+            'user'=>$cin,
         ]);
     }
 

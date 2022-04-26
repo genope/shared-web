@@ -34,15 +34,21 @@ class ChatController extends AbstractController
      */
     public function new(Request $request, EntityManagerInterface $entityManager): Response
     {
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+
+        $cin = $this->getUser();
+
+        $sender=$this->getUser()->getCin();
+
         $chats = $entityManager
             ->getRepository(Chat::class)
             ->findAll();
-
+intval($sender);
 
         $chat = new Chat();
+        $chat->setIdSender($cin);
         $form = $this->createForm(ChatType::class, $chat);
         $form->handleRequest($request);
-
 
 
 
@@ -61,6 +67,8 @@ class ChatController extends AbstractController
             'chats' => $chats,
             'chat' => $chat,
             'form' => $form->createView(),
+            'user' => $cin,
+            'sender'=>$sender,
         ]);
     }
 
