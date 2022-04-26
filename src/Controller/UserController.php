@@ -25,6 +25,9 @@ class UserController extends AbstractController
      */
     public function listUsers(EntityManagerInterface $entityManager): Response
     {
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+
+        $cin = $this->getUser()->getRoles();
         $this->denyAccessUnlessGranted('ROLE_ADMIN');
         $users = $entityManager
             ->getRepository(User::class)
@@ -32,6 +35,7 @@ class UserController extends AbstractController
 
         return $this->render('/user/index.html.twig', [
             'users' => $users,
+            'user' =>$cin,
         ]);
     }
     /**
@@ -49,18 +53,22 @@ class UserController extends AbstractController
      */
     public function show(Request $request, User $user, EntityManagerInterface $entityManager): Response
     {
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+
+        $cin = $this->getUser();
         $form = $this->createForm(UpdateType::class, $user);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager->flush();
 
+            $entityManager->flush();
             return $this->redirectToRoute('app_user_index', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->render('user/profile.html.twig', [
             'user' => $user,
             'form' => $form->createView(),
+            'users' =>$cin,
         ]);
     }
     /**

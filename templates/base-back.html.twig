@@ -16,8 +16,10 @@
     <!-- Google Font -->
 
 
-    <link href="https://fonts.googleapis.com/css?family=Nunito:300,400,600,700,800&amp;display=swap&amp;subset=latin-ext,vietnamese" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,500,600,700,800" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Nunito:300,400,600,700,800&amp;display=swap&amp;subset=latin-ext,vietnamese"
+          rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,500,600,700,800" rel="stylesheet"
+          type="text/css">
 </head>
 <body>
 
@@ -29,7 +31,9 @@
                 <div class="container">
                     <div class="utf_left_side">
 
-                        <div id="logo"> <a href="#"><img src="{{ asset('front-office/images/shared.png') }}" alt=""></a> <a href="index_1.html" class="dashboard-logo"><img src="{{ asset('front-office/images/shared.png') }}" alt=""></a> </div>
+                        <div id="logo"><a href="#"><img src="{{ asset('front-office/images/shared.png') }}" alt=""></a>
+                            <a href="index_1.html" class="dashboard-logo"><img
+                                        src="{{ asset('front-office/images/shared.png') }}" alt=""></a></div>
 
                         <div class="mmenu-trigger">
                             <button class="hamburger utfbutton_collapse" type="button">
@@ -59,11 +63,11 @@
                                                 <li><a href="page_categorie_two.html">Categorie Two</a></li>
                                             </ul>
                                         </li>
-                                            <ul>
-                                                <li><a href="page_icons_one.html">Icon-Mind Icon</a></li>
-                                                <li><a href="page_icons_two.html">Simple Line Icon</a></li>
-                                                <li><a href="page_icons_three.html">Font Awesome Icon</a></li>
-                                            </ul>
+                                        <ul>
+                                            <li><a href="page_icons_one.html">Icon-Mind Icon</a></li>
+                                            <li><a href="page_icons_two.html">Simple Line Icon</a></li>
+                                            <li><a href="page_icons_three.html">Font Awesome Icon</a></li>
+                                        </ul>
                                         </li>
                                         <li><a href="page_not_found.html">Page Error 404</a></li>
                                         <li><a href="page_coming_soon.html">Coming Soon</a></li>
@@ -72,15 +76,14 @@
 
                                 </li>
                                 <li>
-                                  <a href="{{path('app_offres_index')}}">List Offres</a>
+                                    <a href="{{ path('app_offres_index') }}">List Offres</a>
 
-                               </li>
+                                </li>
 
                                 <li>
-                                  <a href="{{path('app_chat_new')}}">Forum</a>
+                                    <a href="{{ path('app_chat_new') }}">Forum</a>
 
-                               </li>
-
+                                </li>
 
 
                             </ul>
@@ -119,17 +122,23 @@
                                 </div>
                             </div>
                             <a class="dashboard_header_button_item" href="{{ path('app_panierdetails_index') }}">
-                                <i class="sl sl-icon-basket" ></i>
+                                <i class="sl sl-icon-basket"></i>
 
                             </a>
                             <div class="utf_user_menu">
-                                <div class="utf_user_name"><span><img src="images/dashboard-avatar.jpg" alt=""></span>Hi, John!</div>
+                                <div class="utf_user_name"><span><img src="images/dashboard-avatar.jpg" alt=""></span>Hi,
+                                    John!
+                                </div>
                                 <ul>
                                     <li><a href="dashboard.html"><i class="sl sl-icon-layers"></i> Dashboard</a></li>
-                                    <li><a href="dashboard_my_profile.html"><i class="sl sl-icon-user"></i> My Profile</a></li>
-                                    <li><a href="dashboard_my_listing.html"><i class="sl sl-icon-list"></i> My Listing</a></li>
-                                    <li><a href="dashboard_messages.html"><i class="sl sl-icon-envelope-open"></i> Messages</a></li>
-                                    <li><a href="dashboard_bookings.html"><i class="sl sl-icon-docs"></i> Booking</a></li>
+                                    <li><a href="dashboard_my_profile.html"><i class="sl sl-icon-user"></i> My
+                                            Profile</a></li>
+                                    <li><a href="dashboard_my_listing.html"><i class="sl sl-icon-list"></i> My
+                                            Listing</a></li>
+                                    <li><a href="dashboard_messages.html"><i class="sl sl-icon-envelope-open"></i>
+                                            Messages</a></li>
+                                    <li><a href="dashboard_bookings.html"><i class="sl sl-icon-docs"></i> Booking</a>
+                                    </li>
                                     <li><a href="index_1.html"><i class="sl sl-icon-power"></i> Logout</a></li>
                                 </ul>
                             </div>
@@ -147,32 +156,40 @@
                 <div class="utf_dashboard_navigation_inner_block">
                     <ul>
 
-{% if user[0] == "ROLE_ADMIN" %}
-                        <li  ><a href="{{ path('Approuver') }}"><i class="sl sl-icon-layers"></i> Approuver Produits</a></li>
-              {% endif %}
-                        {% if user[0] == "ROLE_HOST" %}
-                        <li ><a href="{{ path('app_offres_new') }}"><i class="sl sl-icon-plus"></i> Add Offres</a></li>
+                        {% if user[0] == "ROLE_ADMIN" %}
+                            <li><a href="{{ path('Approuver') }}"><i class="sl sl-icon-layers"></i> Approuver
+                                    Produits</a></li>
                         {% endif %}
                         {% if user[0] == "ROLE_HOST" %}
-                         <li ><a href="{{ path('dashboard') }}"><i class="sl sl-icon-chart"></i> Mes statistiques</a></li>
-                         {% endif %}
-{% if user[0] == "ROLE_HOST" %}
-                        <li ><a href="{{ path('mine') }}"><i class="sl sl-icon-docs"></i> My Offers</a></li>
+                            <li><a href="{{ path('app_offres_new') }}"><i class="sl sl-icon-plus"></i> Add Offres</a>
+                            </li>
+                        {% endif %}
+                        {% if user[0] == "ROLE_HOST" %}
+                            <li><a href="{{ path('dashboard') }}"><i class="sl sl-icon-chart"></i> Mes statistiques</a>
+                            </li>
+                        {% endif %}
+                        {% if user[0] == "ROLE_HOST" %}
+                            <li><a href="{{ path('mine') }}"><i class="sl sl-icon-docs"></i> My Offers</a></li>
                         {% endif %}
 
+                        {% if user[0] == "ROLE_ADMIN" %}
+                            <li><a href="{{ path('app_user_users') }}"><i class="sl sl-icon-layers"></i> Approuver Users</a>
+                            </li>
 
-<li><a href=""><i class="sl sl-icon-layers"></i> Approuver Users</a></li>
-
-<li><a href="{{ path('app_user_index') }}"><i class="sl sl-icon-layers"></i> Profile</a></li>
+                        <li><a href="{{ path('app_user_show',{'cin': Usercin.cin}) }}"><i class="sl sl-icon-layers"></i> Profile</a></li>
+                        {% endif %}
                         <li><a href="{{ path('app_user_index') }}"><i class="sl sl-icon-layers"></i> Index</a></li>
 
-{% if user[0] == "ROLE_ADMIN" %}
-                        <li><a href="{{ path('app_produit_new') }}"><i class="sl sl-icon-plus"></i> Ajouter Produit</a></li>
+                        {% if user[0] == "ROLE_ADMIN" %}
+                            <li><a href="{{ path('app_produit_new') }}"><i class="sl sl-icon-plus"></i> Ajouter Produit</a>
+                            </li>
                         {% endif %}
-{% if user[0] == "ROLE_ADMIN" %}
-                        <li><a href="{{ path('app_produit_index') }}"><i class="sl sl-icon-docs"></i> List des produits</a></li>
-                        <li><a href="{{ path('app_categorieproduit_index') }}"><i class="sl sl-icon-envelope-open"></i> Categories</a></li>
-  {% endif %}
+                        {% if user[0] == "ROLE_ADMIN" %}
+                            <li><a href="{{ path('app_produit_index') }}"><i class="sl sl-icon-docs"></i> List des
+                                    produits</a></li>
+                            <li><a href="{{ path('app_categorieproduit_index') }}"><i
+                                            class="sl sl-icon-envelope-open"></i> Categories</a></li>
+                        {% endif %}
                         <li><a href="index_1.html"><i class="sl sl-icon-power"></i> Logout</a></li>
 
                     </ul>
@@ -194,12 +211,10 @@
 <!-- Scripts -->
 
 
-
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"
-integrity="sha512-s
+        integrity="sha512-s
 +xg36jbIujB2S2VKfpGmlC3T5V2TF31Y48DX7u2r9XZGzgPsa6wTp0QA7J9iffvdeBN0q9tKzRxVxw1JviZPg="
-crossorigin="anonymous"></script>
-
+        crossorigin="anonymous"></script>
 
 
 <script src="{{ asset('front-office/scripts/jquery-3.4.1.min.js') }}"></script>
@@ -215,9 +230,11 @@ crossorigin="anonymous"></script>
 <script src="{{ asset('front-office/scripts/color_switcher.js') }}"></script>
 <script src="{{ asset('front-office/scripts/jquery_custom.js') }}"></script>
 <script src="{{ asset('front-office/scripts/typed.js') }}"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.1/chart.min.js" integrity="sha512-QSkVNOCYLtj73J4hbmVoOV6KVZuMluZlioC+trLpewV8qMjsWqlIQvkn1KGX2StWvPMdWGBqim1xlC8krl1EKQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.1/chart.min.js"
+        integrity="sha512-QSkVNOCYLtj73J4hbmVoOV6KVZuMluZlioC+trLpewV8qMjsWqlIQvkn1KGX2StWvPMdWGBqim1xlC8krl1EKQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script>
-    (function($) {
+    (function ($) {
         try {
             var jscr1 = $('.js-scrollbar');
             if (jscr1[0]) {
@@ -231,8 +248,8 @@ crossorigin="anonymous"></script>
 
 </script>
 
-    {% block stylesheets %}
-    {% endblock %}
+{% block stylesheets %}
+{% endblock %}
 
 {{ include('@MercurySeriesFlashy/flashy.html.twig') }}
 </body>
