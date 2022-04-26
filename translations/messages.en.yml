@@ -1,6 +1,6 @@
 site:
   name: My Website
-
+home: Home
 button:
   save: Save
 user:
@@ -29,10 +29,13 @@ user:
   activation-link: A link to activate your account has been sent to your inbox. Check it out!
   request-password-link: A link to reset your password has been sent to your inbox. Check it out!
   mailer:
-    activation.html: 'Click <a href="%activationUrl%" target="_blank">here</a> to activate your account'
+    activation.html: 'Click <a href="%activationUrl.K
+    %" target="_blank">here</a> to activate your account'
     activation.txt: 'Click on the following link to activate your account %activationUrl%'
     reset-password.html: 'Click <a href="%resetPasswordUrl%" target="_blank">here</a> to reset your password'
     reset-password.txt: 'Click on the following link to reset your password %resetPasswordUrl%'
 
 captcha.wrong: Please prove you are not a robot
 rememberme: Remember me
+fr_FR: fr
+en_EN: en

@@ -29,7 +29,7 @@ class PanierdetailsController extends AbstractController
 
         $panierwithdata = [];
 
-        foreach ($panier as $id => $quantity) {
+        foreach ($panier as $id  => $quantity) {
 
             $panierwithdata[] = [
                 'produit' => $produitRepository->find($id),

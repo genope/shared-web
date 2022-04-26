@@ -44,6 +44,8 @@ class ProduitController extends AbstractController
             'categories' => $categories,
             'produits' => $produits,
         ]);
+        //json
+
     }
 
     /**
