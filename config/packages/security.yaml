@@ -46,3 +46,4 @@ security:
      - { path: ^/admin, roles: [IS_AUTHENTICATED_FULLY,ROLE_ADMIN] }
      - { path: ^(?!/(login|register|forget_password|reset_pass|)), roles: ROLE_USER }
 
+

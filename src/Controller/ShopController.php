@@ -22,12 +22,12 @@ class ShopController extends AbstractController
         $categories = $entityManager
             ->getRepository(Categorieproduit::class)
             ->findAll();
-        if ($this->getUser() ){
+        if ($this->getUser()) {
             $userCon = $this->getUser()->getCin();
             $userName = $this->getUser()->getNom();
             $userRole = $this->getUser()->getRoles();
             $ci = $this->getUser();
-        }else{
+        } else {
             $userCon = 0;
             $userName = "";
             $ci = null;
@@ -39,8 +39,8 @@ class ShopController extends AbstractController
             'categories' => $categories,
             'userCon' => $userCon,
             'userName' => $userName,
-            'Usercin' =>$ci,
-            'userRole' =>$userRole
+            'Usercin' => $ci,
+            'userRole' => $userRole
         ]);
     }
 
@@ -60,7 +60,7 @@ class ShopController extends AbstractController
             $userName = $this->getUser()->getNom();
             $ci = $this->getUser();
             $userRole = $this->getUser()->getRoles();
-        }else {
+        } else {
 
             $userCon = 0;
             $userName = "";
@@ -75,18 +75,9 @@ class ShopController extends AbstractController
                 'userCon' => $userCon,
                 'userName' => $userName,
                 'Usercin' => $ci,
-
-        return $this->render('shop/indexFrontList.html.twig', [
-            'controller_name' => 'ShopController',
-            'produits' => $produits,
-            'categories' => $categories,
-            'userCon' => $userCon,
-            'userName' => $userName,
-            'Usercin' =>$ci,
-            'userRole' =>$userRole
-
-        ]);
-    }
+                'userRole' => $userRole,
+            ]);
+        }
     }
 
 
