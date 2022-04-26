@@ -1,6 +1,13 @@
 site:
   name: My Website
 Accueil: Accueil
+Offres: Offres
+Liste Offres: Liste Offres
+Grid Offres: Grid Offres
+Boutique: Boutique
+Boutique Grid: Boutique Grid
+Boutique Liste: Boutique Liste
+Bonjour: Bonjour
 button:
   save: Save
 user:

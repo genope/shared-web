@@ -110,6 +110,7 @@ class OffresController extends AbstractController
         $user = $this->getUser()->getRoles();
 
 
+
         $Maison = $repo->findBy([
             'idUser' => $cin,
             'categ' => "Maison",
@@ -144,6 +145,7 @@ class OffresController extends AbstractController
                 'Moto' => count($Moto),
                     'user' => $user,
                     'Usercin' =>$cin,
+
                 ]);
     }
 
@@ -153,6 +155,7 @@ class OffresController extends AbstractController
     public function Approuver(EntityManagerInterface $entityManager): Response
     {
 
+        
         $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
 
         $cin = $this->getUser()->getRoles();
