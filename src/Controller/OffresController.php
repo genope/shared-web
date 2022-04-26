@@ -66,6 +66,7 @@ class OffresController extends AbstractController
         $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
 
         $cin = $this->getUser()->getRoles();
+        $Usercin = $this->getUser();
 
         $offres = $entityManager
             ->getRepository(Offres::class)
@@ -75,7 +76,8 @@ class OffresController extends AbstractController
 
         return $this->render('offres/MesOffres.html.twig', [
             'offres' => $offres,
-'user'=>$cin,
+            'user'=>$cin,
+            'Usercin'=>$Usercin,
         ]);
     }
         /**
@@ -130,6 +132,8 @@ class OffresController extends AbstractController
         $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
 
         $cin = $this->getUser()->getRoles();
+        $ci = $this->getUser();
+
         $offres = $entityManager
             ->getRepository(Offres::class)
             ->findAll([
@@ -140,6 +144,8 @@ class OffresController extends AbstractController
                 return $this->render('offres/ApprouverOffres.html.twig', [
                     'offres' => $offres,
                     'user' =>$cin,
+                    'Usercin' =>$ci,
+
                 ]);
     }
 
