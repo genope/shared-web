@@ -239,6 +239,15 @@ class OffresController extends AbstractController
         $form->handleRequest($request);
 
 
+        if ($this->getUser() ){
+
+            $userRole = $this->getUser()->getRoles();
+            $ci = $this->getUser();
+        }else{
+
+            $ci = null;
+            $userRole = null;
+        }
 
         if ($form->isSubmitted() && $form->isValid()) {
 
@@ -284,6 +293,8 @@ class OffresController extends AbstractController
         return $this->render('offres/new.html.twig', [
             'offre' => $offre,
             'form' => $form->createView(),
+            'Usercin' =>$ci,
+            'userRole' =>$userRole
         ]);
     }
 
