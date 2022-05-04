@@ -89,7 +89,7 @@ class OffresController extends AbstractController
         $offres = $entityManager
             ->getRepository(Offres::class)
             ->findBy([
-                'idUser' => $cin,
+                'idUser' => $Usercin,
             ]);
 
         return $this->render('offres/MesOffres.html.twig', [
@@ -209,7 +209,7 @@ class OffresController extends AbstractController
         }
 
 
-       $liste_Offres = $paginator->paginate($offres,$request->query->getInt('page',1),5);
+       $liste_Offres = $paginator->paginate($offres,$request->query->getInt('page',1),3);
         return $this->render('offres/ListesOffres.html.twig', [
             'offres' => $offres,
             'filtre'=>$liste_Offres,
