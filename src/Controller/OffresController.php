@@ -15,12 +15,64 @@ use Symfony\Component\Routing\Annotation\Route;
 use Knp\Component\Pager\PaginatorInterface;
 
 use MercurySeries\FlashyBundle\FlashyNotifier;
+use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
+use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
+use Symfony\Component\Serializer\SerializerAwareInterface;
 
 /**
  * @Route("/offres")
  */
 class OffresController extends AbstractController
 {
+
+    // jawha behy hedhy sur
+    /**
+     * @Route("/Offres_mobile", name="Offres_mobile")
+     */
+    public function AfficherOffre(EntityManagerInterface $entityManager,OffresRepository $repo,NormalizerInterface $Normalizer)
+    {
+
+        $offres = $this->getDoctrine()->getRepository(Offres::class)->findAll();
+
+        //transforme  les objets(destinations) en un array json
+        $json = $Normalizer->normalize($offres, 'json', ['groups' => 'offres']);
+
+        return new Response(json_encode($json));
+    }
+    // jawha behy hedhy sur
+    /**
+     * @Route("/addOffres_mobile", name="mobile_create")
+     */
+    public function addOffre(Request $request, NormalizerInterface $Normalizer): Response
+    {
+        $entitymanager = $this->getDoctrine()->getManager();
+        $offre = new Offres();
+        $offre->setNom($request->query->get('nom'));
+        $offre->setDescription($request->query->get('description'));
+        $prixfloat = floatval($request->query->get('prix'));
+        $offre->setPrix($prixfloat);
+        $offre->setEtat(false);
+        $offre->setVille($request->query->get('ville'));
+        $offre->setCateg($request->query->get('categ'));
+        $entitymanager->persist($offre);
+        $entitymanager->flush();
+        //return new Response('categorie added successfully');
+        $json = $Normalizer->normalize($offre, 'json', ['groups' => 'offres']);
+
+        return new Response(json_encode($json));
+    }
+// jawha behy hedhy sur
+    /**
+     * @Route("/deleteOffre/{id}", name="mobile_delete")
+     */
+    public function deleteOffre(Request $request, NormalizerInterface $Normalizer, $id)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $offre = $this->getDoctrine()->getRepository(Offres::class)->find($id);
+        $em->remove($offre);
+        $em->flush();
+        return $this->json(["response" => "Offre deleted successfully"]);
+    }
 
     /**
      * @Route("/send/{id}", name="send", methods={"GET", "POST"})
@@ -47,6 +99,7 @@ class OffresController extends AbstractController
 
       
     }
+
     /**
      * @Route("/", name="app_offres_index", methods={"GET"})
      */
@@ -209,7 +262,7 @@ class OffresController extends AbstractController
         }
 
 
-       $liste_Offres = $paginator->paginate($offres,$request->query->getInt('page',1),5);
+       $liste_Offres = $paginator->paginate($offres,$request->query->getInt('page',1),2);
         return $this->render('offres/ListesOffres.html.twig', [
             'offres' => $offres,
             'filtre'=>$liste_Offres,
@@ -230,7 +283,9 @@ class OffresController extends AbstractController
 
         $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
 
+
         $cin = $this->getUser()->getRoles();
+
 
         $offre = new Offres();
 
@@ -293,9 +348,11 @@ class OffresController extends AbstractController
         return $this->render('offres/new.html.twig', [
             'offre' => $offre,
             'form' => $form->createView(),
+
             'Usercin' =>$ci,
             'userRole' =>$userRole,
             'user'=>$userRole,
+
 
         ]);
     }
@@ -366,5 +423,6 @@ class OffresController extends AbstractController
     }
 
 
- 
+    /*_______________________________________Mobile_____________________________________*/
+
 }
