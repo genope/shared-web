@@ -142,7 +142,7 @@ class OffresController extends AbstractController
         $offres = $entityManager
             ->getRepository(Offres::class)
             ->findBy([
-                'idUser' => $cin,
+                'idUser' => $Usercin,
             ]);
 
         return $this->render('offres/MesOffres.html.twig', [
@@ -260,6 +260,7 @@ class OffresController extends AbstractController
             $userRole = null;
 
         }
+
 
 
        $liste_Offres = $paginator->paginate($offres,$request->query->getInt('page',1),2);
