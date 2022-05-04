@@ -29,12 +29,20 @@ class CategorieproduitController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->persist($categorieproduitA);
-            dump($categorieproduitA);
             $entityManager->flush();
             $entityManager->clear();
 
 
             return $this->redirectToRoute('app_categorieproduit_index', [], Response::HTTP_SEE_OTHER);
+        }
+        if ($this->getUser() ){
+
+            $userRole = $this->getUser()->getRoles();
+            $ci = $this->getUser();
+        }else{
+
+            $ci = null;
+            $userRole = null;
         }
 
         $categorieproduits = $entityManager
@@ -45,6 +53,8 @@ class CategorieproduitController extends AbstractController
             'categorieproduits' => $categorieproduits,
             'form' => $form->createView(),
             'user'=>$cin,
+            'Usercin' =>$ci,
+            'userRole' =>$userRole
         ]);
     }
 
@@ -63,10 +73,21 @@ class CategorieproduitController extends AbstractController
 
             return $this->redirectToRoute('app_categorieproduit_index', [], Response::HTTP_SEE_OTHER);
         }
+        if ($this->getUser() ){
+
+            $userRole = $this->getUser()->getRoles();
+            $ci = $this->getUser();
+        }else{
+
+            $ci = null;
+            $userRole = null;
+        }
 
         return $this->render('categorieproduit/new.html.twig', [
             'categorieproduit' => $categorieproduit,
             'form' => $form->createView(),
+            'Usercin' =>$ci,
+            'userRole' =>$userRole
         ]);
     }
 

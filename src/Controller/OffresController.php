@@ -112,16 +112,20 @@ class OffresController extends AbstractController
             $userCon = $this->getUser()->getCin();
             $userName = $this->getUser()->getNom();
             $ci = $this->getUser();
+            $userRole = $this->getUser()->getRoles();
 
         }else {
             $userCon = 0;
             $userName = "";
+            $ci = null;
+            $userRole = null;
         }
         return $this->render('offres/GridOffres.html.twig', [
             'offres' => $offres,
                 'userCon' => $userCon,
                 'userName' => $userName,
             'Usercin' =>$ci,
+            'userRole' =>$userRole
         ]);
     }
     /**
@@ -148,17 +152,18 @@ class OffresController extends AbstractController
         ]);
     }
         /**
-     * @Route("/dashboard", name="dashboard", methods={"GET"})
+     * @Route("/dashboard", name="app_dashboard", methods={"GET"})
      */
     public function MesStatistique(OffresRepository $repo): Response
     {
 
         $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
 
-      
-        $cin = $this->getUser()->getRoles();
-     
-      
+        $cin = $this->getUser();
+        $user = $this->getUser()->getRoles();
+
+
+
         $Maison = $repo->findBy([
             'idUser' => $cin,
             'categ' => "Maison",
@@ -191,7 +196,9 @@ class OffresController extends AbstractController
                 'Voiture' => count($Voiture),
                 'Vélo' => count($Vélo),
                 'Moto' => count($Moto),
-                'user'=>$cin,
+                    'user' => $user,
+                    'Usercin' =>$cin,
+
                 ]);
     }
 
@@ -240,6 +247,20 @@ class OffresController extends AbstractController
             $userName = "";
         }
 
+        if ($this->getUser() ){
+            $userCon = $this->getUser()->getCin();
+            $userName = $this->getUser()->getNom();
+            $ci = $this->getUser();
+            $userRole = $this->getUser()->getRoles();
+
+        }else {
+            $userCon = 0;
+            $userName = "";
+            $ci = null;
+            $userRole = null;
+
+        }
+
 
        $liste_Offres = $paginator->paginate($offres,$request->query->getInt('page',1),2);
         return $this->render('offres/ListesOffres.html.twig', [
@@ -248,6 +269,7 @@ class OffresController extends AbstractController
             'userCon' => $userCon,
             'userName' => $userName,
             'Usercin' =>$ci,
+            'userRole' =>$userRole
 
         ]);
     }
@@ -260,9 +282,11 @@ class OffresController extends AbstractController
     {
 
         $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
-   
-        $cin = $this->getUser();
-        $us = $this->getUser()->getRoles();
+
+
+        $cin = $this->getUser()->getRoles();
+
+
         $offre = new Offres();
 
 
@@ -270,6 +294,15 @@ class OffresController extends AbstractController
         $form->handleRequest($request);
 
 
+        if ($this->getUser() ){
+
+            $userRole = $this->getUser()->getRoles();
+            $ci = $this->getUser();
+        }else{
+
+            $ci = null;
+            $userRole = null;
+        }
 
         if ($form->isSubmitted() && $form->isValid()) {
 
@@ -285,7 +318,7 @@ class OffresController extends AbstractController
             }
 
 
-            $offre->setIdUser($cin);
+            $offre->setIdUser($ci);
             $offre->setEtat(false);
              if($offre->getCateg() == 'Appartement' || $offre->getCateg() == 'Maison' || $offre->getCateg() == 'Chambre'){
                  $offre->setType("Logement");
@@ -315,7 +348,12 @@ class OffresController extends AbstractController
         return $this->render('offres/new.html.twig', [
             'offre' => $offre,
             'form' => $form->createView(),
-            'user'=>$us,
+
+            'Usercin' =>$ci,
+            'userRole' =>$userRole,
+            'user'=>$userRole,
+
+
         ]);
     }
 

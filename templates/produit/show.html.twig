@@ -1,4 +1,4 @@
-{% extends 'base-back.html.twig' %}
+{% extends 'base-front.html.twig' %}
 
 
 {% block content %}
@@ -61,9 +61,9 @@
                     <div class="row with-forms margin-top-0">
 
                         <div class="qtyButtons" >
-
+                            {% if userCon != 0 %}
                             <a href="{{ path('ajout_panier', {'idProd': produit.idProd}) }}" class="addCart-button "  ><i class="fa fa-shopping-basket"></i> Ajouter au panier</a>
-
+                            {% endif %}
                         </div>
                     </div>
 
