@@ -3,8 +3,10 @@
 namespace App\Controller;
 
 use App\Entity\Categorieproduit;
+use App\Entity\Offres;
 use App\Entity\Produit;
 use App\Form\ProduitType;
+use App\Repository\ProduitRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -13,6 +15,7 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 use Symfony\Component\String\Slugger\SluggerInterface;
 
 
@@ -21,6 +24,44 @@ use Symfony\Component\String\Slugger\SluggerInterface;
  */
 class ProduitController extends AbstractController
 {
+    /**
+     * @Route("/ProduitMobile", name="ProduitMobile", methods={"GET"})
+     */
+    public function AfficherProduit(EntityManagerInterface $entityManager,ProduitRepository $repo,NormalizerInterface $Normalizer)
+    {
+
+        $produits = $entityManager
+            ->getRepository(Produit::class)
+            ->findAll();
+        $categories = $entityManager
+            ->getRepository(Categorieproduit::class)
+            ->findAll();
+
+        $json = $Normalizer->normalize($produits, 'json', ['groups' => 'produits']);
+
+        return new Response(json_encode($json));
+    }
+    /**
+     * @Route("/ProduitMobile/{idProd}", name="app_produit_show", methods={"GET"})
+     */
+    public function showMobile(Produit $produit,NormalizerInterface $Normalizer): Response
+    {
+        $json = $Normalizer->normalize($produit, 'json', ['groups' => 'offres']);
+
+        return new Response(json_encode($json));
+    }
+    /**
+     * @Route("/deleteProduit/{id}", name="mobileDelete")
+     */
+    public function deleteProduit(Request $request, NormalizerInterface $Normalizer, $id)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $offre = $this->getDoctrine()->getRepository(Produit::class)->find($id);
+        $em->remove($offre);
+        $em->flush();
+        return $this->json(["response" => "Produit Supprimé"]);
+    }
+
     /**
      * @Route("/", name="app_produit_index", methods={"GET"})
      */
