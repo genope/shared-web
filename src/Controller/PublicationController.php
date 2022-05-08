@@ -51,6 +51,8 @@ $commentaire = $this->getDoctrine()->getRepository(Commentaire::class)->findBy([
             'userRole' =>$userRole,
             'user'=>$cin,
         ]);
+
+        
     }
 
 
