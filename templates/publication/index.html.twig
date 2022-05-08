@@ -2,7 +2,7 @@
 
 {% block footer %}Publication index{% endblock %}
 
-{% block body %}
+{% block content %}
     <div class="container">
         <div id="titlebar" class="dashboard_gradient">
             <div class="row">
@@ -42,6 +42,15 @@
                 <h4><i class="sl sl-icon-list"></i> Les publications</h4>
                 <ul>
                     {% for publication in publications %}
+                        {% set count = 0 %}
+                        {% for commentaire in commentaires %}
+{% if commentaire.idPublication.id ==  publication.id %}
+
+    {% set count = count +1 %}
+
+                            {% endif %}
+                            {% endfor %}
+
                     <li>
                         <div class="utf_list_box_listing_item">
                             <div class="utf_list_box_listing_item-img"><a href="#"><img src="{{  asset ("image/#{publication.image}") }}" alt=""></a></div>
@@ -51,25 +60,28 @@
                                     <span><i class="im im-icon-Hotel"></i> {{ publication.region }}</span>
                                     <span><i class="fa fa-map-marker"></i> {{ publication.adresse }}</span>
                                     <span><i class="fa fa-calendar"></i>{{ publication.datecreation ? publication.datecreation|date('Y-m-d') : '' }}</span>
-
-                                 <div class="utf_star_rating_section" data-rating="4.5">
-                                        <div class="utf_counter_star_rating">(4.5)</div>
-
                                     <p>{{ publication.description }}</p>
+{#                                 <div class="utf_star_rating_section" data-rating="4.5">#}
+{#                                        <div class="utf_counter_star_rating">(4.5)</div>#}
 
-                                </div>
+
+
+{#                                </div>#}
                             </div>
                         </div>
                         <div class="buttons-to-right">
                             <a href="{{ path('app_publication_show', {'id': publication.id}) }}" class="button gray"><i class="fa fa-eye"></i> Détails</a>
                             <a href="{{ path('app_publication_delete', {'id': publication.id}) }}" class="button gray"><i class="fa fa-trash-o"></i> Supprimer</a>
+                        <h6 style="margin-top: 25px;color: #ff2222"> Nombre de Commentaire a Approuver : <strong style="color: black"> {{ count }} </strong></h6>
+                        </div>
                         </div>
                     </li>
                     {% endfor %}
                 </ul>
             </div>
+
             <div class="clearfix"></div>
-            <div class="utf_pagination_container_part margin-top-30 margin-bottom-30">
+            {#  <div class="utf_pagination_container_part margin-top-30 margin-bottom-30">
                 <nav class="pagination">
                     <ul>
                         <li><a href="#"><i class="sl sl-icon-arrow-left"></i></a></li>
@@ -79,6 +91,11 @@
                         <li><a href="#"><i class="sl sl-icon-arrow-right"></i></a></li>
                     </ul>
                 </nav>
+            </div> #}
+
+
+            <div class="pagination">
+                {{ knp_pagination_render(publications) }}
             </div>
         </div>
 

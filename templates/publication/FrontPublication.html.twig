@@ -2,7 +2,7 @@
 
 {% block title %}Publication index{% endblock %}
 
-{% block body %}
+{% block content %}
     <body>
 
     <div id="titlebar" class="gradient">
@@ -22,19 +22,23 @@
         </div>
     </div>
     <div class="container">
-
-
+        <form method="get" action="/Publication/recherchePub">
+         <input  id="myInput"  name="rech" type="text" placeholder="Chercher par nom ou description ou adresse " required>
+            <button type="submit" class="button">Chercher</button>
+        </form>
         <div class="blog-page">
             <div class="row mt-5">
+
                 {% for publication in publications %}
+
                     <div class="col-md-6 col-sm-6 col-xs-12">
                         <div class="utf_blog_post">
-                            <a href="blog_detail_right_sidebar.html" class="utf_post_img"> <img  src="{{  asset ("image/#{publication.image}") }}" alt=""> </a>
+                            <a  class="utf_post_img"> <img  src="{{  asset ("image/#{publication.image}") }}" alt=""> </a>
                             <div class="utf_post_content" >
-                                <h3><a href="blog_detail_right_sidebar.html"> {{ publication.nom }}</a></h3>
+                                <h3>{{ publication.nom }}</h3>
                                 <ul class="utf_post_text_meta">
                                     <li> <i class="fa fa-calendar"   ></i>  {{ publication.datecreation ? publication.datecreation|date('Y-m-d') : '' }}</li>
-                                    <li> <i class="fa fa-user" ></i> Par  {{ publication.idGuest }}</li>
+                                 <li> <i class="fa fa-user" ></i> Par  {{ publication.idGuest }}</li>
 
                                 </ul>
                                 <p>{{ publication.description }}</p>
@@ -44,6 +48,10 @@
                         </div>
                     </div>
                 {% endfor %}
+
+            </div>
+            <div class="pagination">
+                {{ knp_pagination_render(publications) }}
             </div>
         </div>
     </div>

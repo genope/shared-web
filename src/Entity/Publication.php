@@ -96,6 +96,17 @@ class Publication
      */
     private $region;
 
+    protected $captchaCode;
+
+    public function getCaptchaCode()
+    {
+        return $this->captchaCode;
+    }
+
+    public function setCaptchaCode($captchaCode)
+    {
+        $this->captchaCode = $captchaCode;
+    }
     public function getId(): ?int
     {
         return $this->id;
@@ -184,6 +195,7 @@ class Publication
 
         return $this;
     }
+
 
 
 }

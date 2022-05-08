@@ -62,6 +62,13 @@ class Commentaire
     private $note;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="etat", type="string", nullable=false)
+     */
+    private $etat = 'En cours de traitement';
+
+    /**
      * @var \User
      *
      * @ORM\ManyToOne(targetEntity="User")
@@ -154,6 +161,17 @@ class Commentaire
     public function setIdPublication(?Publication $idPublication): self
     {
         $this->idPublication = $idPublication;
+
+        return $this;
+    }
+    public function getEtat(): ?string
+    {
+        return $this->etat;
+    }
+
+    public function setEtat(string $etat): self
+    {
+        $this->etat = $etat;
 
         return $this;
     }

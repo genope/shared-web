@@ -19,7 +19,7 @@ class CommentaireType extends AbstractType
 
             ->add('nom', TextType::class, array(
                 'attr' => array(
-                    'placeholder' => 'Nom'
+                    'placeholder' => 'Objet'
                 )
             ))
             ->add('comment',null,array('attr'=>['maxlength'=>7000,'placeholder' => 'Votre message...']))

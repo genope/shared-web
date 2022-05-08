@@ -2,8 +2,17 @@
     "behat/transliterator": {
         "version": "v1.5.0"
     },
+    "captcha-com/captcha": {
+        "version": "4.2.5"
+    },
+    "captcha-com/symfony-captcha-bundle": {
+        "version": "4.2.12"
+    },
     "clue/stream-filter": {
         "version": "v1.6.0"
+    },
+    "composer/package-versions-deprecated": {
+        "version": "1.11.99.5"
     },
     "doctrine/annotations": {
         "version": "1.13",
@@ -121,6 +130,12 @@
             "ref": "18ce21f16066cccfa0803c9e846a2e4f4bec92ab"
         }
     },
+    "knplabs/knp-components": {
+        "version": "v3.4.0"
+    },
+    "knplabs/knp-paginator-bundle": {
+        "version": "v5.8.0"
+    },
     "knpuniversity/oauth2-client-bundle": {
         "version": "2.10",
         "recipe": {
@@ -141,6 +156,12 @@
     },
     "league/oauth2-google": {
         "version": "4.0.0"
+    },
+    "mercuryseries/flashy-bundle": {
+        "version": "v5.1.0"
+    },
+    "mofodojodino/profanity-filter": {
+        "version": "1.3.0"
     },
     "monolog/monolog": {
         "version": "1.27.0"
@@ -299,6 +320,9 @@
         "files": [
             "./config/packages/sensio_framework_extra.yaml"
         ]
+    },
+    "swiftmailer/swiftmailer": {
+        "version": "v6.3.0"
     },
     "symfony/asset": {
         "version": "v4.4.37"
@@ -668,6 +692,12 @@
     },
     "twig/twig": {
         "version": "v3.3.8"
+    },
+    "twilio/sdk": {
+        "version": "6.36.1"
+    },
+    "vangrg/profanity-bundle": {
+        "version": "v1.1.3"
     },
     "webmozart/assert": {
         "version": "1.10.0"

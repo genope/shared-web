@@ -2,7 +2,7 @@
 
 {% block title %}Publication{% endblock %}
 
-{% block body %}
+{% block content %}
     <div class="container">
 
         <div id="titlebar" class="dashboard_gradient">
@@ -71,28 +71,102 @@
 
                     <ul>
                         {% for c in commentaires %}
+                              {% if c.etat =="Afficher" %}
+
                             <li>
-                                <div class="avatar"><img src="Front-office/images/client-avatar3.jpg" alt=""></div>
+                                <div class="avatar"><img src="{{ asset("Front-office/images/#{c.idGuest.imageProfile}") }}" alt=""></div>
                                 <div class="utf_comment_content">
                                     <div class="utf_arrow_comment"></div>
+                                    <div style="font-weight: bold;color:#282b42" >{{ c.idguest.nom }} {{ c.idguest.prenom }}</div>
                                     {#    <div class="utf_star_rating_section" data-rating="4.5"><span class="star"></span><span class="star"></span><span class="star"></span><span class="star"></span><span class="star half"></span></div> #}
                                     {% if c.note==1  %}
-                                        <i class ='fa fa-star text-warning'></i> <i class ='fa fa-star '  ></i><i class ='fa fa-star '  ></i><i class ='fa fa-star '  ></i><i class ='fa fa-star '  ></i>
+                                        <i style="color:gold " class ='fa fa-star '></i> <i class ='fa fa-star '  ></i><i class ='fa fa-star '  ></i><i class ='fa fa-star '  ></i><i class ='fa fa-star '  ></i>
                                     {% elseif c.note==2 %}
-                                        <i class ='fa fa-star text-warning'  ></i> <i class ='fa fa-star text-warning'  ></i><i class ='fa fa-star '  ></i><i class ='fa fa-star '  ></i><i class ='fa fa-star '  ></i>
+                                        <i style="color: gold" class ='fa fa-star '  ></i> <i style="color: gold" class ='fa fa-star '></i><i class ='fa fa-star '  ></i><i class ='fa fa-star '  ></i><i class ='fa fa-star '  ></i>
                                     {% elseif c.note==3 %}
-                                        <i class ='fa fa-star text-warning'  ></i> <i class ='fa fa-star text-warning'  ></i><i class ='fa fa-star text-warning'  ></i><i class ='fa fa-star '  ></i><i class ='fa fa-star '  ></i>
+                                        <i style="color: gold" class ='fa fa-star '  ></i> <i style="color: gold" class ='fa fa-star '  ></i><i style="color: gold" class ='fa fa-star '  ></i><i class ='fa fa-star '  ></i><i class ='fa fa-star '  ></i>
                                     {% elseif c.note==4 %}
-                                        <i class ='fa fa-star text-warning'  ></i> <i class ='fa fa-star text-warning'  ></i><i class ='fa fa-star text-warning'  ></i><i class ='fa fa-star text-warning'  ></i><i class ='fa fa-star '  ></i>
+                                        <i style="color: gold" class ='fa fa-star '  ></i><i style="color: gold" class ='fa fa-star '  ></i> <i style="color: gold" class ='fa fa-star '  ></i><i style="color: gold" class ='fa fa-star '  ></i><i class ='fa fa-star '  ></i>
                                     {% else %}
-                                        <i class ='fa fa-star text-warning'  ></i> <i class ='fa fa-star text-warning'  ></i><i class ='fa fa-star text-warning'  ></i><i class ='fa fa-star text-warning'  ></i><i class ='fa fa-star text-warning'  ></i>
+                                        <i style="color: gold" class ='fa fa-star '  ></i> <i style="color: gold" class ='fa fa-star '  ></i><i style="color: gold" class ='fa fa-star '  ></i><i style="color: gold" class ='fa fa-star '  ></i><i style="color: gold" class ='fa fa-star '  ></i>
                                     {% endif %}
 
-                                    <div class="utf_by_comment">{{ c.nom }}<span class="date"><i class="fa fa-clock-o"></i> {{ publication.datecreation ? publication.datecreation|date('Y-m-d') : '' }}/span>  <a href="{{ path('app_commentaire_back_delete', {'id':c.id ,'idpub':idpub}) }}" onclick="return confirm('Are you sure you want to delete this item?');" class="reply">Supprimer <i class="fa fa-times"></i></a>   </div>
+
+
+
+                                    <div class="utf_by_comment">{{ c.nom }}<span class="date"><i class="fa fa-clock-o"></i> {{ c.dateCom|date('Y-m-d')}}</span>
+
+
+
+                                        <a href="{{ path('app_commentaire_back_affichercom', {'id':c.id,'idpub':idpub }) }}"  style="margin-right: 120px" class="reply">Masquer <i class="fa fa-eye-slash"></i></a>
+                                        <a href="{{ path('app_commentaire_back_delete', {'id':c.id ,'idpub':idpub}) }}" onclick="return confirm('Are you sure you want to delete this item?');" class="reply">Supprimer <i class="fa fa-times"></i></a>   </div>
                                     <p>{{ c.comment }}</p>
 
                                 </div>
                             </li>
+
+                            {% elseif c.etat =="Masquer" %}
+
+                                <li>
+                                    <div class="avatar"><img src="{{ asset("Front-office/images/#{c.idGuest.imageProfile}") }}" alt=""></div>
+                                    <div class="utf_comment_content">
+                                        <div class="utf_arrow_comment"></div>
+                                        <div style="font-weight: bold;color:#282b42" >{{ c.idguest.nom }} {{ c.idguest.prenom }}</div>
+                                        {#    <div class="utf_star_rating_section" data-rating="4.5"><span class="star"></span><span class="star"></span><span class="star"></span><span class="star"></span><span class="star half"></span></div> #}
+                                        {% if c.note==1  %}
+                                            <i style="color:gold " class ='fa fa-star '></i> <i class ='fa fa-star '  ></i><i class ='fa fa-star '  ></i><i class ='fa fa-star '  ></i><i class ='fa fa-star '  ></i>
+                                        {% elseif c.note==2 %}
+                                            <i style="color: gold" class ='fa fa-star '  ></i> <i style="color: gold" class ='fa fa-star '></i><i class ='fa fa-star '  ></i><i class ='fa fa-star '  ></i><i class ='fa fa-star '  ></i>
+                                        {% elseif c.note==3 %}
+                                            <i style="color: gold" class ='fa fa-star '  ></i> <i style="color: gold" class ='fa fa-star '  ></i><i style="color: gold" class ='fa fa-star '  ></i><i class ='fa fa-star '  ></i><i class ='fa fa-star '  ></i>
+                                        {% elseif c.note==4 %}
+                                            <i style="color: gold" class ='fa fa-star '  ></i><i style="color: gold" class ='fa fa-star '  ></i> <i style="color: gold" class ='fa fa-star '  ></i><i style="color: gold" class ='fa fa-star '  ></i><i class ='fa fa-star '  ></i>
+                                        {% else %}
+                                            <i style="color: gold" class ='fa fa-star '  ></i> <i style="color: gold" class ='fa fa-star '  ></i><i style="color: gold" class ='fa fa-star '  ></i><i style="color: gold" class ='fa fa-star '  ></i><i style="color: gold" class ='fa fa-star '  ></i>
+                                        {% endif %}
+
+                                        <div class="utf_by_comment">{{ c.nom }}<span class="date"><i class="fa fa-clock-o"></i> {{ c.dateCom|date('Y-m-d')}}</span>
+                                            <a href="{{ path('app_commentaire_back_masquercom', {'id':c.id ,'idpub':idpub}) }}" style="margin-right: 120px" class="reply">Afficher <i class="fa fa-eye"></i></a>
+
+                                            <a href="{{ path('app_commentaire_back_delete', {'id':c.id ,'idpub':idpub}) }}" onclick="return confirm('Are you sure you want to delete this item?');" class="reply">Supprimer <i class="fa fa-times"></i></a>   </div>
+                                        <p>{{ c.comment }}</p>
+
+                                    </div>
+                                </li>
+                            {% else%}
+
+                                <li>
+                                    <div class="avatar"><img src="{{ asset("Front-office/images/#{c.idGuest.imageProfile}") }}" alt=""></div>
+                                    <div class="utf_comment_content">
+                                        <div class="utf_arrow_comment"></div>
+                                        <div style="font-weight: bold;color:#282b42" >{{ c.idguest.nom }} {{ c.idguest.prenom }}</div>
+                                        {#    <div class="utf_star_rating_section" data-rating="4.5"><span class="star"></span><span class="star"></span><span class="star"></span><span class="star"></span><span class="star half"></span></div> #}
+                                        {% if c.note==1  %}
+                                            <i style="color:gold " class ='fa fa-star '></i> <i class ='fa fa-star '  ></i><i class ='fa fa-star '  ></i><i class ='fa fa-star '  ></i><i class ='fa fa-star '  ></i>
+                                        {% elseif c.note==2 %}
+                                            <i style="color: gold" class ='fa fa-star '  ></i> <i style="color: gold" class ='fa fa-star '></i><i class ='fa fa-star '  ></i><i class ='fa fa-star '  ></i><i class ='fa fa-star '  ></i>
+                                        {% elseif c.note==3 %}
+                                            <i style="color: gold" class ='fa fa-star '  ></i> <i style="color: gold" class ='fa fa-star '  ></i><i style="color: gold" class ='fa fa-star '  ></i><i class ='fa fa-star '  ></i><i class ='fa fa-star '  ></i>
+                                        {% elseif c.note==4 %}
+                                            <i style="color: gold" class ='fa fa-star '  ></i><i style="color: gold" class ='fa fa-star '  ></i> <i style="color: gold" class ='fa fa-star '  ></i><i style="color: gold" class ='fa fa-star '  ></i><i class ='fa fa-star '  ></i>
+                                        {% else %}
+                                            <i style="color: gold" class ='fa fa-star '  ></i> <i style="color: gold" class ='fa fa-star '  ></i><i style="color: gold" class ='fa fa-star '  ></i><i style="color: gold" class ='fa fa-star '  ></i><i style="color: gold" class ='fa fa-star '  ></i>
+                                        {% endif %}
+
+                                        <div class="utf_by_comment">{{ c.nom }}<span class="date"><i class="fa fa-clock-o"></i> {{ c.dateCom|date('Y-m-d')}}</span>
+                                            <a href="{{ path('app_commentaire_back_ajoutercom', {'id':c.id,'idpub':idpub }) }}" style="margin-right: 120px" class="reply">Approuver <i class="fa fa-check"></i></a>
+
+
+                                        <a href="{{ path('app_commentaire_back_delete', {'id':c.id ,'idpub':idpub}) }}" onclick="return confirm('Are you sure you want to delete this item?');" class="reply">Supprimer <i class="fa fa-times"></i></a>   </div>
+                                        <p>{{ c.comment }}</p>
+
+                                    </div>
+                                </li>
+                              {% endif %}
+
+
+
+
                         {% endfor %}
                     </ul>
                 </section>

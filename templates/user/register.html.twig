@@ -96,7 +96,7 @@
                         <hr>
                         <div class="fxt-footer">
                             <div class="fxt-transformY-50 fxt-transition-delay-9">
-                                <p>Already have an account?<a href="login-24.html" class="switcher-text2 inline-text">Log
+                                <p>Already have an account?<a href="{{ path('app_login') }}" class="switcher-text2 inline-text">Log
                                         in</a></p>
                             </div>
                         </div>
@@ -133,7 +133,8 @@
 //  TODO:: Open modal error
 
 <script>
-    $("#registerForm").on('submit', function(){
+    $("#register
+    Form").on('submit', function(){
     if($("#user_password_first").val() != $("#user_password_second").val()) {
     $("#myModal").modal('show');
     return false;}
