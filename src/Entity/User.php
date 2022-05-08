@@ -421,9 +421,5 @@ class User implements UserInterface
 
         return $this;
     }
-//    public function __ToString() {
-//        return $this -> prenom;
-//
-//    }
 
 }
