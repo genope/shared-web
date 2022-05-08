@@ -18,21 +18,10 @@ class UserType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('nom', TextType::class, array(
-                'attr' => array(
-                    'placeholder' => 'Name'
-                )
-            ))
-            ->add('prenom', TextType::class, array(
-                'attr' => array(
-                    'placeholder' => 'LastName'
-                )
-            ))
-            ->add('email', EmailType::class, array(
-                'attr' => array(
-                    'placeholder' => 'Email'
-                )
-            ))
+            ->add('cin')
+            ->add('nom')
+            ->add('prenom')
+            ->add('email')
             ->add('password', RepeatedType::class, [
                 'type' => PasswordType::class,
                 'first_options' => ['label' => 'user.password.first'],
@@ -42,14 +31,11 @@ class UserType extends AbstractType
                 'widget' => 'single_text',
                 'html5' => false,
                 'required' => false,
-                'format' => 'yyyy-MM',
+                'format' => 'yyyy-MM-DD',
                 'attr' => ['class' => 'js-datepicker']
             ])
-            ->add('telephone')
-            ->add('etat')
-            ->add('adressHost', TextType::class, ['attr' => ['id' => 'searchTextField', 'autocomplete' => 'on']])
-            ->add('imageCin')
-            ->add('imageProfile');
+
+            ->add('telephone');
     }
 
     public function configureOptions(OptionsResolver $resolver): void

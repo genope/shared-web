@@ -90,7 +90,7 @@ class FacebookAuthenticator extends SocialAuthenticator
             $user->setPassword(md5(uniqid()));
             $user->setDatedenaissance(new DateTime("now"));
             $user->setTelephone(00);
-            $user->setEtat('Approved');
+
         }
         $user->setGoogleId(" ");
         $user->setFacebookId($facebookUser->getId());

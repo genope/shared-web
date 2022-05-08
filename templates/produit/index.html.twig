@@ -1,0 +1,113 @@
+{% extends 'base-back.html.twig' %}
+
+
+{% block content %}
+
+
+        <div id="titlebar" class="dashboard_gradient">
+            <div class="row">
+                <div class="col-md-12">
+                    <h2>Liste des produits</h2>
+                    <nav id="breadcrumbs">
+                        <ul>
+                            <li><a href="{{ path('app_user_index') }}">Home</a></li>
+                            <li><a href="dashboard.html">Dashboard</a></li>
+                            <li>My Listings</li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <div id="filters">
+                    <ul class="option-set margin-bottom-30">
+
+                        <li><a href="#filter" class="selected" data-filter="*">Tous</a></li>
+
+                        {% for categorie in categories %}
+                            <li><a href="#filter" data-filter="."{{ categorie.nomcategorie }}>{{ categorie.nomcategorie }}</a></li>
+                        {% endfor %}
+
+                    </ul>
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+            <div class="col-lg-12 col-md-12">
+                <div class="utf_dashboard_list_box margin-top-0">
+                    <div class="sort-by my_sort_by">
+                        <div class="utf_sort_by_select_item">
+                            <select data-placeholder="Default Listing" class="utf_chosen_select_single">
+                                <option>Tout les produit</option>
+                                <option>produit Disponible</option>
+                                <option>produit non disponible</option>
+                            </select>
+                        </div>
+                    </div>
+                    <h4><i class="sl sl-icon-list"></i> My Listings</h4>
+                    <ul>
+                        {% for produit in produits %}
+
+
+                            <li>
+                                <div class="utf_list_box_listing_item">
+                                    <div style="max-height: 250px; max-width: 250px" class="utf_list_box_listing_item-img  "><a href="{{ path('app_produit_show', {'idProd': produit.idProd}) }}"><img  src="{{ asset('uploads/' ~ produit.image) }}" alt=""></a></div>
+                                    <div class="utf_list_box_listing_item_content isotope-item {{  produit.nomcategorie }}">
+                                        <div class="inner">
+                                            <h3>{{ produit.designation }}</h3>
+                                            <h3>{{ produit.refProd }}</h3>
+
+                                            <span><i class=""></i> Categorie:  {{  produit.nomcategorie }}</span>
+                                            <span><i class=""></i> Quantité : {{  produit.qteStock }}</span>
+                                            <span><i class=""></i> Prix : {{  produit.prix }} dt</span>
+                                            <p>{{ produit.description }}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="buttons-to-right">
+                                    <a href="{{ path('app_produit_edit', {'idProd': produit.idProd}) }}" class="button gray"><i class="fa fa-pencil"></i> Edit</a>
+                                    {{ include('produit/_delete_form.html.twig') }}
+                                </div>
+                            </li>
+                        {% else %}
+                            <tr>
+                                <td colspan="10">no records found</td>
+                            </tr>
+                        {% endfor %}
+                        <div class="utf_pagination_container_part margin-top-30 margin-bottom-30">
+                            <nav class="pagination">
+                                {{ knp_pagination_render(produits) }}
+                            </nav>
+                    </ul>
+                </div>
+                <div class="clearfix"></div>
+
+            </div>
+            <div class="col-md-12">
+            </div>
+        </div>
+
+    <a href="{{ path('app_produit_new') }}" class="buttons-to-right " >Ajouter un produit</a>
+
+    <script src="{{ asset('front-office/scripts/jquery-3.4.1.min.js') }}"></script>
+    <script src="{{ asset('front-office/scripts/jquery-migrate-3.3.2.min.js') }}"></script>
+
+    <script>
+        $(window).load(function(){
+            var $container = $('.isotope-wrapper');
+            $container.isotope({ itemSelector: '.isotope-item', layoutMode: 'masonry' });
+        });
+
+        $('#filters a').click(function(e){
+            e.preventDefault();
+
+            var selector = $(this).attr('data-filter');
+            $('.projects.isotope-wrapper').isotope({ filter: selector });
+
+            $(this).parents('ul').find('a').removeClass('selected');
+            $(this).addClass('selected');
+        });
+    </script>
+
+{% endblock %}
