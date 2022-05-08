@@ -46,7 +46,7 @@ class ProduitController extends AbstractController
      */
     public function showMobile(Produit $produit,NormalizerInterface $Normalizer): Response
     {
-        $json = $Normalizer->normalize($produit, 'json', ['groups' => 'offres']);
+        $json = $Normalizer->normalize($produit, 'json', ['groups' => 'produits']);
 
         return new Response(json_encode($json));
     }
@@ -60,6 +60,36 @@ class ProduitController extends AbstractController
         $em->remove($offre);
         $em->flush();
         return $this->json(["response" => "Produit Supprimé"]);
+    }
+    /**
+     * @Route("/new", name="ProduitMobile/mobile_new", methods={"GET", "POST"})
+     *
+     */
+    public function newMobile(Request $request, EntityManagerInterface $entityManager, NormalizerInterface $Normalizer): Response
+    {
+
+        $produit = new Produit();
+        //$form = $this->createForm(ProduitType::class, $produit);
+        //$form->handleRequest($request);
+        $categorieproduit = $entityManager
+            ->getRepository(categorieproduit::class)
+            ->findAll();
+        //$produit->setImage($newFilename);
+
+        $entityManager = $this->getDoctrine()->getManager();
+
+        $produit->setNom($request->query->get('refProd'));
+        $produit->setDescription($request->query->get('designation'));
+        $prixfloat = floatval($request->query->get('prix'));
+        $produit->setPrix($prixfloat);
+        $produit->setQteStock($request->query->get('Qte'));
+
+        $entityManager->persist($produit);
+        $entityManager->flush();
+
+        $json = $Normalizer->normalize($produit, 'json', ['groups' => 'produits']);
+        return new Response(json_encode($json));
+
     }
 
     /**
