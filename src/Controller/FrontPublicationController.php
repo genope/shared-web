@@ -36,6 +36,7 @@ class FrontPublicationController extends AbstractController
         $request->query->getInt('page', 1),
         3
         );
+        
 
         if ($this->getUser() ){
             $userCon = $this->getUser()->getCin();
