@@ -10,6 +10,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Knp\Component\Pager\PaginatorInterface;
 
@@ -67,10 +68,9 @@ class FrontController extends AbstractController
      */
 
 
-    public function addres(Request $request,MailerService $mailer
+    public function addres(Request $request,\Swift_Mailer $mailer
     )
     {
-
         $r = new Reservation(); //objet create instance
         $form = $this->createForm(ReservationType::class, $r);
         $form->add('Ajouter', SubmitType::class);
@@ -80,12 +80,11 @@ class FrontController extends AbstractController
             $em = $this->getDoctrine()->getManager();
             $em->persist($r);
             $em->flush();
-
-            $mailer->sendEmail("Confirmation de réservation",
-"tnsharedinc@gmail.com",
-"testbentest152@gmail.com"
-        );
-
+            $message = (new \Swift_Message('Confirmation de réservation'))
+                ->setFrom('tnsharedinc@gmail.com')
+                ->setTo('testbentest152@gmail.com')
+                ->setBody($this->renderView('Emails/confirmationRes.html.twig'),'text/html');
+            $mailer ->send($message);
             return $this->redirectToRoute('listreservation');
 
         }
@@ -98,6 +97,7 @@ class FrontController extends AbstractController
      */
     public function updater(Request $request,$idreserv)
     {
+
         $event = $this->getDoctrine()->getRepository(Reservation::class)->find($idreserv);
         $form = $this->createForm(ReservationType::class, $event);
         $form->add('modifier',SubmitType::class);

@@ -2,7 +2,11 @@
 
 namespace App\Controller;
 use Knp\Component\Pager\PaginatorInterface;
+use CMEN\GoogleChartsBundle\GoogleCharts\Charts\PieChart;
+use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 
+use Dompdf\Dompdf;
+use Dompdf\Options;
 use App\Entity\Event;
 use App\Form\EventType;
 use App\Service\MailerService;
@@ -14,7 +18,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
-
+use App\Repository\EventRepository;
 class HostController extends AbstractController
 {
     /**
@@ -36,12 +40,15 @@ class HostController extends AbstractController
 
         $repo = $this->getDoctrine()->getRepository(Event::class);
         $ev =$repo->findAll();
+
         $ev = $paginator->paginate(
             $ev, // Requête contenant les données à paginer
             $request->query->getInt('page', 1), // Numéro de la page en cours, passé dans l'URL, 1 si aucune page
             3 // Nombre de résultats par page
         );
+     //   return $this->render('host/listevent.html.twig', array("events" => $ev));
         return $this->render('host/listevent.html.twig', array("events" => $ev));
+
     }
 
 
@@ -68,7 +75,7 @@ class HostController extends AbstractController
      */
 
 
-    public function addevent(Request $request,MailerService $mailer)
+    public function addevent(Request $request,\Swift_Mailer $mailer)
     {
         $event = new Event(); //objet create instance
         $form = $this->createForm(EventType::class, $event);
@@ -84,16 +91,21 @@ class HostController extends AbstractController
             $em = $this->getDoctrine()->getManager(); //get manager bch tbadel fel base
                 $em->persist($event); //$c baathtou feragh tawa b des donnees
                 $em->flush();
-            $mailer->sendEmailevent("Confirmation d'ajout d'évenement",
-                "tnsharedinc@gmail.com",
-                "testbentest152@gmail.com"
-            );
+            $message = (new \Swift_Message('Confirmation dajout devenement'))
+                ->setFrom('tnsharedinc@gmail.com')
+                ->setTo('testbentest152@gmail.com')
+                ->setBody($this->renderView('Emails/confirmationEv.html.twig'),'text/html');
+            $mailer ->send($message);
+
+
 
             return $this->redirectToRoute('listevent');
         }
             return $this->render("host/addevent.html.twig", array('form' => $form->createView())); //return the form
 
         }
+
+
 
     /**
      * @Route("/supp/{idevent}",name="delete")
@@ -129,6 +141,114 @@ class HostController extends AbstractController
         return $this->render("host/modifyevent.html.twig",array('form'=>$form->createView()));
     }
 
+    /**
+     * @Route("/imprimEvent", name="imprimEvent", methods={"GET"})
+     */
+    public function imprim(): Response
+
+    {
+        $repo = $this->getDoctrine()->getRepository(Event::class);
+        // Configure Dompdf according to your needs
+        $pdfOptions = new Options();
+        $pdfOptions->set('defaultFont', 'Arial');
+
+        // Instantiate Dompdf with our options
+        $dompdf = new Dompdf($pdfOptions);
+
+
+        // Retrieve the HTML generated in our twig file
+        $html = $this->renderView('Pdf/eventpdf.html.twig', [
+            'events' => $repo->findAll(),
+        ]);
+
+        // Load HTML to Dompdf
+        $dompdf->loadHtml($html);
+
+        // (Optional) Setup the paper size and orientation 'portrait' or 'portrait'
+        $dompdf->setPaper('A4', 'portrait');
+
+        // Render the HTML as PDF
+        $dompdf->render();
+
+        // Output the generated PDF to Browser (inline view)
+        $dompdf->stream("Liste evenements.pdf", [
+            "Attachment" => true
+        ]);
+    }
+    /**
+     * @Route("/statevent", name="statevent")
+     */
+    public function statevent()
+    {
+        $repository = $this->getDoctrine()->getRepository(Event::class);
+        $events = $repository->findAll();
+
+        $t=0;
+        $ar=0;
+        $b=0;
+        $other=0;
+
+
+        foreach ($events as $events)
+        {
+        //    if (  $events->getNbparticip()>100)  :
+            if (($events->getNbparticip()>100) and ($events->getNbparticip()<200)) :
+
+                $t+=1;
+          //  elseif (($events->getNbparticip()>100) and ($events->getNbparticip()<200)) :
+
+            //    $ar+=1;
+            elseif (($events->getNbparticip()>200) and ($events->getNbparticip()<300)) :
+
+                $b+=1;
+                elseif ($events->getNbparticip()>300)  :
+
+                    $ar+=1;
+
+            else :
+                $other +=1;
+
+            endif;
+
+        }
+
+
+        $pieChart = new PieChart();
+        $pieChart->getData()->setArrayToDataTable(
+            [['events', 'nombre'],
+           //     ['nombre de participants>100',     $t],
+                ['nombre de participants entre [100-200]',      $t],
+                ['nombre de participants entre [200-300]',   $b],
+                ['nombre de participants >300',   $ar]
+
+            ]
+        );
+        $pieChart->getOptions()->setTitle('Top évenements ');
+        $pieChart->getOptions()->setHeight(500);
+        $pieChart->getOptions()->setWidth(900);
+        $pieChart->getOptions()->getTitleTextStyle()->setBold(true);
+        $pieChart->getOptions()->getTitleTextStyle()->setColor('red');
+        $pieChart->getOptions()->getTitleTextStyle()->setItalic(true);
+        $pieChart->getOptions()->getTitleTextStyle()->setFontName('Arial');
+        $pieChart->getOptions()->getTitleTextStyle()->setFontSize(20);
+
+        return $this->render('statevent/statevent.html.twig', array('piechart' => $pieChart));
+    }
+
+    /**
+     * @Route("/trievent", name="trievent")
+     */
+    public function trievent()
+    {
+
+     //   $evenement=$this->getDoctrine()->getRepository(Event::class)->find($idevent);
+
+        $trievent=$this->getDoctrine()->getRepository(Event::class)->findEventByTri();
+
+     //   return $this->redirectToRoute('listevent');
+        return $this->render('host/trievent.html.twig', array("trievent" => $trievent));
+
+    }
 
 
 }

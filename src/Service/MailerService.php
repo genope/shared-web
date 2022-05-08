@@ -10,30 +10,49 @@ use App\Entity\Event;
 
 class MailerService
 {
-    private $mailer;
+    protected $mailer;
+    protected $router;
+    protected $twig;
 
 
-    public function __construct(MailerInterface $mailer)
+    public function __construct(\Swift_Mailer $mailer, RouterInterface $router, \Twig\Environment $twig, LoggerInterface $logger, $noreply)
     {
         $this->mailer = $mailer;
+        $this->router = $router;
+        $this->twig = $twig;
+
     }
-    public function sendEmail(string $subject,string $from,string $to):void
+    protected function sendMessage($templateName, $context, $fromEmail, $toEmail): bool
+    {
+        $context = $this->twig->mergeGlobals($context);
+        $template = $this->twig->load($templateName);
+        $subject = $template->renderBlock('subject', $context);
+        $textBody = $template->renderBlock('body_text', $context);
+        $htmlBody = $template->renderBlock('body_html', $context);
 
-    {         $r = new Reservation(); //objet create instance
+        $message = (new \Swift_Message())
+            ->setSubject($subject)
+            ->setFrom($fromEmail)
+            ->setTo($toEmail);
 
-        $email = (new Email())
-            ->from($from)
-            ->to($to)
-            ->subject($subject)
-        ->embedFromPath('Front-office/images/logo.png',  'logo shared')
-        ->html(' <p>Bonjour cher(e) Mr/Mme </p><br> <p>Votre réservation a été passée avec succés </p>');
+        if (!empty($htmlBody)) {
+            $message->setBody($htmlBody, 'text/html')->addPart($textBody, 'text/plain');
+        } else {
+            $message->setBody($textBody);
+        }
+        $result = $this->mailer->send($message);
 
+        $log_context = ['to' => $toEmail, 'message' => $textBody, 'template' => $templateName];
+        if ($result) {
+            $this->logger->info('SMTP email sent', $log_context);
+        } else {
+            $this->logger->error('SMTP email error', $log_context);
+        }
 
-        $this->mailer->send($email);
+        return $result;
     }
 
-
-    public function sendEmailevent(string $subject,string $from,string $to):void
+   /* public function sendEmailevent(string $subject,string $from,string $to):void
 
     {         $r = new Event(); //objet create instance
 
@@ -46,6 +65,6 @@ class MailerService
 
 
         $this->mailer->send($email);
-    }
+    }*/
 
 }

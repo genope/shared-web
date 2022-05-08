@@ -4,6 +4,7 @@ namespace App\Entity;
 use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 use Doctrine\ORM\Mapping as ORM;
 
@@ -12,6 +13,8 @@ use Doctrine\ORM\Mapping as ORM;
  *
  * @ORM\Table(name="event")
  * @ORM\Entity
+ * @ORM\Entity(repositoryClass="App\Repository\EventRepository")
+
  */
 class Event
 {
