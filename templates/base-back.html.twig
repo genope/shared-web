@@ -32,7 +32,7 @@
                     <div class="utf_left_side">
 
                         <div id="logo"><a href="#"><img src="{{ asset('front-office/images/shared.png') }}" alt=""></a>
-                            <a href="#" class="dashboard-logo" style="margin-left:80px"><img
+                            <a href="{{ path('app_user_index') }}" class="dashboard-logo" style="margin-left:80px"><img
                                         src="{{ asset('front-office/images/shared.png') }}" alt=""></a></div>
 
                         <div class="mmenu-trigger">
@@ -48,7 +48,7 @@
                     <div class="utf_right_side">
                         <div class="header_widget">
                             
-                            <a class="dashboard_header_button_item" href="#">
+                            <a class="dashboard_header_button_item" href="{{ path('app_panierdetails_index') }}">
                                 <i class="sl sl-icon-basket"></i>
 
                             </a>
@@ -67,42 +67,42 @@
             <div class="utf_dashboard_navigation js-scrollbar">
                 <div class="utf_dashboard_navigation_inner_block">
                     <ul>
-              <li><a href="#"><i class="sl sl-icon-layers"></i> Accueil</a></li>
+              <li><a href="{{ path('app_user_index') }}"><i class="sl sl-icon-layers"></i> Accueil</a></li>
                         {% if user[0] == "ROLE_ADMIN" %}
-                            <li><a href="#"><i class="sl sl-icon-like"></i> Approuver
+                            <li><a href="{{ path('Approuver') }}"><i class="sl sl-icon-like"></i> Approuver
                                     Produits</a></li>
                         {% endif %}
                         {% if user[0] == "ROLE_HOST" %}
-                            <li><a href="#"><i class="sl sl-icon-plus"></i> Add Offres</a>
+                            <li><a href="{{ path('app_offres_new') }}"><i class="sl sl-icon-plus"></i> Add Offres</a>
                             </li>
                         {% endif %}
                         {% if user[0] == "ROLE_HOST" %}
-                            <li><a href="#"><i class="sl sl-icon-chart"></i> Mes statistiques</a>
+                            <li><a href="{{ path('app_dashboard') }}"><i class="sl sl-icon-chart"></i> Mes statistiques</a>
                             </li>
                         {% endif %}
                         {% if user[0] == "ROLE_HOST" %}
-                            <li><a href="#"><i class="sl sl-icon-docs"></i> My Offers</a></li>
+                            <li><a href="{{ path('mine') }}"><i class="sl sl-icon-docs"></i> My Offers</a></li>
                         {% endif %}
 
                         {% if user[0] == "ROLE_ADMIN" %}
-                            <li><a href="#"><i class="sl sl-icon-user-following"></i> Approuver Users</a>
+                            <li><a href="{{ path('app_user_users') }}"><i class="sl sl-icon-user-following"></i> Approuver Users</a>
                             </li>
 
-                        <li><a href="#"><i class="sl sl-icon-user"></i> Profile</a></li>
+                        <li><a href="{{ path('app_user_show',{'cin': Usercin.cin}) }}"><i class="sl sl-icon-user"></i> Profile</a></li>
                         {% endif %}
           
 
                         {% if user[0] == "ROLE_ADMIN" %}
-                            <li><a href="#"><i class="sl sl-icon-plus"></i> Ajouter Produit</a>
+                            <li><a href="{{ path('app_produit_new') }}"><i class="sl sl-icon-plus"></i> Ajouter Produit</a>
                             </li>
                         {% endif %}
                         {% if user[0] == "ROLE_ADMIN" %}
-                            <li><a href="#"><i class="sl sl-icon-docs"></i> List des
+                            <li><a href="{{ path('app_produit_index') }}"><i class="sl sl-icon-docs"></i> List des
                                     produits</a></li>
-                            <li><a href="#"><i
+                            <li><a href="{{ path('app_categorieproduit_index') }}"><i
                                             class="sl sl-icon-envelope-open"></i> Categories</a></li>
                         {% endif %}
-                        <li style="border-bottom-color: red"><a href="#" ><i class="sl sl-icon-power"></i> Logout</a></li>
+                        <li style="border-bottom-color: red"><a href="{{ path('app_logout') }}" ><i class="sl sl-icon-power"></i> Logout</a></li>
 
                     </ul>
                 </div>
@@ -163,6 +163,6 @@
 {% block stylesheets %}
 {% endblock %}
 
-{#{{ include('@MercurySeriesFlashy/flashy.html.twig') }}#}
+{{ include('@MercurySeriesFlashy/flashy.html.twig') }}
 </body>
 </html>
