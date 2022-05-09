@@ -319,7 +319,7 @@ class OffresController extends AbstractController
             }
 
 
-            $offre->setIdUser($ci);
+                $offre->setIdUser($ci);
             $offre->setEtat(false);
              if($offre->getCateg() == 'Appartement' || $offre->getCateg() == 'Maison' || $offre->getCateg() == 'Chambre'){
                  $offre->setType("Logement");

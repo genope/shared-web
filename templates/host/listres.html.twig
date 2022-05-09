@@ -1,0 +1,56 @@
+{% extends 'base-back.html.twig' %}
+                    {% block content %}
+                        <div class="utf_dashboard_list_box margin-top-0">
+                            <div class="sort-by my_sort_by">
+                                <div class="utf_sort_by_select_item">
+                                    <select data-placeholder="Réservations proches" class="utf_chosen_select_single">
+
+                                    </select>
+                                </div>
+                            </div>
+                            <h4><i class="sl sl-icon-list"></i> Mes réservations</h4>
+                            <ul>
+                                <li>
+                                    {% for c in res %}
+
+                                        <div class="utf_list_box_listing_item">
+
+                                            <div class="utf_list_box_listing_item-img"><img src="{{ asset('/uploads/images/'~ c.idevent.image) }}"/></div>
+                                            <div class="utf_list_box_listing_item_content">
+                                                <div class="inner">
+                                                    <h3>{{ c.idevent.nomevent }}</h3>
+                                                    <!--span><i class="im im-icon-Hotel"></i></span-->
+                                                    <span><i class="fa fa-calendar"></i> {{'date début réservation'~' '~ c.datedebut|date}}</span>
+                                                    <span><i class="fa fa-calendar"></i> {{'date début réservation'~' '~ c.datefin|date}}</span>
+
+
+
+
+
+                                                    <span><i class="fa fa-question-circle " aria-hidden="true"></i> {{ c.idevent.description}}</span>
+
+
+                                                </div>
+
+                                            </div>
+
+                                        </div>
+
+                                    {% endfor  %}
+
+                                </li>
+                                <nav class="pagination">
+                                    <ul>
+                                        <li><a class="current-page" {{ knp_pagination_render(res) }}></a></li>
+                                    </ul>
+                                </nav>
+                            </ul>
+                        </div>
+
+                </div>
+            </div>
+        </div>
+
+    {% endblock %}
+
+

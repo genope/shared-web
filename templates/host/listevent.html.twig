@@ -1,0 +1,88 @@
+{% extends 'base-back.html.twig' %}
+                    {% block content %}
+                        <div class="utf_dashboard_list_box margin-top-0">
+                            <div class="sort-by my_sort_by">
+
+                                <div class="utf_sort_by_select_item">
+
+                                   <table>
+                                       <tr>
+                                           <td><a
+                                                       href="{{ path('trievent') }}"  class="button gray" >
+                                                   <i class="fa fa-calendar" aria-hidden="true"></i> Upcoming events</a>
+
+                                               </td>
+                                           <td>
+
+                                               <a href="{{ path('imprimEvent') }}" class="button gray"><i class="fa fa-file" aria-hidden="true"></i> Imprimer</a>
+
+                                           </td>
+                                           <td>
+
+                                               <a href="{{ path('statevent') }}" class="button gray"><i class="fa fa-pie-chart" aria-hidden="true"></i> Statistiques</a>
+
+                                           </td>
+                                       </tr>
+
+                                   </table>
+
+
+
+                                </div>
+                            </div>
+                            <h4><i class="sl sl-icon-list"></i> Mes évenements
+
+                            </h4>
+                            <ul>
+                                <li>
+
+                                    {% for c in events %}
+
+                                        <div class="utf_list_box_listing_item">
+
+                                            <div class="utf_list_box_listing_item-img"><img src="{{ asset('/uploads/images/'~ c.image) }}"/></div>
+                                            <div class="utf_list_box_listing_item_content">
+                                                <div class="inner">
+                                                    <h3>{{ c.nomevent }}</h3>
+                                                    <!--span><i class="im im-icon-Hotel"></i></span-->
+                                                    <span><i class="fa fa-map-marker"></i> {{ c.lieu}}</span>
+                                                    <div class="utf_star_rating_section">
+                                                        <div class="utf_counter_star_rating">{{ c.nbparticip ~' '~'participants' }}</div>
+                                                    </div>
+
+                                                    <span></span>  <i class="fa fa-calendar" aria-hidden="true"></i>{{'From' ~' '~ c.datedebev|date }}</span>
+                                                    <span></span>  <i class="fa fa-calendar" aria-hidden="true"></i>{{'To' ~' '~ c.datefinev|date }}</span>
+
+
+                                                    <span><i class="fa fa-question-circle " aria-hidden="true"></i> {{ c.description}}</span>
+                                                    <div class="buttons-to-right">
+                                                        <a href="{{ path('delete',{'idevent':c.idevent}) }}" class="button gray"><i class="fa fa-trash"></i> supprimer</a>
+                                                        <a href="{{ path('update',{'idevent':c.idevent}) }}" class="button gray"><i class="fa fa-pencil"></i> Modifier</a>
+                                                    </div>
+
+                                                </div>
+
+                                            </div>
+
+                                        </div>
+
+                                    {% endfor  %}
+
+                                </li>
+
+
+                                    <nav class="pagination">
+                                        <ul>
+                                            <li><a class="current-page" {{ knp_pagination_render(events) }}></a></li>
+                                        </ul>
+                                    </nav>
+
+                            </ul>
+                        </div>
+
+
+                </div>
+            </div>
+        </div>
+
+    {% endblock %}
