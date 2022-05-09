@@ -122,8 +122,8 @@ class OffresController extends AbstractController
         }
         return $this->render('offres/GridOffres.html.twig', [
             'offres' => $offres,
-                'userCon' => $userCon,
-                'userName' => $userName,
+            'userCon' => $userCon,
+            'userName' => $userName,
             'Usercin' =>$ci,
             'userRole' =>$userRole
         ]);

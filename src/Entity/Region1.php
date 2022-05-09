@@ -5,12 +5,12 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Region
+ * Region1
  *
- * @ORM\Table(name="region", uniqueConstraints={@ORM\UniqueConstraint(name="id", columns={"id"}), @ORM\UniqueConstraint(name="nom", columns={"nom"})})
+ * @ORM\Table(name="region1", uniqueConstraints={@ORM\UniqueConstraint(name="id", columns={"id"}), @ORM\UniqueConstraint(name="nom", columns={"nom"})})
  * @ORM\Entity
  */
-class Region
+class Region1
 {
     /**
      * @var string
