@@ -68,7 +68,6 @@ class Reservation
     /**
      * @var \Offres
      *
-     * @Assert\NotBlank(message="veuillez saisir l'id de l'offre ")
 
      * @ORM\ManyToOne(targetEntity="Offres")
      * @ORM\JoinColumns({

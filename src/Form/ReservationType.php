@@ -15,7 +15,7 @@ class ReservationType extends AbstractType
             ->add('datedebut')
             ->add('datefin')
             ->add('idguest')
-           ->add('idoffre')
+     //      ->add('idoffre')
             ->add('idevent')
         ;
     }
