@@ -101,11 +101,11 @@ class Produit
     private $qteStock;
 
     /**
-     * @var \Region
+     * @var \Region1
      *
-     * @ORM\ManyToOne(targetEntity="Region")
+     * @ORM\ManyToOne(targetEntity="Region1")
      * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="region", referencedColumnName="nom")
+     *   @ORM\JoinColumn(name="region1", referencedColumnName="nom")
      * })
      * @Assert\NotBlank(message="Ne doit pas etre vide")
      */
@@ -198,12 +198,12 @@ class Produit
         return $this;
     }
 
-    public function getRegion(): ?Region
+    public function getRegion(): ?Region1
     {
         return $this->region;
     }
 
-    public function setRegion(?Region $region): self
+    public function setRegion(?Region1 $region): self
     {
         $this->region = $region;
 

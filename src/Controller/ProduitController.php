@@ -62,7 +62,7 @@ class ProduitController extends AbstractController
         return $this->json(["response" => "Produit Supprimé"]);
     }
     /**
-     * @Route("/new", name="ProduitMobile/mobile_new", methods={"GET", "POST"})
+     * @Route("/newMob", name="ProduitMobile/mobile_new", methods={"GET", "POST"})
      *
      */
     public function newMobile(Request $request, EntityManagerInterface $entityManager, NormalizerInterface $Normalizer): Response
@@ -78,8 +78,8 @@ class ProduitController extends AbstractController
 
         $entityManager = $this->getDoctrine()->getManager();
 
-        $produit->setNom($request->query->get('refProd'));
-        $produit->setDescription($request->query->get('designation'));
+        $produit->setRefProd($request->query->get('refProd'));
+        $produit->setDesignation($request->query->get('designation'));
         $prixfloat = floatval($request->query->get('prix'));
         $produit->setPrix($prixfloat);
         $produit->setQteStock($request->query->get('Qte'));
@@ -177,7 +177,7 @@ class ProduitController extends AbstractController
             $entityManager->persist($produit);
             $entityManager->flush();
 
-            return $this->redirectToRoute('app_produit_6', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app_produit_index', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->render('produit/new.html.twig', [
