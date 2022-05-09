@@ -89,6 +89,21 @@ class FrontPublicationController extends AbstractController
                 );
                 $publication->setImage($newFilename);
             }
+            if ($this->getUser() ){
+                $userCon = $this->getUser()->getCin();
+                $userName = $this->getUser()->getNom();
+                $ci = $this->getUser();
+                $userRole = $this->getUser()->getRoles();
+                $cin=$this->getUser();
+
+            }else {
+                $userCon = 0;
+                $userName = "";
+                $ci = null;
+                $cin = null;
+                $userRole = null;
+            }
+            $publication->setIdGuest($cin);
             $entityManager->persist($publication);
             $entityManager->flush();
 
@@ -151,24 +166,29 @@ $rating = $em->createQuery($dql)
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
 
-            $sid    = "AC42a59cc79a1a7df5e584c05fd0350f55";
-            $token  = "207f9bd0ea1e54c7e6a5cb157af8122e";
-            $twilio = new Client($sid, $token);
 
-            $message = $twilio->messages
-                ->create("+21694337950", // to
-                    array(
-                        "messagingServiceSid" => "MGdc6f5b3b0e0674e1fb181165ffa1db35",
-                        "body" => "Cette publication a atteint un nombre inquiéttant de zeros , priére de verifier cette publication."
-                    )
-                );
 
-            print($message->sid);
+
+            if ($this->getUser() ){
+                $userCon = $this->getUser()->getCin();
+                $userName = $this->getUser()->getNom();
+                $ci = $this->getUser();
+                $userRole = $this->getUser()->getRoles();
+                $cin=$this->getUser();
+
+            }else {
+                $userCon = 0;
+                $userName = "";
+                $ci = null;
+                $cin = null;
+                $userRole = null;
+            }
 
             $verifier = $form['comment']->getData();
             $hasProfanity = $check->hasProfanity($verifier);
             if ($hasProfanity == false) {
                 $commentaires2->setIdPublication($publication);
+                $commentaires2->setIdGuest($cin);
                 $entityManager->persist($commentaires2);
                 $entityManager->flush();
                 $good="good";

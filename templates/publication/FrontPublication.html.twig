@@ -38,7 +38,7 @@
                                 <h3>{{ publication.nom }}</h3>
                                 <ul class="utf_post_text_meta">
                                     <li> <i class="fa fa-calendar"   ></i>  {{ publication.datecreation ? publication.datecreation|date('Y-m-d') : '' }}</li>
-                                 <li> <i class="fa fa-user" ></i> Par  {{ publication.idGuest }}</li>
+                                 <li> <i class="fa fa-user" ></i> Par  {{ publication.idGuest.prenom }}</li>
 
                                 </ul>
                                 <p>{{ publication.description }}</p>
