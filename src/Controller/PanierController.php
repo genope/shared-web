@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Categorieproduit;
 use App\Entity\Panier;
 use App\Entity\Produit;
 use App\Form\PanierType;
@@ -28,7 +29,7 @@ class PanierController extends AbstractController
             ->getRepository(Produit::class)
             ->findAll();
         $categorieproduit = $entityManager
-            ->getRepository(categorieproduit::class)
+            ->getRepository(Categorieproduit::class)
             ->findAll();
 
         return $this->render('panier/index.html.twig', [
