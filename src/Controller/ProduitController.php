@@ -57,7 +57,7 @@ class ProduitController extends AbstractController
         return $this->render('produit/index.html.twig', [
             'categories' => $categories,
             'produits' => $produits,
-            'user'=>$cin,
+                'user'=>$cin,
             'Usercin' =>$ci,
 
         ]);

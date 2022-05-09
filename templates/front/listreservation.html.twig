@@ -1,0 +1,66 @@
+{% extends 'base-front.html.twig' %}
+{% block content %}
+    <div class="container">
+
+        <div class="blog-page">
+            <div class="row">
+
+                {% for c in res %}
+
+                    <div class="utf_blog_post">
+                        <div class="utf_post_content">
+                            <ul class="utf_post_text_meta">
+
+                                <div class="utf_star_rating_section">
+
+
+                                    </span>
+
+
+                                    <div>
+                                        <div class="utf_list_box_listing_item">
+
+                                            <div class="utf_list_box_listing_item-img"><img
+                                                        src="{{ asset('/uploads/images/'~ c.idevent.image) }}"/></div>
+                                            <div class="inner">
+
+                                        <span> <div class="fa fa-title">{{ 'nom event'~' '~ c.idevent.nomevent }}</div>
+                                        </span>
+                                                <span> <div class="fa fa-location-arrow">{{ 'location'~' '~c.idevent.lieu }}</div></span>
+                                                <div class="fa fa-calendar">{{ 'date début réservation'~' '~ c.datedebut|date }}</div>
+                                                <span> <div class="fa fa-calendar">{{ 'date début réservation'~' '~ c.datefin|date }}</div>
+                              <div> <div class="fa fa-user">{{ 'user name'~' '~ c.idguest.prenom }}
+
+
+                                  </div>
+                                  <div class="fa fa-envelope">{{ 'user mail'~ ' '~c.idguest.email }}
+                                  </div>
+                        </div>
+                                            </div>
+                            </ul>
+                            <a href="{{ path('deleter',{'idreserv':c.idreserv}) }}" class="button gray"><i
+                                        class="fa fa-trash"></i> Delete</a>
+                            <a href="{{ path('updater',{'idreserv':c.idreserv}) }}" class="button gray"><i
+                                        class="fa fa-pencil"></i> Edit</a>
+
+
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+
+
+            <div class="clearfix"></div>
+            <div class="col-md-12">
+                <div class="utf_pagination_container_part margin-bottom-70">
+                    <nav class="pagination">
+                        <ul>
+                            <li><a class="current-page" {{ knp_pagination_render(res) }}></a></li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+{% endblock %}

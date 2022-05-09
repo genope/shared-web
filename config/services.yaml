@@ -14,6 +14,7 @@ parameters:
   app.facebook_id: '%env(OAUTH_FACEBOOK_ID)%'
   app.facebook_secret: '%env(OAUTH_FACEBOOK_SECRET)%'
   uploads_directory: '%kernel.project_dir%/public.uploads'
+  images_directory: '%kernel.project_dir%/public/uploads/images'
   app_locales: [fr_FR, en_EN]
 
 services:
