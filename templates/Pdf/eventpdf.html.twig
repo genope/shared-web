@@ -1,0 +1,41 @@
+
+                            <h4><i class="sl sl-icon-list"></i> Mes évenements</h4>
+                           <hr>
+<br>
+
+                                      <table border="1">
+                                          <thead>
+<tr>
+                                          <th>Nom évènement</th>
+                                          <th>Lieu évènement</th>
+                                          <th>Nombre participants</th>
+                                          <th>Date début</th>
+                                          <th>Date fin</th>
+
+                                          <th>Description évènement</th>
+</tr>
+                                          </thead>
+
+
+
+                                          <tbody>
+                                          {% for c in events %}
+
+                                          <tr>
+                                          <td>            {{ c.nomevent }}</td>
+
+                                              <td>{{ c.lieu }}</td>
+                                              <td>{{ c.nbparticip}}</td>
+                                              <td>{{ c.datedebev|date}}</td>
+                                              <td>{{ c.datefinev|date}}</td>
+                                              <td>{{ c.description}}</td>
+
+
+                                          </tr>
+
+
+
+
+{% endfor %}
+                                          </tbody>
+                                      </table>

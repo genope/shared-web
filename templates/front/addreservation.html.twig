@@ -1,0 +1,23 @@
+{% extends 'base-front.html.twig' %}
+{% block content%}
+    <div class="container">
+        <div class="blog-page">
+            <div class="row">
+                <div class="add_utf_listing_section margin-top-45">
+                    <div class="utf_add_listing_part_headline_part">
+                        <h3><i class="sl sl-icon-tag"></i>Ajouter reservation</h3>
+                    </div>
+                    <div class="row with-forms">
+                        <div class="col-md-6">
+
+                            {{ form_start(form,{'attr': {'novalidate': 'novalidate'}} ) }}
+
+
+                            {{ form_end(form) }}
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+{% endblock %}
