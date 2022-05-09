@@ -47,6 +47,8 @@
                             <ul id="responsive">
 
                                 <li><a class="current" href="{{ path('app_user_index') }}">{% trans %}Accueil{% endtrans %}</a></li>
+                                <li><a href="{{ path('listreservation') }}">Reservations</a></li>
+                                <li><a href="{{ path('events') }}">Events</a></li>
                                 <li><a href="{{path('app_offres_index')}}">{% trans %}Offres{% endtrans %}</a>
                                     <ul>
                                         <li><a href={{path('liste_offre')}}>{% trans %}Liste Offres{% endtrans %}</a></li>
@@ -82,9 +84,10 @@
                               <div class="utf_user_menu">
                                 {% include 'user/locale.html.twig' %}
                              </div>
-  
+
                                     <div class="utf_user_menu">
-                                        <div class="utf_user_name"><span><img src="images/dashboard-avatar.jpg" alt=""></span>{% trans %}Bonjour{% endtrans %}, {{ userName }}</div>
+                                        <div class="utf_user_name"><span><img src="images/dashboard-avatar.jpg" alt="">
+                                            </span>{% trans %}Bonjour{% endtrans %}, {{ userName }}</div>
                                         <ul>
                                             {% if userRole[0] != "ROLE_GUEST" %}
                                                 <li><a href="{{ path('app_dashboard') }}"><i class="sl sl-icon-layers"></i> Dashboard</a></li>
