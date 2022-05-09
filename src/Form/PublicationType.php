@@ -39,7 +39,7 @@ class PublicationType extends AbstractType
                 )
             ))
 
-            ->add('idGuest')
+
             ->add('region')
            /* -> add('captchaCode', CaptchaType::class, array(
                 'captchaConfig' => 'ExampleCaptcha'
