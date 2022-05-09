@@ -36,19 +36,20 @@ class FrontPublicationController extends AbstractController
         $request->query->getInt('page', 1),
         3
         );
-        
+
 
         if ($this->getUser() ){
             $userCon = $this->getUser()->getCin();
             $userName = $this->getUser()->getNom();
             $ci = $this->getUser();
             $userRole = $this->getUser()->getRoles();
+            $cin=$this->getUser();
 
         }else {
             $userCon = 0;
             $userName = "";
             $ci = null;
-            $cin = [12345678];
+            $cin =null;
             $userRole = null;
         }
 
@@ -99,12 +100,13 @@ class FrontPublicationController extends AbstractController
             $userName = $this->getUser()->getNom();
             $ci = $this->getUser();
             $userRole = $this->getUser()->getRoles();
+            $cin=$this->getUser();
 
         }else {
             $userCon = 0;
             $userName = "";
             $ci = null;
-            $cin = [12345678];
+            $cin = null;
             $userRole = null;
         }
 
@@ -191,12 +193,13 @@ $bad="bad";
             $userName = $this->getUser()->getNom();
             $ci = $this->getUser();
             $userRole = $this->getUser()->getRoles();
+            $cin=$this->getUser();
 
         }else {
             $userCon = 0;
             $userName = "";
             $ci = null;
-            $cin = [12345678];
+            $cin = null;
             $userRole = null;
         }
         return $this->render('publication/show_front.html.twig', [
@@ -247,12 +250,13 @@ $bad="bad";
             $userName = $this->getUser()->getNom();
             $ci = $this->getUser();
             $userRole = $this->getUser()->getRoles();
+            $cin=$this->getUser();
 
         }else {
             $userCon = 0;
             $userName = "";
             $ci = null;
-            $cin = [12345678];
+            $cin = null;
             $userRole = null;
         }
         return $this->render('publication/edit.html.twig', [

@@ -36,12 +36,13 @@ $commentaire = $this->getDoctrine()->getRepository(Commentaire::class)->findBy([
             $userName = $this->getUser()->getNom();
             $ci = $this->getUser();
             $userRole = $this->getUser()->getRoles();
+            $cin=$this->getUser();
 
         }else {
             $userCon = 0;
             $userName = "";
             $ci = null;
-            $cin = [12345678];
+            $cin =null;
             $userRole = null;
         }
         return $this->render('publication/index.html.twig', [
@@ -81,12 +82,13 @@ $commentaire = $this->getDoctrine()->getRepository(Commentaire::class)->findBy([
             $userName = $this->getUser()->getNom();
             $ci = $this->getUser();
             $userRole = $this->getUser()->getRoles();
+            $cin=$this->getUser();
 
         }else {
             $userCon = 0;
             $userName = "";
             $ci = null;
-            $cin = [12345678];
+            $cin =null;
             $userRole = null;
         }
 
@@ -110,19 +112,7 @@ $commentaire = $this->getDoctrine()->getRepository(Commentaire::class)->findBy([
         $entityManager->remove($publication);
         $entityManager->flush();
 
-        if ($this->getUser() ){
-            $userCon = $this->getUser()->getCin();
-            $userName = $this->getUser()->getNom();
-            $ci = $this->getUser();
-            $userRole = $this->getUser()->getRoles();
 
-        }else {
-            $userCon = 0;
-            $userName = "";
-            $ci = null;
-            $cin = [12345678];
-            $userRole = null;
-        }
 
         return $this->redirectToRoute('app_publication_index');
     }
@@ -135,19 +125,7 @@ $commentaire = $this->getDoctrine()->getRepository(Commentaire::class)->findBy([
         $entityManager->remove($commentaire);
         $entityManager->flush();
 
-        if ($this->getUser() ){
-            $userCon = $this->getUser()->getCin();
-            $userName = $this->getUser()->getNom();
-            $ci = $this->getUser();
-            $userRole = $this->getUser()->getRoles();
 
-        }else {
-            $userCon = 0;
-            $userName = "";
-            $ci = null;
-            $cin = [12345678];
-            $userRole = null;
-        }
         return $this->redirectToRoute('app_publication_show');
     }
     /**
@@ -158,19 +136,7 @@ $commentaire = $this->getDoctrine()->getRepository(Commentaire::class)->findBy([
         $commentaire->setEtat("Afficher");
         $entityManager->flush();
 
-        if ($this->getUser() ){
-            $userCon = $this->getUser()->getCin();
-            $userName = $this->getUser()->getNom();
-            $ci = $this->getUser();
-            $userRole = $this->getUser()->getRoles();
 
-        }else {
-            $userCon = 0;
-            $userName = "";
-            $ci = null;
-            $cin = [12345678];
-            $userRole = null;
-        }
 
         return $this->redirectToRoute('app_publication_show',['id'=>$idpub ]);
     }
