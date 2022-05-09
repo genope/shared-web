@@ -1,0 +1,59 @@
+{% extends 'base-front.html.twig' %}
+
+{% block title %}Publication index{% endblock %}
+
+{% block content %}
+    <div id="titlebar" class="gradient">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <h2>Les experiences partagées</h2>
+                    <nav id="breadcrumbs">
+                        <ul>
+
+                            <li><a href="{{ path('app_front_publication') }}"> Retour</a></li>
+                            <li>Détails expériences</li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+<div style="margin-top: 25px">
+    <h3>Recherche sur : <strong style="color: #eb4924">{{ mot }} </strong> </h3>
+    <h3>Nombre de résultats trouvés : <strong style="color: #eb4924"> {{ count }} </strong> </h3> </div>
+        <div class="blog-page">
+            <div style="margin-top: 30px" class="row ">
+
+                {% for publication in publications %}
+
+                    <div class="col-md-6 col-sm-6 col-xs-12">
+                        <div class="utf_blog_post">
+                            <a  class="utf_post_img"> <img  src="{{  asset ("image/#{publication.image}") }}" alt=""> </a>
+                            <div class="utf_post_content" >
+                                <h3>{{ publication.nom }}</h3>
+                                <ul class="utf_post_text_meta">
+                                    <li> <i class="fa fa-calendar"   ></i>  {{ publication.datecreation ? publication.datecreation|date('Y-m-d') : '' }}</li>
+                                    <li> <i class="fa fa-user" ></i> Par  {{ publication.idGuest }}</li>
+
+                                </ul>
+                                <p>{{ publication.description }}</p>
+                                <a href="{{ path('app_publication_front_show', {'id': publication.id}) }}" class="read-more">Voir Plus <i class="fa fa-angle-right"></i></a>
+                            </div>
+
+                        </div>
+                    </div>
+                {% endfor %}
+
+            </div>
+
+        </div>
+
+
+</div>
+
+
+
+
+{% endblock %}

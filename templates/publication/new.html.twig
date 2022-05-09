@@ -1,0 +1,53 @@
+{% extends 'base-front.html.twig' %}
+
+{% block title %}New Publication{% endblock %}
+
+{% block content %}
+    <style> li{
+            color:red;
+        }
+    </style>
+    <div class="container">
+
+        {{ form_start(form,{'attr': {'novalidate': 'novalidate'}} ) }}
+
+        <div class="add_utf_listing_section margin-top-45">
+            <div class="utf_add_listing_part_headline_part">
+                <h3><i class="sl sl-icon-list"></i> Ajouter votre expérience</h3>
+            </div>
+            <div class="row with-forms">
+                <div class="col-md-6">
+                    {{ form_row(form.nom) }}
+                </div>
+                <div class="col-md-6">
+                    {{ form_row(form.adresse) }}
+                </div>
+                <div class="col-md-6">
+                    {{ form_row(form.image) }}
+                </div>
+                <div class="col-md-6">
+                    {{ form_row(form.region) }}
+                </div>
+                <div class="col-md-6">
+                    {{ form_row(form.idGuest) }}
+                </div>
+                <div class="col-md-12">
+                    {{ form_row(form.description) }}
+                </div>
+
+            </div>
+        </div>
+
+
+
+
+
+
+        {{ form_errors(form) }}
+   <a href="{{ path('app_publicationfront_new') }}"> <button type="submit" class="button border">Ajouter</button></a>
+        <a class=" button border"href="{{ path('app_front_publication') }}" >Annuler</a>
+    {{ form_end(form) }}
+
+
+</div>
+{% endblock %}
