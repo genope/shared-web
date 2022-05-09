@@ -2,7 +2,8 @@
 
 {% block title %}Nouvelle Réclamation{% endblock %}
 
-{% block body %}
+{% block content %}
+
     <style>li{
             color:red;
         }</style>
@@ -26,15 +27,8 @@
                     <div class="col-md-6">
                         {{ form_row(form.objet) }}
                     </div>
-                    <div class="col-md-6">
-                        {{ form_row(form.nom) }}
-                    </div>
-                    <div class="col-md-6">
-                        {{ form_row(form.prenom) }}
-                    </div>
-                    <div class="col-md-6">
-                        {{ form_row(form.email) }}
-                    </div>
+
+
                     <div class="col-md-6">
                         {{ form_row(form.image) }}
                     </div>
@@ -54,7 +48,7 @@
             <span><img src="{{ asset('Front-office/images/sorry.gif') }}" alt="" /></span>
         </div>
         <div class="opening-hours margin-top-35">
-            <div class="utf_coupon_widget" style="background-image: url(Front-office/images/coupon-bg-1.jpg);">
+            <div class="utf_coupon_widget" style="background-image: url('Front-office/images/coupon-bg-1.jpg');">
                 <div class="utf_coupon_overlay"></div>
                 <a href="#" class="utf_coupon_top">
                     <h3>Coupon de pardon</h3>

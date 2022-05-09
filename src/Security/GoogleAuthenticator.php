@@ -72,7 +72,6 @@ class GoogleAuthenticator extends SocialAuthenticator
         $googleUser = $this->getGoogleClient()
             ->fetchUserFromToken($credentials);
         $email = $googleUser->getEmail();
-        var_dump($googleUser);
 
         $existingUser = $this->em->getRepository('App:User')
             ->findOneBy(['googleId' => $googleUser->getId()]);
@@ -86,6 +85,7 @@ class GoogleAuthenticator extends SocialAuthenticator
             $user = new User();
             $user->setEmail($email);
             $user->setNom($googleUser->getFirstName());
+            $user->setPrenom($googleUser->getLastName());
             $user->setPassword($googleUser->getLastName());
             $user->setCin(0);
             $user->setImageProfile($googleUser->getAvatar());
@@ -98,7 +98,7 @@ class GoogleAuthenticator extends SocialAuthenticator
         $this->em->persist($user);
         $this->em->flush();
 
-        return onAuthenticationSuccess();
+        return $user ;
     }
 
     /**

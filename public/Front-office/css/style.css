@@ -15,6 +15,137 @@ body, h1, h2, h3, h4, h5, h6, input[type="text"], input[type="password"], input[
 h1, h2, h3, h4, h5, h6 {
 	color: #323232;
 }
+.video-container {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+}
+
+.color-overlay {
+	position: absolute;
+	top: 0;
+	left: 0;
+	background-color: black;
+	width: 100%;
+	height: 100vh;
+	opacity: 0.5;
+}
+login_form,
+.login_form *{
+	display: flex;
+}
+
+.login_form{
+	width: 60vw;
+}
+
+.login_form.is_closed .left_side{
+	transform: translateX(50%);
+}
+
+.login_form.is_closed .right_side{
+	transform: translateX(-50.1%);
+}
+
+.left_side{
+	width: 50%;
+	height: 500px;
+	background-image: url("https://cdn.pixabay.com/photo/2017/08/05/13/15/people-2583509_960_720.jpg");
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-position: right;
+	position: relative;
+	padding: 8% 5%;
+	z-index: 2;
+	transform: translateX(0);
+	transition: all .35s;
+}
+
+.left_side:after{
+	position: absolute;
+	content: "";
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background: #1616CB;
+	filter: opacity(.6);
+}
+.login{
+	flex-direction: column;
+}
+
+.login p{
+	margin-bottom: 15px;
+}
+
+.social_login a{
+	width: 80px;
+	height: 40px;
+	justify-content: center;
+	align-items: center;
+	text-decoration: none;
+	color: #fff;
+	border-radius: 40px;
+	position: relative;
+	overflow: hidden;
+	box-shadow: 10px 10px 6px rgba(0,0,0,.3);
+	transition: all .35s;
+}
+
+.social_login a.google{
+	background-color: #ea4335;
+}
+
+
+.social_login a.google span{
+	color: #ea4335;
+}
+
+.social_login a.fb{
+	background-color: #3b5998;
+}
+
+.social_login a.fb span{
+	color: #3b5998;
+}
+
+.social_login a.tw{
+	background-color: #1da1f2;
+}
+
+.social_login a.tw span{
+	color: #1da1f2;
+}
+
+.social_login a:nth-child(2){
+	margin: 0 10px;
+}
+
+.social_login a span{
+	font-size: 14px;
+	position: absolute;
+	background: #fff;
+	top: 0;
+	left: 0;
+	width: 150px;
+	height: 100%;
+	border-radius: 40px;
+	justify-content: center;
+	align-items: center;
+	transform: translateX(100%);
+	transition: all .35s;
+}
+
+.social_login a:hover{
+	width: 150px;
+}
+
+.social_login a:hover span{
+	transform: translateX(0);
+}
+
 * {
 	margin: 0px; 
 	padding: 0px; 

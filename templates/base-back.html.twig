@@ -14,21 +14,15 @@
     <link rel="stylesheet" href="{{ asset('front-office/css/perfect-scrollbar.css') }}">
     <link rel="stylesheet" href="{{ asset('front-office/css/Authstyle.css') }}" id="colors">
     <!-- Google Font -->
-    <link href="https://fonts.googleapis.com/css?family=Nunito:300,400,600,700,800&amp;display=swap&amp;subset=latin-ext,vietnamese" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,500,600,700,800" rel="stylesheet" type="text/css">
+
+
+    <link href="https://fonts.googleapis.com/css?family=Nunito:300,400,600,700,800&amp;display=swap&amp;subset=latin-ext,vietnamese"
+          rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,500,600,700,800" rel="stylesheet"
+          type="text/css">
 </head>
 <body>
 
-<!-- Preloader Start -->
-<div class="preloader">
-    <div class="utf-preloader">
-        <span></span>
-        <span></span>
-        <span></span>
-        <span></span>
-    </div>
-</div>
-<!-- Preloader End -->
 {% block header %}
     <!-- Wrapper -->
     <div id="main_wrapper">
@@ -36,7 +30,11 @@
             <div id="header" class="not-sticky">
                 <div class="container">
                     <div class="utf_left_side">
-                        <div id="logo"> <a href="index_1.html"><img src="{{ asset('Front-office/images/shared.png') }}" alt=""></a> </div>
+
+                        <div id="logo"><a href="#"><img src="{{ asset('front-office/images/shared.png') }}" alt=""></a>
+                            <a href="{{ path('app_user_index') }}" class="dashboard-logo" style="margin-left:80px"><img
+                                        src="{{ asset('front-office/images/shared.png') }}" alt=""></a></div>
+
                         <div class="mmenu-trigger">
                             <button class="hamburger utfbutton_collapse" type="button">
 				<span class="utf_inner_button_box">
@@ -44,91 +42,79 @@
 				</span>
                             </button>
                         </div>
-
-                        <div class="clearfix"></div>
+                   
+                   
                     </div>
                     <div class="utf_right_side">
                         <div class="header_widget">
-                            <div class="dashboard_header_button_item has-noti js-item-menu">
-                                <i class="sl sl-icon-bell"></i>
-                                <div class="dashboard_notifi_dropdown js-dropdown">
-                                    <div class="dashboard_notifi_title">
-                                        <p>You Have 2 Notifications</p>
-                                    </div>
-                                    <div class="dashboard_notifi_item">
-                                        <div class="bg-c1 red">
-                                            <i class="fa fa-check"></i>
-                                        </div>
-                                        <div class="content">
-                                            <p>Your Listing <b>Burger House (MG Road)</b> Has Been Approved!</p>
-                                            <span class="date">2 hours ago</span>
-                                        </div>
-                                    </div>
-                                    <div class="dashboard_notifi_item">
-                                        <div class="bg-c1 green">
-                                            <i class="fa fa-envelope"></i>
-                                        </div>
-                                        <div class="content">
-                                            <p>You Have 7 Unread Messages</p>
-                                            <span class="date">5 hours ago</span>
-                                        </div>
-                                    </div>
-                                    <div class="dashboard_notify_bottom text-center pad-tb-20">
-                                        <a href="#">View All Notification</a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="utf_user_menu">
-                                <div class="utf_user_name"><span><img src="images/dashboard-avatar.jpg" alt=""></span>Hi, John!</div>
-                                <ul>
-                                    <li><a href="dashboard.html"><i class="sl sl-icon-layers"></i> Dashboard</a></li>
-                                    <li><a href="dashboard_my_profile.html"><i class="sl sl-icon-user"></i> My Profile</a></li>
-                                    <li><a href="dashboard_my_listing.html"><i class="sl sl-icon-list"></i> My Listing</a></li>
-                                    <li><a href="dashboard_messages.html"><i class="sl sl-icon-envelope-open"></i> Messages</a></li>
-                                    <li><a href="dashboard_bookings.html"><i class="sl sl-icon-docs"></i> Booking</a></li>
-                                    <li><a href="index_1.html"><i class="sl sl-icon-power"></i> Logout</a></li>
-                                </ul>
+                            
+                            <a class="dashboard_header_button_item" href="{{ path('app_panierdetails_index') }}">
+                                <i class="sl sl-icon-basket"></i>
+
+                            </a>
+                         
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
+            
         </header>
         <div class="clearfix"></div>
 
         <!-- Dashboard -->
         <div id="dashboard">
-            <a href="#" class="utf_dashboard_nav_responsive"><i class="fa fa-reorder"></i> Menu Admin</a>
+            <a href="#" class="utf_dashboard_nav_responsive"><i class="fa fa-reorder"></i> Dashboard Sidebar Menu</a>
             <div class="utf_dashboard_navigation js-scrollbar">
                 <div class="utf_dashboard_navigation_inner_block">
                     <ul>
-                        <li>
-                            <a href="{{ path('app_avis_back') }}"><i class="sl sl-icon-star"></i> Avis</a>
+              <li><a href="{{ path('app_user_index') }}"><i class="sl sl-icon-layers"></i> Accueil</a></li>
+                        {% if user[0] == "ROLE_ADMIN" %}
+                            <li><a href="{{ path('Approuver') }}"><i class="sl sl-icon-like"></i> Approuver
+                                    Produits</a></li>
+                            <li>
+                                <a href="{{ path('app_avis_back') }}"><i class="sl sl-icon-star"></i> Avis</a>
 
-                        </li>
-                        <li><a href="dashboard_my_profile.html"><i class="sl sl-icon-user"></i> Découvertes</a></li>
-                        <li>
-                            <a href="#"><i class="sl sl-icon-layers"></i> Evénements</a>
-                            <ul>
-                                <li><a href="#">Ajouter </a></li>
-                                <li><a href="#">Evénements <span class="nav-tag yellow">10</span></a></li>
-                            </ul>
-                        </li>
-                        <li><a href="dashboard_wallet.html"><i class="sl sl-icon-wallet"></i> Offres</a></li>
+                            </li>
+                            <li><a href="{{ path('Reclamations') }}"><i class="sl sl-icon-envelope-open"></i> Réclamation</a></li>
+                        {% endif %}
+                        {% if user[0] == "ROLE_HOST" %}
+                            <li><a href="{{ path('app_offres_new') }}"><i class="sl sl-icon-plus"></i> Add Offres</a>
+                            </li>
+                        {% endif %}
+                        {% if user[0] == "ROLE_HOST" %}
+                            <li><a href="{{ path('dashboard') }}"><i class="sl sl-icon-chart"></i> Mes statistiques</a>
+                            </li>
+                        {% endif %}
+                        {% if user[0] == "ROLE_HOST" %}
+                            <li><a href="{{ path('mine') }}"><i class="sl sl-icon-docs"></i> My Offers</a></li>
+                        {% endif %}
 
-                        <li><a href="{{ path('Reclamations') }}"><i class="sl sl-icon-envelope-open"></i> Réclamation</a></li>
+                        {% if user[0] == "ROLE_ADMIN" %}
+                            <li><a href="{{ path('app_user_users') }}"><i class="sl sl-icon-user-following"></i> Approuver Users</a>
+                            </li>
 
+                        <li><a href="{{ path('app_user_show',{'cin': Usercin.cin}) }}"><i class="sl sl-icon-user"></i> Profile</a></li>
+                        {% endif %}
+          
 
-                        <li><a href="dashboard_bookmark.html"><i class="sl sl-icon-heart"></i> Reservation</a></li>
-                        <li><a href="#"><i class="sl sl-icon-wallet"></i> Shop</a></li>
-                        <li><a href="dashboard_change_password.html"><i class="sl sl-icon-user"></i> Profil</a></li>
-                        <li><a href="index_1.html"><i class="sl sl-icon-power"></i> Logout</a></li>
+                        {% if user[0] == "ROLE_ADMIN" %}
+                            <li><a href="{{ path('app_produit_new') }}"><i class="sl sl-icon-plus"></i> Ajouter Produit</a>
+                            </li>
+                        {% endif %}
+                        {% if user[0] == "ROLE_ADMIN" %}
+                            <li><a href="{{ path('app_produit_index') }}"><i class="sl sl-icon-docs"></i> List des
+                                    produits</a></li>
+                            <li><a href="{{ path('app_categorieproduit_index') }}"><i
+                                            class="sl sl-icon-envelope-open"></i> Categories</a></li>
+                        {% endif %}
+                        <li style="border-bottom-color: red"><a href="index_1.html" ><i class="sl sl-icon-power"></i> Logout</a></li>
+
                     </ul>
                 </div>
             </div>
             <div class="utf_dashboard_content">
 
-                {% block body %}
+                {% block content %}
 
                 {% endblock %}
 
@@ -140,6 +126,13 @@
 
 
 <!-- Scripts -->
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"
+        integrity="sha512-s
++xg36jbIujB2S2VKfpGmlC3T5V2TF31Y48DX7u2r9XZGzgPsa6wTp0QA7J9iffvdeBN0q9tKzRxVxw1JviZPg="
+        crossorigin="anonymous"></script>
+
 
 <script src="{{ asset('front-office/scripts/jquery-3.4.1.min.js') }}"></script>
 <script src="{{ asset('front-office/scripts/chosen.min.js') }}"></script>
@@ -154,8 +147,11 @@
 <script src="{{ asset('front-office/scripts/color_switcher.js') }}"></script>
 <script src="{{ asset('front-office/scripts/jquery_custom.js') }}"></script>
 <script src="{{ asset('front-office/scripts/typed.js') }}"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.1/chart.min.js"
+        integrity="sha512-QSkVNOCYLtj73J4hbmVoOV6KVZuMluZlioC+trLpewV8qMjsWqlIQvkn1KGX2StWvPMdWGBqim1xlC8krl1EKQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script>
-    (function($) {
+    (function ($) {
         try {
             var jscr1 = $('.js-scrollbar');
             if (jscr1[0]) {
@@ -166,10 +162,12 @@
             console.log(error);
         }
     })(jQuery);
-    {% block stylesheets %}
-    {% endblock %}
+
 </script>
 
+{% block stylesheets %}
+{% endblock %}
 
+{{ include('@MercurySeriesFlashy/flashy.html.twig') }}
 </body>
 </html>

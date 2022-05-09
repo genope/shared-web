@@ -1,0 +1,123 @@
+{% extends 'base-front.html.twig' %}
+
+{% block content %}
+hhhh
+    {% if items |length > 0 %}
+        <div class="container">
+            <div class="utf_dashboard_list_box table-responsive ">
+
+                <h4>Panier</h4>
+                <div class="dashboard-list-box table-responsive invoices with-icons">
+                    <table class="table table-hover">
+                        <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Image</th>
+                            <th>Designation</th>
+                            <th>Prix</th>
+                            <th>Quantite</th>
+                            <th>Total</th>
+                            <th></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% set i = 0 %}
+                        {% for item in items %}
+                            {% set i=i+1 %}
+                            <tr>
+                                <td>{{ item.produit.idProd }}</td>
+                                <td><img alt="" class="img-fluid rounded-circle shadow-lg"
+                                         src="{{ asset('uploads/' ~ item.produit.image) }}" width="50" height="50"></td>
+                                <td>{{ item.produit.designation }}</td>
+                                <td id="tdd{{ i }}">{{ item.produit.prix }} dt</td>
+                                <td>
+                                    <div class="qtyButtons">
+                                        <a href="{{ path('dec_panier', {'idProd': item.produit.idProd}) }}"
+                                           class="qtyDec "> </a>
+
+                                        {# <div class="qtyDec" id="btnmoin" onclick="moins('{{ i }}')"> </div> #}
+                                        <input type="number" name="qtyInput" id="{{ i }}" value="{{ item.quantity }}">
+                                        {#  <div class="qtyInc" id="btnplus" onclick="plus('{{ i }}')"></div> #}
+                                        <a href="{{ path('ajout_panier', {'idProd': item.produit.idProd}) }}"
+                                           class="qtyInc "> </a>
+                                    </div>
+
+                                </td>
+                                <td id="td{{ i }}">{{ item.produit.prix * item.quantity }} dt</td>
+                                <td>
+                                    <a href="{{ path('remove_panier', {'idProd' : item.produit.idProd}) }}"class="btn btn-danger btn-sm">
+                                        <i class="fa fa-trash-o"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                        {% endfor %}
+
+                        </tbody>
+                        <tfoot>
+                        <tr>
+                            <td colspan="5" class="text-right"> total:</td>
+                            <td>{{ total }} dt</td>
+                            <td></td>
+                        </tr>
+                        </tfoot>
+                    </table>
+                    <div style="width: 100%;display:flex; justify-content: center">
+                        <a href="{{ path('commande') }}" class="button gray" style="height: 50px; text-align: center" ><i class="sl sl-icon-credit-card"></i> Passer Commande</a>
+
+                    </div>
+
+
+
+                </div>
+            </div>
+        </div>
+    {% else %}
+        <p>Le panier est vide</p>
+
+    {% endif %}
+
+    <script>
+        const valeur = parseInt(document.getElementById("td" + index).innerText);
+        const a = valeur;
+
+        function plus(index) {
+
+            const c = document.getElementById(index);
+            const a = document.getElementById(index).value;
+            let b = parseInt(a);
+            console.log(a);
+            const aa = document.getElementById("tdd" + index).innerText;
+            console.log(aa);
+
+
+            var d = parseInt(document.getElementById("td" + index).innerText);
+
+            if (d = a) {
+
+                document.getElementById("td" + index).innerText = d + a * aa;
+            } else {
+                document.getElementById("td" + index).innerText = a * aa;
+            }
+
+            c.value = b + 1;
+
+
+        }
+
+        function moins(index) {
+
+            const c = document.getElementById(index);
+            const a = document.getElementById(index).value;
+
+            let b = parseInt(a);
+            if (a > 0)
+                c.value = b - 1;
+        }
+
+    </script>
+
+
+
+
+
+{% endblock %}

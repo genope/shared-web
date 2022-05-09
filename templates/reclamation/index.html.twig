@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="{{ asset(css/perfect-scrollbar.css) }}">
     <link rel="stylesheet" href="{{ asset(css/style.css) }}" id="colors">
 {% endblock %}
-{% block body %}
+{% block content %}
     <div class="clearfix"></div>
     <div id="titlebar" class="gradient">
         <div class="container">
@@ -65,7 +65,7 @@
                         <div class="utf_listing_item-container list-layout"> <a href="" class="utf_listing_item">
                                 <div class="utf_listing_item-image">
                                     {% if rec.getImage != null %}
-                                        <img src="{{ asset("Front-office/images/#{rec.getImage}") }}"   }}"  alt="">
+                                        <img src="{{ asset("Front-office/images/#{rec.getImage}") }}"  alt="">
                                     {% else %}
                                     <img src="{{ asset("Front-office/images/noimage.png") }}" alt="">
                                     {% endif %}

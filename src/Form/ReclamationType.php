@@ -17,18 +17,12 @@ class ReclamationType extends AbstractType
             ->add('type')
             ->add('objet')
             ->add('description')
-            ->add('email', EmailType::class, array(
-                'attr' => array(
-                    'placeholder' => 'xyz_123@xyz.com'
-                )
-            ))
+
             ->add('image',FileType::Class,[
                 'mapped'=>false,
                 'required'=>false,
             ])
-            ->add('nom')
-            ->add('prenom')
-            ->add('iduser')
+
         ;
     }
 

@@ -1,0 +1,94 @@
+{% extends 'base-back.html.twig' %}
+
+{% block content %}
+
+
+ <div id="titlebar" class="dashboard_gradient">
+        <div class="row">
+            <div class="col-md-12">
+                <h2>Mes statistiques</h2>
+                <nav id="breadcrumbs">
+                    <ul>
+                        <li><a href="index_1.html">Dashbord</a></li>
+                        <li><a href="dashboard.html">Add Offres</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </div>
+
+ <div class="row"> 
+        <div class="col-lg-2 col-md-6">
+          <div class="utf_dashboard_stat color-1">
+            <div class="utf_dashboard_stat_content">
+              <h4>{{ Appartement }}</h4>
+              
+              <span>Appartement</span>
+			</div>
+            <div class="utf_dashboard_stat_icon"><i class="im im-icon-Building"></i></div>
+          </div>
+        </div>
+        
+        <div class="col-lg-2 col-md-6">
+          <div class="utf_dashboard_stat color-2">
+            <div class="utf_dashboard_stat_content">
+              <h4>{{ Maison }}</h4>
+              <span>Maisons</span>
+			</div>
+            <div class="utf_dashboard_stat_icon"><i class="im im-icon-Home"></i></div>
+          </div>
+        </div>
+        
+        <div class="col-lg-2 col-md-6">
+          <div class="utf_dashboard_stat color-3">
+            <div class="utf_dashboard_stat_content">
+              <h4>{{ Chambre }}</h4>
+              <span>Chambres</span>
+			</div>
+            <div class="utf_dashboard_stat_icon"><i class="fa fa-bed"> </i></div>
+          </div>
+        </div>
+        
+        <div class="col-lg-2 col-md-6">
+          <div class="utf_dashboard_stat color-4">
+            <div class="utf_dashboard_stat_content">
+              <h4>{{ Voiture }}</h4>
+              <span>Voiture</span>
+			</div>
+            <div class="utf_dashboard_stat_icon"><i class="im im-icon-Car-2"></i></div>
+          </div>
+        </div>
+	
+		<div class="col-lg-2 col-md-6">
+          <div class="utf_dashboard_stat color-5">
+            <div class="utf_dashboard_stat_content">
+              <h4>{{ Moto }}</h4>
+              <span>Motos</span>
+			</div>
+            <div class="utf_dashboard_stat_icon"><i class="im im-icon-Motorcycle"></i></div>
+          </div>
+        </div>
+		
+        <div class="col-lg-2 col-md-6">
+          <div class="utf_dashboard_stat color-6">
+            <div class="utf_dashboard_stat_content">
+              <h4 sty>{{ Vélo }}</h4>
+              <span>Vélos</span>
+			</div>
+            <div class="utf_dashboard_stat_icon"><i class="im im-icon-Bicycle-3"></i></div>
+          </div>
+        </div>
+      </div>
+
+
+
+
+
+
+{% endblock %}
+
+
+
+
+
+

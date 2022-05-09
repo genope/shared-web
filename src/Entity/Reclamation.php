@@ -4,7 +4,7 @@ namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
-
+use Symfony\Component\Serializer\Annotation\Groups;
 /**
  * Reclamation
  *
@@ -17,6 +17,7 @@ class Reclamation
      * @var int
      *
      * @ORM\Column(name="id", type="integer", nullable=false)
+     * @Groups("post:read")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
@@ -26,6 +27,7 @@ class Reclamation
      * @var string
      * @Assert\NotBlank(message = "Veuillez transmettre le type de votre rélamation.")
      * @ORM\Column(name="type", type="string", length=255, nullable=false)
+     * @Groups("post:read")
      */
     private $type;
 
@@ -33,6 +35,7 @@ class Reclamation
      * @var \DateTime
      *
      * @ORM\Column(name="dateCreation", type="date", nullable=false, options={"default"="CURRENT_TIMESTAMP"})
+     * @Groups("post:read")
      */
     private $datecreation = 'CURRENT_TIMESTAMP';
     function __construct(){
@@ -42,6 +45,7 @@ class Reclamation
      * @var \DateTime|null
      *
      * @ORM\Column(name="dateTraitement", type="date", nullable=true)
+     * @Groups("post:read")
      */
     private $datetraitement;
 
@@ -54,6 +58,7 @@ class Reclamation
      *     minMessage="l'objet doit comporter au moins 3 caractéres" ,
      *     maxMessage="l'objet doit comporter au plus 255 caractéres"  )
      * @ORM\Column(name="objet", type="string", length=255, nullable=false)
+     * @Groups("post:read")
      */
     private $objet;
 
@@ -64,6 +69,7 @@ class Reclamation
      *     min=3 ,
      *     minMessage="l'adresse de la publication doit comporter au moins 3 caractéres")
      * @ORM\Column(name="description", type="string", length=5000, nullable=false)
+     * @Groups("post:read")
      */
     private $description;
 
@@ -71,6 +77,7 @@ class Reclamation
      * @var string
      *
      * @ORM\Column(name="statut", type="string", length=20, nullable=false)
+     * @Groups("post:read")
      */
     private $statut;
 
@@ -80,6 +87,7 @@ class Reclamation
      *     message = "L'Email '{{ value }}' n'est pas valide."
      * )
      * @ORM\Column(name="email", type="string", length=40, nullable=false)
+     * @Groups("post:read")
      */
     private $email;
 
@@ -87,29 +95,21 @@ class Reclamation
      * @var string|null
      *
      * @ORM\Column(name="image", type="string", length=255, nullable=true)
+     * @Groups("post:read")
      */
     private $image;
 
     /**
      * @var string
-     *@Assert\NotBlank(message = "Veuillez ecrire votre nom.")
-     *
-     * @Assert\Regex(
-     *     pattern     = "/^[a-z]+$/i",
-     *     htmlPattern = "[a-zA-Z]+",
-     *     message = "Le nom ne doit contenir que des caractères")
      * @ORM\Column(name="nom", type="string", length=255, nullable=false)
+     * @Groups("post:read")
      */
     private $nom;
 
     /**
      * @var string
-     *@Assert\NotBlank(message = "Veuillez ecrire votre prenom.")
-     * @Assert\Regex(
-     *     pattern     = "/^[a-z]+$/i",
-     *     htmlPattern = "[a-zA-Z]+",
-     *     message = "Le prénom ne doit contenir que des caractères")
      * @ORM\Column(name="prenom", type="string", length=255, nullable=false)
+     * @Groups("post:read")
      */
     private $prenom;
 
@@ -117,6 +117,7 @@ class Reclamation
      * @var string|null
      *
      * @ORM\Column(name="vocal", type="string", length=255, nullable=true)
+     * @Groups("post:read")
      */
     private $vocal;
 
@@ -127,6 +128,7 @@ class Reclamation
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="idUser", referencedColumnName="CIN")
      * })
+     * @Groups("post:read")
      */
     private $iduser;
 

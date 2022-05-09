@@ -25,6 +25,12 @@ class AvisController extends AbstractController
 
     public function index(Request $request ,EntityManagerInterface $entityManager): Response
     {
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+
+        $cin = $this->getUser()->getRoles();
+        $Usercin = $this->getUser();
+
+
         $query= $entityManager->createQuery('Select avg(a.note) FROM App\Entity\Avis a');
         $moyenne=$query->getSingleScalarResult();
         $moyenne=round($moyenne,2);
@@ -67,7 +73,8 @@ return $this->redirectToRoute('app_avis',[
 
 return $this->render('avis/index.html.twig', [
     'avis2' => $avis,'avis' => $avisafficher,'moyenne' => $moyenne,'nbr' => $nbr,
-    'form' => $form->createView(),
+    'form' => $form->createView(),'user'=>$cin,
+    'Usercin'=>$Usercin
 ]);}
     public function searchAction(Request $request)
     {
@@ -100,6 +107,11 @@ return $this->render('avis/index.html.twig', [
 
     public function index2(EntityManagerInterface $entityManager): Response
     {
+
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+
+        $cin = $this->getUser()->getRoles();
+        $Usercin = $this->getUser();
         $aviss = $entityManager
             ->getRepository(Avis::class)
             ->findAll();
@@ -107,7 +119,9 @@ return $this->render('avis/index.html.twig', [
 
 
         return $this->render('avis/back.html.twig', [
-            'aviss' => $aviss
+            'aviss' => $aviss,
+            'user'=>$cin,
+            'Usercin'=>$Usercin
         ]);
     }
 
