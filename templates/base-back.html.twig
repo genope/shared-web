@@ -71,13 +71,18 @@
                             {% if user[0] == "ROLE_ADMIN" %}
                                 <li><a href="{{ path('Approuver') }}"><i class="sl sl-icon-like"></i> Approuver
                                         Produits</a></li>
+                                <li>
+                                    <a href="{{ path('app_avis_back') }}"><i class="sl sl-icon-star"></i> Avis</a>
+
+                                </li>
+                                <li><a href="{{ path('Reclamations') }}"><i class="sl sl-icon-envelope-open"></i> Réclamation</a></li>
                             {% endif %}
                             {% if user[0] == "ROLE_HOST" %}
                                 <li><a href="{{ path('app_offres_new') }}"><i class="sl sl-icon-plus"></i> Add Offres</a>
                                 </li>
                             {% endif %}
                             {% if user[0] == "ROLE_HOST" %}
-                                <li><a href="{{ path('app_dashboard') }}"><i class="sl sl-icon-chart"></i> Mes statistiques</a>
+                                <li><a href="{{ path('dashboard') }}"><i class="sl sl-icon-chart"></i> Mes statistiques</a>
                                 </li>
                             {% endif %}
                             {% if user[0] == "ROLE_HOST" %}
@@ -110,7 +115,7 @@
                                 </li>
                             {% endif %}
                             {% if user[0] == "ROLE_ADMIN" %}
-                                <li><a href="{{ path('app_produit_new') }}"><i class="sl sl-icon-plus"></i> Ajouter Produit</a>
+                                <li><a href="{{ path('app_publication_index') }}"><i class="sl sl-icon-plus"></i> Les publications</a>
                                 </li>
                             {% endif %}
                             {% if user[0] == "ROLE_ADMIN" %}

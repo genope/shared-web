@@ -1,0 +1,87 @@
+{% extends 'base-back.html.twig' %}
+{% block title %}Avis {% endblock %}
+{% block css %}
+    <link rel="stylesheet" href="{{asset(css/stylesheet.css)}}">
+    <link rel="stylesheet" href="{{ asset(css/mmenu.css) }}">
+    <link rel="stylesheet" href="{{ asset(css/perfect-scrollbar.css) }}">
+    <link rel="stylesheet" href="{{ asset(css/style.css) }}" id="colors">
+{% endblock %}
+{% block content %}
+
+            <div id="titlebar" class="dashboard_gradient">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h2>Avis</h2>
+                        <nav id="breadcrumbs">
+                            <ul>
+                                <li><a href="index_1.html">Home</a></li>
+                                <li>Avis</li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+
+    <div class="row">
+                <div class="col-lg-12 col-md-12">
+                    <div class="utf_dashboard_list_box margin-top-0">
+
+                        <h4><i class="sl sl-icon-star"></i>Avis</h4>
+
+                        <ul>
+                            {% for avis in aviss %}
+                                <div id="small-dialog" class="zoom-anim-dialog mfp-hide">
+                                    <div class="small_dialog_header">
+                                        <h3>Ban</h3>
+                                    </div>
+                                    <div class="utf_message_reply_block margin-top-0">
+                                        <textarea cols="40" rows="3" placeholder="Vous avez reçu un ban d'une semaine."></textarea>
+                                        <button class="button">Envoyer</button>
+
+                                    </div>
+                                </div>
+                            <li>
+                                <div class="comments utf_listing_reviews dashboard_review_item">
+                                    <div class="buttons-to-right"> <a href="{{ path('app_avis_delete',{'id': avis.id }) }}" class="button gray"><i class="sl sl-icon-close"></i> Supprimer</a> </div><br>
+                                    <ul>
+                                        <li>
+                                            <div class="avatar"><img src="{{ asset("Front-office/images/#{avis.idGuest.imageProfile}") }}" alt="" /></div>
+                                            <div class="utf_comment_content">
+                                                <div class="utf_arrow_comment"></div>
+                                                <div class="utf_by_comment">{{ avis.idGuest.nom }} {{ avis.idGuest.prenom }}
+                                                    <div class="utf_by_comment-listing">à <a href="#">{{ avis.idOffre.nom }}</a></div>
+                                                    <span class="date"><i class="fa fa-clock-o"></i> {{ avis.dateCreation|date('Y-m-d') }}</span>
+                                                    <div class="utf_star_rating_section" data-rating="{{ avis.note }}"></div>
+                                                    <a href="#small-dialog" class="rate-review popup-with-zoom-anim">Ban <i class="fa fa-reply"></i></a>
+                                                </div>
+                                                <p>{{ avis.commentaire }}</p>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </li>
+                            {% endfor %}
+
+                    <div class="clearfix"></div>
+                    <div class="utf_pagination_container_part margin-top-30 margin-bottom-30">
+                        <nav class="pagination">
+                            <ul>
+                                <li><a href="#"><i class="sl sl-icon-arrow-left"></i></a></li>
+                                <li><a href="#" class="current-page">1</a></li>
+                                <li><a href="#">2</a></li>
+                                <li><a href="#">3</a></li>
+                                <li><a href="#">4</a></li>
+                                <li><a href="#"><i class="sl sl-icon-arrow-right"></i></a></li>
+                            </ul>
+                        </nav>
+                    </div>
+                        </ul>
+
+            </div>
+        </div>
+            </div>
+
+
+
+
+{% endblock %}

@@ -1,0 +1,219 @@
+{% extends 'base-front.html.twig' %}
+{% block title %}Mes reclamations {% endblock %}
+{% block css %}
+    <link rel="stylesheet" href="{{asset(css/stylesheet.css)}}">
+    <link rel="stylesheet" href="{{ asset(css/mmenu.css) }}">
+    <link rel="stylesheet" href="{{ asset(css/perfect-scrollbar.css) }}">
+    <link rel="stylesheet" href="{{ asset(css/style.css) }}" id="colors">
+{% endblock %}
+{% block content %}
+    <div class="clearfix"></div>
+    <div id="titlebar" class="gradient">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <h2>Mes réclamations</h2>
+                    <nav id="breadcrumbs">
+                        <ul>
+                            <li>Réclamations</li>
+                            <li><a href="{{ path('app_reclamationfront_new') }}">Ajouter une réclamation</a></li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-md-8">
+                <div class="listing_filter_block">
+                    <div class="col-md-2 col-xs-2">
+                        <div class="utf_layout_nav"> <a href="" class="grid"><i class="fa fa-th"></i></a> <a href="#" class="list active"><i class="fa fa-align-justify"></i></a> </div>
+                    </div>
+                    <div class="col-md-10 col-xs-10">
+
+                        <div class="sort-by">
+                            <div class="utf_sort_by_select_item sort_by_margin">
+                                <select data-placeholder="Sort by Listing" class="utf_chosen_select_single">
+                                    <option>Tri par état</option>
+                                    <option>En Attente</option>
+                                    <option>En Cours</option>
+                                    <option>Traitée</option>
+
+                                </select>
+                            </div>
+                        </div>
+                        <div class="sort-by">
+                            <div class="utf_sort_by_select_item sort_by_margin">
+                                <select data-placeholder="Categories:" class="utf_chosen_select_single">
+                                    <option>Tri par type</option>
+                                    <option>Offre</option>
+                                    <option>Compte</option>
+                                    <option>Autre</option>
+
+                                </select>
+                            </div>
+                        </div>
+                        <div class="sort-by">
+
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    {% for rec in recs %}
+                    <div class="col-lg-12 col-md-12">
+                        <div class="utf_listing_item-container list-layout"> <a href="" class="utf_listing_item">
+                                <div class="utf_listing_item-image">
+                                    {% if rec.getImage != null %}
+                                        <img src="{{ asset("Front-office/images/#{rec.getImage}") }}"  alt="">
+                                    {% else %}
+                                    <img src="{{ asset("Front-office/images/noimage.png") }}" alt="">
+                                    {% endif %}
+                                    <div class="utf_listing_prige_block utf_half_list">
+                                        {% if rec.getDatetraitement != null %}
+
+                                            <span class="utf_meta_listing_price"><i class="fa fa-calendar"></i>{{ rec.getDatecreation|date('Y-m-d') }} / {{ rec.getDatetraitement|date('Y-m-d') }}</span>
+                                        {% else %}
+                                            <span class="utf_meta_listing_price"><i class="fa fa-calendar"></i>{{ rec.getDatecreation|date('Y-m-d') }}</span>
+                                        {% endif%}
+
+                                    </div>
+
+                                </div>
+                                {% if rec.getStatut == 'Traitée' %}
+                                <span class="utf_open_now">Traitée</span>
+                                {% elseif rec.getStatut == 'EnAttente'  %}
+                                    <span class="utf_closed">En Attente</span>
+                                    {% else %}
+                                        <span class="utf_closed">En Cours</span>
+                                        {% endif %}
+                                <div class="utf_listing_item_content">
+                                    <div class="utf_listing_item-inner">
+                                        <h3>{{ rec.getObjet }}</h3>
+                                        <blockquote>{{ rec.getDescription }}</blockquote>
+                                        <audio controls>
+                                            <source src="{{ asset("Front-office/voc/#{rec.getVocal}") }}" type="audio/wav">
+                                            <source src="{{ asset("Front-office/voc/#{rec.getVocal}") }}" type="audio/mpeg">
+                                            Your browser does not support the audio element.
+                                        </audio>
+
+                                        <span><i class="fa fa-male"></i>{{ rec.getNom }} {{ rec.getPrenom }}</span>
+                                        <span><i class="fa fa-envelope"></i> {{ rec.getEmail }}</span><br>
+
+
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+                <div class="clearfix"></div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="utf_pagination_container_part margin-top-20 margin-bottom-70">
+                            <nav class="pagination">
+                                <ul>
+                                    <li><a href="#"><i class="sl sl-icon-arrow-left"></i></a></li>
+                                    <li><a href="#" class="current-page">1</a></li>
+                                    <li><a href="#">2</a></li>
+                                    <li><a href="#">3</a></li>
+                                    <li><a href="#">4</a></li>
+                                    <li><a href="#"><i class="sl sl-icon-arrow-right"></i></a></li>
+                                </ul>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sidebar -->
+            <div class="col-lg-4 col-md-4">
+                <div class="sidebar">
+                    <div class="utf_box_widget margin-bottom-35">
+                        <h3><i class="sl sl-icon-direction"></i> Filters</h3>
+                        <div class="row with-forms">
+                            <div class="col-md-12">
+                                <input type="text" placeholder="What are you looking for?" value=""/>
+                            </div>
+                        </div>
+                        <div class="row with-forms">
+                            <div class="col-md-12">
+                                <div class="input-with-icon location">
+                                    <input type="text" placeholder="Search Location..." value=""/>
+                                    <a href="#"><i class="sl sl-icon-location"></i></a> </div>
+                            </div>
+                        </div>
+                        <a href="#" class="more-search-options-trigger margin-bottom-10" data-open-title="More Filters Options" data-close-title="More Filters Options"></a>
+                        <div class="more-search-options relative">
+                            <div class="checkboxes one-in-row margin-bottom-15">
+                                <input id="check-a" type="checkbox" name="check">
+                                <label for="check-a">Real Estate</label>
+                                <input id="check-b" type="checkbox" name="check">
+                                <label for="check-b">Friendly Workspace</label>
+                                <input id="check-c" type="checkbox" name="check">
+                                <label for="check-c">Instant Book</label>
+                                <input id="check-d" type="checkbox" name="check">
+                                <label for="check-d">Wireless Internet</label>
+                                <input id="check-e" type="checkbox" name="check" >
+                                <label for="check-e">Free Parking</label>
+                                <input id="check-f" type="checkbox" name="check" >
+                                <label for="check-f">Elevator in Building</label>
+                                <input id="check-g" type="checkbox" name="check">
+                                <label for="check-g">Restaurant</label>
+                                <input id="check-h" type="checkbox" name="check">
+                                <label for="check-h">Dance Floor</label>
+                            </div>
+                        </div>
+                        <button class="button fullwidth_block margin-top-5">Update</button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <section class="utf_cta_area_item utf_cta_area2_block">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="utf_subscribe_block clearfix">
+                        <div class="col-md-8 col-sm-7">
+                            <div class="section-heading">
+                                <h2 class="utf_sec_title_item utf_sec_title_item2">Subscribe to Newsletter!</h2>
+                                <p class="utf_sec_meta">
+                                    Subscribe to get latest updates and information.
+                                </p>
+                            </div>
+                        </div>
+                        <div class="col-md-4 col-sm-5">
+                            <div class="contact-form-action">
+                                <form method="post">
+                                    <span class="la la-envelope-o"></span>
+                                    <input class="form-control" type="email" placeholder="Enter your email" required="">
+                                    <button class="utf_theme_btn" type="submit">Subscribe</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+{% endblock %}
+{% block js %}
+    <script src="{{ asset(scripts/jquery-3.4.1.min.js) }}"></script>
+    <script src="{{ asset(scripts/chosen.min.js) }}"></script>
+    <script src="{{ asset(scripts/perfect-scrollbar.min.js) }}"></script>
+    <script src="{{ asset(scripts/slick.min.js) }}"></script>
+    <script src="{{ asset(scripts/rangeslider.min.js) }}"></script>
+    <script src="{{ asset(scripts/magnific-popup.min.js) }}"></script>
+    <script src="{{ asset(scripts/jquery-ui.min.js) }}"></script>
+    <script src="{{ asset(scripts/mmenu.js) }}"></script>
+    <script src="{{ asset(scripts/tooltips.min.js) }}"></script>
+    <script src="{{ asset(scripts/color_switcher.js) }}"></script>
+    <script src="{{ asset(scripts/jquery_custom.js) }}"></script>
+{% endblock %}
