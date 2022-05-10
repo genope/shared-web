@@ -158,7 +158,7 @@ class OffresController extends AbstractController
         $offres = $entityManager
             ->getRepository(Offres::class)
             ->findBy([
-                'idUser' => $cin,
+                'idUser' => $Usercin,
             ]);
 
         return $this->render('offres/MesOffres.html.twig', [
@@ -368,7 +368,7 @@ class OffresController extends AbstractController
         $nbr=$query->getSingleScalarResult();
         $avisafficher = $entityManager
             ->getRepository(Avis::class)
-            ->findAll();
+            ->findBy(["idoffre"=>$offre->getIdOffre()]);
 
         $check = new Check( '../config/profanities.php');
         $avis = new Avis();

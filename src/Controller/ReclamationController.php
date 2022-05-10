@@ -25,8 +25,9 @@ class ReclamationController extends AbstractController
     public function index(EntityManagerInterface $entityManager): Response
     {
         $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
-
+        $ci = $this->getUser();
         $cin = $this->getUser()->getRoles();
+        $nom = $this->getUser()->getNom();
 
         $cinn = $this->getUser()->getCin();
 
@@ -37,7 +38,7 @@ class ReclamationController extends AbstractController
 
         return $this->render('reclamation/index.html.twig', [
             'recs' => $recs,
-            'user'=>$cin
+            'user'=>$cin, 'Usercin' =>$ci,'userName'=>$nom
         ]);
     }
     /**
@@ -49,7 +50,7 @@ class ReclamationController extends AbstractController
 
         $cin = $this->getUser()->getRoles();
         $Usercin = $this->getUser();
-
+        $userName = $this->getUser()->getNom();
         $données = $entityManager
             ->getRepository(Reclamation::class)
             ->findAll();
@@ -81,7 +82,7 @@ class ReclamationController extends AbstractController
 
         return $this->render('reclamation/back.html.twig', [
             'recls' => $recls,'nbr'=>$nbr,'nbrA'=>$nbrA,'nbrE'=>$nbrE,'nbrT'=>$nbrT,'temps'=>$temps,'user'=>$cin,
-            'Usercin'=>$Usercin
+            'Usercin'=>$Usercin,
         ]);
     }
 
@@ -96,6 +97,7 @@ class ReclamationController extends AbstractController
 
         $cin = $this->getUser()->getRoles();
         $Usercin = $this->getUser();
+        $userName = $this->getUser()->getNom();
         $query = $entityManager
             -> createQuery('Select r FROM App\Entity\Reclamation r WHERE r.statut LIKE :statut')->setParameter('statut','EnCours');
         $données=$query->getResult();
@@ -106,7 +108,7 @@ class ReclamationController extends AbstractController
             ->getSingleScalarResult();
         return $this->render('reclamation/back.html.twig', [
             'recls' => $recls,'nbrE'=>$nbrE,'user'=>$cin,
-            'Usercin'=>$Usercin
+            'Usercin'=>$Usercin,
         ]);
     }
     /**
@@ -115,7 +117,7 @@ class ReclamationController extends AbstractController
     public function ReclamationsEA(EntityManagerInterface $entityManager,PaginatorInterface $paginator,Request $request )
     {
         $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
-
+        $userName = $this->getUser()->getNom();
         $cin = $this->getUser()->getRoles();
         $Usercin = $this->getUser();
         $query = $entityManager
@@ -124,7 +126,7 @@ class ReclamationController extends AbstractController
         $recls = $paginator->paginate($données,$request->query->getInt('page',1),4);
         return $this->render('reclamation/back.html.twig', [
             'recls' => $recls,'user'=>$cin,
-            'Usercin'=>$Usercin
+            'Usercin'=>$Usercin,
         ]);
     }
     /**
@@ -132,7 +134,7 @@ class ReclamationController extends AbstractController
      */
     public function ReclamationsT(EntityManagerInterface $entityManager,PaginatorInterface $paginator,Request $request )
     {$this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
-
+        $userName = $this->getUser()->getNom();
         $cin = $this->getUser()->getRoles();
         $Usercin = $this->getUser();
         $query = $entityManager
@@ -151,7 +153,7 @@ class ReclamationController extends AbstractController
     public function new(Request $request, EntityManagerInterface $entityManager ): Response
     {
         $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
-
+        $userName = $this->getUser()->getNom();
         $cin = $this->getUser()->getRoles();
         $Usercin = $this->getUser();
         $mail = $this->getUser()->getEmail();
@@ -199,7 +201,7 @@ class ReclamationController extends AbstractController
         return $this->render('reclamation/Ajout.html.twig', [
             'reclamation' => $reclamation,
             'form' => $form->createView(),'user'=>$cin,
-            'Usercin'=>$Usercin
+            'Usercin'=>$Usercin,
 
 
         ]);
@@ -212,7 +214,7 @@ class ReclamationController extends AbstractController
     {
 
         $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
-
+        $userName = $this->getUser()->getNom();
         $cin = $this->getUser()->getRoles();
         $Usercin = $this->getUser();
         if ($reclamation->getStatut()=="EnAttente"){
