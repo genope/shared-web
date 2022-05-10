@@ -48,14 +48,14 @@
 
                                 <li><a class="current" href="{{ path('app_user_index') }}">{% trans %}Accueil{% endtrans %}</a></li>
                                 <li><a href="{{ path('listreservation') }}">Reservations</a></li>
-                                <li><a href="{{ path('events') }}">Events</a></li>
+                                <li><a href="{{ path('events') }}">Evenements</a></li>
                                 <li><a href="{{path('app_offres_index')}}">{% trans %}Offres{% endtrans %}</a>
                                     <ul>
                                         <li><a href={{path('liste_offre')}}>{% trans %}Liste Offres{% endtrans %}</a></li>
                                         <li><a href="{{path('app_offres_index')}}">{% trans %}Grid Offres{% endtrans %}</a></li>
                                     </ul>
                                 </li>
-                                <li><a href="#">Evenements</a></li>
+                                
                                 <li><a href="{{path('app_chat_new')}}">Forum</a></li>
 
                                 <li><a href="{{path('app_front_publication')}}">Publication</a></li>
@@ -63,6 +63,12 @@
                                     <ul>
                                         <li><a href="{{ path('app_shop') }}">{% trans %}Boutique Grid{% endtrans %}</a></li>
                                         <li><a href="{{ path('app_shopList') }}">{% trans %}Boutique Liste{% endtrans %}</a></li>
+                                    </ul>
+                                </li>
+                                <li><a href="{{path('MesReclamations')}}"> Réclamation</a>
+                                    <ul>
+                                        <li><a href={{path('app_reclamationfront_new')}}>Ajouter</a></li>
+                                        <li><a href="{{path('MesReclamations')}}">Mes réclamations</a></li>
                                     </ul>
                                 </li>
                             </ul>
@@ -90,7 +96,7 @@
                                             </span>{% trans %}Bonjour{% endtrans %}, {{ userName }}</div>
                                         <ul>
                                             {% if userRole[0] != "ROLE_GUEST" %}
-                                                <li><a href="{{ path('app_dashboard') }}"><i class="sl sl-icon-layers"></i> Dashboard</a></li>
+                                                <li><a href="{{ path('Approuver') }}"><i class="sl sl-icon-layers"></i> Dashboard</a></li>
                                             {% endif %}
                                             {% if userRole[0] == "ROLE_ADMIN" %}
                                                 <li><a href="{{ path('app_produit_index') }}"><i class="sl sl-icon-layers"></i> Gestion Produit</a></li>

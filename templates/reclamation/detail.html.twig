@@ -1,0 +1,144 @@
+{% extends 'base-back.html.twig' %}
+{% block title %}Reclamation {% endblock %}
+{% block css %}
+    <link rel="stylesheet" href="{{asset(css/stylesheet.css)}}">
+    <link rel="stylesheet" href="{{ asset(css/mmenu.css) }}">
+    <link rel="stylesheet" href="{{ asset(css/perfect-scrollbar.css) }}">
+    <link rel="stylesheet" href="{{ asset(css/style.css) }}" id="colors">
+{% endblock %}
+{% block content %}
+    <div class="container">
+        <div class="blog-page">
+            <div class="row">
+                <div class="col-lg-8 col-md-8">
+                    <div class="utf_blog_post utf_single_post">
+                        {% if reclamation.image != null %}
+                        <img class="utf_post_img" src="{{ asset("Front-office/images/#{reclamation.image}") }}" alt="">
+                        {% else %}
+                        <img class="utf_post_img" src="{{asset('Front-office/')}}images/noimage.png" alt="">
+                        {% endif %}
+                        <div class="utf_post_content">
+                            <h3>{{ reclamation.objet }}</h3>
+                            <ul class="utf_post_text_meta">
+                                <li>{{ reclamation.getDatecreation|date('Y-m-d') }}</li>
+                                <li>De <a href="#">{{reclamation.nom}} {{ reclamation.prenom }}</a></li>
+                            </ul>
+                            <div class="utf_post_quote"> <span class="icon"></span>
+                                <blockquote> {{ reclamation.description}} </blockquote>
+                            </div>
+                        </div>
+                    </div>
+                    <section class="comments">
+                        <div id="utf_add_review" class="utf_add_review-box">
+                        <h4 class="headline_part margin-top-20 margin-bottom-35">Audio {% if reclamation.vocal != null%} <i class="fa fa-check"></i>{% else %} <i class="fa fa-cross"></i>{% endif%}  </h4>
+                        {% if reclamation.getVocal != null %}
+                        <audio controls autoplay muted>
+                            <source src="{{asset("Front-office/voc/#{reclamation.getVocal}")}}" type="audio/wav">
+                            <source src="{{asset("Front-office/voc/#{reclamation.getVocal}")}}" type="audio/mp3">
+                            Your browser does not support the audio element.
+                        </audio>
+                        <br>
+                            {% else %}
+                            <h4>Pas de fichier audio joint.</h4>
+                        {% endif %}
+
+                        </div>
+                    </section>
+                    <div class="clearfix"></div>
+
+
+                </div>
+
+                <div class="col-lg-4 col-md-4">
+                    <div class="sidebar right">
+                        <div class="utf_box_widget">
+                            {% if reclamation.statut == 'Traitée' %}
+                            <div class="verified-badge with-tip margin-bottom-30" data-tip-content="Traitée le {{reclamation.dateTraitement|date('Y-m-d')}}"> <i class="sl sl-icon-check"></i> Traitée</div>
+                                {% else %}
+                                    <div class="verified-badge2 with-tip margin-bottom-30" > <i class="sl sl-icon-wrench"></i> En cours</div>
+
+                            {% endif %}
+                            <div class="utf_box_widget margin-top-35">
+                                <h3><i class="sl sl-icon-phone"></i> Infos</h3>
+                                <div class="utf_hosted_by_user_title"> <a href="#" class="utf_hosted_by_avatar_listing"><img src="{{ asset("Front-office/images/#{reclamation.iduser.imageProfile}") }}" alt=""></a>
+                                    <h4><a href="#">{{ reclamation.iduser.nom }} {{ reclamation.iduser.prenom }}</a><span>Reçue le {{ reclamation.dateCreation|date("Y-m-d") }}</span>
+                                        <span><i class="sl sl-icon-target"></i> {{ reclamation.type }}</span>
+                                    </h4>
+                                </div>
+                                <ul class="utf_social_icon rounded margin-top-10">
+                                    <li><a class="facebook" href="#"><i class="icon-facebook"></i></a></li>
+                                    <li><a class="gplus" href="#"><i class="icon-gplus"></i></a></li>
+                                </ul>
+                                <ul class="utf_listing_detail_sidebar">
+                                    <li><i class="sl sl-icon-map"></i> {{ reclamation.type }}</li>
+                                    <li><i class="sl sl-icon-phone"></i> +(216) {{ reclamation.iduser.telephone }}</li>
+                                    <li><i class="fa fa-envelope-o"></i> <a href="mailto:info@example.com">{{reclamation.email}}</a></li>
+                                </ul>
+                            </div>
+                            <div class="clearfix"></div>
+                        </div>
+
+
+
+
+
+
+
+                        <div class="utf_box_widget margin-top-35">
+                            <h3><i class="sl sl-icon-book-open"></i> Reclamations associées</h3>
+                            <ul class="utf_widget_tabs">
+                                {% for r in RidU %}
+                                <li>
+                                    <div class="utf_widget_content">
+                                        {% if r.getImage != null %}
+                                            <div class="utf_widget_thum"> <a href="blog_detail_right_sidebar.html"><img src="{{ asset("Front-office/images/#{r.image}") }}" alt=""></a> </div>
+                                        {% else %}
+                                            <div class="utf_widget_thum"> <a href="blog_detail_right_sidebar.html"><img src="{{asset('Front-office/images/noimage.png')}}" alt=""></a> </div>
+                                        {% endif %}
+
+                                        <div class="utf_widget_text">
+                                            <h5><a href="blog_detail_right_sidebar.html">{{ r.objet }}</a></h5>
+                                            <span><i class="fa fa-clock-o"></i> {{ r.dateCreation|date("Y-m-d") }}</span>
+                                        </div>
+                                        <div class="clearfix"></div>
+                                    </div>
+                                </li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                        <div class="utf_box_widget margin-top-35">
+                            <h3><i class="sl sl-icon-paper-clip"></i> Version papier</h3>
+                            <a href="{{path('app_reclamation_papier',{'id': reclamation.id })}}"><button class="button">Imprimer</button></a>
+
+                        </div>
+
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+{% endblock %}
+{% block javascripts %}
+        <script>
+            function myGeeks() {
+                var str = {{reclamation.type}};
+                matches = str.match(/\d+/g);
+                var i=0
+
+                document.getElementById('GFG').innerHTML
+                    = matches[0] + matches[1] + matches[2];
+
+                document.getElementById("Geeks").innerHTML
+                    = "Where 35 is the first, 5 is the second"
+                    + " and 88 is the third number"
+            }
+        </script>
+{% endblock %}

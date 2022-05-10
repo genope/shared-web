@@ -36,7 +36,7 @@ $commentaire = $this->getDoctrine()->getRepository(Commentaire::class)->findBy([
             $userName = $this->getUser()->getNom();
             $ci = $this->getUser();
             $userRole = $this->getUser()->getRoles();
-            $cin=$this->getUser();
+
 
         }else {
             $userCon = 0;
@@ -49,8 +49,8 @@ $commentaire = $this->getDoctrine()->getRepository(Commentaire::class)->findBy([
             'publications' => $publications,'commentaires'=>$commentaire,'userCon' => $userCon,
             'userName' => $userName,
             'Usercin' =>$ci,
-            'userRole' =>$userRole,
-            'user'=>$cin,
+            'user' =>$userRole,
+
         ]);
 
         
@@ -96,8 +96,8 @@ $commentaire = $this->getDoctrine()->getRepository(Commentaire::class)->findBy([
             'publication' => $publication,'commentaires'=>$commentaires,'idpub'=>$id,'number'=>$number,'rating'=>$rating,'userCon' => $userCon,
             'userName' => $userName,
             'Usercin' =>$ci,
-            'userRole' =>$userRole,
-            'user'=>$cin,
+            'user' =>$userRole,
+            'user1'=>$cin,
         ]);
     }
 

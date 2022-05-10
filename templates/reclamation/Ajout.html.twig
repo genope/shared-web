@@ -1,0 +1,69 @@
+{% extends 'base-front.html.twig' %}
+
+{% block title %}Nouvelle Réclamation{% endblock %}
+
+{% block content %}
+
+    <style>li{
+            color:red;
+        }</style>
+    <div class="container">
+
+    <div class="blog-page">
+    <div class="row">
+        <div class="col-lg-8 col-md-8">
+        {{ form_start(form,{'attr':{'novalidate':'novalidate'}}) }}
+            <div class="my-custom-class-for-errors">
+                {{ form_errors(form) }}
+            </div>
+            <div class="add_utf_listing_section margin-top-45">
+                <div class="utf_add_listing_part_headline_part">
+                    <h3><i class="sl sl-icon-list"></i> Ajouter votre réclamation</h3>
+                </div>
+                <div class="row with-forms">
+                    <div class="col-md-6">
+                        {{ form_row(form.type) }}
+                    </div>
+                    <div class="col-md-6">
+                        {{ form_row(form.objet) }}
+                    </div>
+
+
+                    <div class="col-md-6">
+                        {{ form_row(form.image) }}
+                    </div>
+                    <div class="col-md-12  ">
+                        {{ form_row(form.description) }}
+                    </div>
+                </div>
+            </div>
+
+        {{ form_widget(form) }}
+        <a href="{{ path('app_reclamationfront_new') }}"> <button type="submit" class="button border">Ajouter</button></a>
+        <a class=" button border"href="{{ path('MesReclamations') }}" >Annuler</a>
+        {{ form_end(form) }}
+
+        </div>
+        <div class="utf_box_widget opening-hours margin-top-35">
+            <span><img src="{{ asset('Front-office/images/sorry.gif') }}" alt="" /></span>
+        </div>
+        <div class="opening-hours margin-top-35">
+            <div class="utf_coupon_widget" style="background-image: url('Front-office/images/coupon-bg-1.jpg');">
+                <div class="utf_coupon_overlay"></div>
+                <a href="#" class="utf_coupon_top">
+                    <h3>Coupon de pardon</h3>
+                    <div class="utf_coupon_expires_date">-20% sur l'offre de votre choix</div>
+                    <div class="utf_coupon_used"><strong>Comment ?</strong> Entrer le code de réduction lors de votre prochain payement</div>
+                </a>
+                <div class="utf_coupon_bottom">
+                    <p>Coupon Code</p>
+                    <div class="utf_coupon_code">DL76T</div>
+                </div>
+            </div>
+        </div>
+
+
+
+    </div>
+
+{% endblock %}
