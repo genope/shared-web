@@ -2,9 +2,11 @@
 
 namespace App\Controller;
 
+use App\Entity\Avis;
 use App\Entity\Classroom;
 use App\Entity\Offres;
 use App\Entity\User;
+use App\Form\AvisType;
 use App\Form\OffresType;
 use App\Repository\OffresRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -15,12 +17,78 @@ use Symfony\Component\Routing\Annotation\Route;
 use Knp\Component\Pager\PaginatorInterface;
 
 use MercurySeries\FlashyBundle\FlashyNotifier;
+use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
+use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
+use Symfony\Component\Serializer\SerializerAwareInterface;
+use mofodojodino\ProfanityFilter\Check;
 
 /**
  * @Route("/offres")
  */
 class OffresController extends AbstractController
 {
+
+    // jawha behy hedhy sur
+    /**
+     * @Route("/Offres_mobile", name="Offres_mobile")
+     */
+    public function AfficherOffre(EntityManagerInterface $entityManager,OffresRepository $repo,NormalizerInterface $Normalizer)
+    {
+
+        $offres = $this->getDoctrine()->getRepository(Offres::class)->findAll();
+
+        //transforme  les objets(destinations) en un array json
+        $json = $Normalizer->normalize($offres, 'json', ['groups' => 'offres']);
+
+        return new Response(json_encode($json));
+    }
+    // jawha behy hedhy sur
+    /**
+     * @Route("/addOffres_mobile", name="mobile_create")
+     */
+    public function addOffre(Request $request, NormalizerInterface $Normalizer): Response
+    {
+        $entitymanager = $this->getDoctrine()->getManager();
+        $offre = new Offres();
+        $offre->setNom($request->query->get('nom'));
+        $offre->setDescription($request->query->get('description'));
+        $prixfloat = floatval($request->query->get('prix'));
+        $offre->setPrix($prixfloat);
+        $offre->setEtat(false);
+        $offre->setVille($request->query->get('ville'));
+        $offre->setCateg($request->query->get('categ'));
+
+
+      /*  $file = strval($request->files->get('image'));
+        $newFilename = md5(uniqid()).'.'.$file->guessExtension();
+        try {
+            $file->move(
+                $this->getParameter('upload_directory'),
+                $newFilename
+            );
+        } catch (FileException $e) {
+        }
+        $offre->setImage($newFilename);*/
+
+        $entitymanager->persist($offre);
+        $entitymanager->flush();
+        //return new Response('categorie added successfully');
+        $json = $Normalizer->normalize($offre, 'json', ['groups' => 'offres']);
+
+        return new Response(json_encode($json));
+    }
+// jawha behy hedhy sur
+    /**
+     * @Route("/deleteOffre/{id}", name="mobile_delete")
+     */
+    public function deleteOffre(Request $request, NormalizerInterface $Normalizer, $id)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $offre = $this->getDoctrine()->getRepository(Offres::class)->find($id);
+        $em->remove($offre);
+        $em->flush();
+        return $this->json(["response" => "Offre deleted successfully"]);
+    }
 
     /**
      * @Route("/send/{id}", name="send", methods={"GET", "POST"})
@@ -47,14 +115,19 @@ class OffresController extends AbstractController
 
       
     }
+
     /**
      * @Route("/", name="app_offres_index", methods={"GET"})
      */
     public function index(EntityManagerInterface $entityManager): Response
     {
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+
+        $cin = $this->getUser()->getRoles();
         $offres = $entityManager
             ->getRepository(Offres::class)
             ->findAll();
+        dump($offres);
         if ($this->getUser() ){
             $userCon = $this->getUser()->getCin();
             $userName = $this->getUser()->getNom();
@@ -66,9 +139,9 @@ class OffresController extends AbstractController
         }
         return $this->render('offres/GridOffres.html.twig', [
             'offres' => $offres,
-                'userCon' => $userCon,
-                'userName' => $userName,
-            'Usercin' =>$ci,
+            'userCon' => $userCon,
+            'userName' => $userName,
+            'Usercin' =>$ci,'userRole' =>$cin,
         ]);
     }
     /**
@@ -85,7 +158,7 @@ class OffresController extends AbstractController
         $offres = $entityManager
             ->getRepository(Offres::class)
             ->findBy([
-                'idUser' => $cin,
+                'idUser' => $Usercin,
             ]);
 
         return $this->render('offres/MesOffres.html.twig', [
@@ -102,8 +175,10 @@ class OffresController extends AbstractController
 
         $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
 
-        $cin = $this->getUser();
+      
+        $cin = $this->getUser()->getRoles();
      
+      
         $Maison = $repo->findBy([
             'idUser' => $cin,
             'categ' => "Maison",
@@ -135,7 +210,8 @@ class OffresController extends AbstractController
                 'Chambre' => count($Chambre),
                 'Voiture' => count($Voiture),
                 'Vélo' => count($Vélo),
-                'Moto' => count($Moto)
+                'Moto' => count($Moto),
+                'user'=>$cin,
                 ]);
     }
 
@@ -145,6 +221,7 @@ class OffresController extends AbstractController
     public function Approuver(EntityManagerInterface $entityManager): Response
     {
 
+        
         $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
 
         $cin = $this->getUser()->getRoles();
@@ -171,9 +248,13 @@ class OffresController extends AbstractController
      */
     public function listeindex(Request $request,EntityManagerInterface $entityManager,PaginatorInterface $paginator): Response
     {
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+
+        $cin = $this->getUser()->getRoles();
         $offres = $entityManager
             ->getRepository(Offres::class)
             ->findAll();
+        dump($offres);
         if ($this->getUser() ){
             $userCon = $this->getUser()->getCin();
             $userName = $this->getUser()->getNom();
@@ -184,13 +265,14 @@ class OffresController extends AbstractController
         }
 
 
-       $liste_Offres = $paginator->paginate($offres,$request->query->getInt('page',1),5);
+       $liste_Offres = $paginator->paginate($offres,$request->query->getInt('page',1),2);
         return $this->render('offres/ListesOffres.html.twig', [
             'offres' => $offres,
             'filtre'=>$liste_Offres,
             'userCon' => $userCon,
             'userName' => $userName,
             'Usercin' =>$ci,
+            'userRole'=>$cin,
 
         ]);
     }
@@ -199,13 +281,13 @@ class OffresController extends AbstractController
     /**
      * @Route("/new", name="app_offres_new", methods={"GET", "POST"})
      */
-    public function new(Request $request, EntityManagerInterface $entityManager,FlashyNotifier $flashy): Response
+    public function new(Request $request, EntityManagerInterface $entityManager): Response
     {
 
-        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
 
+   
         $cin = $this->getUser();
-
+        $us = $this->getUser()->getRoles();
         $offre = new Offres();
 
 
@@ -249,7 +331,7 @@ class OffresController extends AbstractController
 
 
            
-          $flashy->success('Event created!', 'http://your-awesome-link.com');
+
 
 
          
@@ -258,6 +340,7 @@ class OffresController extends AbstractController
         return $this->render('offres/new.html.twig', [
             'offre' => $offre,
             'form' => $form->createView(),
+            'user'=>$us,
         ]);
     }
 
@@ -265,8 +348,67 @@ class OffresController extends AbstractController
      * @Route("/{idOffre}", name="app_offres_show", methods={"GET"})
      */
 
-    public function show(Offres $offre): Response
+    public function show(Offres $offre,Request $request ,EntityManagerInterface $entityManager): Response
     {
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+
+        $cin = $this->getUser()->getRoles();
+
+        $cinn = $this->getUser()->getCin();
+
+        $Usercin = $this->getUser();
+
+
+        $query= $entityManager->createQuery('Select avg(a.note) FROM App\Entity\Avis a where a.idoffre=:of')
+        ->setParameter('of',$offre->getIdOffre());
+        $moyenne=$query->getSingleScalarResult();
+        $moyenne=round($moyenne,2);
+        $query= $entityManager->createQuery('Select count(a.note) FROM App\Entity\Avis a where a.idoffre=:off')
+        ->setParameter('off',$offre->getIdOffre());
+        $nbr=$query->getSingleScalarResult();
+        $avisafficher = $entityManager
+            ->getRepository(Avis::class)
+            ->findBy(["idoffre"=>$offre->getIdOffre()]);
+
+        $check = new Check( '../config/profanities.php');
+        $avis = new Avis();
+
+        $form = $this->createForm(AvisType::class,$avis);
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $verifier = $form['commentaire']->getData();
+            $hasProfanity = $check->hasProfanity($verifier);
+            if ($hasProfanity == false) {
+
+                $finduer = $this -> getDoctrine()->getRepository(User::class)->find(9637898);
+                $idoffre2 = $this -> getDoctrine()->getRepository(Offres::class)->find(10);
+                $avis->setIdguest($cinn);
+                $avis->setIdoffre($offre->getIdOffre());
+                $avis->setDatecreation(new \DateTime());
+                $entityManager->persist($avis);
+                $entityManager->flush() ;
+                $good="good";
+                return $this->redirectToRoute('app_avis',[
+                    "good"=>$good
+                ]);
+            }else {
+                $bad="bad";
+                return $this->redirectToRoute('app_avis',[
+                    "bad"=>$bad
+                ]);
+            }
+        }
+        if ($this->getUser() ){
+            $userCon = $this->getUser()->getCin();
+            $userName = $this->getUser()->getNom();
+            $ci = $this->getUser();
+        }else {
+            $userCon = 0;
+            $userName = "";
+        }
+
         $users = $this->getDoctrine()
             ->getRepository(User::class)
             ->findBy(['cin' => $offre->getIdUser()]);
@@ -274,7 +416,8 @@ class OffresController extends AbstractController
 
         return $this->render('offres/show.html.twig', [
             'offre' => $offre,
-            'user'=>$offre->getIdUser(),
+            'user'=>$offre->getIdUser(),'avis2' => $avis,'avis' => $avisafficher,'moyenne' => $moyenne,'nbr' => $nbr,
+            'form' => $form->createView(),'userName' => $userName,
         ]);
     }
     /**
@@ -327,5 +470,6 @@ class OffresController extends AbstractController
     }
 
 
- 
+    /*_______________________________________Mobile_____________________________________*/
+
 }

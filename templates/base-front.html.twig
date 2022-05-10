@@ -45,20 +45,30 @@
 
                         <nav id="navigation" class="style_one">
                             <ul id="responsive">
+
                                 <li><a class="current" href="{{ path('app_user_index') }}">{% trans %}Accueil{% endtrans %}</a></li>
-                                <li><a href="{{path('app_offres_index')}}"> Offres</a>
+                                <li><a href="{{ path('listreservation') }}">Reservations</a></li>
+                                <li><a href="{{ path('events') }}">Evenements</a></li>
+                                <li><a href="{{path('app_offres_index')}}">{% trans %}Offres{% endtrans %}</a>
                                     <ul>
-                                        <li><a href={{path('liste_offre')}}>Liste Offres</a></li>
-                                        <li><a href="{{path('app_offres_index')}}">Grid Offres</a></li>
+                                        <li><a href={{path('liste_offre')}}>{% trans %}Liste Offres{% endtrans %}</a></li>
+                                        <li><a href="{{path('app_offres_index')}}">{% trans %}Grid Offres{% endtrans %}</a></li>
                                     </ul>
                                 </li>
-                                <li><a href="#">Evenements</a></li>
+                                
                                 <li><a href="{{path('app_chat_new')}}">Forum</a></li>
-                                <li><a href="{{path('mine')}}">Publication</a></li>
-                                <li><a href="{{ path('app_shop') }}">Boutique</a>
+
+                                <li><a href="{{path('app_front_publication')}}">Publication</a></li>
+                                <li><a href="{{ path('app_shop') }}">{% trans %}Boutique{% endtrans %}</a>
                                     <ul>
-                                        <li><a href="{{ path('app_shop') }}">Boutique Grid</a></li>
-                                        <li><a href="{{ path('app_shopList') }}">Boutique Liste</a></li>
+                                        <li><a href="{{ path('app_shop') }}">{% trans %}Boutique Grid{% endtrans %}</a></li>
+                                        <li><a href="{{ path('app_shopList') }}">{% trans %}Boutique Liste{% endtrans %}</a></li>
+                                    </ul>
+                                </li>
+                                <li><a href="{{path('MesReclamations')}}"> Réclamation</a>
+                                    <ul>
+                                        <li><a href={{path('app_reclamationfront_new')}}>Ajouter</a></li>
+                                        <li><a href="{{path('MesReclamations')}}">Mes réclamations</a></li>
                                     </ul>
                                 </li>
                             </ul>
@@ -80,20 +90,23 @@
                               <div class="utf_user_menu">
                                 {% include 'user/locale.html.twig' %}
                              </div>
-  
+
                                     <div class="utf_user_menu">
-                                        <div class="utf_user_name"><span><img src="images/dashboard-avatar.jpg" alt=""></span>Bonjour, {{ userName }}</div>
+                                        <div class="utf_user_name"><span><img src="images/dashboard-avatar.jpg" alt="">
+                                            </span>{% trans %}Bonjour{% endtrans %}, {{ userName }}</div>
                                         <ul>
-                                            <li><a href="dashboard.html"><i class="sl sl-icon-layers"></i> Dashboard</a></li>
-                                            <li><a href="dashboard_my_profile.html"><i class="sl sl-icon-user"></i> My Profile</a></li>
-                                            <li><a href="dashboard_my_listing.html"><i class="sl sl-icon-list"></i> My Listing</a></li>
-                                            <li><a href="dashboard_messages.html"><i class="sl sl-icon-envelope-open"></i> Messages</a></li>
-                                            <li><a href="dashboard_bookings.html"><i class="sl sl-icon-docs"></i> Booking</a></li>
-                                            <li><a href="index_1.html"><i class="sl sl-icon-power"></i> Logout</a></li>
+                                            {% if userRole[0] != "ROLE_GUEST" %}
+                                                <li><a href="{{ path('Approuver') }}"><i class="sl sl-icon-layers"></i> Dashboard</a></li>
+                                            {% endif %}
+                                            {% if userRole[0] == "ROLE_ADMIN" %}
+                                                <li><a href="{{ path('app_produit_index') }}"><i class="sl sl-icon-layers"></i> Gestion Produit</a></li>
+                                            {% endif %}
+                                            <li><a href="{{ path('app_user_show',{'cin': Usercin.cin}) }}"><i class="sl sl-icon-user"></i> My Profile</a></li>
+                                            <li><a href="{{ path('app_logout') }}"><i class="sl sl-icon-power"></i> Logout</a></li>
                                         </ul>
                                     </div>
                                 {% else %}
-                                    <a href="{{ path('app_panierdetails_index') }}">Login</a>
+                                    <a class="button" href="{{ path('app_login') }}">Login</a>
                                 {% endif %}
                             {% endif %}
                         </div>

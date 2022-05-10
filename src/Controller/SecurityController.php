@@ -51,7 +51,10 @@ class SecurityController extends AbstractController
      */
     public function logout(): void
     {
+        $this->redirectToRoute('app_login');
+
         throw new \LogicException('This method can be blank - it will be intercepted by the logout key on your firewall.');
+
     }
 
     /**
@@ -134,10 +137,10 @@ class SecurityController extends AbstractController
         $entityManager = $this->getDoctrine()->getManager();
 
         if ($form->isSubmitted() && $form->isValid()) {
-            /*   if (!$captchaService->validateCaptcha($request->get('g-recaptcha-response'))) {
+             if (!$captchaService->validateCaptcha($request->get('g-recaptcha-response'))) {
                    $form->addError(new FormError($translator->trans('captcha.wrong')));
                    throw new ValidatorException('captcha.wrong');
-               }*/
+               }
             $user->setRoles(array('ROLE_HOST'));
             $user->setEtat(array('Approved'));
             $password = $passwordEncoder->encodePassword($user, $user->getPassword());

@@ -5,6 +5,8 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Serializer\Annotation\Groups;
+
 
 
 
@@ -26,6 +28,7 @@ class Produit
      * @ORM\Column(name="id_prod", type="integer", nullable=false)
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
+     * @Groups("produits")
      */
     private $idProd;
 
@@ -33,6 +36,7 @@ class Produit
      * @var string
      *
      * @ORM\Column(name="ref_prod", type="string", length=25, nullable=false)
+     * @Groups("produits")
      * @Assert\NotBlank(message="Ne doit pas etre vide")
      * @Assert\Length(min=4, max=25,
      *     minMessage ="Doit etre  moins que 25 caracteres", minMessage ="Doit etre plus que 4 caracteres")
@@ -43,6 +47,7 @@ class Produit
      * @var string
      *
      * @ORM\Column(name="designation", type="string", length=255, nullable=false)
+     * @Groups("produits")
      * @Assert\NotBlank(message="Ne doit pas etre vide")
      * @Assert\Length(min=4, max=50,
      *     minMessage ="Doit etre  moins que 25 caracteres", minMessage ="Doit etre plus que 4 caracteres")
@@ -60,6 +65,7 @@ class Produit
      * @var string
      *
      * @ORM\Column(name="image", type="string", length=255, nullable=false)
+     * @Groups("produits")
      * @Assert\NotBlank(message="Ne doit pas etre vide")
      * @Assert\Length(min=4, max=255)
      *  @Assert\File(
@@ -74,6 +80,7 @@ class Produit
      * @var float
      *
      * @ORM\Column(name="prix", type="float", precision=10, scale=0, nullable=false)
+     * @Groups("produits")
      * @Assert\NotBlank(message="Ne doit pas etre vide")
      * @Assert\Positive(message="doit etre Positif")
      * @Assert\Regex(
@@ -87,17 +94,18 @@ class Produit
      * @var int
      *
      * @ORM\Column(name="qte_stock", type="integer", nullable=false)
+     * @Groups("produits")
      * @Assert\NotBlank(message="Ne doit pas etre vide")
      * @Assert\Positive(message="doit etre Positif")
      */
     private $qteStock;
 
     /**
-     * @var \Region
+     * @var \Region1
      *
-     * @ORM\ManyToOne(targetEntity="Region")
+     * @ORM\ManyToOne(targetEntity="Region1")
      * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="region", referencedColumnName="nom")
+     *   @ORM\JoinColumn(name="region1", referencedColumnName="nom")
      * })
      * @Assert\NotBlank(message="Ne doit pas etre vide")
      */
@@ -190,12 +198,12 @@ class Produit
         return $this;
     }
 
-    public function getRegion(): ?Region
+    public function getRegion(): ?Region1
     {
         return $this->region;
     }
 
-    public function setRegion(?Region $region): self
+    public function setRegion(?Region1 $region): self
     {
         $this->region = $region;
 

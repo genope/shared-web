@@ -1,0 +1,16 @@
+{% extends 'base-front.html.twig' %}
+
+{% block title %}Edit Publication{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <a href="{{ path('app_front_publication') }}">Retour</a>
+    <h1 style="margin-top: 25px">Edit Publication</h1>
+
+    {{ include('publication/_form.html.twig', {'button_label': 'Update'}) }}
+        <a href="{{ path('app_publication_front_delete', {'id': publication.id}) }}" onclick="return confirm('Are you sure you want to delete this item?');" class="button border">Delete</a>
+
+
+
+    </div>
+{% endblock %}

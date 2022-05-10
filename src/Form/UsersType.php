@@ -33,7 +33,7 @@ class UsersType extends AbstractType
                 'widget' => 'single_text',
                 'html5' => false,
                 'required' => false,
-                'format' => 'yyyy-MM',
+                'format' => 'yyyy-MM-DD',
                 'attr' => ['class' => 'js-datepicker']
             ])
             ->add('telephone')

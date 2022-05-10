@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Serializer\Annotation\Groups;
 /**
  * Offres
  * @ORM\Entity(repositoryClass=OffresRepository::class)
@@ -18,6 +19,7 @@ class Offres
      * @ORM\Column(name="id_offre", type="integer", nullable=false)
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
+     * @Groups("offres")
      */
     private $idOffre;
 
@@ -25,6 +27,7 @@ class Offres
      * @var string
      *@Assert\NotBlank(message="le nom  fin is required")
      * @ORM\Column(name="nom", type="string", length=255, nullable=false)
+     * @Groups("offres")
      */
     private $nom;
 
@@ -32,6 +35,7 @@ class Offres
      * @var string
      *@Assert\NotBlank(message="La description  is required")
      * @ORM\Column(name="description", type="string", length=255, nullable=false)
+     * @Groups("offres")
      */
     private $description;
 
@@ -39,6 +43,7 @@ class Offres
      * @var \DateTime
      *@Assert\NotBlank(message="Date debut is required")
      * @ORM\Column(name="dateDebut", type="date", nullable=false)
+     * @Groups("offres")
      */
     private $datedebut;
 
@@ -46,6 +51,7 @@ class Offres
      * @var \DateTime
      *@Assert\NotBlank(message="Date fin is required")
      * @ORM\Column(name="dateFin", type="date", nullable=false)
+     * @Groups("offres")
      */
     private $datefin;
 
@@ -55,6 +61,7 @@ class Offres
      * @Assert\Positive(message="le prix doit etre positive ")
      * @Assert\Regex(pattern = "/^[0-9]+$/i",message="le prix doit se composer seulement des numéros")
      * @ORM\Column(name="prix", type="float", precision=10, scale=0, nullable=false)
+     * @Groups("offres")
      */
     private $prix;
 
@@ -69,6 +76,7 @@ class Offres
      * @var string
      *@Assert\NotBlank(message="ville  is required")
      * @ORM\Column(name="ville", type="string", length=255, nullable=false)
+     * @Groups("offres")
      */
     private $ville;
 
@@ -76,6 +84,7 @@ class Offres
      * @var string
      *
      * @ORM\Column(name="type", type="string", length=255, nullable=false)
+     * @Groups("offres")
      */
     private $type;
 
@@ -83,6 +92,7 @@ class Offres
      * @var string
      *@Assert\NotBlank(message=" Categorie  is required")
      * @ORM\Column(name="categ", type="string", length=255, nullable=false)
+     * @Groups("offres")
      */
     private $categ;
 
@@ -100,6 +110,7 @@ class Offres
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="id_user", referencedColumnName="CIN")
      * })
+     * @Groups("offres")
      */
     private $idUser;
 

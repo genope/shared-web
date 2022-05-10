@@ -1,0 +1,58 @@
+{% block css %}
+    <link rel="stylesheet" href="{{ asset('Front-office/css/invoice.css') }}">
+    <link rel="stylesheet" href="{{ asset('Front-office/css/bootstrap.html') }}">
+{% endblock %}
+{% block start %}
+    <a href="javascript:window.print()" class="print-button">Imprimer</a>
+    <!-- Invoice -->
+    <div id="invoice">
+        <div class="row">
+            <div class="col-md-6">
+                <div id="logo"><a href="index_1.html"><img src="{{ asset('Front-office/images/shared.png') }}" alt=""></a></div>
+            </div>
+            <div class="col-md-6">
+                <p id="details">
+                    <strong>Réclamation n°:</strong> {{ reclamation.id }}<br>
+                    <strong>Envoyé le </strong> {{reclamation.dateCreation|date('Y-m-d')}}<br>
+
+                </p>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <h2 class="invoice_title">Shared Réclamation</h2>
+            </div>
+            <div class="col-md-6">
+                <p><strong>Envoyé par :</strong><br>
+                    {{ reclamation.iduser.nom }} {{ reclamation.iduser.prenom }}<br>{{ reclamation.iduser.email }}<br> {{ reclamation.iduser.telephone }}
+                </p>
+            </div>
+            <div class="col-md-6 fl_right">
+                <p><strong>Contre :</strong><br>
+                   {{ reclamation.type}}
+                </p>
+            </div>
+            <div class="col-md-6">
+                <p><strong>Objet :</strong><br>
+                    {{ reclamation.objet }}
+
+                </p>
+            </div>
+            <div class="col-md-6 fl_right">
+                <p><strong>Desription :</strong><br>
+                    {{ reclamation.description }}
+                </p>
+            </div>
+        </div>
+
+        <br> <br> <br> <br> <br> <br>
+
+
+
+        <img class="" src="{{ asset("Front-office/images/#{reclamation.image}") }}" alt="">
+
+
+
+    </div>
+{% endblock %}
