@@ -2,20 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="20f700c5-9937-42f0-9fe5-9c675e4b2fea" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/Shared.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Shared.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/bundles.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/bundles.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/packages/security.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/config/packages/security.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/OffresController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/OffresController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/UserController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/UserController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/Offres.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Offres.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/symfony.lock" beforeDir="false" afterPath="$PROJECT_DIR$/symfony.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/base-back.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/base-back.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/base-front.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/base-front.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/offres/ListesOffres.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/offres/ListesOffres.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/offres/show.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/offres/show.html.twig" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -208,6 +197,8 @@
       <path value="$PROJECT_DIR$/vendor/hwi/oauth-bundle" />
       <path value="$PROJECT_DIR$/vendor/composer" />
       <path value="$PROJECT_DIR$/vendor/mofodojodino/profanity-filter" />
+      <path value="$PROJECT_DIR$/vendor/gedmo/doctrine-extensions" />
+      <path value="$PROJECT_DIR$/vendor/behat/transliterator" />
     </include_path>
   </component>
   <component name="ProjectId" id="27RFYq0bCg0oRBIZW4mfjMukUbd" />
@@ -219,10 +210,15 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/Controller" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
     <property name="vue.rearranger.settings.migration" value="true" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\xampp\htdocs\shared-web\src\Controller" />
+    </key>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -255,6 +251,8 @@
       <workItem from="1651878793720" duration="19593000" />
       <workItem from="1652129901263" duration="4266000" />
       <workItem from="1652134215786" duration="1390000" />
+      <workItem from="1652140938350" duration="182000" />
+      <workItem from="1652142791113" duration="1572000" />
     </task>
     <servers />
   </component>
