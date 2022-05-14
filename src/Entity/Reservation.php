@@ -1,9 +1,11 @@
 <?php
 
 namespace App\Entity;
+
 use Symfony\Component\Validator\Constraints as Assert;
 
 use Doctrine\ORM\Mapping as ORM;
+use JsonSerializable;
 
 /**
  * Reservation
@@ -11,7 +13,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="reservation", indexes={@ORM\Index(name="fk_reservation_event", columns={"idevent"}), @ORM\Index(name="fk_reservation_guest", columns={"idguest"}), @ORM\Index(name="fk_reservation_offre", columns={"idoffre"})})
  * @ORM\Entity
  */
-class Reservation
+class Reservation implements JsonSerializable
 {
     /**
      * @var int
@@ -27,7 +29,6 @@ class Reservation
      *
      * @Assert\NotBlank(message="veuillez entrez une date ")
      * @Assert\GreaterThan("today")
-
      * @ORM\Column(name="datedebut", type="date", nullable=true)
      */
     private $datedebut;
@@ -36,7 +37,6 @@ class Reservation
      * @var \DateTime|null
      * @Assert\NotBlank(message="veuillez entrez une date   ")
      * @Assert\GreaterThan(propertyPath="datedebut")
-
      * @ORM\Column(name="datefin", type="date", nullable=true)
      */
     private $datefin;
@@ -59,7 +59,6 @@ class Reservation
      * @ORM\ManyToOne(targetEntity="Event")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="idevent", referencedColumnName="idevent")
-
      * })
      */
     private $idevent;
@@ -139,5 +138,24 @@ class Reservation
         return $this;
     }
 
+    public function jsonSerialize(): array
+    {
+        return array(
+            'id' => $this->idreserv,
+            'guest' => $this->idguest,
+            'event' => $this->idevent,
+            'offre' => $this->idoffre,
+            'datedebut' => $this->datedebut->format("d-m-Y"),
+            'datefin' => $this->datefin->format("d-m-Y")
+        );
+    }
 
+    public function setUp($guest, $event, $offre, $datedebut, $datefin)
+    {
+        $this->idguest = $guest;
+        $this->idevent = $event;
+        $this->idoffre = $offre;
+        $this->datedebut = $datedebut;
+        $this->datefin = $datefin;
+    }
 }

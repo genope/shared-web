@@ -5,13 +5,15 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Serializer\Annotation\Groups;
+use JsonSerializable;
+
 /**
  * Offres
  * @ORM\Entity(repositoryClass=OffresRepository::class)
  * @ORM\Table(name="offres", indexes={@ORM\Index(name="id_user", columns={"id_user"})})
  * @ORM\Entity
  */
-class Offres
+class Offres implements JsonSerializable
 {
     /**
      * @var int
@@ -25,7 +27,7 @@ class Offres
 
     /**
      * @var string
-     *@Assert\NotBlank(message="le nom  fin is required")
+     * @Assert\NotBlank(message="le nom  fin is required")
      * @ORM\Column(name="nom", type="string", length=255, nullable=false)
      * @Groups("offres")
      */
@@ -33,7 +35,7 @@ class Offres
 
     /**
      * @var string
-     *@Assert\NotBlank(message="La description  is required")
+     * @Assert\NotBlank(message="La description  is required")
      * @ORM\Column(name="description", type="string", length=255, nullable=false)
      * @Groups("offres")
      */
@@ -41,7 +43,7 @@ class Offres
 
     /**
      * @var \DateTime
-     *@Assert\NotBlank(message="Date debut is required")
+     * @Assert\NotBlank(message="Date debut is required")
      * @ORM\Column(name="dateDebut", type="date", nullable=false)
      * @Groups("offres")
      */
@@ -49,7 +51,7 @@ class Offres
 
     /**
      * @var \DateTime
-     *@Assert\NotBlank(message="Date fin is required")
+     * @Assert\NotBlank(message="Date fin is required")
      * @ORM\Column(name="dateFin", type="date", nullable=false)
      * @Groups("offres")
      */
@@ -57,7 +59,7 @@ class Offres
 
     /**
      * @var float
-     *@Assert\NotBlank(message="Le prix  is required")
+     * @Assert\NotBlank(message="Le prix  is required")
      * @Assert\Positive(message="le prix doit etre positive ")
      * @Assert\Regex(pattern = "/^[0-9]+$/i",message="le prix doit se composer seulement des numéros")
      * @ORM\Column(name="prix", type="float", precision=10, scale=0, nullable=false)
@@ -74,7 +76,7 @@ class Offres
 
     /**
      * @var string
-     *@Assert\NotBlank(message="ville  is required")
+     * @Assert\NotBlank(message="ville  is required")
      * @ORM\Column(name="ville", type="string", length=255, nullable=false)
      * @Groups("offres")
      */
@@ -90,7 +92,7 @@ class Offres
 
     /**
      * @var string
-     *@Assert\NotBlank(message=" Categorie  is required")
+     * @Assert\NotBlank(message=" Categorie  is required")
      * @ORM\Column(name="categ", type="string", length=255, nullable=false)
      * @Groups("offres")
      */
@@ -98,7 +100,7 @@ class Offres
 
     /**
      * @var string
-     *@Assert\NotBlank(message="L'image  is required")
+     * @Assert\NotBlank(message="L'image  is required")
      * @ORM\Column(name="image", type="string", length=255, nullable=false)
      */
     private $image;
@@ -251,5 +253,12 @@ class Offres
         return $this;
     }
 
+    public function jsonSerialize(): array
+    {
+        return array(
+            'id' => $this->idOffre,
+            'nom' => $this->nom
+        );
+    }
 
 }

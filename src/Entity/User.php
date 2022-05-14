@@ -13,7 +13,7 @@ use App\Validator\Constraints\ComplexPassword;
  * @ORM\Table(name="user", uniqueConstraints={@ORM\UniqueConstraint(name="user_email", columns={"Email"})})
  * @ORM\Entity
  */
-class User implements UserInterface
+class User implements UserInterface, \JsonSerializable
 {
     /**
      * @var int
@@ -420,6 +420,15 @@ class User implements UserInterface
         $this->locale = $locale;
 
         return $this;
+    }
+
+    public function jsonSerialize(): array
+    {
+        return array(
+            'id' => $this->cin,
+            'nom' => $this->nom
+
+        );
     }
 
 }

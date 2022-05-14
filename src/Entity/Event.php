@@ -1,12 +1,14 @@
 <?php
 
 namespace App\Entity;
+
 use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Serializer\Annotation\Groups;
 
 use Doctrine\ORM\Mapping as ORM;
+use JsonSerializable;
 
 /**
  * Event
@@ -14,9 +16,8 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="event")
  * @ORM\Entity
  * @ORM\Entity(repositoryClass="App\Repository\EventRepository")
-
  */
-class Event
+class Event implements JsonSerializable
 {
     /**
      * @var int
@@ -31,10 +32,9 @@ class Event
      * @var string
      *
      * @ORM\Column(name="nomevent", type="string", length=24, nullable=false)
-     *@Assert\NotBlank(message="Nom requis")
-     *@Assert\Length(min="6",       minMessage= "Le nom doit contenir au minimum 6 caractères."
+     * @Assert\NotBlank(message="Nom requis")
+     * @Assert\Length(min="6",       minMessage= "Le nom doit contenir au minimum 6 caractères."
      *)
-
      */
     private $nomevent;
 
@@ -43,7 +43,7 @@ class Event
      *
      * @ORM\Column(name="datedebev", type="date", nullable=false)
      *
-     *@Assert\NotBlank(message="veuillez saisir une date")
+     * @Assert\NotBlank(message="veuillez saisir une date")
      * @Assert\GreaterThan("today")
      */
     private $datedebev;
@@ -78,8 +78,8 @@ class Event
      * @var int
      *
      * @ORM\Column(name="nbparticip", type="integer", nullable=false)
-     *@Assert\NotBlank(message="entrez un nombre supérieur à 20 requis")
-     *@Assert\GreaterThan(20)
+     * @Assert\NotBlank(message="entrez un nombre supérieur à 20 requis")
+     * @Assert\GreaterThan(20)
      */
     private $nbparticip;
 
@@ -87,8 +87,8 @@ class Event
      * @var string
      *
      * @ORM\Column(name="description", type="string", length=100, nullable=false)
-     *@Assert\NotBlank(message="Description requise")
-     *@Assert\Length(min="10",minMessage= "La description doit contenir au minimum 10 caractères."
+     * @Assert\NotBlank(message="Description requise")
+     * @Assert\Length(min="10",minMessage= "La description doit contenir au minimum 10 caractères."
      *)
      */
     private $description;
@@ -97,8 +97,8 @@ class Event
      * @var string
      *
      * @ORM\Column(name="lieu", type="string", length=50, nullable=false)
-     *@Assert\NotBlank(message="Lieu requis")
-     *@Assert\Length(min="4",minMessage= "Le lieu doit contenir au minimum 4 caractères."
+     * @Assert\NotBlank(message="Lieu requis")
+     * @Assert\Length(min="4",minMessage= "Le lieu doit contenir au minimum 4 caractères."
      *)
      */
     private $lieu;
@@ -107,7 +107,9 @@ class Event
     {
         return $this->idevent;
     }
-    public function __toString() {
+
+    public function __toString()
+    {
         return $this->nomevent;
     }
 
@@ -152,7 +154,7 @@ class Event
         return $this->image;
     }
 
-    public function setImage( $image)
+    public function setImage($image)
     {
         $this->image = $image;
 
@@ -195,5 +197,29 @@ class Event
         return $this;
     }
 
+    public function jsonSerialize(): array
+    {
+        return array(
+            'id' => $this->idevent,
+            'nom' => $this->nomevent,
+            'dateDebut' => $this->datedebev->format("d-m-Y"),
+            'dateFin' => $this->datefinev->format("d-m-Y"),
+            'image' => $this->image,
+            'nbParticipants' => $this->nbparticip,
+            'description' => $this->description,
+            'lieu' => $this->lieu
+        );
+    }
 
+    public function setUp($nom, $dateDebut, $dateFin, $image, $nbParticipants, $description, $lieu)
+    {
+        $this->nomevent = $nom;
+        $this->datedebev = $dateDebut;
+        $this->datefinev = $dateFin;
+        $this->image = $image;
+        $this->nbparticip = $nbParticipants;
+        $this->description = $description;
+        $this->lieu = $lieu;
+
+    }
 }
